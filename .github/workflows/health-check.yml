@@ -1,0 +1,39 @@
+name: Health Check
+
+on:
+  schedule:
+    - cron: '0 */2 * * *' # every 2 hours
+  workflow_dispatch: {}
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run health checks
+        run: |
+          newman run collections/vyaguta-api.postman_collection.json \
+            -e environments/vyaguta.postman_environment.json \
+            --env-var "authToken=$VYAGUTA_TOKEN" \
+            --folder Health \
+            --reporters cli,junit \
+            --reporter-junit-export reports/health-junit-report.xml
+        env:
+          VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
+
+      - name: Upload health report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: health-report
+          path: reports/health-junit-report.xml

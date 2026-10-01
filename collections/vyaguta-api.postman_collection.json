@@ -1,0 +1,179 @@
+{
+  "info": {
+    "name": "Vyaguta API Tests",
+    "description": "API test suite for the Vyaguta API at {{baseUrl}}. Requests are grouped into one folder per resource, plus a 'Behavior & Edge Cases' folder documenting known quirks. Authenticated with a Bearer token from {{authToken}}.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// TOKEN AUTOMATION — fill in once the login endpoint is confirmed.",
+          "//",
+          "// If Vyaguta uses a login endpoint (not a static/SSO token), uncomment and",
+          "// complete the block below. It fetches a fresh token before each request and",
+          "// stores it in authToken so the collection-level Bearer auth picks it up.",
+          "// Set LOGIN_URL and the request body fields to match the actual endpoint.",
+          "//",
+          "// const token = pm.environment.get('authToken');",
+          "// if (!token) {",
+          "//   pm.sendRequest({",
+          "//     url: pm.environment.get('baseUrl') + '/LOGIN_URL',",
+          "//     method: 'POST',",
+          "//     header: { 'Content-Type': 'application/json' },",
+          "//     body: {",
+          "//       mode: 'raw',",
+          "//       raw: JSON.stringify({",
+          "//         email: pm.environment.get('loginEmail'),",
+          "//         password: pm.environment.get('loginPassword')",
+          "//       })",
+          "//     }",
+          "//   }, function (err, res) {",
+          "//     if (err) { console.error('Token fetch failed:', err); return; }",
+          "//     const body = res.json();",
+          "//     pm.environment.set('authToken', body.token); // adjust field name",
+          "//   });",
+          "// }"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test(\"Response time is below 5000ms\", function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Sanity",
+      "description": "One representative request per module. Asserts status 200, Content-Type, and non-empty body only. Run on every PR/push for fast feedback.",
+      "item": []
+    },
+    {
+      "name": "Health",
+      "description": "Lightweight GET per critical endpoint. Runs every 2 hours via health-check.yml to confirm the API is reachable.",
+      "item": []
+    },
+    {
+      "name": "People",
+      "description": "Tests for the People module (employees, profiles, org structure).",
+      "item": []
+    },
+    {
+      "name": "Team",
+      "description": "Tests for the Team module (team listings, members, hierarchy).",
+      "item": []
+    },
+    {
+      "name": "Attendance",
+      "description": "Tests for the Attendance module (check-in/out, attendance records, reports).",
+      "item": []
+    },
+    {
+      "name": "JUMP",
+      "description": "Tests for the JUMP module.",
+      "item": []
+    },
+    {
+      "name": "Honor",
+      "description": "Tests for the Honor module (recognitions, awards).",
+      "item": []
+    },
+    {
+      "name": "OKR",
+      "description": "Tests for the OKR module (objectives, key results, check-ins).",
+      "item": []
+    },
+    {
+      "name": "Pulse",
+      "description": "Tests for the Pulse module (surveys, feedback).",
+      "item": []
+    },
+    {
+      "name": "Behavior & Edge Cases",
+      "description": "Auth negative tests and known API quirks. Auth role coverage to be expanded once user roles are confirmed.",
+      "item": [
+        {
+          "name": "Missing token returns 401",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", function () {",
+                  "    pm.response.to.have.status(401);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid token returns 401",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "invalid-token", "type": "string" }]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", function () {",
+                  "    pm.response.to.have.status(401);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
