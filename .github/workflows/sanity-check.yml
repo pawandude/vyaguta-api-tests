@@ -1,12 +1,14 @@
-name: API Tests
+name: Sanity Check
 
 on:
-  schedule:
-    - cron: '0 6 * * *' # daily at 06:00 UTC
-  workflow_dispatch: {} # allows manual "Run workflow" from the Actions tab
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
 
 jobs:
-  newman:
+  sanity:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,17 +25,23 @@ jobs:
       - name: Lint collection and environment JSON
         run: npm run lint
 
-      - name: Run Newman tests
-        run: npm run test:ci
+      - name: Run sanity checks
+        run: |
+          newman run collections/vyaguta-api.postman_collection.json \
+            -e environments/vyaguta.postman_environment.json \
+            --env-var "authToken=$VYAGUTA_TOKEN" \
+            --folder Sanity \
+            --reporters cli,junit \
+            --reporter-junit-export reports/sanity-junit-report.xml
         env:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
 
-      - name: Upload test report
+      - name: Upload sanity report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: newman-report
-          path: reports/
+          name: sanity-report
+          path: reports/sanity-junit-report.xml
 
       - name: Notify on failure
         if: failure()
@@ -43,7 +51,7 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": ":x: *Vyaguta API Tests failed*",
+              "text": ":x: *Vyaguta Sanity Check failed*",
               "attachments": [
                 {
                   "color": "danger",
