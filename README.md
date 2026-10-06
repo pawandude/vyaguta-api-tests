@@ -159,15 +159,31 @@ Each module section is added here as requests are written. The assertion columns
 
 ### Sanity
 
+One request per module — confirms the module is up and returning data. Runs on every push and pull request to `main`.
+
 | Request | Method & URL | Assertions |
 | --- | --- | --- |
-| Get users list | `GET /api/core/users` | 200, data array present |
+| People — get users list | `GET /api/core/users` | 200, Content-Type, data property present |
+| Team — get project status types | `GET /api/teams/status-types` | 200, Content-Type, data property present |
+| Attendance — get attendance summary | `GET /api/leave/attendance/summary?fetchType=self` | 200, Content-Type, data property present |
+| JUMP — get KPI filters | `GET /api/jump/kpis/filters?type=Role based` | 200, Content-Type, data property present |
+| Honor — get honor menus | `GET /api/honor/menus` | 200, Content-Type, data property present |
+| OKR — get strategic pillars summary | `GET /api/okr/strategic-pillars/summary?year=2026` | 200, Content-Type, data property present |
+| Pulse — get evaluation groups | `GET /api/pulse/evaluations/groups` | 200, Content-Type, data property present |
 
 ### Health
 
+One request per module — confirms the module is reachable. Runs every 2 hours.
+
 | Request | Method & URL | Assertions |
 | --- | --- | --- |
-| Users endpoint is reachable | `GET /api/core/users` | 200 |
+| People endpoint is reachable | `GET /api/core/users` | 200 |
+| Team endpoint is reachable | `GET /api/teams/status-types` | 200 |
+| Attendance endpoint is reachable | `GET /api/leave/attendance/summary?fetchType=self` | 200 |
+| JUMP endpoint is reachable | `GET /api/jump/kpis/filters?type=Role based` | 200 |
+| Honor endpoint is reachable | `GET /api/honor/menus` | 200 |
+| OKR endpoint is reachable | `GET /api/okr/strategic-pillars/summary?year=2026` | 200 |
+| Pulse endpoint is reachable | `GET /api/pulse/evaluations/groups` | 200 |
 
 ### People
 
