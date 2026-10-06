@@ -27,32 +27,38 @@
       "script": {
         "type": "text/javascript",
         "exec": [
-          "// TOKEN AUTOMATION — fill in once the login endpoint is confirmed.",
-          "//",
-          "// If Vyaguta uses a login endpoint (not a static/SSO token), uncomment and",
-          "// complete the block below. It fetches a fresh token before each request and",
-          "// stores it in authToken so the collection-level Bearer auth picks it up.",
-          "// Set LOGIN_URL and the request body fields to match the actual endpoint.",
-          "//",
-          "// const token = pm.environment.get('authToken');",
-          "// if (!token) {",
-          "//   pm.sendRequest({",
-          "//     url: pm.environment.get('baseUrl') + '/LOGIN_URL',",
-          "//     method: 'POST',",
-          "//     header: { 'Content-Type': 'application/json' },",
-          "//     body: {",
-          "//       mode: 'raw',",
-          "//       raw: JSON.stringify({",
-          "//         email: pm.environment.get('loginEmail'),",
-          "//         password: pm.environment.get('loginPassword')",
-          "//       })",
-          "//     }",
-          "//   }, function (err, res) {",
-          "//     if (err) { console.error('Token fetch failed:', err); return; }",
-          "//     const body = res.json();",
-          "//     pm.environment.set('authToken', body.token); // adjust field name",
-          "//   });",
-          "// }"
+          "const accessToken = pm.environment.get('authToken');",
+          "const refreshToken = pm.environment.get('refreshToken');",
+          "",
+          "if (!accessToken || !refreshToken) return;",
+          "",
+          "// Decode JWT expiry without a library (base64url decode of the payload segment)",
+          "const payloadBase64 = accessToken.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');",
+          "const payload = JSON.parse(atob(payloadBase64));",
+          "const expiresAtMs = payload.exp * 1000;",
+          "const bufferMs = 5 * 60 * 1000;",
+          "",
+          "if (Date.now() < expiresAtMs - bufferMs) return;",
+          "",
+          "// Access token is expired or expiring within 5 minutes — refresh it",
+          "pm.sendRequest({",
+          "    url: pm.environment.get('baseUrl') + '/api/core/auth/refresh',",
+          "    method: 'GET',",
+          "    header: {",
+          "        'Authorization': 'Bearer ' + refreshToken,",
+          "        'Accept': 'application/json'",
+          "    }",
+          "}, function (err, res) {",
+          "    if (err || res.code !== 200) {",
+          "        console.warn('Token refresh failed — using existing token. Error:', err || res.status);",
+          "        return;",
+          "    }",
+          "    const body = res.json();",
+          "    const newAccessToken = (body.data && body.data.accessToken) || body.accessToken;",
+          "    const newRefreshToken = (body.data && body.data.refreshToken) || body.refreshToken;",
+          "    if (newAccessToken) pm.environment.set('authToken', newAccessToken);",
+          "    if (newRefreshToken) pm.environment.set('refreshToken', newRefreshToken);",
+          "});"
         ]
       }
     },
@@ -76,37 +82,37 @@
         {
           "name": "People — users list is reachable",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/core/users", "host": ["{{baseUrl}}"], "path": ["api", "core", "users"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));", "pm.test(\"Content-Type is application/json\", () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));", "pm.test(\"Response body has data property\", () => pm.expect(pm.response.json()).to.have.property('data'));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
         },
         {
           "name": "Team — status-types is reachable",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/teams/status-types", "host": ["{{baseUrl}}"], "path": ["api", "teams", "status-types"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));", "pm.test(\"Content-Type is application/json\", () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));", "pm.test(\"Response body has data property\", () => pm.expect(pm.response.json()).to.have.property('data'));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
         },
         {
           "name": "Attendance — summary is reachable",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self", "host": ["{{baseUrl}}"], "path": ["api", "leave", "attendance", "summary"], "query": [{ "key": "fetchType", "value": "self" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));", "pm.test(\"Content-Type is application/json\", () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));", "pm.test(\"Response body has data property\", () => pm.expect(pm.response.json()).to.have.property('data'));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
         },
         {
           "name": "JUMP — KPI filters is reachable",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based", "host": ["{{baseUrl}}"], "path": ["api", "jump", "kpis", "filters"], "query": [{ "key": "type", "value": "Role based" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));", "pm.test(\"Content-Type is application/json\", () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));", "pm.test(\"Response body has data property\", () => pm.expect(pm.response.json()).to.have.property('data'));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
         },
         {
           "name": "Honor — menus is reachable",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/honor/menus", "host": ["{{baseUrl}}"], "path": ["api", "honor", "menus"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));", "pm.test(\"Content-Type is application/json\", () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));", "pm.test(\"Response body has data property\", () => pm.expect(pm.response.json()).to.have.property('data'));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
         },
         {
           "name": "OKR — strategic pillars is reachable",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026", "host": ["{{baseUrl}}"], "path": ["api", "okr", "strategic-pillars", "summary"], "query": [{ "key": "year", "value": "2026" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));", "pm.test(\"Content-Type is application/json\", () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));", "pm.test(\"Response body has data property\", () => pm.expect(pm.response.json()).to.have.property('data'));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
         },
         {
           "name": "Pulse — evaluation groups is reachable",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/pulse/evaluations/groups", "host": ["{{baseUrl}}"], "path": ["api", "pulse", "evaluations", "groups"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));", "pm.test(\"Content-Type is application/json\", () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));", "pm.test(\"Response body has data property\", () => pm.expect(pm.response.json()).to.have.property('data'));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
         }
       ]
     },
@@ -117,37 +123,37 @@
         {
           "name": "People — users endpoint is up",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/core/users", "host": ["{{baseUrl}}"], "path": ["api", "core", "users"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
         },
         {
           "name": "Team — status-types endpoint is up",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/teams/status-types", "host": ["{{baseUrl}}"], "path": ["api", "teams", "status-types"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
         },
         {
           "name": "Attendance — summary endpoint is up",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self", "host": ["{{baseUrl}}"], "path": ["api", "leave", "attendance", "summary"], "query": [{ "key": "fetchType", "value": "self" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
         },
         {
           "name": "JUMP — KPI filters endpoint is up",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based", "host": ["{{baseUrl}}"], "path": ["api", "jump", "kpis", "filters"], "query": [{ "key": "type", "value": "Role based" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
         },
         {
           "name": "Honor — menus endpoint is up",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/honor/menus", "host": ["{{baseUrl}}"], "path": ["api", "honor", "menus"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
         },
         {
           "name": "OKR — strategic pillars endpoint is up",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026", "host": ["{{baseUrl}}"], "path": ["api", "okr", "strategic-pillars", "summary"], "query": [{ "key": "year", "value": "2026" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
         },
         {
           "name": "Pulse — evaluations endpoint is up",
           "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/pulse/evaluations/groups", "host": ["{{baseUrl}}"], "path": ["api", "pulse", "evaluations", "groups"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"] } }]
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
         }
       ]
     },
@@ -1142,8 +1148,8 @@
                   "    pm.response.to.have.jsonSchema(schema);",
                   "});",
                   "pm.test(\"Campaign stores active campaignId for later use\", function () {",
-                  "    const id = pm.response.json().id;",
-                  "    if (id) pm.environment.set('honorCampaignId', id);",
+                  "    const campaignId = pm.response.json().id;",
+                  "    if (campaignId) pm.environment.set('honorCampaignId', campaignId);",
                   "    pm.expect(id).to.be.a('string');",
                   "});"
                 ]
@@ -1485,15 +1491,15 @@
                   "        type: 'object',",
                   "        required: ['id', 'name', 'type'],",
                   "        properties: {",
-                  "          id:             { type: 'number' },",
+                  "          id:             { type: 'integer' },",
                   "          name:           { type: 'string' },",
                   "          description:    { type: ['string', 'null'] },",
                   "          type:           { type: 'string' },",
-                  "          createdBy:      { type: 'number' },",
+                  "          createdBy:      { type: 'integer' },",
                   "          createdAt:      { type: 'string' },",
                   "          updatedAt:      { type: ['string', 'null'] },",
-                  "          updatedBy:      { type: ['number', 'null'] },",
-                  "          objectiveCount: { type: 'number' },",
+                  "          updatedBy:      { type: ['integer', 'null'] },",
+                  "          objectiveCount: { type: 'integer' },",
                   "          progress:       { type: 'number' },",
                   "          lastUpdatedAt:  { type: ['string', 'null'] },",
                   "          manager: {",
@@ -1502,7 +1508,7 @@
                   "              type: 'object',",
                   "              required: ['id', 'fullName'],",
                   "              properties: {",
-                  "                id:       { type: 'number' },",
+                  "                id:       { type: 'integer' },",
                   "                email:    { type: 'string' },",
                   "                empId:    { type: 'string' },",
                   "                fullName: { type: 'string' }",
@@ -1512,7 +1518,7 @@
                   "          lead: {",
                   "            type: ['object', 'null'],",
                   "            properties: {",
-                  "              id:       { type: 'number' },",
+                  "              id:       { type: 'integer' },",
                   "              email:    { type: 'string' },",
                   "              empId:    { type: 'string' },",
                   "              fullName: { type: 'string' }",
@@ -1527,7 +1533,7 @@
                   "                user: {",
                   "                  type: 'object',",
                   "                  properties: {",
-                  "                    id:       { type: 'number' },",
+                  "                    id:       { type: 'integer' },",
                   "                    email:    { type: 'string' },",
                   "                    empId:    { type: 'string' },",
                   "                    fullName: { type: 'string' }",
@@ -1593,12 +1599,12 @@
                   "            type: 'object',",
                   "            required: ['id', 'actionType', 'createdAt'],",
                   "            properties: {",
-                  "              id:         { type: 'number' },",
+                  "              id:         { type: 'integer' },",
                   "              actionType: { type: 'string' },",
                   "              area: {",
                   "                type: ['object', 'null'],",
                   "                properties: {",
-                  "                  id:   { type: 'number' },",
+                  "                  id:   { type: 'integer' },",
                   "                  name: { type: 'string' },",
                   "                  code: { type: 'string' },",
                   "                  type: { type: 'string' }",
@@ -1608,8 +1614,8 @@
                   "              actionTemplateData: { type: 'object' },",
                   "              parentTemplate:     { type: 'string' },",
                   "              parentTemplateData: { type: 'object' },",
-                  "              createdBy:    { type: 'number' },",
-                  "              ownerId:      { type: 'number' },",
+                  "              createdBy:    { type: 'integer' },",
+                  "              ownerId:      { type: 'integer' },",
                   "              createdAt:    { type: 'string' },",
                   "              updatedAt:    { type: ['string', 'null'] },",
                   "              collaborators: { type: 'array' }",
@@ -1671,7 +1677,7 @@
                   "        type: 'object',",
                   "        required: ['id', 'relation', 'noteStatus'],",
                   "        properties: {",
-                  "          id:         { type: 'number' },",
+                  "          id:         { type: 'integer' },",
                   "          relation:   { type: 'string' },",
                   "          noteStatus: { type: 'string' },",
                   "          subject:    { type: ['object', 'null'] },",
@@ -1812,7 +1818,7 @@
                   "            type: 'object',",
                   "            required: ['id', 'status'],",
                   "            properties: {",
-                  "              id:                  { type: 'number' },",
+                  "              id:                  { type: 'integer' },",
                   "              eventDate:           { type: ['string', 'null'] },",
                   "              status:              { type: 'string' },",
                   "              probationCategory:   { type: ['string', 'null'] }",
@@ -1862,20 +1868,20 @@
                   "  type: 'object',",
                   "  required: ['id', 'noteType', 'subjectId'],",
                   "  properties: {",
-                  "    id:                   { type: 'number' },",
-                  "    allocationId:         { type: ['number', 'null'] },",
-                  "    isClosingFeedback:    { type: 'number' },",
+                  "    id:                   { type: 'integer' },",
+                  "    allocationId:         { type: ['integer', 'null'] },",
+                  "    isClosingFeedback:    { type: 'integer' },",
                   "    note:                 { type: ['string', 'null'] },",
                   "    noteExpectations:     { type: 'array' },",
                   "    isDeletable:          { type: 'boolean' },",
-                  "    ratings:              {},",
-                  "    finalEvaluationScore: {},",
+                  "    ratings:              { type: ['number', 'null'] },",
+                  "    finalEvaluationScore: { type: ['number', 'null'] },",
                   "    noteType:             { type: 'string' },",
-                  "    subjectId:            { type: 'number' },",
+                  "    subjectId:            { type: 'integer' },",
                   "    pulseNoteRelation:    { type: 'string' },",
                   "    notePrivacy:          { type: 'string' },",
                   "    createdAt:            { type: 'string' },",
-                  "    createdBy:            { type: 'number' },",
+                  "    createdBy:            { type: 'integer' },",
                   "    updatedAt:            { type: ['string', 'null'] },",
                   "    deletedAt:            { type: ['string', 'null'] },",
                   "    noteStatus:           { type: 'string' }",
@@ -1929,14 +1935,14 @@
                   "  type: 'object',",
                   "  required: ['id', 'noteType', 'subjectId'],",
                   "  properties: {",
-                  "    id:                   { type: 'number' },",
-                  "    allocationId:         { type: ['number', 'null'] },",
-                  "    isClosingFeedback:    { type: 'number' },",
+                  "    id:                   { type: 'integer' },",
+                  "    allocationId:         { type: ['integer', 'null'] },",
+                  "    isClosingFeedback:    { type: 'integer' },",
                   "    note:                 { type: ['string', 'null'] },",
                   "    noteExpectations:     { type: 'array' },",
                   "    isDeletable:          { type: 'boolean' },",
                   "    noteType:             { type: 'string' },",
-                  "    subjectId:            { type: 'number' },",
+                  "    subjectId:            { type: 'integer' },",
                   "    pulseNoteRelation:    { type: 'string' },",
                   "    notePrivacy:          { type: 'string' },",
                   "    createdAt:            { type: 'string' },",
