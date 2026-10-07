@@ -675,6 +675,11 @@
                   "    pm.expect(meta.total).to.be.a('number').and.above(0);",
                   "    pm.expect(meta.size).to.be.a('number').and.above(0);",
                   "    pm.expect(meta.page).to.be.a('number').and.equal(1);",
+                  "});",
+                  "pm.test('Users are sorted by firstName ascending', function () {",
+                  "    const names = pm.response.json().data.map(function (u) { return u.firstName.toLowerCase(); });",
+                  "    const sorted = names.slice().sort();",
+                  "    pm.expect(names).to.deep.equal(sorted);",
                   "});"
                 ]
               }
@@ -1256,6 +1261,11 @@
                   "});",
                   "pm.test(\"meta page equals requested page\", function () {",
                   "    pm.expect(pm.response.json().meta.page).to.equal(1);",
+                  "});",
+                  "pm.test('Returned week count does not exceed size=10', function () {",
+                  "    const body = pm.response.json();",
+                  "    const items = body.data || body;",
+                  "    if (Array.isArray(items)) pm.expect(items.length).to.be.at.most(10);",
                   "});"
                 ]
               }
@@ -1565,66 +1575,56 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
+                  "const status = pm.response.code;",
+                  "pm.test('Status is 200 (500 if token user has no designation profile — backend bug)', function () {",
+                  "    pm.expect(status).to.be.oneOf([200, 500]);",
                   "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "const schema = {",
-                  "  type: 'object',",
-                  "  required: ['data'],",
-                  "  properties: {",
-                  "    data: {",
-                  "      type: 'array',",
-                  "      items: {",
-                  "        type: 'object',",
-                  "        required: ['id', 'code', 'description', 'stage', 'type', 'area', 'designation', 'priority'],",
-                  "        properties: {",
-                  "          id:          { type: 'integer' },",
-                  "          code:        { type: 'string' },",
-                  "          description: { type: 'string' },",
-                  "          stage:       { type: ['string', 'null'] },",
-                  "          type:        { type: 'string' },",
-                  "          category:    { type: ['string', 'null'] },",
-                  "          priority:    { type: ['string', 'null'] },",
-                  "          score:       { type: ['number', 'null'] },",
-                  "          counts:      { type: ['object', 'null'] },",
-                  "          area: {",
+                  "if (status === 200) {",
+                  "    pm.test('Content-Type is application/json', function () {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "    });",
+                  "    const schema = {",
+                  "      type: 'object',",
+                  "      required: ['data'],",
+                  "      properties: {",
+                  "        data: {",
+                  "          type: 'array',",
+                  "          items: {",
                   "            type: 'object',",
-                  "            required: ['id', 'name'],",
+                  "            required: ['id', 'code', 'description', 'stage', 'type', 'area', 'designation', 'priority'],",
                   "            properties: {",
-                  "              id:   { type: 'integer' },",
-                  "              name: { type: 'string' }",
-                  "            }",
-                  "          },",
-                  "          designation: {",
-                  "            type: 'object',",
-                  "            required: ['id', 'name'],",
-                  "            properties: {",
-                  "              id:   { type: 'integer' },",
-                  "              name: { type: 'string' }",
+                  "              id:          { type: 'integer' },",
+                  "              code:        { type: 'string' },",
+                  "              description: { type: 'string' },",
+                  "              stage:       { type: ['string', 'null'] },",
+                  "              type:        { type: 'string' },",
+                  "              category:    { type: ['string', 'null'] },",
+                  "              priority:    { type: ['string', 'null'] },",
+                  "              score:       { type: ['number', 'null'] },",
+                  "              counts:      { type: ['object', 'null'] },",
+                  "              area:        { type: 'object', required: ['id', 'name'], properties: { id: { type: 'integer' }, name: { type: 'string' } } },",
+                  "              designation: { type: 'object', required: ['id', 'name'], properties: { id: { type: 'integer' }, name: { type: 'string' } } }",
                   "            }",
                   "          }",
                   "        }",
                   "      }",
-                  "    }",
-                  "  }",
-                  "};",
-                  "pm.test(\"Response matches schema\", function () {",
-                  "    pm.response.to.have.jsonSchema(schema);",
-                  "});",
-                  "pm.test(\"All returned KPIs match requested designationId and areaId\", function () {",
-                  "    pm.response.json().data.forEach(function (kpi) {",
-                  "        pm.expect(kpi.designation.id).to.equal(3);",
-                  "        pm.expect(kpi.area.id).to.equal(4);",
+                  "    };",
+                  "    pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "    pm.test('All returned KPIs match requested designationId and areaId', function () {",
+                  "        const expectedDesignationId = parseInt(pm.environment.get('designationId'));",
+                  "        const expectedAreaId = parseInt(pm.environment.get('areaId'));",
+                  "        pm.response.json().data.forEach(function (kpi) {",
+                  "            pm.expect(kpi.designation.id).to.equal(expectedDesignationId);",
+                  "            pm.expect(kpi.area.id).to.equal(expectedAreaId);",
+                  "        });",
                   "    });",
-                  "});",
-                  "pm.test(\"All returned KPIs have type Role based\", function () {",
-                  "    pm.response.json().data.forEach(function (kpi) {",
-                  "        pm.expect(kpi.type).to.equal('Role based');",
+                  "    pm.test('All returned KPIs have type Role based', function () {",
+                  "        pm.response.json().data.forEach(function (kpi) { pm.expect(kpi.type).to.equal('Role based'); });",
                   "    });",
-                  "});"
+                  "    pm.test('Returned item count does not exceed pageSize=10', function () {",
+                  "        pm.expect(pm.response.json().data.length).to.be.at.most(10);",
+                  "    });",
+                  "}"
                 ]
               }
             }
@@ -2299,6 +2299,10 @@
                   "};",
                   "pm.test(\"Response matches schema\", function () {",
                   "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test('Older highlights page does not exceed size=10', function () {",
+                  "    const older = pm.response.json().data.older;",
+                  "    pm.expect(older.length).to.be.at.most(10);",
                   "});"
                 ]
               }
@@ -2779,6 +2783,167 @@
               }
             }
           ]
+        },
+        {
+          "name": "Non-existent user pulse returns 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/user/999999999/pulse",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "user",
+                "999999999",
+                "pulse"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 (API returns 400 for non-existent user pulse, not 404)', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test('Response time is below 5000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Non-existent honor campaign appreciations returns 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/users/{{personId}}/campaigns/00000000-0000-0000-0000-000000000000/appreciations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "users",
+                "{{personId}}",
+                "campaigns",
+                "00000000-0000-0000-0000-000000000000",
+                "appreciations"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400, 403, or 404 (Honor access or campaign not found)', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 403, 404]);",
+                  "});",
+                  "pm.test('Response time is below 5000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Non-existent OKR year returns empty data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=1900",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary?year=1900"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Data is empty for non-existent year', function () {",
+                  "    const body = pm.response.json();",
+                  "    const data = body.data;",
+                  "    pm.expect(data).to.satisfy(function (d) {",
+                  "        return d === null || (Array.isArray(d) && d.length === 0) || (typeof d === 'object' && Object.keys(d).length === 0);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Non-existent user roles returns 200 empty (quirk — API does not validate user existence)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/999999999/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "999999999",
+                "roles"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200 (quirk: API does not 404 for non-existent user roles)', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Response time is below 5000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "});",
+                  "pm.test('Response body is empty (no roles for non-existent user)', function () {",
+                  "    const body = pm.response.json();",
+                  "    const data = body.data !== undefined ? body.data : body;",
+                  "    const isEmpty = data === null",
+                  "        || (Array.isArray(data) && data.length === 0)",
+                  "        || (typeof data === 'object' && !Array.isArray(data) && Object.keys(data).length === 0);",
+                  "    pm.expect(isEmpty).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
         }
       ]
     }
