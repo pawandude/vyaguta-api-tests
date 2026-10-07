@@ -35,22 +35,8 @@ jobs:
           name: newman-report
           path: reports/
 
-      - name: Notify on failure
+      - name: Summarise failure
         if: failure()
-        uses: slackapi/slack-github-action@v2
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            {
-              "text": ":x: *Vyaguta API Tests failed*",
-              "attachments": [
-                {
-                  "color": "danger",
-                  "fields": [
-                    { "title": "Workflow", "value": "${{ github.workflow }}", "short": true },
-                    { "title": "Run", "value": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>", "short": true }
-                  ]
-                }
-              ]
-            }
+        run: |
+          echo "### API Tests failed :x:" >> $GITHUB_STEP_SUMMARY
+          echo "View the uploaded **newman-report** artifact for details." >> $GITHUB_STEP_SUMMARY

@@ -43,22 +43,8 @@ jobs:
           name: sanity-report
           path: reports/sanity-junit-report.xml
 
-      - name: Notify on failure
+      - name: Summarise failure
         if: failure()
-        uses: slackapi/slack-github-action@v2
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            {
-              "text": ":x: *Vyaguta Sanity Check failed*",
-              "attachments": [
-                {
-                  "color": "danger",
-                  "fields": [
-                    { "title": "Workflow", "value": "${{ github.workflow }}", "short": true },
-                    { "title": "Run", "value": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>", "short": true }
-                  ]
-                }
-              ]
-            }
+        run: |
+          echo "### Sanity Check failed :x:" >> $GITHUB_STEP_SUMMARY
+          echo "View the uploaded **sanity-report** artifact for details." >> $GITHUB_STEP_SUMMARY
