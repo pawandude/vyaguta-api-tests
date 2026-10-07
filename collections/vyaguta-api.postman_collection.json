@@ -3195,6 +3195,424 @@
       ]
     },
     {
+      "name": "Teams Write Operations",
+      "item": [
+        {
+          "name": "Create role returns 201 with role data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"{{roleName}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ts = Date.now();",
+                  "pm.environment.set('roleName', '[TEST] Role ' + ts);",
+                  "pm.environment.set('roleNameUpdated', '[TEST] Role ' + ts + ' upd');"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Content-Type is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['id', 'name'],",
+                  "  properties: {",
+                  "    id:   { type: 'integer' },",
+                  "    name: { type: 'string' }",
+                  "  }",
+                  "};",
+                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "pm.test('Response echoes submitted name', function () {",
+                  "    pm.expect(pm.response.json().name).to.equal(pm.environment.get('roleName'));",
+                  "});",
+                  "pm.test('Role ID stored for subsequent requests', function () {",
+                  "    const id = pm.response.json().id;",
+                  "    pm.environment.set('roleId', id);",
+                  "    pm.expect(id).to.be.a('number').and.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Update role returns 200 with updated name",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles",
+                "{{roleId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"{{roleNameUpdated}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response echoes updated name', function () {",
+                  "    const d = pm.response.json();",
+                  "    pm.expect(d.name).to.equal(pm.environment.get('roleNameUpdated'));",
+                  "    pm.expect(d.id).to.equal(pm.environment.get('roleId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Delete role returns 200",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles",
+                "{{roleId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.environment.unset('roleId');",
+                  "pm.environment.unset('roleName');",
+                  "pm.environment.unset('roleNameUpdated');"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create role with missing name returns 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pulse Write Operations",
+      "item": [
+        {
+          "name": "Create feedback note returns 200 with note ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedback",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedback"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"subjectId\":15444,\"noteType\":\"FEEDBACK\",\"note\":\"[TEST] Automated feedback note\",\"noteStatus\":\"ACTIVE\",\"notePrivacy\":\"ONLY_ME\",\"areaId\":4}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Content-Type is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['message', 'data'],",
+                  "  properties: {",
+                  "    message: { type: 'string' },",
+                  "    data: { type: 'object', required: ['id'], properties: { id: { type: 'integer' } } }",
+                  "  }",
+                  "};",
+                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "pm.test('Note ID stored for subsequent requests', function () {",
+                  "    const id = pm.response.json().data.id;",
+                  "    pm.environment.set('pulseNoteId', id);",
+                  "    pm.expect(id).to.be.a('number').and.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Update feedback note returns 200 with updated note",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedback/{{pulseNoteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedback",
+                "{{pulseNoteId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"note\":\"[TEST] Updated feedback note\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response echoes updated note text', function () {",
+                  "    const d = pm.response.json().data;",
+                  "    pm.expect(d.note).to.equal('[TEST] Updated feedback note');",
+                  "    pm.expect(d.id).to.equal(pm.environment.get('pulseNoteId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Delete feedback note returns 200",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedbacks/{{pulseNoteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedbacks",
+                "{{pulseNoteId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.environment.unset('pulseNoteId');"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create feedback note with missing required fields returns 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedback",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedback"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"note\":\"missing subjectId and other required fields\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Behavior & Edge Cases",
       "description": "Auth negative tests and known API quirks. Auth role coverage to be expanded once user roles are confirmed.",
       "item": [
