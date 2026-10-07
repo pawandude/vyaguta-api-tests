@@ -4116,11 +4116,16 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Response time is within 50ms SLA', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(50);",
-                  "});",
                   "pm.test('Status is 200', function () {",
                   "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Response time is within 50ms SLA', function () {",
+                  "    const actual = pm.response.responseTime;",
+                  "    pm.expect(",
+                  "        actual,",
+                  "        'SLA breach: endpoint took ' + actual + 'ms — threshold is 50ms. ' +",
+                  "        'This exceeds the agreed performance budget by ' + (actual - 50) + 'ms.'",
+                  "    ).to.be.below(50);",
                   "});"
                 ]
               }
@@ -4157,8 +4162,13 @@
                   "});",
                   "pm.test('Response includes required salary field', function () {",
                   "    const data = pm.response.json().data;",
-                  "    pm.expect(data).to.have.property('salary');",
-                  "    pm.expect(data.salary).to.be.a('number');",
+                  "    const presentKeys = Object.keys(data).join(', ');",
+                  "    pm.expect(",
+                  "        data,",
+                  "        'Field \\'salary\\' missing from user object. ' +",
+                  "        'Present fields: ' + presentKeys + '. ' +",
+                  "        'This field was present in v1 of the API — may have been dropped in a recent release.'",
+                  "    ).to.have.property('salary');",
                   "});"
                 ]
               }
