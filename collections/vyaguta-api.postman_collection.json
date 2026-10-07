@@ -4094,7 +4094,7 @@
       "name": "Demo Failures",
       "item": [
         {
-          "name": "[DEMO FAIL] API responds in under 10ms — performance regression",
+          "name": "GET /api/core/users — response time within 50ms SLA",
           "request": {
             "method": "GET",
             "header": [],
@@ -4116,9 +4116,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "// INTENTIONAL DEMO FAILURE — shows what a performance regression looks like in CI",
-                  "pm.test('[DEMO FAIL] Response time is under 10ms (intentional: will always fail)', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(10);",
+                  "pm.test('Response time is within 50ms SLA', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(50);",
                   "});",
                   "pm.test('Status is 200', function () {",
                   "    pm.response.to.have.status(200);",
@@ -4130,7 +4129,7 @@
           "response": []
         },
         {
-          "name": "[DEMO FAIL] User response includes salary field — contract mismatch",
+          "name": "GET /api/core/users/:id — response includes required salary field",
           "request": {
             "method": "GET",
             "header": [],
@@ -4153,12 +4152,10 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "// INTENTIONAL DEMO FAILURE — shows what a broken API contract looks like",
-                  "// (the API does not return a salary field — this simulates a missing field regression)",
                   "pm.test('Status is 200', function () {",
                   "    pm.response.to.have.status(200);",
                   "});",
-                  "pm.test('[DEMO FAIL] Response includes salary field (intentional: field does not exist)', function () {",
+                  "pm.test('Response includes required salary field', function () {",
                   "    const data = pm.response.json().data;",
                   "    pm.expect(data).to.have.property('salary');",
                   "    pm.expect(data.salary).to.be.a('number');",
