@@ -4089,6 +4089,87 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Demo Failures",
+      "item": [
+        {
+          "name": "[DEMO FAIL] API responds in under 10ms — performance regression",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// INTENTIONAL DEMO FAILURE — shows what a performance regression looks like in CI",
+                  "pm.test('[DEMO FAIL] Response time is under 10ms (intentional: will always fail)', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(10);",
+                  "});",
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "[DEMO FAIL] User response includes salary field — contract mismatch",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// INTENTIONAL DEMO FAILURE — shows what a broken API contract looks like",
+                  "// (the API does not return a salary field — this simulates a missing field regression)",
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('[DEMO FAIL] Response includes salary field (intentional: field does not exist)', function () {",
+                  "    const data = pm.response.json().data;",
+                  "    pm.expect(data).to.have.property('salary');",
+                  "    pm.expect(data.salary).to.be.a('number');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
     }
   ]
 }
