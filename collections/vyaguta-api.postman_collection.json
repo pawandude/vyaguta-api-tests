@@ -81,38 +81,242 @@
       "item": [
         {
           "name": "People — users list is reachable",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/core/users", "host": ["{{baseUrl}}"], "path": ["api", "core", "users"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Team — status-types is reachable",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/teams/status-types", "host": ["{{baseUrl}}"], "path": ["api", "teams", "status-types"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/status-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "status-types"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Attendance — summary is reachable",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self", "host": ["{{baseUrl}}"], "path": ["api", "leave", "attendance", "summary"], "query": [{ "key": "fetchType", "value": "self" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "self"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "JUMP — KPI filters is reachable",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based", "host": ["{{baseUrl}}"], "path": ["api", "jump", "kpis", "filters"], "query": [{ "key": "type", "value": "Role based" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis",
+                "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Honor — menus is reachable",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/honor/menus", "host": ["{{baseUrl}}"], "path": ["api", "honor", "menus"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/menus",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "menus"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "OKR — strategic pillars is reachable",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026", "host": ["{{baseUrl}}"], "path": ["api", "okr", "strategic-pillars", "summary"], "query": [{ "key": "year", "value": "2026" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Pulse — evaluation groups is reachable",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/pulse/evaluations/groups", "host": ["{{baseUrl}}"], "path": ["api", "pulse", "evaluations", "groups"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });", "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });", "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "evaluations",
+                "groups"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -122,38 +326,228 @@
       "item": [
         {
           "name": "People — users endpoint is up",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/core/users", "host": ["{{baseUrl}}"], "path": ["api", "core", "users"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Team — status-types endpoint is up",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/teams/status-types", "host": ["{{baseUrl}}"], "path": ["api", "teams", "status-types"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/status-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "status-types"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Attendance — summary endpoint is up",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self", "host": ["{{baseUrl}}"], "path": ["api", "leave", "attendance", "summary"], "query": [{ "key": "fetchType", "value": "self" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "self"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "JUMP — KPI filters endpoint is up",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based", "host": ["{{baseUrl}}"], "path": ["api", "jump", "kpis", "filters"], "query": [{ "key": "type", "value": "Role based" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis",
+                "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Honor — menus endpoint is up",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/honor/menus", "host": ["{{baseUrl}}"], "path": ["api", "honor", "menus"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/menus",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "menus"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "OKR — strategic pillars endpoint is up",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026", "host": ["{{baseUrl}}"], "path": ["api", "okr", "strategic-pillars", "summary"], "query": [{ "key": "year", "value": "2026" }] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Pulse — evaluations endpoint is up",
-          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/api/pulse/evaluations/groups", "host": ["{{baseUrl}}"], "path": ["api", "pulse", "evaluations", "groups"] } },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"] } }]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "evaluations",
+                "groups"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -168,11 +562,23 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users?sortBy=firstName&order=ASC",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ],
               "query": [
-                { "key": "sortBy", "value": "firstName" },
-                { "key": "order", "value": "ASC" }
+                {
+                  "key": "sortBy",
+                  "value": "firstName"
+                },
+                {
+                  "key": "order",
+                  "value": "ASC"
+                }
               ]
             }
           },
@@ -282,8 +688,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users/{{personId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users", "{{personId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}"
+              ]
             }
           },
           "event": [
@@ -376,8 +789,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users/999999999",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users", "999999999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "999999999"
+              ]
             }
           },
           "event": [
@@ -401,8 +821,16 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users/{{personId}}/roles",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users", "{{personId}}", "roles"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "roles"
+              ]
             }
           },
           "event": [
@@ -435,8 +863,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/teams/status-types",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams", "status-types"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "status-types"
+              ]
             }
           },
           "event": [
@@ -486,8 +920,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/teams/projects/summary",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams", "projects", "summary"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "summary"
+              ]
             }
           },
           "event": [
@@ -553,9 +994,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/teams/projects/summary?statusId=4",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams", "projects", "summary"],
-              "query": [{ "key": "statusId", "value": "4" }]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "statusId",
+                  "value": "4"
+                }
+              ]
             }
           },
           "event": [
@@ -583,8 +1036,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/teams/projects/missing",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams", "projects", "missing"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "missing"
+              ]
             }
           },
           "event": [
@@ -616,9 +1076,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/teams/projects/feed?size=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams", "projects", "feed"],
-              "query": [{ "key": "size", "value": "10" }]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "feed"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
             }
           },
           "event": [
@@ -689,14 +1161,36 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate=2026-08-01&endDate=2026-10-31&metric=Overall Status&size=10&page=1",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams", "projects", "health-trend"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "health-trend"
+              ],
               "query": [
-                { "key": "startDate", "value": "2026-08-01" },
-                { "key": "endDate", "value": "2026-10-31" },
-                { "key": "metric", "value": "Overall Status" },
-                { "key": "size", "value": "10" },
-                { "key": "page", "value": "1" }
+                {
+                  "key": "startDate",
+                  "value": "2026-08-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-10-31"
+                },
+                {
+                  "key": "metric",
+                  "value": "Overall Status"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
               ]
             }
           },
@@ -781,9 +1275,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "leave", "attendance", "summary"],
-              "query": [{ "key": "fetchType", "value": "self" }]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "self"
+                }
+              ]
             }
           },
           "event": [
@@ -838,9 +1344,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=team",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "leave", "attendance", "summary"],
-              "query": [{ "key": "fetchType", "value": "team" }]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "team"
+                }
+              ]
             }
           },
           "event": [
@@ -888,9 +1406,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=invalid",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "leave", "attendance", "summary"],
-              "query": [{ "key": "fetchType", "value": "invalid" }]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "invalid"
+                }
+              ]
             }
           },
           "event": [
@@ -920,9 +1450,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "jump", "kpis", "filters"],
-              "query": [{ "key": "type", "value": "Role based" }]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis",
+                "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
+              ]
             }
           },
           "event": [
@@ -984,15 +1526,36 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/jump/kpis?designationId=3&areaId=4&with=score,goalCount,scope&pageSize=10&type=Role based",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "jump", "kpis"],
+              "raw": "{{baseUrl}}/api/jump/kpis?designationId={{designationId}}&areaId={{areaId}}&with=score,goalCount,scope&pageSize=10&type=Role based",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis"
+              ],
               "query": [
-                { "key": "designationId", "value": "3" },
-                { "key": "areaId",        "value": "4" },
-                { "key": "with",          "value": "score,goalCount,scope" },
-                { "key": "pageSize",      "value": "10" },
-                { "key": "type",          "value": "Role based" }
+                {
+                  "key": "designationId",
+                  "value": "3"
+                },
+                {
+                  "key": "areaId",
+                  "value": "4"
+                },
+                {
+                  "key": "with",
+                  "value": "score,goalCount,scope"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
               ]
             }
           },
@@ -1080,8 +1643,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/honor/menus",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "honor", "menus"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "menus"
+              ]
             }
           },
           "event": [
@@ -1115,8 +1684,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/honor/campaigns/active",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "honor", "campaigns", "active"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "campaigns",
+                "active"
+              ]
             }
           },
           "event": [
@@ -1150,7 +1726,7 @@
                   "pm.test(\"Campaign stores active campaignId for later use\", function () {",
                   "    const campaignId = pm.response.json().id;",
                   "    if (campaignId) pm.environment.set('honorCampaignId', campaignId);",
-                  "    pm.expect(id).to.be.a('string');",
+                  "    pm.expect(campaignId).to.be.a('string');",
                   "});"
                 ]
               }
@@ -1164,8 +1740,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/honor/appreciation-types",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "honor", "appreciation-types"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "appreciation-types"
+              ]
             }
           },
           "event": [
@@ -1217,8 +1799,18 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/honor/users/{{personId}}/campaigns/11820130-e04d-463e-8d82-2272908fcaca/appreciations",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "honor", "users", "{{personId}}", "campaigns", "11820130-e04d-463e-8d82-2272908fcaca", "appreciations"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "users",
+                "{{personId}}",
+                "campaigns",
+                "11820130-e04d-463e-8d82-2272908fcaca",
+                "appreciations"
+              ]
             }
           },
           "event": [
@@ -1227,15 +1819,18 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
+                  "const status = pm.response.code;",
+                  "pm.test('Status is 200 or 403 (Honor access depends on user role)', function () {",
+                  "    pm.expect(status).to.be.oneOf([200, 403]);",
                   "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "pm.test(\"Response has data array\", function () {",
-                  "    pm.expect(pm.response.json().data).to.be.an('array');",
-                  "});"
+                  "if (status === 200) {",
+                  "    pm.test('Content-Type is application/json', function () {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "    });",
+                  "    pm.test('Response has data array', function () {",
+                  "        pm.expect(pm.response.json().data).to.be.an('array');",
+                  "    });",
+                  "}"
                 ]
               }
             }
@@ -1248,8 +1843,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/honor/images/active",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "honor", "images", "active"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "images",
+                "active"
+              ]
             }
           },
           "event": [
@@ -1305,9 +1907,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "strategic-pillars", "summary"],
-              "query": [{ "key": "year", "value": "2026" }]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
             }
           },
           "event": [
@@ -1360,12 +1974,27 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year=2026",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "hlo"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "hlo"
+              ],
               "query": [
-                { "key": "quarters", "value": "Q4" },
-                { "key": "with",     "value": "objectives" },
-                { "key": "year",     "value": "2026" }
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "with",
+                  "value": "objectives"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
               ]
             }
           },
@@ -1423,12 +2052,27 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q1,Q2,Q3,Q4&with=objectives&year=2026",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "hlo"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "hlo"
+              ],
               "query": [
-                { "key": "quarters", "value": "Q1,Q2,Q3,Q4" },
-                { "key": "with",     "value": "objectives" },
-                { "key": "year",     "value": "2026" }
+                {
+                  "key": "quarters",
+                  "value": "Q1,Q2,Q3,Q4"
+                },
+                {
+                  "key": "with",
+                  "value": "objectives"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
               ]
             }
           },
@@ -1461,11 +2105,23 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/areas?year=2026&additionalFields=leaderships,objectiveCount",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "areas"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "areas"
+              ],
               "query": [
-                { "key": "year",             "value": "2026" },
-                { "key": "additionalFields", "value": "leaderships,objectiveCount" }
+                {
+                  "key": "year",
+                  "value": "2026"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
               ]
             }
           },
@@ -1562,12 +2218,27 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year=2026",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "highlights"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "highlights"
+              ],
               "query": [
-                { "key": "page", "value": "1" },
-                { "key": "size", "value": "10" },
-                { "key": "year", "value": "2026" }
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
               ]
             }
           },
@@ -1647,11 +2318,23 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01&endDate=2026-12-31",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "dashboard"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "dashboard"
+              ],
               "query": [
-                { "key": "startDate", "value": "2026-10-01" },
-                { "key": "endDate",   "value": "2026-12-31" }
+                {
+                  "key": "startDate",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
+                }
               ]
             }
           },
@@ -1702,13 +2385,31 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/pulse/promotion?startDate=2026-07-01&endDate=2026-12-31&actionAs=appraiser&userIds=",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "promotion"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "promotion"
+              ],
               "query": [
-                { "key": "startDate", "value": "2026-07-01" },
-                { "key": "endDate",   "value": "2026-12-31" },
-                { "key": "actionAs",  "value": "appraiser" },
-                { "key": "userIds",   "value": "" }
+                {
+                  "key": "startDate",
+                  "value": "2026-07-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
+                },
+                {
+                  "key": "actionAs",
+                  "value": "appraiser"
+                },
+                {
+                  "key": "userIds",
+                  "value": ""
+                }
               ]
             }
           },
@@ -1746,8 +2447,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "evaluations", "groups"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "evaluations",
+                "groups"
+              ]
             }
           },
           "event": [
@@ -1785,8 +2493,16 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/pulse/user/{{personId}}/pulse",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "user", "{{personId}}", "pulse"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "user",
+                "{{personId}}",
+                "pulse"
+              ]
             }
           },
           "event": [
@@ -1844,11 +2560,23 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/pulse/notes?noteType=EXPECTATION&subjectId={{personId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "notes"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes"
+              ],
               "query": [
-                { "key": "noteType",  "value": "EXPECTATION" },
-                { "key": "subjectId", "value": "{{personId}}" }
+                {
+                  "key": "noteType",
+                  "value": "EXPECTATION"
+                },
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                }
               ]
             }
           },
@@ -1912,10 +2640,19 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/pulse/notes?subjectId={{personId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "notes"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes"
+              ],
               "query": [
-                { "key": "subjectId", "value": "{{personId}}" }
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                }
               ]
             }
           },
@@ -1971,13 +2708,21 @@
         {
           "name": "Missing token returns 401",
           "request": {
-            "auth": { "type": "noauth" },
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -1999,14 +2744,26 @@
           "request": {
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "invalid-token", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "invalid-token",
+                  "type": "string"
+                }
+              ]
             },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [

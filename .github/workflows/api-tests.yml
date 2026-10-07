@@ -24,7 +24,14 @@ jobs:
         run: npm run lint
 
       - name: Run Newman tests
-        run: npm run test:ci
+        run: |
+          newman run collections/vyaguta-api.postman_collection.json \
+            -e environments/vyaguta.postman_environment.json \
+            --env-var "authToken=$VYAGUTA_TOKEN" \
+            --reporters cli,junit,htmlextra \
+            --reporter-junit-export reports/junit-report.xml \
+            --reporter-htmlextra-export reports/report.html \
+            --reporter-htmlextra-title "Vyaguta API Test Report"
         env:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
 
