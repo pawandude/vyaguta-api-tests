@@ -28,12 +28,14 @@ jobs:
           newman run collections/vyaguta-api.postman_collection.json \
             -e environments/vyaguta.postman_environment.json \
             --env-var "authToken=$VYAGUTA_TOKEN" \
+            --env-var "restrictedToken=$VYAGUTA_RESTRICTED_TOKEN" \
             --reporters cli,junit,htmlextra \
             --reporter-junit-export reports/junit-report.xml \
             --reporter-htmlextra-export reports/report.html \
             --reporter-htmlextra-title "Vyaguta API Test Report"
         env:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
+          VYAGUTA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_RESTRICTED_TOKEN }}
 
       - name: Upload test report
         if: always()
