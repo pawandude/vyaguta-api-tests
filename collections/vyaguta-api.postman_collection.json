@@ -76,6 +76,237 @@
   ],
   "item": [
     {
+      "name": "Health",
+      "description": "Lightweight GET per module. Runs every 2 hours via health-check.yml to confirm all services are reachable.",
+      "item": [
+        {
+          "name": "People — users endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Team — status-types endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/status-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "status-types"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — summary endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "self"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "JUMP — KPI filters endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis",
+                "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Honor — menus endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/menus",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "menus"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — strategic pillars endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — evaluations endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "evaluations",
+                "groups"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Sanity",
       "description": "One representative request per module. Asserts status 200, Content-Type, and non-empty body only. Run on every PR/push for fast feedback.",
       "item": [
@@ -321,24 +552,37 @@
       ]
     },
     {
-      "name": "Health",
-      "description": "Lightweight GET per module. Runs every 2 hours via health-check.yml to confirm all services are reachable.",
+      "name": "Core",
       "item": [
         {
-          "name": "People — users endpoint is up",
+          "name": "Create reminder returns 201 with reminder data",
           "request": {
-            "method": "GET",
-            "header": [],
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/api/core/users",
+              "raw": "{{baseUrl}}/api/core/reminders",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "core",
-                "users"
+                "reminders"
               ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"[TEST] Auto reminder\",\"description\":\"Created by automated test\",\"redirectUrl\":\"https://dev.vyaguta.lftechnology.com.np\",\"startDate\":\"2026-10-07T00:00:00.000Z\",\"endDate\":\"2026-10-08T00:00:00.000Z\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           },
           "event": [
@@ -347,26 +591,62 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Content-Type is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object', required: ['data'],",
+                  "  properties: { data: { type: 'object',",
+                  "    required: ['id','title','description','redirectUrl','startDate','endDate'],",
+                  "    properties: {",
+                  "      id:          { type: 'integer' },",
+                  "      title:       { type: 'string' },",
+                  "      description: { type: 'string' },",
+                  "      redirectUrl: { type: 'string' },",
+                  "      startDate:   { type: 'string' },",
+                  "      endDate:     { type: 'string' },",
+                  "      createdBy:   { type: 'integer' }",
+                  "    }",
+                  "  }}",
+                  "};",
+                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "pm.test('Response echoes submitted title and description', function () {",
+                  "    const d = pm.response.json().data;",
+                  "    pm.expect(d.title).to.equal('[TEST] Auto reminder');",
+                  "    pm.expect(d.description).to.equal('Created by automated test');",
+                  "});",
+                  "pm.test('Reminder ID stored for subsequent requests', function () {",
+                  "    const id = pm.response.json().data.id;",
+                  "    pm.environment.set('reminderId', id);",
+                  "    pm.expect(id).to.be.a('number').and.above(0);",
+                  "});"
                 ]
               }
             }
-          ]
+          ],
+          "response": []
         },
         {
-          "name": "Team — status-types endpoint is up",
+          "name": "Get reminder by ID returns 200 with correct data",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/status-types",
+              "raw": "{{baseUrl}}/api/core/reminders/{{reminderId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "teams",
-                "status-types"
+                "core",
+                "reminders",
+                "{{reminderId}}"
               ]
             }
           },
@@ -376,14 +656,396 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Returned reminder matches created reminder', function () {",
+                  "    const d = pm.response.json().data;",
+                  "    pm.expect(d.id).to.equal(pm.environment.get('reminderId'));",
+                  "    pm.expect(d.title).to.equal('[TEST] Auto reminder');",
+                  "});"
                 ]
               }
             }
-          ]
+          ],
+          "response": []
         },
         {
-          "name": "Attendance — summary endpoint is up",
+          "name": "Update reminder returns 200 with updated fields",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/reminders/{{reminderId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "reminders",
+                "{{reminderId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"[TEST] Updated reminder\",\"description\":\"Updated by automated test\",\"redirectUrl\":\"https://dev.vyaguta.lftechnology.com.np\",\"startDate\":\"2026-10-07T00:00:00.000Z\",\"endDate\":\"2026-10-09T00:00:00.000Z\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response echoes updated title', function () {",
+                  "    const d = pm.response.json().data;",
+                  "    pm.expect(d.title).to.equal('[TEST] Updated reminder');",
+                  "    pm.expect(d.updatedBy).to.be.a('number');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Delete reminder returns 200 with deleted ID",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/reminders/{{reminderId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "reminders",
+                "{{reminderId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response returns deleted ID', function () {",
+                  "    pm.expect(pm.response.json().data.id).to.equal(pm.environment.get('reminderId'));",
+                  "});",
+                  "pm.environment.unset('reminderId');"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create event returns 201 with event data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "events"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"[TEST] Auto event\",\"eventDate\":\"2026-12-25\",\"description\":\"Created by automated test\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Content-Type is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "pm.test('Response has event ID', function () {",
+                  "    const id = pm.response.json().data.id;",
+                  "    pm.environment.set('eventId', id);",
+                  "    pm.expect(id).to.be.a('number').and.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Get event by ID returns 200 with correct data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/events/{{eventId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "events",
+                "{{eventId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Returned event matches created event', function () {",
+                  "    const d = pm.response.json().data;",
+                  "    pm.expect(d.id).to.equal(pm.environment.get('eventId'));",
+                  "    pm.expect(d.name).to.equal('[TEST] Auto event');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Update event returns 200 with updated fields",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/events/{{eventId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "events",
+                "{{eventId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"[TEST] Updated event\",\"eventDate\":\"2026-12-26\",\"description\":\"Updated by automated test\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response echoes updated name', function () {",
+                  "    const d = pm.response.json().data;",
+                  "    pm.expect(d.name).to.equal('[TEST] Updated event');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Delete event returns 200 with deleted ID",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/events/{{eventId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "events",
+                "{{eventId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response returns deleted ID', function () {",
+                  "    pm.expect(pm.response.json().data.id).to.equal(pm.environment.get('eventId'));",
+                  "});",
+                  "pm.environment.unset('eventId');"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create reminder with missing required fields returns 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/reminders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "reminders"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+                  "});",
+                  "pm.test('Response body contains error message', function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.satisfy(function (b) {",
+                  "        return b.message || b.error || b.errors;",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create event with missing required fields returns 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "events"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"description\":\"no name or date\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Attendance",
+      "description": "Tests for the Attendance module — /api/leave/attendance/summary with fetchType=self and fetchType=team.",
+      "item": [
+        {
+          "name": "Get attendance summary for self returns 200",
           "request": {
             "method": "GET",
             "header": [],
@@ -412,375 +1074,39 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "JUMP — KPI filters endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "jump",
-                "kpis",
-                "filters"
-              ],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "Role based"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Honor — menus endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/honor/menus",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "honor",
-                "menus"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "OKR — strategic pillars endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "strategic-pillars",
-                "summary"
-              ],
-              "query": [
-                {
-                  "key": "year",
-                  "value": "2026"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Pulse — evaluations endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "pulse",
-                "evaluations",
-                "groups"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "People",
-      "description": "Tests for the People module — GET /api/core/users and /api/core/users/:id.",
-      "item": [
-        {
-          "name": "Get all users returns 200 with paginated list",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/users?sortBy=firstName&order=ASC",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "users"
-              ],
-              "query": [
-                {
-                  "key": "sortBy",
-                  "value": "firstName"
-                },
-                {
-                  "key": "order",
-                  "value": "ASC"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
                   "pm.test(\"Status is 200\", function () {",
                   "    pm.response.to.have.status(200);",
                   "});",
                   "pm.test(\"Content-Type is application/json\", function () {",
                   "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                   "});",
-                  "",
-                  "const schema = {",
-                  "  type: 'object',",
-                  "  required: ['data', 'meta'],",
-                  "  properties: {",
-                  "    data: {",
-                  "      type: 'array',",
-                  "      items: {",
-                  "        type: 'object',",
-                  "        required: ['id', 'empId', 'firstName', 'lastName', 'email'],",
-                  "        properties: {",
-                  "          id:          { type: 'integer' },",
-                  "          empId:       { type: 'string' },",
-                  "          firstName:   { type: 'string' },",
-                  "          middleName:  { type: ['string', 'null'] },",
-                  "          lastName:    { type: 'string' },",
-                  "          email:       { type: 'string' },",
-                  "          avatarUrl:   { type: ['string', 'null'] },",
-                  "          mobilePhone: { type: ['string', 'null'] },",
-                  "          leaveIssuer: {",
-                  "            type: ['object', 'null'],",
-                  "            properties: {",
-                  "              id:         { type: 'integer' },",
-                  "              firstName:  { type: 'string' },",
-                  "              lastName:   { type: 'string' },",
-                  "              email:      { type: 'string' },",
-                  "              empId:      { type: 'string' },",
-                  "              avatarUrl:  { type: ['string', 'null'] },",
-                  "              middleName: { type: ['string', 'null'] }",
-                  "            }",
-                  "          },",
-                  "          designation: {",
-                  "            type: ['object', 'null'],",
-                  "            properties: {",
-                  "              id:   { type: 'integer' },",
-                  "              name: { type: 'string' },",
-                  "              area: {",
-                  "                type: 'object',",
-                  "                properties: {",
-                  "                  id:   { type: 'integer' },",
-                  "                  name: { type: 'string' }",
-                  "                }",
-                  "              }",
-                  "            }",
-                  "          },",
-                  "          department: {",
-                  "            type: ['object', 'null'],",
-                  "            properties: {",
-                  "              id:   { type: 'integer' },",
-                  "              name: { type: 'string' }",
-                  "            }",
-                  "          }",
-                  "        }",
-                  "      }",
-                  "    },",
-                  "    meta: {",
-                  "      type: 'object',",
-                  "      required: ['total', 'size', 'page'],",
-                  "      properties: {",
-                  "        total: { type: 'integer' },",
-                  "        size:  { type: 'integer' },",
-                  "        page:  { type: 'integer' }",
-                  "      }",
-                  "    }",
-                  "  }",
-                  "};",
-                  "",
-                  "pm.test(\"Response matches schema\", function () {",
-                  "    pm.response.to.have.jsonSchema(schema);",
-                  "});",
-                  "",
-                  "pm.test(\"data array is not empty\", function () {",
-                  "    const body = pm.response.json();",
-                  "    pm.expect(body.data).to.be.an('array').that.is.not.empty;",
-                  "});",
-                  "",
-                  "pm.test(\"meta contains total, size, page\", function () {",
-                  "    const { meta } = pm.response.json();",
-                  "    pm.expect(meta.total).to.be.a('number').and.above(0);",
-                  "    pm.expect(meta.size).to.be.a('number').and.above(0);",
-                  "    pm.expect(meta.page).to.be.a('number').and.equal(1);",
-                  "});",
-                  "pm.test('Users are sorted by firstName ascending', function () {",
-                  "    const names = pm.response.json().data.map(function (u) { return u.firstName.toLowerCase(); });",
-                  "    const sorted = names.slice().sort();",
-                  "    pm.expect(names).to.deep.equal(sorted);",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Get user by ID returns 200 with correct user",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/users/{{personId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "users",
-                "{{personId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "",
                   "const schema = {",
                   "  type: 'object',",
                   "  required: ['data'],",
                   "  properties: {",
                   "    data: {",
                   "      type: 'object',",
-                  "      required: ['id', 'empId', 'firstName', 'lastName', 'email', 'joinDate'],",
+                  "      required: ['leave', 'worklog', 'missing'],",
                   "      properties: {",
-                  "        id:                           { type: 'integer' },",
-                  "        empId:                        { type: 'string' },",
-                  "        firstName:                    { type: 'string' },",
-                  "        middleName:                   { type: ['string', 'null'] },",
-                  "        lastName:                     { type: 'string' },",
-                  "        email:                        { type: 'string' },",
-                  "        avatarUrl:                    { type: ['string', 'null'] },",
-                  "        cvUrl:                        { type: ['string', 'null'] },",
-                  "        empStatus:                    { type: ['string', 'null'] },",
-                  "        gender:                       { type: ['string', 'null'] },",
-                  "        githubId:                     { type: ['string', 'null'] },",
-                  "        mobilePhone:                  { type: ['string', 'null'] },",
-                  "        temporaryAddress:             { type: ['string', 'null'] },",
-                  "        permanentAddress:             { type: ['string', 'null'] },",
-                  "        bloodGroup:                   { type: ['string', 'null'] },",
-                  "        joinDate:                     { type: 'string' },",
-                  "        maritialStatus:               { type: ['string', 'null'] },",
-                  "        country:                      { type: ['string', 'null'] },",
-                  "        timezone:                     { type: ['string', 'null'] },",
-                  "        scheduledType:                { type: ['string', 'null'] },",
-                  "        workingShift:                 { type: ['string', 'null'] },",
-                  "        isSubscribed:                 { type: 'boolean' },",
-                  "        designation: {",
-                  "          type: ['object', 'null'],",
-                  "          properties: {",
-                  "            id:   { type: 'integer' },",
-                  "            name: { type: 'string' },",
-                  "            area: { type: 'object', properties: { id: { type: 'integer' }, name: { type: 'string' } } }",
-                  "          }",
+                  "        leave: {",
+                  "          type: 'object',",
+                  "          properties: { approved: { type: 'integer' } }",
                   "        },",
-                  "        department: {",
-                  "          type: ['object', 'null'],",
-                  "          properties: {",
-                  "            id:   { type: 'integer' },",
-                  "            name: { type: 'string' }",
-                  "          }",
+                  "        worklog: {",
+                  "          type: 'object',",
+                  "          properties: { pending: { type: 'integer' } }",
                   "        },",
-                  "        leaveIssuer:  { type: ['object', 'null'] },",
-                  "        teamManager:  { type: ['object', 'null'] },",
-                  "        supervisor:   { type: ['object', 'null'] },",
-                  "        coach:        { type: ['object', 'null'] },",
-                  "        skills:       { type: 'array' },",
-                  "        empStatusHistory:       { type: 'array' },",
-                  "        designationAreaHistory: { type: 'array' }",
+                  "        missing: { type: 'integer' }",
                   "      }",
                   "    }",
                   "  }",
                   "};",
-                  "",
                   "pm.test(\"Response matches schema\", function () {",
                   "    pm.response.to.have.jsonSchema(schema);",
                   "});",
-                  "",
-                  "pm.test(\"Returned user ID matches requested ID\", function () {",
-                  "    const body = pm.response.json();",
-                  "    pm.expect(body.data.id).to.equal(parseInt(pm.environment.get('personId')));",
+                  "pm.test(\"data has leave, worklog, missing\", function () {",
+                  "    const attendanceData = pm.response.json().data;",
+                  "    pm.expect(attendanceData).to.have.all.keys('leave', 'worklog', 'missing');",
                   "});"
                 ]
               }
@@ -788,53 +1114,26 @@
           ]
         },
         {
-          "name": "Get non-existent user returns 404",
+          "name": "Get attendance summary for team returns 200",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/core/users/999999999",
+              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=team",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "core",
-                "users",
-                "999999999"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 404\", function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Get user roles by ID returns 200",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/users/{{personId}}/roles",
-              "host": [
-                "{{baseUrl}}"
+                "leave",
+                "attendance",
+                "summary"
               ],
-              "path": [
-                "api",
-                "core",
-                "users",
-                "{{personId}}",
-                "roles"
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "team"
+                }
               ]
             }
           },
@@ -849,6 +1148,65 @@
                   "});",
                   "pm.test(\"Content-Type is application/json\", function () {",
                   "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'object',",
+                  "      required: ['leave', 'worklog', 'missing'],",
+                  "      properties: {",
+                  "        leave:   { type: 'object' },",
+                  "        worklog: { type: 'object' },",
+                  "        missing: { type: 'integer' }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"missing count is a non-negative integer\", function () {",
+                  "    pm.expect(pm.response.json().data.missing).to.be.at.least(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get attendance summary with invalid fetchType returns 200 or 400 (quirk)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=invalid",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "invalid"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200 or 400\", function () {",
+                  "    pm.expect([200, 400]).to.include(pm.response.code);",
                   "});"
                 ]
               }
@@ -1275,29 +1633,247 @@
       ]
     },
     {
-      "name": "Attendance",
-      "description": "Tests for the Attendance module — /api/leave/attendance/summary with fetchType=self and fetchType=team.",
+      "name": "Teams Write Operations",
       "item": [
         {
-          "name": "Get attendance summary for self returns 200",
+          "name": "Create role returns 201 with role data",
           "request": {
-            "method": "GET",
-            "header": [],
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
+              "raw": "{{baseUrl}}/api/teams/roles",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "leave",
-                "attendance",
-                "summary"
+                "teams",
+                "roles"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"{{roleName}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ts = Date.now();",
+                  "pm.environment.set('roleName', '[TEST] Role ' + ts);",
+                  "pm.environment.set('roleNameUpdated', '[TEST] Role ' + ts + ' upd');"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Content-Type is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['id', 'name'],",
+                  "  properties: {",
+                  "    id:   { type: 'integer' },",
+                  "    name: { type: 'string' }",
+                  "  }",
+                  "};",
+                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "pm.test('Response echoes submitted name', function () {",
+                  "    pm.expect(pm.response.json().name).to.equal(pm.environment.get('roleName'));",
+                  "});",
+                  "pm.test('Role ID stored for subsequent requests', function () {",
+                  "    const id = pm.response.json().id;",
+                  "    pm.environment.set('roleId', id);",
+                  "    pm.expect(id).to.be.a('number').and.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Update role returns 200 with updated name",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles",
+                "{{roleId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"{{roleNameUpdated}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response echoes updated name', function () {",
+                  "    const d = pm.response.json();",
+                  "    pm.expect(d.name).to.equal(pm.environment.get('roleNameUpdated'));",
+                  "    pm.expect(d.id).to.equal(pm.environment.get('roleId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Delete role returns 200",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles",
+                "{{roleId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.environment.unset('roleId');",
+                  "pm.environment.unset('roleName');",
+                  "pm.environment.unset('roleNameUpdated');"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create role with missing name returns 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "People",
+      "description": "Tests for the People module — GET /api/core/users and /api/core/users/:id.",
+      "item": [
+        {
+          "name": "Get all users returns 200 with paginated list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users?sortBy=firstName&order=ASC",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
               ],
               "query": [
                 {
-                  "key": "fetchType",
-                  "value": "self"
+                  "key": "sortBy",
+                  "value": "firstName"
+                },
+                {
+                  "key": "order",
+                  "value": "ASC"
                 }
               ]
             }
@@ -1314,33 +1890,92 @@
                   "pm.test(\"Content-Type is application/json\", function () {",
                   "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                   "});",
+                  "",
                   "const schema = {",
                   "  type: 'object',",
-                  "  required: ['data'],",
+                  "  required: ['data', 'meta'],",
                   "  properties: {",
                   "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'empId', 'firstName', 'lastName', 'email'],",
+                  "        properties: {",
+                  "          id:          { type: 'integer' },",
+                  "          empId:       { type: 'string' },",
+                  "          firstName:   { type: 'string' },",
+                  "          middleName:  { type: ['string', 'null'] },",
+                  "          lastName:    { type: 'string' },",
+                  "          email:       { type: 'string' },",
+                  "          avatarUrl:   { type: ['string', 'null'] },",
+                  "          mobilePhone: { type: ['string', 'null'] },",
+                  "          leaveIssuer: {",
+                  "            type: ['object', 'null'],",
+                  "            properties: {",
+                  "              id:         { type: 'integer' },",
+                  "              firstName:  { type: 'string' },",
+                  "              lastName:   { type: 'string' },",
+                  "              email:      { type: 'string' },",
+                  "              empId:      { type: 'string' },",
+                  "              avatarUrl:  { type: ['string', 'null'] },",
+                  "              middleName: { type: ['string', 'null'] }",
+                  "            }",
+                  "          },",
+                  "          designation: {",
+                  "            type: ['object', 'null'],",
+                  "            properties: {",
+                  "              id:   { type: 'integer' },",
+                  "              name: { type: 'string' },",
+                  "              area: {",
+                  "                type: 'object',",
+                  "                properties: {",
+                  "                  id:   { type: 'integer' },",
+                  "                  name: { type: 'string' }",
+                  "                }",
+                  "              }",
+                  "            }",
+                  "          },",
+                  "          department: {",
+                  "            type: ['object', 'null'],",
+                  "            properties: {",
+                  "              id:   { type: 'integer' },",
+                  "              name: { type: 'string' }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    },",
+                  "    meta: {",
                   "      type: 'object',",
-                  "      required: ['leave', 'worklog', 'missing'],",
+                  "      required: ['total', 'size', 'page'],",
                   "      properties: {",
-                  "        leave: {",
-                  "          type: 'object',",
-                  "          properties: { approved: { type: 'integer' } }",
-                  "        },",
-                  "        worklog: {",
-                  "          type: 'object',",
-                  "          properties: { pending: { type: 'integer' } }",
-                  "        },",
-                  "        missing: { type: 'integer' }",
+                  "        total: { type: 'integer' },",
+                  "        size:  { type: 'integer' },",
+                  "        page:  { type: 'integer' }",
                   "      }",
                   "    }",
                   "  }",
                   "};",
+                  "",
                   "pm.test(\"Response matches schema\", function () {",
                   "    pm.response.to.have.jsonSchema(schema);",
                   "});",
-                  "pm.test(\"data has leave, worklog, missing\", function () {",
-                  "    const attendanceData = pm.response.json().data;",
-                  "    pm.expect(attendanceData).to.have.all.keys('leave', 'worklog', 'missing');",
+                  "",
+                  "pm.test(\"data array is not empty\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.data).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test(\"meta contains total, size, page\", function () {",
+                  "    const { meta } = pm.response.json();",
+                  "    pm.expect(meta.total).to.be.a('number').and.above(0);",
+                  "    pm.expect(meta.size).to.be.a('number').and.above(0);",
+                  "    pm.expect(meta.page).to.be.a('number').and.equal(1);",
+                  "});",
+                  "pm.test('Users are sorted by firstName ascending', function () {",
+                  "    const names = pm.response.json().data.map(function (u) { return u.firstName.toLowerCase(); });",
+                  "    const sorted = names.slice().sort();",
+                  "    pm.expect(names).to.deep.equal(sorted);",
                   "});"
                 ]
               }
@@ -1348,26 +1983,20 @@
           ]
         },
         {
-          "name": "Get attendance summary for team returns 200",
+          "name": "Get user by ID returns 200 with correct user",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=team",
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "leave",
-                "attendance",
-                "summary"
-              ],
-              "query": [
-                {
-                  "key": "fetchType",
-                  "value": "team"
-                }
+                "core",
+                "users",
+                "{{personId}}"
               ]
             }
           },
@@ -1383,26 +2012,71 @@
                   "pm.test(\"Content-Type is application/json\", function () {",
                   "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                   "});",
+                  "",
                   "const schema = {",
                   "  type: 'object',",
                   "  required: ['data'],",
                   "  properties: {",
                   "    data: {",
                   "      type: 'object',",
-                  "      required: ['leave', 'worklog', 'missing'],",
+                  "      required: ['id', 'empId', 'firstName', 'lastName', 'email', 'joinDate'],",
                   "      properties: {",
-                  "        leave:   { type: 'object' },",
-                  "        worklog: { type: 'object' },",
-                  "        missing: { type: 'integer' }",
+                  "        id:                           { type: 'integer' },",
+                  "        empId:                        { type: 'string' },",
+                  "        firstName:                    { type: 'string' },",
+                  "        middleName:                   { type: ['string', 'null'] },",
+                  "        lastName:                     { type: 'string' },",
+                  "        email:                        { type: 'string' },",
+                  "        avatarUrl:                    { type: ['string', 'null'] },",
+                  "        cvUrl:                        { type: ['string', 'null'] },",
+                  "        empStatus:                    { type: ['string', 'null'] },",
+                  "        gender:                       { type: ['string', 'null'] },",
+                  "        githubId:                     { type: ['string', 'null'] },",
+                  "        mobilePhone:                  { type: ['string', 'null'] },",
+                  "        temporaryAddress:             { type: ['string', 'null'] },",
+                  "        permanentAddress:             { type: ['string', 'null'] },",
+                  "        bloodGroup:                   { type: ['string', 'null'] },",
+                  "        joinDate:                     { type: 'string' },",
+                  "        maritialStatus:               { type: ['string', 'null'] },",
+                  "        country:                      { type: ['string', 'null'] },",
+                  "        timezone:                     { type: ['string', 'null'] },",
+                  "        scheduledType:                { type: ['string', 'null'] },",
+                  "        workingShift:                 { type: ['string', 'null'] },",
+                  "        isSubscribed:                 { type: 'boolean' },",
+                  "        designation: {",
+                  "          type: ['object', 'null'],",
+                  "          properties: {",
+                  "            id:   { type: 'integer' },",
+                  "            name: { type: 'string' },",
+                  "            area: { type: 'object', properties: { id: { type: 'integer' }, name: { type: 'string' } } }",
+                  "          }",
+                  "        },",
+                  "        department: {",
+                  "          type: ['object', 'null'],",
+                  "          properties: {",
+                  "            id:   { type: 'integer' },",
+                  "            name: { type: 'string' }",
+                  "          }",
+                  "        },",
+                  "        leaveIssuer:  { type: ['object', 'null'] },",
+                  "        teamManager:  { type: ['object', 'null'] },",
+                  "        supervisor:   { type: ['object', 'null'] },",
+                  "        coach:        { type: ['object', 'null'] },",
+                  "        skills:       { type: 'array' },",
+                  "        empStatusHistory:       { type: 'array' },",
+                  "        designationAreaHistory: { type: 'array' }",
                   "      }",
                   "    }",
                   "  }",
                   "};",
+                  "",
                   "pm.test(\"Response matches schema\", function () {",
                   "    pm.response.to.have.jsonSchema(schema);",
                   "});",
-                  "pm.test(\"missing count is a non-negative integer\", function () {",
-                  "    pm.expect(pm.response.json().data.missing).to.be.at.least(0);",
+                  "",
+                  "pm.test(\"Returned user ID matches requested ID\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.data.id).to.equal(parseInt(pm.environment.get('personId')));",
                   "});"
                 ]
               }
@@ -1410,26 +2084,20 @@
           ]
         },
         {
-          "name": "Get attendance summary with invalid fetchType returns 200 or 400 (quirk)",
+          "name": "Get non-existent user returns 404",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=invalid",
+              "raw": "{{baseUrl}}/api/core/users/999999999",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "leave",
-                "attendance",
-                "summary"
-              ],
-              "query": [
-                {
-                  "key": "fetchType",
-                  "value": "invalid"
-                }
+                "core",
+                "users",
+                "999999999"
               ]
             }
           },
@@ -1439,8 +2107,44 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status is 200 or 400\", function () {",
-                  "    pm.expect([200, 400]).to.include(pm.response.code);",
+                  "pm.test(\"Status is 404\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get user roles by ID returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "roles"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                   "});"
                 ]
               }
@@ -2702,710 +3406,6 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "Core",
-      "item": [
-        {
-          "name": "Create reminder returns 201 with reminder data",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/reminders",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "reminders"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"title\":\"[TEST] Auto reminder\",\"description\":\"Created by automated test\",\"redirectUrl\":\"https://dev.vyaguta.lftechnology.com.np\",\"startDate\":\"2026-10-07T00:00:00.000Z\",\"endDate\":\"2026-10-08T00:00:00.000Z\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
-                  "pm.test('Content-Type is application/json', function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "const schema = {",
-                  "  type: 'object', required: ['data'],",
-                  "  properties: { data: { type: 'object',",
-                  "    required: ['id','title','description','redirectUrl','startDate','endDate'],",
-                  "    properties: {",
-                  "      id:          { type: 'integer' },",
-                  "      title:       { type: 'string' },",
-                  "      description: { type: 'string' },",
-                  "      redirectUrl: { type: 'string' },",
-                  "      startDate:   { type: 'string' },",
-                  "      endDate:     { type: 'string' },",
-                  "      createdBy:   { type: 'integer' }",
-                  "    }",
-                  "  }}",
-                  "};",
-                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
-                  "pm.test('Response echoes submitted title and description', function () {",
-                  "    const d = pm.response.json().data;",
-                  "    pm.expect(d.title).to.equal('[TEST] Auto reminder');",
-                  "    pm.expect(d.description).to.equal('Created by automated test');",
-                  "});",
-                  "pm.test('Reminder ID stored for subsequent requests', function () {",
-                  "    const id = pm.response.json().data.id;",
-                  "    pm.environment.set('reminderId', id);",
-                  "    pm.expect(id).to.be.a('number').and.above(0);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get reminder by ID returns 200 with correct data",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/reminders/{{reminderId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "reminders",
-                "{{reminderId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.test('Returned reminder matches created reminder', function () {",
-                  "    const d = pm.response.json().data;",
-                  "    pm.expect(d.id).to.equal(pm.environment.get('reminderId'));",
-                  "    pm.expect(d.title).to.equal('[TEST] Auto reminder');",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update reminder returns 200 with updated fields",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/reminders/{{reminderId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "reminders",
-                "{{reminderId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"title\":\"[TEST] Updated reminder\",\"description\":\"Updated by automated test\",\"redirectUrl\":\"https://dev.vyaguta.lftechnology.com.np\",\"startDate\":\"2026-10-07T00:00:00.000Z\",\"endDate\":\"2026-10-09T00:00:00.000Z\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.test('Response echoes updated title', function () {",
-                  "    const d = pm.response.json().data;",
-                  "    pm.expect(d.title).to.equal('[TEST] Updated reminder');",
-                  "    pm.expect(d.updatedBy).to.be.a('number');",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Delete reminder returns 200 with deleted ID",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/reminders/{{reminderId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "reminders",
-                "{{reminderId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.test('Response returns deleted ID', function () {",
-                  "    pm.expect(pm.response.json().data.id).to.equal(pm.environment.get('reminderId'));",
-                  "});",
-                  "pm.environment.unset('reminderId');"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create event returns 201 with event data",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/events",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "events"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"name\":\"[TEST] Auto event\",\"eventDate\":\"2026-12-25\",\"description\":\"Created by automated test\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
-                  "pm.test('Content-Type is application/json', function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "pm.test('Response has event ID', function () {",
-                  "    const id = pm.response.json().data.id;",
-                  "    pm.environment.set('eventId', id);",
-                  "    pm.expect(id).to.be.a('number').and.above(0);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get event by ID returns 200 with correct data",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/events/{{eventId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "events",
-                "{{eventId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.test('Returned event matches created event', function () {",
-                  "    const d = pm.response.json().data;",
-                  "    pm.expect(d.id).to.equal(pm.environment.get('eventId'));",
-                  "    pm.expect(d.name).to.equal('[TEST] Auto event');",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update event returns 200 with updated fields",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/events/{{eventId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "events",
-                "{{eventId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"name\":\"[TEST] Updated event\",\"eventDate\":\"2026-12-26\",\"description\":\"Updated by automated test\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.test('Response echoes updated name', function () {",
-                  "    const d = pm.response.json().data;",
-                  "    pm.expect(d.name).to.equal('[TEST] Updated event');",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Delete event returns 200 with deleted ID",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/events/{{eventId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "events",
-                "{{eventId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.test('Response returns deleted ID', function () {",
-                  "    pm.expect(pm.response.json().data.id).to.equal(pm.environment.get('eventId'));",
-                  "});",
-                  "pm.environment.unset('eventId');"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create reminder with missing required fields returns 400",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/reminders",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "reminders"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"title\":\"\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
-                  "});",
-                  "pm.test('Response body contains error message', function () {",
-                  "    const body = pm.response.json();",
-                  "    pm.expect(body).to.satisfy(function (b) {",
-                  "        return b.message || b.error || b.errors;",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create event with missing required fields returns 400",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/events",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "events"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"description\":\"no name or date\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Teams Write Operations",
-      "item": [
-        {
-          "name": "Create role returns 201 with role data",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/roles",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "roles"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"name\":\"{{roleName}}\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "const ts = Date.now();",
-                  "pm.environment.set('roleName', '[TEST] Role ' + ts);",
-                  "pm.environment.set('roleNameUpdated', '[TEST] Role ' + ts + ' upd');"
-                ]
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
-                  "pm.test('Content-Type is application/json', function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "const schema = {",
-                  "  type: 'object',",
-                  "  required: ['id', 'name'],",
-                  "  properties: {",
-                  "    id:   { type: 'integer' },",
-                  "    name: { type: 'string' }",
-                  "  }",
-                  "};",
-                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
-                  "pm.test('Response echoes submitted name', function () {",
-                  "    pm.expect(pm.response.json().name).to.equal(pm.environment.get('roleName'));",
-                  "});",
-                  "pm.test('Role ID stored for subsequent requests', function () {",
-                  "    const id = pm.response.json().id;",
-                  "    pm.environment.set('roleId', id);",
-                  "    pm.expect(id).to.be.a('number').and.above(0);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update role returns 200 with updated name",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "roles",
-                "{{roleId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\"name\":\"{{roleNameUpdated}}\"}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.test('Response echoes updated name', function () {",
-                  "    const d = pm.response.json();",
-                  "    pm.expect(d.name).to.equal(pm.environment.get('roleNameUpdated'));",
-                  "    pm.expect(d.id).to.equal(pm.environment.get('roleId'));",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Delete role returns 200",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "roles",
-                "{{roleId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                  "pm.environment.unset('roleId');",
-                  "pm.environment.unset('roleName');",
-                  "pm.environment.unset('roleNameUpdated');"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create role with missing name returns 400",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/roles",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "roles"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
         }
       ]
     },
