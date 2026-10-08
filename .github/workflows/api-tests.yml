@@ -98,6 +98,7 @@ jobs:
           subject: ${{ env.SUBJECT }}
           to: pawanlamichhane@lftechnology.com
           from: Vyaguta API Tests <${{ secrets.MAIL_USERNAME }}>
+          attachments: reports/report.html
           body: |
             ${{ env.STATUS }} — Vyaguta API Tests (DEV)
             ─────────────────────────────────────
@@ -107,11 +108,9 @@ jobs:
             Failed     : ${{ env.FAILED }}
             Duration   : ${{ env.DURATION }}
             ─────────────────────────────────────
-            View the full HTML report (passed + failed details):
+            The full HTML report is attached to this email.
+            You can also view it online:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-            Download the report:
-            Go to the link above → Artifacts → newman-report → report.html
             ─────────────────────────────────────
             Triggered by: ${{ github.event_name }}
             Run #: ${{ github.run_number }}
