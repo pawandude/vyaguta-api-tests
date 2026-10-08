@@ -24,18 +24,52 @@ jobs:
         run: npm run lint
 
       - name: Run Newman tests
+        id: newman
+        continue-on-error: true
         run: |
           newman run collections/vyaguta-api.postman_collection.json \
             -e environments/vyaguta.postman_environment.json \
             --env-var "authToken=$VYAGUTA_TOKEN" \
             --env-var "restrictedToken=$VYAGUTA_RESTRICTED_TOKEN" \
-            --reporters cli,junit,htmlextra \
+            --reporters cli,junit,htmlextra,json \
             --reporter-junit-export reports/junit-report.xml \
             --reporter-htmlextra-export reports/report.html \
-            --reporter-htmlextra-title "Vyaguta API Test Report"
+            --reporter-htmlextra-title "Vyaguta API Test Report" \
+            --reporter-json-export reports/results.json
         env:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
           VYAGUTA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_RESTRICTED_TOKEN }}
+
+      - name: Parse test results
+        id: results
+        if: always()
+        run: |
+          node -e "
+          const r = require('./reports/results.json');
+          const stats = r.run.stats;
+          const timings = r.run.timings;
+
+          const requests   = stats.requests.total;
+          const assertions = stats.assertions.total;
+          const failed     = stats.assertions.failed;
+          const passed     = assertions - failed;
+          const duration   = Math.round(timings.completed / 1000);
+
+          const status = failed === 0 ? 'PASSED' : 'FAILED';
+          const emoji  = failed === 0 ? '✅' : '❌';
+
+          const subject = failed === 0
+            ? emoji + ' API Tests Passed — ' + assertions + ' assertions, 0 failures | Vyaguta DEV'
+            : emoji + ' API Tests Failed — ' + failed + ' failure(s) in ' + assertions + ' assertions | Vyaguta DEV';
+
+          console.log('STATUS=' + status);
+          console.log('SUBJECT=' + subject);
+          console.log('REQUESTS=' + requests);
+          console.log('ASSERTIONS=' + assertions);
+          console.log('PASSED=' + passed);
+          console.log('FAILED=' + failed);
+          console.log('DURATION=' + duration + 's');
+          " | tee -a \$GITHUB_ENV
 
       - name: Upload test report
         if: always()
@@ -44,8 +78,35 @@ jobs:
           name: newman-report
           path: reports/
 
-      - name: Summarise failure
-        if: failure()
-        run: |
-          echo "### API Tests failed :x:" >> $GITHUB_STEP_SUMMARY
-          echo "View the uploaded **newman-report** artifact for details." >> $GITHUB_STEP_SUMMARY
+      - name: Send email notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ env.SUBJECT }}
+          to: pawanlamichhane@lftechnology.com
+          from: Vyaguta API Tests <${{ secrets.MAIL_USERNAME }}>
+          body: |
+            ${{ env.STATUS }} — Vyaguta API Tests (DEV)
+            ─────────────────────────────────────
+            Requests   : ${{ env.REQUESTS }}
+            Assertions : ${{ env.ASSERTIONS }}
+            Passed     : ${{ env.PASSED }}
+            Failed     : ${{ env.FAILED }}
+            Duration   : ${{ env.DURATION }}
+            ─────────────────────────────────────
+            View the full HTML report (passed + failed details):
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Download the report:
+            Go to the link above → Artifacts → newman-report → report.html
+            ─────────────────────────────────────
+            Triggered by: ${{ github.event_name }}
+            Run #: ${{ github.run_number }}
+
+      - name: Fail the job if Newman had failures
+        if: steps.newman.outcome == 'failure'
+        run: exit 1
