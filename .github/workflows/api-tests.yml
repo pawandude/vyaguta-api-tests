@@ -27,7 +27,7 @@ jobs:
         id: newman
         continue-on-error: true
         run: |
-          newman run collections/vyaguta-api.postman_collection.json \
+          npx newman run collections/vyaguta-api.postman_collection.json \
             -e environments/vyaguta.postman_environment.json \
             --env-var "authToken=$VYAGUTA_TOKEN" \
             --env-var "restrictedToken=$VYAGUTA_RESTRICTED_TOKEN" \

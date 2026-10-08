@@ -22,7 +22,7 @@ jobs:
 
       - name: Run health checks
         run: |
-          newman run collections/vyaguta-api.postman_collection.json \
+          npx newman run collections/vyaguta-api.postman_collection.json \
             -e environments/vyaguta.postman_environment.json \
             --env-var "authToken=$VYAGUTA_TOKEN" \
             --folder Health \
