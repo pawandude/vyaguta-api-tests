@@ -45,6 +45,7 @@ jobs:
         if: always()
         run: |
           node -e "
+          const fs = require('fs');
           const r = require('./reports/results.json');
           const stats = r.run.stats;
           const timings = r.run.timings;
@@ -53,23 +54,31 @@ jobs:
           const assertions = stats.assertions.total;
           const failed     = stats.assertions.failed;
           const passed     = assertions - failed;
-          const duration   = Math.round(timings.completed / 1000);
+          const duration   = Math.round((timings.completed - timings.started) / 1000);
 
-          const status = failed === 0 ? 'PASSED' : 'FAILED';
-          const emoji  = failed === 0 ? '✅' : '❌';
-
+          const status  = failed === 0 ? 'PASSED' : 'FAILED';
+          const emoji   = failed === 0 ? '✅' : '❌';
+          const dash    = '—';
           const subject = failed === 0
-            ? emoji + ' API Tests Passed — ' + assertions + ' assertions, 0 failures | Vyaguta DEV'
-            : emoji + ' API Tests Failed — ' + failed + ' failure(s) in ' + assertions + ' assertions | Vyaguta DEV';
+            ? emoji + ' API Tests Passed ' + dash + ' ' + assertions + ' assertions, 0 failures | Vyaguta DEV'
+            : emoji + ' API Tests Failed ' + dash + ' ' + failed + ' failure(s) in ' + assertions + ' assertions | Vyaguta DEV';
 
-          console.log('STATUS=' + status);
-          console.log('SUBJECT=' + subject);
-          console.log('REQUESTS=' + requests);
-          console.log('ASSERTIONS=' + assertions);
-          console.log('PASSED=' + passed);
-          console.log('FAILED=' + failed);
-          console.log('DURATION=' + duration + 's');
-          " | tee -a \$GITHUB_ENV
+          const envFile = process.env.GITHUB_ENV;
+          // Simple KEY=VALUE for plain vars
+          const plain = [
+            'STATUS=' + status,
+            'REQUESTS=' + requests,
+            'ASSERTIONS=' + assertions,
+            'PASSED=' + passed,
+            'FAILED=' + failed,
+            'DURATION=' + duration + 's',
+          ].join('\n') + '\n';
+          // Use multiline delimiter for SUBJECT (contains emoji/special chars)
+          const subjectBlock = 'SUBJECT<<_SUBEOF\n' + subject + '\n_SUBEOF\n';
+
+          fs.appendFileSync(envFile, plain + subjectBlock);
+          process.stdout.write(plain + subjectBlock);
+          "
 
       - name: Upload test report
         if: always()
