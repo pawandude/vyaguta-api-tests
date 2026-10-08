@@ -1,0 +1,658 @@
+{
+  "info": {
+    "name": "Vyaguta — Team + Teams Write Operations",
+    "description": "Module tests: Team + Teams Write Operations. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Team",
+      "description": "Tests for the Team module — /api/teams/status-types, /api/teams/projects/summary, /api/teams/projects/missing, /api/teams/projects/feed, /api/teams/projects/health-trend.",
+      "item": [
+        {
+          "name": "Get project status types returns 200 with list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/status-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "status-types"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'name'],",
+                  "        properties: {",
+                  "          id:   { type: 'integer' },",
+                  "          name: { type: 'string' }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"data array is not empty\", function () {",
+                  "    pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get projects summary returns 200 with status breakdown",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "summary"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['status', 'category', 'industry', 'recentProjects'],",
+                  "  properties: {",
+                  "    status: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'name', 'count'],",
+                  "        properties: {",
+                  "          id:    { type: ['integer', 'null'] },",
+                  "          name:  { type: ['string', 'null'] },",
+                  "          count: { type: 'integer' }",
+                  "        }",
+                  "      }",
+                  "    },",
+                  "    category:       { type: 'array' },",
+                  "    industry:       { type: 'array' },",
+                  "    recentProjects: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'name', 'status', 'updatedAt'],",
+                  "        properties: {",
+                  "          id:        { type: 'integer' },",
+                  "          name:      { type: 'string' },",
+                  "          status:    { type: 'string' },",
+                  "          updatedAt: { type: 'string' }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"status array is not empty\", function () {",
+                  "    pm.expect(pm.response.json().status).to.be.an('array').that.is.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get projects summary filtered by statusId returns matching results",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/summary?statusId=4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "statusId",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response has status, category, industry, recentProjects\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.have.all.keys('status', 'category', 'industry', 'recentProjects');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get projects missing data returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/missing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "missing"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "pm.test(\"Response has data object with missing categories\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.have.property('data');",
+                  "    pm.expect(body.data).to.be.an('object');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get projects activity feed returns 200 with paginated items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/feed?size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "feed"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data', 'meta'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'updateType', 'createdAt', 'project'],",
+                  "        properties: {",
+                  "          id:             { type: 'integer' },",
+                  "          updateType:     { type: 'string' },",
+                  "          template:       { type: ['string', 'null'] },",
+                  "          globalTemplate: { type: ['string', 'null'] },",
+                  "          createdAt:      { type: 'string' },",
+                  "          project: {",
+                  "            type: 'object',",
+                  "            required: ['id', 'name'],",
+                  "            properties: {",
+                  "              id:   { type: 'integer' },",
+                  "              name: { type: 'string' }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    },",
+                  "    meta: {",
+                  "      type: 'object',",
+                  "      required: ['size'],",
+                  "      properties: {",
+                  "        size:           { type: 'integer' },",
+                  "        nextCursor:     { type: ['integer', 'null'] },",
+                  "        latestViewedId: { type: ['integer', 'null'] }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"Returned page size matches requested size\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.data.length).to.be.at.most(10);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get projects health trend returns 200 with weekly breakdown",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate=2026-08-01&endDate=2026-10-31&metric=Overall Status&size=10&page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "health-trend"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2026-08-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-10-31"
+                },
+                {
+                  "key": "metric",
+                  "value": "Overall Status"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data', 'meta'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['project', 'weeklyStatus'],",
+                  "        properties: {",
+                  "          project: {",
+                  "            type: 'object',",
+                  "            required: ['id', 'name'],",
+                  "            properties: {",
+                  "              id:   { type: 'integer' },",
+                  "              name: { type: 'string' }",
+                  "            }",
+                  "          },",
+                  "          weeklyStatus: {",
+                  "            type: 'array',",
+                  "            items: {",
+                  "              type: 'object',",
+                  "              required: ['startDate', 'endDate'],",
+                  "              properties: {",
+                  "                startDate: { type: 'string' },",
+                  "                endDate:   { type: 'string' },",
+                  "                psrId:     { type: ['integer', 'null'] },",
+                  "                metric:    { type: ['string', 'null'] }",
+                  "              }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    },",
+                  "    meta: {",
+                  "      type: 'object',",
+                  "      required: ['page', 'pageSize', 'total'],",
+                  "      properties: {",
+                  "        page:     { type: 'integer' },",
+                  "        pageSize: { type: 'integer' },",
+                  "        total:    { type: 'integer' }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"meta page equals requested page\", function () {",
+                  "    pm.expect(pm.response.json().meta.page).to.equal(1);",
+                  "});",
+                  "pm.test('Returned week count does not exceed size=10', function () {",
+                  "    const body = pm.response.json();",
+                  "    const items = body.data || body;",
+                  "    if (Array.isArray(items)) pm.expect(items.length).to.be.at.most(10);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Teams Write Operations",
+      "item": [
+        {
+          "name": "Create role returns 201 with role data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"{{roleName}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ts = Date.now();",
+                  "pm.environment.set('roleName', '[TEST] Role ' + ts);",
+                  "pm.environment.set('roleNameUpdated', '[TEST] Role ' + ts + ' upd');"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Content-Type is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['id', 'name'],",
+                  "  properties: {",
+                  "    id:   { type: 'integer' },",
+                  "    name: { type: 'string' }",
+                  "  }",
+                  "};",
+                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "pm.test('Response echoes submitted name', function () {",
+                  "    pm.expect(pm.response.json().name).to.equal(pm.environment.get('roleName'));",
+                  "});",
+                  "pm.test('Role ID stored for subsequent requests', function () {",
+                  "    const id = pm.response.json().id;",
+                  "    pm.environment.set('roleId', id);",
+                  "    pm.expect(id).to.be.a('number').and.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Update role returns 200 with updated name",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles",
+                "{{roleId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"{{roleNameUpdated}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response echoes updated name', function () {",
+                  "    const d = pm.response.json();",
+                  "    pm.expect(d.name).to.equal(pm.environment.get('roleNameUpdated'));",
+                  "    pm.expect(d.id).to.equal(pm.environment.get('roleId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Delete role returns 200",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles/{{roleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles",
+                "{{roleId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.environment.unset('roleId');",
+                  "pm.environment.unset('roleName');",
+                  "pm.environment.unset('roleNameUpdated');"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create role with missing name returns 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

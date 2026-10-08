@@ -1,0 +1,332 @@
+{
+  "info": {
+    "name": "Vyaguta — People",
+    "description": "Module tests: People. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "People",
+      "description": "Tests for the People module — GET /api/core/users and /api/core/users/:id.",
+      "item": [
+        {
+          "name": "Get all users returns 200 with paginated list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users?sortBy=firstName&order=ASC",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "sortBy",
+                  "value": "firstName"
+                },
+                {
+                  "key": "order",
+                  "value": "ASC"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data', 'meta'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'empId', 'firstName', 'lastName', 'email'],",
+                  "        properties: {",
+                  "          id:          { type: 'integer' },",
+                  "          empId:       { type: 'string' },",
+                  "          firstName:   { type: 'string' },",
+                  "          middleName:  { type: ['string', 'null'] },",
+                  "          lastName:    { type: 'string' },",
+                  "          email:       { type: 'string' },",
+                  "          avatarUrl:   { type: ['string', 'null'] },",
+                  "          mobilePhone: { type: ['string', 'null'] },",
+                  "          leaveIssuer: {",
+                  "            type: ['object', 'null'],",
+                  "            properties: {",
+                  "              id:         { type: 'integer' },",
+                  "              firstName:  { type: 'string' },",
+                  "              lastName:   { type: 'string' },",
+                  "              email:      { type: 'string' },",
+                  "              empId:      { type: 'string' },",
+                  "              avatarUrl:  { type: ['string', 'null'] },",
+                  "              middleName: { type: ['string', 'null'] }",
+                  "            }",
+                  "          },",
+                  "          designation: {",
+                  "            type: ['object', 'null'],",
+                  "            properties: {",
+                  "              id:   { type: 'integer' },",
+                  "              name: { type: 'string' },",
+                  "              area: {",
+                  "                type: 'object',",
+                  "                properties: {",
+                  "                  id:   { type: 'integer' },",
+                  "                  name: { type: 'string' }",
+                  "                }",
+                  "              }",
+                  "            }",
+                  "          },",
+                  "          department: {",
+                  "            type: ['object', 'null'],",
+                  "            properties: {",
+                  "              id:   { type: 'integer' },",
+                  "              name: { type: 'string' }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    },",
+                  "    meta: {",
+                  "      type: 'object',",
+                  "      required: ['total', 'size', 'page'],",
+                  "      properties: {",
+                  "        total: { type: 'integer' },",
+                  "        size:  { type: 'integer' },",
+                  "        page:  { type: 'integer' }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "",
+                  "pm.test(\"data array is not empty\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.data).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test(\"meta contains total, size, page\", function () {",
+                  "    const { meta } = pm.response.json();",
+                  "    pm.expect(meta.total).to.be.a('number').and.above(0);",
+                  "    pm.expect(meta.size).to.be.a('number').and.above(0);",
+                  "    pm.expect(meta.page).to.be.a('number').and.equal(1);",
+                  "});",
+                  "pm.test('Users are sorted by firstName ascending', function () {",
+                  "    const names = pm.response.json().data.map(function (u) { return u.firstName.toLowerCase(); });",
+                  "    const sorted = names.slice().sort();",
+                  "    pm.expect(names).to.deep.equal(sorted);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get user by ID returns 200 with correct user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'object',",
+                  "      required: ['id', 'empId', 'firstName', 'lastName', 'email', 'joinDate'],",
+                  "      properties: {",
+                  "        id:                           { type: 'integer' },",
+                  "        empId:                        { type: 'string' },",
+                  "        firstName:                    { type: 'string' },",
+                  "        middleName:                   { type: ['string', 'null'] },",
+                  "        lastName:                     { type: 'string' },",
+                  "        email:                        { type: 'string' },",
+                  "        avatarUrl:                    { type: ['string', 'null'] },",
+                  "        cvUrl:                        { type: ['string', 'null'] },",
+                  "        empStatus:                    { type: ['string', 'null'] },",
+                  "        gender:                       { type: ['string', 'null'] },",
+                  "        githubId:                     { type: ['string', 'null'] },",
+                  "        mobilePhone:                  { type: ['string', 'null'] },",
+                  "        temporaryAddress:             { type: ['string', 'null'] },",
+                  "        permanentAddress:             { type: ['string', 'null'] },",
+                  "        bloodGroup:                   { type: ['string', 'null'] },",
+                  "        joinDate:                     { type: 'string' },",
+                  "        maritialStatus:               { type: ['string', 'null'] },",
+                  "        country:                      { type: ['string', 'null'] },",
+                  "        timezone:                     { type: ['string', 'null'] },",
+                  "        scheduledType:                { type: ['string', 'null'] },",
+                  "        workingShift:                 { type: ['string', 'null'] },",
+                  "        isSubscribed:                 { type: 'boolean' },",
+                  "        designation: {",
+                  "          type: ['object', 'null'],",
+                  "          properties: {",
+                  "            id:   { type: 'integer' },",
+                  "            name: { type: 'string' },",
+                  "            area: { type: 'object', properties: { id: { type: 'integer' }, name: { type: 'string' } } }",
+                  "          }",
+                  "        },",
+                  "        department: {",
+                  "          type: ['object', 'null'],",
+                  "          properties: {",
+                  "            id:   { type: 'integer' },",
+                  "            name: { type: 'string' }",
+                  "          }",
+                  "        },",
+                  "        leaveIssuer:  { type: ['object', 'null'] },",
+                  "        teamManager:  { type: ['object', 'null'] },",
+                  "        supervisor:   { type: ['object', 'null'] },",
+                  "        coach:        { type: ['object', 'null'] },",
+                  "        skills:       { type: 'array' },",
+                  "        empStatusHistory:       { type: 'array' },",
+                  "        designationAreaHistory: { type: 'array' }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "",
+                  "pm.test(\"Returned user ID matches requested ID\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.data.id).to.equal(parseInt(pm.environment.get('personId')));",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get non-existent user returns 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/999999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "999999999"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get user roles by ID returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "roles"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

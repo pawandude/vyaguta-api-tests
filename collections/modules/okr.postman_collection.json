@@ -1,0 +1,441 @@
+{
+  "info": {
+    "name": "Vyaguta — OKR",
+    "description": "Module tests: OKR. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "OKR",
+      "description": "Tests for the OKR module — /api/okr/strategic-pillars/summary and /api/okr/hlo.",
+      "item": [
+        {
+          "name": "Get strategic pillars summary returns 200 with pillar list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['strategicPillarId', 'statement', 'hloCount', 'objectiveCount', 'progress'],",
+                  "        properties: {",
+                  "          strategicPillarId: { type: 'integer' },",
+                  "          statement:         { type: 'string' },",
+                  "          hloCount:          { type: 'integer' },",
+                  "          objectiveCount:    { type: 'integer' },",
+                  "          progress:          { type: ['number', 'null'] }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"data array is not empty\", function () {",
+                  "    pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get HLOs for single quarter returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "hlo"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "with",
+                  "value": "objectives"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'code', 'title', 'quarter'],",
+                  "        properties: {",
+                  "          id:      { type: 'integer' },",
+                  "          code:    { type: 'string' },",
+                  "          title:   { type: 'string' },",
+                  "          quarter: { type: 'string' },",
+                  "          area: {",
+                  "            type: 'object',",
+                  "            properties: {",
+                  "              id:   { type: 'integer' },",
+                  "              name: { type: 'string' },",
+                  "              code: { type: 'string' }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get HLOs for all quarters returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q1,Q2,Q3,Q4&with=objectives&year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "hlo"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q1,Q2,Q3,Q4"
+                },
+                {
+                  "key": "with",
+                  "value": "objectives"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "pm.test(\"All quarters represented in results\", function () {",
+                  "    const quarters = pm.response.json().data.map(function (hlo) { return hlo.quarter; });",
+                  "    const unique = [...new Set(quarters)];",
+                  "    pm.expect(unique.length).to.be.at.least(1);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get OKR areas with leaderships returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/areas?year=2026&additionalFields=leaderships,objectiveCount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "areas"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'name', 'type'],",
+                  "        properties: {",
+                  "          id:             { type: 'integer' },",
+                  "          name:           { type: 'string' },",
+                  "          description:    { type: ['string', 'null'] },",
+                  "          type:           { type: 'string' },",
+                  "          createdBy:      { type: 'integer' },",
+                  "          createdAt:      { type: 'string' },",
+                  "          updatedAt:      { type: ['string', 'null'] },",
+                  "          updatedBy:      { type: ['integer', 'null'] },",
+                  "          objectiveCount: { type: 'integer' },",
+                  "          progress:       { type: 'number' },",
+                  "          lastUpdatedAt:  { type: ['string', 'null'] },",
+                  "          manager: {",
+                  "            type: ['array', 'null'],",
+                  "            items: {",
+                  "              type: 'object',",
+                  "              required: ['id', 'fullName'],",
+                  "              properties: {",
+                  "                id:       { type: 'integer' },",
+                  "                email:    { type: 'string' },",
+                  "                empId:    { type: 'string' },",
+                  "                fullName: { type: 'string' }",
+                  "              }",
+                  "            }",
+                  "          },",
+                  "          lead: {",
+                  "            type: ['object', 'null'],",
+                  "            properties: {",
+                  "              id:       { type: 'integer' },",
+                  "              email:    { type: 'string' },",
+                  "              empId:    { type: 'string' },",
+                  "              fullName: { type: 'string' }",
+                  "            }",
+                  "          },",
+                  "          leaders: {",
+                  "            type: ['array', 'null'],",
+                  "            items: {",
+                  "              type: 'object',",
+                  "              properties: {",
+                  "                type: { type: 'string' },",
+                  "                user: {",
+                  "                  type: 'object',",
+                  "                  properties: {",
+                  "                    id:       { type: 'integer' },",
+                  "                    email:    { type: 'string' },",
+                  "                    empId:    { type: 'string' },",
+                  "                    fullName: { type: 'string' }",
+                  "                  }",
+                  "                }",
+                  "              }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get OKR highlights returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "highlights"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'object',",
+                  "      required: ['today', 'yesterday', 'older'],",
+                  "      properties: {",
+                  "        today:     { type: 'array' },",
+                  "        yesterday: { type: 'array' },",
+                  "        older: {",
+                  "          type: 'array',",
+                  "          items: {",
+                  "            type: 'object',",
+                  "            required: ['id', 'actionType', 'createdAt'],",
+                  "            properties: {",
+                  "              id:         { type: 'integer' },",
+                  "              actionType: { type: 'string' },",
+                  "              area: {",
+                  "                type: ['object', 'null'],",
+                  "                properties: {",
+                  "                  id:   { type: 'integer' },",
+                  "                  name: { type: 'string' },",
+                  "                  code: { type: 'string' },",
+                  "                  type: { type: 'string' }",
+                  "                }",
+                  "              },",
+                  "              actionTemplate:     { type: 'string' },",
+                  "              actionTemplateData: { type: 'object' },",
+                  "              parentTemplate:     { type: 'string' },",
+                  "              parentTemplateData: { type: 'object' },",
+                  "              createdBy:    { type: 'integer' },",
+                  "              ownerId:      { type: 'integer' },",
+                  "              createdAt:    { type: 'string' },",
+                  "              updatedAt:    { type: ['string', 'null'] },",
+                  "              collaborators: { type: 'array' }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test('Older highlights page does not exceed size=10', function () {",
+                  "    const older = pm.response.json().data.older;",
+                  "    pm.expect(older.length).to.be.at.most(10);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
