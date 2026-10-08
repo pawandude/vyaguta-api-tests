@@ -5,6 +5,9 @@ on:
     - cron: '0 6 * * *' # daily at 06:00 UTC
   workflow_dispatch: {} # allows manual "Run workflow" from the Actions tab
 
+permissions:
+  contents: write # needed to push to gh-pages branch
+
 jobs:
   newman:
     runs-on: ubuntu-latest
@@ -79,7 +82,8 @@ jobs:
           // Generate a self-contained HTML email body
           const color   = failed === 0 ? '#16a34a' : '#dc2626';
           const bgColor = failed === 0 ? '#f0fdf4' : '#fef2f2';
-          const runUrl  = process.env.RUN_URL || '';
+          const reportUrl = process.env.PAGES_URL || '';
+          const runUrl    = process.env.RUN_URL || '';
           const rows = [
             ['Requests',   requests],
             ['Assertions', assertions],
@@ -98,14 +102,15 @@ jobs:
             '<table style=\"width:100%;border-collapse:collapse\">' + rows + '</table>' +
             '</div>' +
             '<div style=\"padding:24px 32px\">' +
-            '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:14px;font-weight:600\">View Full Report on GitHub</a>' +
-            '<p style=\"color:#9ca3af;font-size:12px;margin-top:24px\">Download the detailed HTML report from the link above &rarr; Artifacts &rarr; newman-report</p>' +
+            '<a href=\"' + reportUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:14px;font-weight:600\">View Full Report</a>' +
+            '<p style=\"color:#9ca3af;font-size:12px;margin-top:16px\">GitHub Actions run: <a href=\"' + runUrl + '\" style=\"color:#6b7280\">' + runUrl + '</a></p>' +
             '</div></div></body></html>';
 
           fs.writeFileSync('reports/email.html', html);
           "
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          PAGES_URL: https://pawandude.github.io/vyaguta-api-tests/report.html
 
       - name: Upload test report
         if: always()
@@ -113,6 +118,16 @@ jobs:
         with:
           name: newman-report
           path: reports/
+
+      - name: Deploy report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: reports
+          publish_branch: gh-pages
+          destination_dir: .
+          keep_files: false
 
       - name: Send email notification
         if: always()
