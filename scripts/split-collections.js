@@ -17,18 +17,19 @@ const OUT_DIR = path.join(__dirname, '..', 'collections', 'modules');
 const master = JSON.parse(fs.readFileSync(MASTER, 'utf8'));
 
 // Map: output filename → array of folder names from master to include
+// Prefixed with numbers to enforce order in file explorers
 const MODULE_MAP = {
-  'sanity':      ['Sanity'],
-  'health':      ['Health'],
-  'people':      ['People'],
-  'teams':       ['Team', 'Teams Write Operations'],
-  'attendance':  ['Attendance'],
-  'jump':        ['JUMP'],
-  'honor':       ['Honor'],
-  'okr':         ['OKR'],
-  'pulse':       ['Pulse', 'Pulse Write Operations'],
-  'core':        ['Core'],
-  'edge-cases':  ['Behavior & Edge Cases'],
+  '01-health':      ['Health'],
+  '02-sanity':      ['Sanity'],
+  '03-core':        ['Core'],
+  '04-attendance':  ['Attendance'],
+  '05-teams':       ['Team', 'Teams Write Operations'],
+  '06-people':      ['People'],
+  '07-jump':        ['JUMP'],
+  '08-honor':       ['Honor'],
+  '09-okr':         ['OKR'],
+  '10-pulse':       ['Pulse', 'Pulse Write Operations'],
+  '11-edge-cases':  ['Behavior & Edge Cases'],
 };
 
 const allMasterFolders = master.item.map(f => f.name);
