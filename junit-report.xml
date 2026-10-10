@@ -1,402 +1,402 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Vyaguta API Tests" tests="73" time="50.086">
-  <testsuite name="Health / People — users endpoint is up" id="86e58018-1c2c-44b3-ab17-770d1b818424" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="1.008">
-    <testcase name="Response time is below 5000ms" time="1.008" classname="HealthPeopleUsersEndpointIsUp"/>
-    <testcase name="Status is 200" time="1.008" classname="HealthPeopleUsersEndpointIsUp"/>
-  </testsuite>
-  <testsuite name="Health / Team — status-types endpoint is up" id="7548e457-3143-4275-854c-3e134a32e8fa" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.342">
-    <testcase name="Response time is below 5000ms" time="0.342" classname="HealthTeamStatusTypesEndpointIsUp"/>
-    <testcase name="Status is 200" time="0.342" classname="HealthTeamStatusTypesEndpointIsUp"/>
-  </testsuite>
-  <testsuite name="Health / Attendance — summary endpoint is up" id="59c2bfa9-ee46-4ebe-b3d9-0958872d7c68" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="1.031">
-    <testcase name="Response time is below 5000ms" time="1.031" classname="HealthAttendanceSummaryEndpointIsUp"/>
-    <testcase name="Status is 200" time="1.031" classname="HealthAttendanceSummaryEndpointIsUp"/>
-  </testsuite>
-  <testsuite name="Health / JUMP — KPI filters endpoint is up" id="d40ea250-e81f-467c-bd6d-e1485d2abcf4" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.843">
-    <testcase name="Response time is below 5000ms" time="0.843" classname="HealthJumpKpiFiltersEndpointIsUp"/>
-    <testcase name="Status is 200" time="0.843" classname="HealthJumpKpiFiltersEndpointIsUp"/>
-  </testsuite>
-  <testsuite name="Health / Honor — menus endpoint is up" id="9565e2e0-0dc2-49ce-8f83-66e91e6b3879" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="1.150">
-    <testcase name="Response time is below 5000ms" time="1.150" classname="HealthHonorMenusEndpointIsUp"/>
-    <testcase name="Status is 200" time="1.150" classname="HealthHonorMenusEndpointIsUp"/>
-  </testsuite>
-  <testsuite name="Health / OKR — strategic pillars endpoint is up" id="93a2b53c-33af-4c60-bb06-01153fd8eb58" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.434">
-    <testcase name="Response time is below 5000ms" time="0.434" classname="HealthOkrStrategicPillarsEndpointIsUp"/>
-    <testcase name="Status is 200" time="0.434" classname="HealthOkrStrategicPillarsEndpointIsUp"/>
-  </testsuite>
-  <testsuite name="Health / Pulse — evaluations endpoint is up" id="2bff89f3-879e-41e4-8a6d-0435f1726735" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.828">
-    <testcase name="Response time is below 5000ms" time="0.828" classname="HealthPulseEvaluationsEndpointIsUp"/>
-    <testcase name="Status is 200" time="0.828" classname="HealthPulseEvaluationsEndpointIsUp"/>
-  </testsuite>
-  <testsuite name="Sanity / People — users list is reachable" id="0bbc8664-e23a-450d-9357-779d64333bd5" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.278">
-    <testcase name="Response time is below 5000ms" time="0.278" classname="SanityPeopleUsersListIsReachable"/>
-    <testcase name="Status is 200" time="0.278" classname="SanityPeopleUsersListIsReachable"/>
-    <testcase name="Content-Type is application/json" time="0.278" classname="SanityPeopleUsersListIsReachable"/>
-    <testcase name="Response body has data property" time="0.278" classname="SanityPeopleUsersListIsReachable"/>
-  </testsuite>
-  <testsuite name="Sanity / Team — status-types is reachable" id="b43e7883-ad0c-482f-8356-6dba6ed5391e" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.300">
-    <testcase name="Response time is below 5000ms" time="0.300" classname="SanityTeamStatusTypesIsReachable"/>
-    <testcase name="Status is 200" time="0.300" classname="SanityTeamStatusTypesIsReachable"/>
-    <testcase name="Content-Type is application/json" time="0.300" classname="SanityTeamStatusTypesIsReachable"/>
-    <testcase name="Response body has data property" time="0.300" classname="SanityTeamStatusTypesIsReachable"/>
-  </testsuite>
-  <testsuite name="Sanity / Attendance — summary is reachable" id="aa4de693-917f-4990-a381-8987c36b139d" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.449">
-    <testcase name="Response time is below 5000ms" time="0.449" classname="SanityAttendanceSummaryIsReachable"/>
-    <testcase name="Status is 200" time="0.449" classname="SanityAttendanceSummaryIsReachable"/>
-    <testcase name="Content-Type is application/json" time="0.449" classname="SanityAttendanceSummaryIsReachable"/>
-    <testcase name="Response body has data property" time="0.449" classname="SanityAttendanceSummaryIsReachable"/>
-  </testsuite>
-  <testsuite name="Sanity / JUMP — KPI filters is reachable" id="53e8a1da-a49f-4d22-a00e-418528a98566" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.775">
-    <testcase name="Response time is below 5000ms" time="0.775" classname="SanityJumpKpiFiltersIsReachable"/>
-    <testcase name="Status is 200" time="0.775" classname="SanityJumpKpiFiltersIsReachable"/>
-    <testcase name="Content-Type is application/json" time="0.775" classname="SanityJumpKpiFiltersIsReachable"/>
-    <testcase name="Response body has data property" time="0.775" classname="SanityJumpKpiFiltersIsReachable"/>
-  </testsuite>
-  <testsuite name="Sanity / Honor — menus is reachable" id="a32a801f-7057-466d-8d43-1d9c1e9b7f56" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.647">
-    <testcase name="Response time is below 5000ms" time="0.647" classname="SanityHonorMenusIsReachable"/>
-    <testcase name="Status is 200" time="0.647" classname="SanityHonorMenusIsReachable"/>
-    <testcase name="Content-Type is application/json" time="0.647" classname="SanityHonorMenusIsReachable"/>
-    <testcase name="Response body has data property" time="0.647" classname="SanityHonorMenusIsReachable"/>
-  </testsuite>
-  <testsuite name="Sanity / OKR — strategic pillars is reachable" id="b3e35475-e711-4f88-87dd-ad854d0a4bfc" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.753">
-    <testcase name="Response time is below 5000ms" time="0.753" classname="SanityOkrStrategicPillarsIsReachable"/>
-    <testcase name="Status is 200" time="0.753" classname="SanityOkrStrategicPillarsIsReachable"/>
-    <testcase name="Content-Type is application/json" time="0.753" classname="SanityOkrStrategicPillarsIsReachable"/>
-    <testcase name="Response body has data property" time="0.753" classname="SanityOkrStrategicPillarsIsReachable"/>
-  </testsuite>
-  <testsuite name="Sanity / Pulse — evaluation groups is reachable" id="b4b6b979-f382-4f5a-8df3-7dc864cb2cda" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.713">
-    <testcase name="Response time is below 5000ms" time="0.713" classname="SanityPulseEvaluationGroupsIsReachable"/>
-    <testcase name="Status is 200" time="0.713" classname="SanityPulseEvaluationGroupsIsReachable"/>
-    <testcase name="Content-Type is application/json" time="0.713" classname="SanityPulseEvaluationGroupsIsReachable"/>
-    <testcase name="Response body has data property" time="0.713" classname="SanityPulseEvaluationGroupsIsReachable"/>
-  </testsuite>
-  <testsuite name="Core / Create reminder returns 201 with reminder data" id="0cf0f675-47df-4ffa-a411-50a5184f3242" timestamp="2026-10-09T12:28:24.553Z" tests="6" failures="0" errors="0" time="0.266">
-    <testcase name="Response time is below 5000ms" time="0.266" classname="CoreCreateReminderReturns201WithReminderData"/>
-    <testcase name="Status is 201" time="0.266" classname="CoreCreateReminderReturns201WithReminderData"/>
-    <testcase name="Content-Type is application/json" time="0.266" classname="CoreCreateReminderReturns201WithReminderData"/>
-    <testcase name="Response matches schema" time="0.266" classname="CoreCreateReminderReturns201WithReminderData"/>
-    <testcase name="Response echoes submitted title and description" time="0.266" classname="CoreCreateReminderReturns201WithReminderData"/>
-    <testcase name="Reminder ID stored for subsequent requests" time="0.266" classname="CoreCreateReminderReturns201WithReminderData"/>
-  </testsuite>
-  <testsuite name="Core / Get reminder by ID returns 200 with correct data" id="98e9455d-abe4-41e1-8fec-8d6a1df3e20f" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.245">
-    <testcase name="Response time is below 5000ms" time="0.245" classname="CoreGetReminderByIdReturns200WithCorrectData"/>
-    <testcase name="Status is 200" time="0.245" classname="CoreGetReminderByIdReturns200WithCorrectData"/>
-    <testcase name="Returned reminder matches created reminder" time="0.245" classname="CoreGetReminderByIdReturns200WithCorrectData"/>
-  </testsuite>
-  <testsuite name="Core / Update reminder returns 200 with updated fields" id="21316eb7-39d5-4963-8d85-346da39b097e" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.725">
-    <testcase name="Response time is below 5000ms" time="0.725" classname="CoreUpdateReminderReturns200WithUpdatedFields"/>
-    <testcase name="Status is 200" time="0.725" classname="CoreUpdateReminderReturns200WithUpdatedFields"/>
-    <testcase name="Response echoes updated title" time="0.725" classname="CoreUpdateReminderReturns200WithUpdatedFields"/>
-  </testsuite>
-  <testsuite name="Core / Delete reminder returns 200 with deleted ID" id="0b310e85-04d1-4240-96da-bd04f1a75f95" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.262">
-    <testcase name="Response time is below 5000ms" time="0.262" classname="CoreDeleteReminderReturns200WithDeletedId"/>
-    <testcase name="Status is 200" time="0.262" classname="CoreDeleteReminderReturns200WithDeletedId"/>
-    <testcase name="Response returns deleted ID" time="0.262" classname="CoreDeleteReminderReturns200WithDeletedId"/>
-  </testsuite>
-  <testsuite name="Core / Create event returns 201 with event data" id="0f12520c-5d0d-40d4-ae61-3492c285feb5" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.253">
-    <testcase name="Response time is below 5000ms" time="0.253" classname="CoreCreateEventReturns201WithEventData"/>
-    <testcase name="Status is 201" time="0.253" classname="CoreCreateEventReturns201WithEventData"/>
-    <testcase name="Content-Type is application/json" time="0.253" classname="CoreCreateEventReturns201WithEventData"/>
-    <testcase name="Response has event ID" time="0.253" classname="CoreCreateEventReturns201WithEventData"/>
-  </testsuite>
-  <testsuite name="Core / Get event by ID returns 200 with correct data" id="dd635881-d646-48f5-a893-c0205b952f48" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.732">
-    <testcase name="Response time is below 5000ms" time="0.732" classname="CoreGetEventByIdReturns200WithCorrectData"/>
-    <testcase name="Status is 200" time="0.732" classname="CoreGetEventByIdReturns200WithCorrectData"/>
-    <testcase name="Returned event matches created event" time="0.732" classname="CoreGetEventByIdReturns200WithCorrectData"/>
-  </testsuite>
-  <testsuite name="Core / Update event returns 200 with updated fields" id="dfce8aca-56ca-4a5c-9b37-0e78a0c6813e" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.741">
-    <testcase name="Response time is below 5000ms" time="0.741" classname="CoreUpdateEventReturns200WithUpdatedFields"/>
-    <testcase name="Status is 200" time="0.741" classname="CoreUpdateEventReturns200WithUpdatedFields"/>
-    <testcase name="Response echoes updated name" time="0.741" classname="CoreUpdateEventReturns200WithUpdatedFields"/>
-  </testsuite>
-  <testsuite name="Core / Delete event returns 200 with deleted ID" id="e4a4b603-4bc9-4f00-b402-80d040065e16" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.707">
-    <testcase name="Response time is below 5000ms" time="0.707" classname="CoreDeleteEventReturns200WithDeletedId"/>
-    <testcase name="Status is 200" time="0.707" classname="CoreDeleteEventReturns200WithDeletedId"/>
-    <testcase name="Response returns deleted ID" time="0.707" classname="CoreDeleteEventReturns200WithDeletedId"/>
-  </testsuite>
-  <testsuite name="Core / Create reminder with missing required fields returns 400" id="ca25628f-aab7-4a34-abe2-0d56d293065b" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.262">
-    <testcase name="Response time is below 5000ms" time="0.262" classname="CoreCreateReminderWithMissingRequiredFieldsReturns400"/>
-    <testcase name="Status is 400 or 422 for missing required fields" time="0.262" classname="CoreCreateReminderWithMissingRequiredFieldsReturns400"/>
-    <testcase name="Response body contains error message" time="0.262" classname="CoreCreateReminderWithMissingRequiredFieldsReturns400"/>
-  </testsuite>
-  <testsuite name="Core / Create event with missing required fields returns 400" id="8f4b0f70-142a-4d60-ae9d-891d64af188e" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.692">
-    <testcase name="Response time is below 5000ms" time="0.692" classname="CoreCreateEventWithMissingRequiredFieldsReturns400"/>
-    <testcase name="Status is 400 or 422 for missing required fields" time="0.692" classname="CoreCreateEventWithMissingRequiredFieldsReturns400"/>
-  </testsuite>
-  <testsuite name="Attendance / Get attendance summary for self returns 200" id="c96f4ce2-fd5c-44e8-a5d1-2243d9319938" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.432">
-    <testcase name="Response time is below 5000ms" time="0.432" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
-    <testcase name="Status is 200" time="0.432" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.432" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
-    <testcase name="Response matches schema" time="0.432" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
-    <testcase name="data has leave, worklog, missing" time="0.432" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
-  </testsuite>
-  <testsuite name="Attendance / Get attendance summary for team returns 200" id="8d50bb19-0028-4b76-be47-2996bf60f797" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="2.501">
-    <testcase name="Response time is below 5000ms" time="2.501" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
-    <testcase name="Status is 200" time="2.501" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
-    <testcase name="Content-Type is application/json" time="2.501" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
-    <testcase name="Response matches schema" time="2.501" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
-    <testcase name="missing count is a non-negative integer" time="2.501" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
-  </testsuite>
-  <testsuite name="Attendance / Get attendance summary with invalid fetchType returns 200 or 400 (quirk)" id="1c73080b-4ee1-4087-ae35-58712d6cf360" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.325">
-    <testcase name="Response time is below 5000ms" time="0.325" classname="AttendanceGetAttendanceSummaryWithInvalidFetchTypeReturns200Or400Quirk"/>
-    <testcase name="Status is 200 or 400" time="0.325" classname="AttendanceGetAttendanceSummaryWithInvalidFetchTypeReturns200Or400Quirk"/>
-  </testsuite>
-  <testsuite name="Team / Get project status types returns 200 with list" id="4ff272bf-32ff-48fc-a10e-9c44fc40ada9" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.288">
-    <testcase name="Response time is below 5000ms" time="0.288" classname="TeamGetProjectStatusTypesReturns200WithList"/>
-    <testcase name="Status is 200" time="0.288" classname="TeamGetProjectStatusTypesReturns200WithList"/>
-    <testcase name="Content-Type is application/json" time="0.288" classname="TeamGetProjectStatusTypesReturns200WithList"/>
-    <testcase name="Response matches schema" time="0.288" classname="TeamGetProjectStatusTypesReturns200WithList"/>
-    <testcase name="data array is not empty" time="0.288" classname="TeamGetProjectStatusTypesReturns200WithList"/>
-  </testsuite>
-  <testsuite name="Team / Get projects summary returns 200 with status breakdown" id="92c1c55f-825d-4327-9332-1b6542fef465" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.819">
-    <testcase name="Response time is below 5000ms" time="0.819" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
-    <testcase name="Status is 200" time="0.819" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
-    <testcase name="Content-Type is application/json" time="0.819" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
-    <testcase name="Response matches schema" time="0.819" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
-    <testcase name="status array is not empty" time="0.819" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
-  </testsuite>
-  <testsuite name="Team / Get projects summary filtered by statusId returns matching results" id="300c44ed-1edc-4786-9165-a4e71cb7218a" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.302">
-    <testcase name="Response time is below 5000ms" time="0.302" classname="TeamGetProjectsSummaryFilteredByStatusIdReturnsMatchingResults"/>
-    <testcase name="Status is 200" time="0.302" classname="TeamGetProjectsSummaryFilteredByStatusIdReturnsMatchingResults"/>
-    <testcase name="Response has status, category, industry, recentProjects" time="0.302" classname="TeamGetProjectsSummaryFilteredByStatusIdReturnsMatchingResults"/>
-  </testsuite>
-  <testsuite name="Team / Get projects missing data returns 200" id="67c974aa-c978-4dc5-9e4f-daf7ecd3e93d" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="1.030">
-    <testcase name="Response time is below 5000ms" time="1.030" classname="TeamGetProjectsMissingDataReturns200"/>
-    <testcase name="Status is 200" time="1.030" classname="TeamGetProjectsMissingDataReturns200"/>
-    <testcase name="Content-Type is application/json" time="1.030" classname="TeamGetProjectsMissingDataReturns200"/>
-    <testcase name="Response has data object with missing categories" time="1.030" classname="TeamGetProjectsMissingDataReturns200"/>
-  </testsuite>
-  <testsuite name="Team / Get projects activity feed returns 200 with paginated items" id="234b3412-af7a-4778-9bab-0ce1e252ebaa" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.770">
-    <testcase name="Response time is below 5000ms" time="0.770" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
-    <testcase name="Status is 200" time="0.770" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
-    <testcase name="Content-Type is application/json" time="0.770" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
-    <testcase name="Response matches schema" time="0.770" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
-    <testcase name="Returned page size matches requested size" time="0.770" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
-  </testsuite>
-  <testsuite name="Team / Get projects health trend returns 200 with weekly breakdown" id="26268517-4ea3-4c98-9993-25a1a4a935a5" timestamp="2026-10-09T12:28:24.553Z" tests="6" failures="0" errors="0" time="0.362">
-    <testcase name="Response time is below 5000ms" time="0.362" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
-    <testcase name="Status is 200" time="0.362" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
-    <testcase name="Content-Type is application/json" time="0.362" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
-    <testcase name="Response matches schema" time="0.362" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
-    <testcase name="meta page equals requested page" time="0.362" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
-    <testcase name="Returned week count does not exceed size=10" time="0.362" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
-  </testsuite>
-  <testsuite name="Teams Write Operations / Create role returns 201 with role data" id="7c320b02-61f8-4b08-ac32-0733c1d8b754" timestamp="2026-10-09T12:28:24.553Z" tests="6" failures="0" errors="0" time="0.322">
-    <testcase name="Response time is below 5000ms" time="0.322" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
-    <testcase name="Status is 201" time="0.322" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
-    <testcase name="Content-Type is application/json" time="0.322" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
-    <testcase name="Response matches schema" time="0.322" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
-    <testcase name="Response echoes submitted name" time="0.322" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
-    <testcase name="Role ID stored for subsequent requests" time="0.322" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
-  </testsuite>
-  <testsuite name="Teams Write Operations / Update role returns 200 with updated name" id="a1cedd86-2b7f-4b76-934f-6ef7f7ef391e" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.797">
-    <testcase name="Response time is below 5000ms" time="0.797" classname="TeamsWriteOperationsUpdateRoleReturns200WithUpdatedName"/>
-    <testcase name="Status is 200" time="0.797" classname="TeamsWriteOperationsUpdateRoleReturns200WithUpdatedName"/>
-    <testcase name="Response echoes updated name" time="0.797" classname="TeamsWriteOperationsUpdateRoleReturns200WithUpdatedName"/>
-  </testsuite>
-  <testsuite name="Teams Write Operations / Delete role returns 200" id="f5d28965-1624-4f82-b58d-30f22a1f5298" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.334">
-    <testcase name="Response time is below 5000ms" time="0.334" classname="TeamsWriteOperationsDeleteRoleReturns200"/>
-    <testcase name="Status is 200" time="0.334" classname="TeamsWriteOperationsDeleteRoleReturns200"/>
-  </testsuite>
-  <testsuite name="Teams Write Operations / Create role with missing name returns 400" id="dc26b0d0-283f-459f-b475-2a43b1a1cd82" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.286">
-    <testcase name="Response time is below 5000ms" time="0.286" classname="TeamsWriteOperationsCreateRoleWithMissingNameReturns400"/>
-    <testcase name="Status is 400 or 422 for missing required fields" time="0.286" classname="TeamsWriteOperationsCreateRoleWithMissingNameReturns400"/>
-  </testsuite>
-  <testsuite name="People / Get all users returns 200 with paginated list" id="b461bdf0-bce8-49e1-bb65-d04321b830dd" timestamp="2026-10-09T12:28:24.553Z" tests="7" failures="0" errors="0" time="0.715">
-    <testcase name="Response time is below 5000ms" time="0.715" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
-    <testcase name="Status is 200" time="0.715" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
-    <testcase name="Content-Type is application/json" time="0.715" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
-    <testcase name="Response matches schema" time="0.715" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
-    <testcase name="data array is not empty" time="0.715" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
-    <testcase name="meta contains total, size, page" time="0.715" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
-    <testcase name="Users are sorted by firstName ascending" time="0.715" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
-  </testsuite>
-  <testsuite name="People / Get user by ID returns 200 with correct user" id="ff7720e6-43a7-40f6-b714-71d0033f72af" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.438">
-    <testcase name="Response time is below 5000ms" time="0.438" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
-    <testcase name="Status is 200" time="0.438" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
-    <testcase name="Content-Type is application/json" time="0.438" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
-    <testcase name="Response matches schema" time="0.438" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
-    <testcase name="Returned user ID matches requested ID" time="0.438" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
-  </testsuite>
-  <testsuite name="People / Get non-existent user returns 404" id="8ab6bb25-77f4-406c-b87b-3c4c3d410c1a" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.696">
-    <testcase name="Response time is below 5000ms" time="0.696" classname="PeopleGetNonExistentUserReturns404"/>
-    <testcase name="Status is 404" time="0.696" classname="PeopleGetNonExistentUserReturns404"/>
-  </testsuite>
-  <testsuite name="People / Get user roles by ID returns 200" id="4bbd8882-166c-424b-ba17-a7802e09d55e" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.695">
-    <testcase name="Response time is below 5000ms" time="0.695" classname="PeopleGetUserRolesByIdReturns200"/>
-    <testcase name="Status is 200" time="0.695" classname="PeopleGetUserRolesByIdReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.695" classname="PeopleGetUserRolesByIdReturns200"/>
-  </testsuite>
-  <testsuite name="JUMP / Get KPI filters returns 200 with area/designation list" id="993d6762-fd25-4192-8ed3-cd74953301a2" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.823">
-    <testcase name="Response time is below 5000ms" time="0.823" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
-    <testcase name="Status is 200" time="0.823" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
-    <testcase name="Content-Type is application/json" time="0.823" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
-    <testcase name="Response matches schema" time="0.823" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
-    <testcase name="data array is not empty" time="0.823" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
-  </testsuite>
-  <testsuite name="JUMP / Get KPIs filtered by designation and area returns matching items" id="01895c97-1ce5-46f0-96f8-44ba769558d0" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.317">
-    <testcase name="Response time is below 5000ms" time="0.317" classname="JumpGetKpIsFilteredByDesignationAndAreaReturnsMatchingItems"/>
-    <testcase name="Status is 200 (500 if token user has no designation profile — backend bug)" time="0.317" classname="JumpGetKpIsFilteredByDesignationAndAreaReturnsMatchingItems"/>
-  </testsuite>
-  <testsuite name="Honor / Get honor menus returns 200 with menu list" id="b98d9e93-6823-465e-bd7e-4e39432a83a2" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.530">
-    <testcase name="Response time is below 5000ms" time="0.530" classname="HonorGetHonorMenusReturns200WithMenuList"/>
-    <testcase name="Status is 200" time="0.530" classname="HonorGetHonorMenusReturns200WithMenuList"/>
-    <testcase name="Content-Type is application/json" time="0.530" classname="HonorGetHonorMenusReturns200WithMenuList"/>
-    <testcase name="data is a non-empty array of strings" time="0.530" classname="HonorGetHonorMenusReturns200WithMenuList"/>
-  </testsuite>
-  <testsuite name="Honor / Get active campaign returns 200 with campaign details" id="e238e211-3871-4c3f-83e4-7353896d340d" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.535">
-    <testcase name="Response time is below 5000ms" time="0.535" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
-    <testcase name="Status is 200" time="0.535" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
-    <testcase name="Content-Type is application/json" time="0.535" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
-    <testcase name="Response matches schema" time="0.535" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
-    <testcase name="Campaign stores active campaignId for later use" time="0.535" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
-  </testsuite>
-  <testsuite name="Honor / Get appreciation types returns 200 with type list" id="31906e79-23f8-40ae-9e79-effdd830e99b" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.995">
-    <testcase name="Response time is below 5000ms" time="0.995" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
-    <testcase name="Status is 200" time="0.995" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
-    <testcase name="Content-Type is application/json" time="0.995" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
-    <testcase name="Response matches schema" time="0.995" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
-    <testcase name="data array is not empty" time="0.995" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
-  </testsuite>
-  <testsuite name="Honor / Get user appreciations for active campaign returns 200" id="49e14b53-dfb3-48bb-a8c8-4794ff55518d" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="1.011">
-    <testcase name="Response time is below 5000ms" time="1.011" classname="HonorGetUserAppreciationsForActiveCampaignReturns200"/>
-    <testcase name="Status is 200 or 403 (Honor access depends on user role)" time="1.011" classname="HonorGetUserAppreciationsForActiveCampaignReturns200"/>
-  </testsuite>
-  <testsuite name="Honor / Get active honor images returns 200 with image list" id="6ab0efb3-96bc-4051-afba-f8e390a9402a" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.976">
-    <testcase name="Response time is below 5000ms" time="0.976" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
-    <testcase name="Status is 200" time="0.976" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
-    <testcase name="Content-Type is application/json" time="0.976" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
-    <testcase name="Response matches schema" time="0.976" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
-  </testsuite>
-  <testsuite name="OKR / Get strategic pillars summary returns 200 with pillar list" id="095339ff-dea6-4f25-b975-062c581ac794" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.304">
-    <testcase name="Response time is below 5000ms" time="0.304" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
-    <testcase name="Status is 200" time="0.304" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
-    <testcase name="Content-Type is application/json" time="0.304" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
-    <testcase name="Response matches schema" time="0.304" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
-    <testcase name="data array is not empty" time="0.304" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
-  </testsuite>
-  <testsuite name="OKR / Get HLOs for single quarter returns 200" id="cdaa6445-178b-4a24-8df7-610206f6d89e" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.760">
-    <testcase name="Response time is below 5000ms" time="0.760" classname="OkrGetHlOsForSingleQuarterReturns200"/>
-    <testcase name="Status is 200" time="0.760" classname="OkrGetHlOsForSingleQuarterReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.760" classname="OkrGetHlOsForSingleQuarterReturns200"/>
-    <testcase name="Response matches schema" time="0.760" classname="OkrGetHlOsForSingleQuarterReturns200"/>
-  </testsuite>
-  <testsuite name="OKR / Get HLOs for all quarters returns 200" id="06bdb9fa-ead2-4bb7-bc1d-1d3e84ab847e" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.655">
-    <testcase name="Response time is below 5000ms" time="0.655" classname="OkrGetHlOsForAllQuartersReturns200"/>
-    <testcase name="Status is 200" time="0.655" classname="OkrGetHlOsForAllQuartersReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.655" classname="OkrGetHlOsForAllQuartersReturns200"/>
-    <testcase name="All quarters represented in results" time="0.655" classname="OkrGetHlOsForAllQuartersReturns200"/>
-  </testsuite>
-  <testsuite name="OKR / Get OKR areas with leaderships returns 200" id="82a364c8-f549-40b6-8381-9da7f4ddffa7" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.759">
-    <testcase name="Response time is below 5000ms" time="0.759" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
-    <testcase name="Status is 200" time="0.759" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.759" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
-    <testcase name="Response matches schema" time="0.759" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
-  </testsuite>
-  <testsuite name="OKR / Get OKR highlights returns 200" id="9807da61-697b-46f9-a350-52ff9838da60" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="0.541">
-    <testcase name="Response time is below 5000ms" time="0.541" classname="OkrGetOkrHighlightsReturns200"/>
-    <testcase name="Status is 200" time="0.541" classname="OkrGetOkrHighlightsReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.541" classname="OkrGetOkrHighlightsReturns200"/>
-    <testcase name="Response matches schema" time="0.541" classname="OkrGetOkrHighlightsReturns200"/>
-    <testcase name="Older highlights page does not exceed size=10" time="0.541" classname="OkrGetOkrHighlightsReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse / Get pulse dashboard returns 200" id="0004dcee-d65a-4114-9daa-8c8f2467526c" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="1.647">
-    <testcase name="Response time is below 5000ms" time="1.647" classname="PulseGetPulseDashboardReturns200"/>
-    <testcase name="Status is 200" time="1.647" classname="PulseGetPulseDashboardReturns200"/>
-    <testcase name="Content-Type is application/json" time="1.647" classname="PulseGetPulseDashboardReturns200"/>
-    <testcase name="Response matches schema" time="1.647" classname="PulseGetPulseDashboardReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse / Get promotion status as appraiser returns 200" id="f207f0bc-5809-4731-b008-e712baeebc37" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.792">
-    <testcase name="Response time is below 5000ms" time="0.792" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
-    <testcase name="Status is 200" time="0.792" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.792" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
-    <testcase name="Response matches schema" time="0.792" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse / Get evaluation groups returns 200" id="ee665dfb-1e60-476c-b4ab-1bb4ddc5f81d" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.732">
-    <testcase name="Response time is below 5000ms" time="0.732" classname="PulseGetEvaluationGroupsReturns200"/>
-    <testcase name="Status is 200" time="0.732" classname="PulseGetEvaluationGroupsReturns200"/>
-    <testcase name="Content-Type is application/json" time="0.732" classname="PulseGetEvaluationGroupsReturns200"/>
-    <testcase name="Response matches schema" time="0.732" classname="PulseGetEvaluationGroupsReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse / Get user pulse info returns 200" id="160b530b-d650-429a-bab8-bde369270e4a" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="1.265">
-    <testcase name="Response time is below 5000ms" time="1.265" classname="PulseGetUserPulseInfoReturns200"/>
-    <testcase name="Status is 200" time="1.265" classname="PulseGetUserPulseInfoReturns200"/>
-    <testcase name="Content-Type is application/json" time="1.265" classname="PulseGetUserPulseInfoReturns200"/>
-    <testcase name="Response matches schema" time="1.265" classname="PulseGetUserPulseInfoReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse / Get expectation notes for user returns 200" id="19ded62a-3a5d-4d59-9c93-5f55e17d36c8" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="1.597">
-    <testcase name="Response time is below 5000ms" time="1.597" classname="PulseGetExpectationNotesForUserReturns200"/>
-    <testcase name="Status is 200" time="1.597" classname="PulseGetExpectationNotesForUserReturns200"/>
-    <testcase name="Content-Type is application/json" time="1.597" classname="PulseGetExpectationNotesForUserReturns200"/>
-    <testcase name="Response matches schema" time="1.597" classname="PulseGetExpectationNotesForUserReturns200"/>
-    <testcase name="All returned notes are EXPECTATION type" time="1.597" classname="PulseGetExpectationNotesForUserReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse / Get all notes for user returns 200" id="d8fa723a-cf1c-4816-a374-44a1d9ebab8e" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="1.157">
-    <testcase name="Response time is below 5000ms" time="1.157" classname="PulseGetAllNotesForUserReturns200"/>
-    <testcase name="Status is 200" time="1.157" classname="PulseGetAllNotesForUserReturns200"/>
-    <testcase name="Content-Type is application/json" time="1.157" classname="PulseGetAllNotesForUserReturns200"/>
-    <testcase name="Response matches schema" time="1.157" classname="PulseGetAllNotesForUserReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse Write Operations / Create feedback note returns 200 with note ID" id="ee9abb7e-794d-4fd5-825d-8f6b8d29ba7d" timestamp="2026-10-09T12:28:24.553Z" tests="5" failures="0" errors="0" time="1.692">
-    <testcase name="Response time is below 5000ms" time="1.692" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
-    <testcase name="Status is 200" time="1.692" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
-    <testcase name="Content-Type is application/json" time="1.692" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
-    <testcase name="Response matches schema" time="1.692" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
-    <testcase name="Note ID stored for subsequent requests" time="1.692" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
-  </testsuite>
-  <testsuite name="Pulse Write Operations / Update feedback note returns 200 with updated note" id="bc3c1897-0193-4aef-8da1-bd0197e58058" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.396">
-    <testcase name="Response time is below 5000ms" time="0.396" classname="PulseWriteOperationsUpdateFeedbackNoteReturns200WithUpdatedNote"/>
-    <testcase name="Status is 200" time="0.396" classname="PulseWriteOperationsUpdateFeedbackNoteReturns200WithUpdatedNote"/>
-    <testcase name="Response echoes updated note text" time="0.396" classname="PulseWriteOperationsUpdateFeedbackNoteReturns200WithUpdatedNote"/>
-  </testsuite>
-  <testsuite name="Pulse Write Operations / Delete feedback note returns 200" id="95fed1bb-41c5-47ca-9a40-9e988def8ad5" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="1.166">
-    <testcase name="Response time is below 5000ms" time="1.166" classname="PulseWriteOperationsDeleteFeedbackNoteReturns200"/>
-    <testcase name="Status is 200" time="1.166" classname="PulseWriteOperationsDeleteFeedbackNoteReturns200"/>
-  </testsuite>
-  <testsuite name="Pulse Write Operations / Create feedback note with missing required fields returns 400" id="bf8ca094-cd94-4ead-b483-bd60e9080f75" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.754">
-    <testcase name="Response time is below 5000ms" time="0.754" classname="PulseWriteOperationsCreateFeedbackNoteWithMissingRequiredFieldsReturns400"/>
-    <testcase name="Status is 400 or 422 for missing required fields" time="0.754" classname="PulseWriteOperationsCreateFeedbackNoteWithMissingRequiredFieldsReturns400"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Missing token returns 401" id="daa21e91-2385-49d6-ba88-87bf24dccbdb" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.714">
-    <testcase name="Response time is below 5000ms" time="0.714" classname="BehaviorAmpEdgeCasesMissingTokenReturns401"/>
-    <testcase name="Status is 401" time="0.714" classname="BehaviorAmpEdgeCasesMissingTokenReturns401"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Invalid token returns 401" id="e8440433-a473-4a26-8627-f5378a9703bb" timestamp="2026-10-09T12:28:24.553Z" tests="2" failures="0" errors="0" time="0.253">
-    <testcase name="Response time is below 5000ms" time="0.253" classname="BehaviorAmpEdgeCasesInvalidTokenReturns401"/>
-    <testcase name="Status is 401" time="0.253" classname="BehaviorAmpEdgeCasesInvalidTokenReturns401"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Non-existent user pulse returns 404" id="4c08d717-38a8-4edb-af5a-c0c369699d0e" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.382">
-    <testcase name="Response time is below 5000ms" time="0.382" classname="BehaviorAmpEdgeCasesNonExistentUserPulseReturns404"/>
-    <testcase name="Status is 400 (API returns 400 for non-existent user pulse, not 404)" time="0.382" classname="BehaviorAmpEdgeCasesNonExistentUserPulseReturns404"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Non-existent honor campaign appreciations returns 404" id="a7742cfd-978a-42e8-a70f-f3b2c5e2e1d2" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.933">
-    <testcase name="Response time is below 5000ms" time="0.933" classname="BehaviorAmpEdgeCasesNonExistentHonorCampaignAppreciationsReturns404"/>
-    <testcase name="Status is 400, 403, or 404 (Honor access or campaign not found)" time="0.933" classname="BehaviorAmpEdgeCasesNonExistentHonorCampaignAppreciationsReturns404"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Non-existent OKR year returns empty data" id="204fda17-7ad8-4905-af3a-a22e1010f3c6" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.716">
-    <testcase name="Response time is below 5000ms" time="0.716" classname="BehaviorAmpEdgeCasesNonExistentOkrYearReturnsEmptyData"/>
-    <testcase name="Status is 200" time="0.716" classname="BehaviorAmpEdgeCasesNonExistentOkrYearReturnsEmptyData"/>
-    <testcase name="Data is empty for non-existent year" time="0.716" classname="BehaviorAmpEdgeCasesNonExistentOkrYearReturnsEmptyData"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Non-existent user roles returns 200 empty (quirk — API does not validate user existence)" id="b8b29f15-ba38-4c6b-863d-398ba2db468c" timestamp="2026-10-09T12:28:24.553Z" tests="4" failures="0" errors="0" time="0.724">
-    <testcase name="Response time is below 5000ms" time="0.724" classname="BehaviorAmpEdgeCasesNonExistentUserRolesReturns200EmptyQuirkApiDoesNotValidateUserExistence"/>
-    <testcase name="Status is 200 (quirk: API does not 404 for non-existent user roles)" time="0.724" classname="BehaviorAmpEdgeCasesNonExistentUserRolesReturns200EmptyQuirkApiDoesNotValidateUserExistence"/>
-    <testcase name="Response body is empty (no roles for non-existent user)" time="0.724" classname="BehaviorAmpEdgeCasesNonExistentUserRolesReturns200EmptyQuirkApiDoesNotValidateUserExistence"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create reminder returns 403" id="8fdbf86e-3c30-47b4-9474-5762971344ab" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.685">
-    <testcase name="Response time is below 5000ms" time="0.685" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateReminderReturns403"/>
-    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.685" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateReminderReturns403"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create event returns 403" id="ceb4a184-08f9-4c93-9e26-99034de9bd97" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.242">
-    <testcase name="Response time is below 5000ms" time="0.242" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateEventReturns403"/>
-    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.242" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateEventReturns403"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create designation returns 403" id="116770fe-9152-42bd-a7b4-bc043cfe6b70" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.244">
-    <testcase name="Response time is below 5000ms" time="0.244" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateDesignationReturns403"/>
-    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.244" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateDesignationReturns403"/>
-  </testsuite>
-  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create notice returns 403" id="0e972baa-19a0-4851-93f5-e27a7e7e6b42" timestamp="2026-10-09T12:28:24.553Z" tests="3" failures="0" errors="0" time="0.241">
-    <testcase name="Response time is below 5000ms" time="0.241" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateNoticeReturns403"/>
-    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.241" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateNoticeReturns403"/>
+<testsuites name="Vyaguta API Tests" tests="73" time="54.830">
+  <testsuite name="Health / People — users endpoint is up" id="23f7587f-d85a-41ea-9adf-0e07983c53c5" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="1.023">
+    <testcase name="Response time is below 5000ms" time="1.023" classname="HealthPeopleUsersEndpointIsUp"/>
+    <testcase name="Status is 200" time="1.023" classname="HealthPeopleUsersEndpointIsUp"/>
+  </testsuite>
+  <testsuite name="Health / Team — status-types endpoint is up" id="bde9a43d-87c9-483a-a2b3-c2bd3604b7b4" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.849">
+    <testcase name="Response time is below 5000ms" time="0.849" classname="HealthTeamStatusTypesEndpointIsUp"/>
+    <testcase name="Status is 200" time="0.849" classname="HealthTeamStatusTypesEndpointIsUp"/>
+  </testsuite>
+  <testsuite name="Health / Attendance — summary endpoint is up" id="f7865f93-ed04-4b8b-998b-56a65d07762c" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.680">
+    <testcase name="Response time is below 5000ms" time="0.680" classname="HealthAttendanceSummaryEndpointIsUp"/>
+    <testcase name="Status is 200" time="0.680" classname="HealthAttendanceSummaryEndpointIsUp"/>
+  </testsuite>
+  <testsuite name="Health / JUMP — KPI filters endpoint is up" id="ca65fd38-2e41-442f-9c66-2e4f1f22be98" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.959">
+    <testcase name="Response time is below 5000ms" time="0.959" classname="HealthJumpKpiFiltersEndpointIsUp"/>
+    <testcase name="Status is 200" time="0.959" classname="HealthJumpKpiFiltersEndpointIsUp"/>
+  </testsuite>
+  <testsuite name="Health / Honor — menus endpoint is up" id="3ca9a6e9-f253-4b07-b1af-7ace990c2f80" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="1.118">
+    <testcase name="Response time is below 5000ms" time="1.118" classname="HealthHonorMenusEndpointIsUp"/>
+    <testcase name="Status is 200" time="1.118" classname="HealthHonorMenusEndpointIsUp"/>
+  </testsuite>
+  <testsuite name="Health / OKR — strategic pillars endpoint is up" id="895c3208-4b86-49d5-94e4-050fae4430b5" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.388">
+    <testcase name="Response time is below 5000ms" time="0.388" classname="HealthOkrStrategicPillarsEndpointIsUp"/>
+    <testcase name="Status is 200" time="0.388" classname="HealthOkrStrategicPillarsEndpointIsUp"/>
+  </testsuite>
+  <testsuite name="Health / Pulse — evaluations endpoint is up" id="e6984b07-4bbf-4940-a742-d518e83455fe" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.345">
+    <testcase name="Response time is below 5000ms" time="0.345" classname="HealthPulseEvaluationsEndpointIsUp"/>
+    <testcase name="Status is 200" time="0.345" classname="HealthPulseEvaluationsEndpointIsUp"/>
+  </testsuite>
+  <testsuite name="Sanity / People — users list is reachable" id="7ee38290-1d0d-46f0-800b-57276af6ae93" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.292">
+    <testcase name="Response time is below 5000ms" time="0.292" classname="SanityPeopleUsersListIsReachable"/>
+    <testcase name="Status is 200" time="0.292" classname="SanityPeopleUsersListIsReachable"/>
+    <testcase name="Content-Type is application/json" time="0.292" classname="SanityPeopleUsersListIsReachable"/>
+    <testcase name="Response body has data property" time="0.292" classname="SanityPeopleUsersListIsReachable"/>
+  </testsuite>
+  <testsuite name="Sanity / Team — status-types is reachable" id="7cd51a9a-e58e-46bc-a83b-5ff9790fafd4" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.814">
+    <testcase name="Response time is below 5000ms" time="0.814" classname="SanityTeamStatusTypesIsReachable"/>
+    <testcase name="Status is 200" time="0.814" classname="SanityTeamStatusTypesIsReachable"/>
+    <testcase name="Content-Type is application/json" time="0.814" classname="SanityTeamStatusTypesIsReachable"/>
+    <testcase name="Response body has data property" time="0.814" classname="SanityTeamStatusTypesIsReachable"/>
+  </testsuite>
+  <testsuite name="Sanity / Attendance — summary is reachable" id="6da15f92-3357-4b52-8b31-5e6cd8b794f5" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.958">
+    <testcase name="Response time is below 5000ms" time="0.958" classname="SanityAttendanceSummaryIsReachable"/>
+    <testcase name="Status is 200" time="0.958" classname="SanityAttendanceSummaryIsReachable"/>
+    <testcase name="Content-Type is application/json" time="0.958" classname="SanityAttendanceSummaryIsReachable"/>
+    <testcase name="Response body has data property" time="0.958" classname="SanityAttendanceSummaryIsReachable"/>
+  </testsuite>
+  <testsuite name="Sanity / JUMP — KPI filters is reachable" id="b0958ddd-eda7-4d09-ab31-2405529e3333" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.351">
+    <testcase name="Response time is below 5000ms" time="0.351" classname="SanityJumpKpiFiltersIsReachable"/>
+    <testcase name="Status is 200" time="0.351" classname="SanityJumpKpiFiltersIsReachable"/>
+    <testcase name="Content-Type is application/json" time="0.351" classname="SanityJumpKpiFiltersIsReachable"/>
+    <testcase name="Response body has data property" time="0.351" classname="SanityJumpKpiFiltersIsReachable"/>
+  </testsuite>
+  <testsuite name="Sanity / Honor — menus is reachable" id="c1b99927-a450-4e90-a907-61a867bbf5ab" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="1.066">
+    <testcase name="Response time is below 5000ms" time="1.066" classname="SanityHonorMenusIsReachable"/>
+    <testcase name="Status is 200" time="1.066" classname="SanityHonorMenusIsReachable"/>
+    <testcase name="Content-Type is application/json" time="1.066" classname="SanityHonorMenusIsReachable"/>
+    <testcase name="Response body has data property" time="1.066" classname="SanityHonorMenusIsReachable"/>
+  </testsuite>
+  <testsuite name="Sanity / OKR — strategic pillars is reachable" id="9fd9b900-8959-4722-822f-61e9de93640f" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.300">
+    <testcase name="Response time is below 5000ms" time="0.300" classname="SanityOkrStrategicPillarsIsReachable"/>
+    <testcase name="Status is 200" time="0.300" classname="SanityOkrStrategicPillarsIsReachable"/>
+    <testcase name="Content-Type is application/json" time="0.300" classname="SanityOkrStrategicPillarsIsReachable"/>
+    <testcase name="Response body has data property" time="0.300" classname="SanityOkrStrategicPillarsIsReachable"/>
+  </testsuite>
+  <testsuite name="Sanity / Pulse — evaluation groups is reachable" id="d2f960f9-9e78-45b7-9572-e267871bbde9" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.814">
+    <testcase name="Response time is below 5000ms" time="0.814" classname="SanityPulseEvaluationGroupsIsReachable"/>
+    <testcase name="Status is 200" time="0.814" classname="SanityPulseEvaluationGroupsIsReachable"/>
+    <testcase name="Content-Type is application/json" time="0.814" classname="SanityPulseEvaluationGroupsIsReachable"/>
+    <testcase name="Response body has data property" time="0.814" classname="SanityPulseEvaluationGroupsIsReachable"/>
+  </testsuite>
+  <testsuite name="Core / Create reminder returns 201 with reminder data" id="7301066c-09a4-4343-8702-b05ce1c3072d" timestamp="2026-10-10T11:47:15.449Z" tests="6" failures="0" errors="0" time="0.794">
+    <testcase name="Response time is below 5000ms" time="0.794" classname="CoreCreateReminderReturns201WithReminderData"/>
+    <testcase name="Status is 201" time="0.794" classname="CoreCreateReminderReturns201WithReminderData"/>
+    <testcase name="Content-Type is application/json" time="0.794" classname="CoreCreateReminderReturns201WithReminderData"/>
+    <testcase name="Response matches schema" time="0.794" classname="CoreCreateReminderReturns201WithReminderData"/>
+    <testcase name="Response echoes submitted title and description" time="0.794" classname="CoreCreateReminderReturns201WithReminderData"/>
+    <testcase name="Reminder ID stored for subsequent requests" time="0.794" classname="CoreCreateReminderReturns201WithReminderData"/>
+  </testsuite>
+  <testsuite name="Core / Get reminder by ID returns 200 with correct data" id="75d12f6c-1e2a-45f1-9809-d812464fbb5c" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.272">
+    <testcase name="Response time is below 5000ms" time="0.272" classname="CoreGetReminderByIdReturns200WithCorrectData"/>
+    <testcase name="Status is 200" time="0.272" classname="CoreGetReminderByIdReturns200WithCorrectData"/>
+    <testcase name="Returned reminder matches created reminder" time="0.272" classname="CoreGetReminderByIdReturns200WithCorrectData"/>
+  </testsuite>
+  <testsuite name="Core / Update reminder returns 200 with updated fields" id="7472ee8c-9178-4d56-bf09-52aeee1bdebe" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.275">
+    <testcase name="Response time is below 5000ms" time="0.275" classname="CoreUpdateReminderReturns200WithUpdatedFields"/>
+    <testcase name="Status is 200" time="0.275" classname="CoreUpdateReminderReturns200WithUpdatedFields"/>
+    <testcase name="Response echoes updated title" time="0.275" classname="CoreUpdateReminderReturns200WithUpdatedFields"/>
+  </testsuite>
+  <testsuite name="Core / Delete reminder returns 200 with deleted ID" id="6a1ad968-edb4-4d80-bd52-356677f03bcc" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.283">
+    <testcase name="Response time is below 5000ms" time="0.283" classname="CoreDeleteReminderReturns200WithDeletedId"/>
+    <testcase name="Status is 200" time="0.283" classname="CoreDeleteReminderReturns200WithDeletedId"/>
+    <testcase name="Response returns deleted ID" time="0.283" classname="CoreDeleteReminderReturns200WithDeletedId"/>
+  </testsuite>
+  <testsuite name="Core / Create event returns 201 with event data" id="7044cae0-47c1-422f-912c-9075f72c094b" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.275">
+    <testcase name="Response time is below 5000ms" time="0.275" classname="CoreCreateEventReturns201WithEventData"/>
+    <testcase name="Status is 201" time="0.275" classname="CoreCreateEventReturns201WithEventData"/>
+    <testcase name="Content-Type is application/json" time="0.275" classname="CoreCreateEventReturns201WithEventData"/>
+    <testcase name="Response has event ID" time="0.275" classname="CoreCreateEventReturns201WithEventData"/>
+  </testsuite>
+  <testsuite name="Core / Get event by ID returns 200 with correct data" id="44521dc1-b26e-4ed4-b08b-62619d9cf755" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.267">
+    <testcase name="Response time is below 5000ms" time="0.267" classname="CoreGetEventByIdReturns200WithCorrectData"/>
+    <testcase name="Status is 200" time="0.267" classname="CoreGetEventByIdReturns200WithCorrectData"/>
+    <testcase name="Returned event matches created event" time="0.267" classname="CoreGetEventByIdReturns200WithCorrectData"/>
+  </testsuite>
+  <testsuite name="Core / Update event returns 200 with updated fields" id="de255cd5-a8ac-4ec7-a6b1-6f74b42df879" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.281">
+    <testcase name="Response time is below 5000ms" time="0.281" classname="CoreUpdateEventReturns200WithUpdatedFields"/>
+    <testcase name="Status is 200" time="0.281" classname="CoreUpdateEventReturns200WithUpdatedFields"/>
+    <testcase name="Response echoes updated name" time="0.281" classname="CoreUpdateEventReturns200WithUpdatedFields"/>
+  </testsuite>
+  <testsuite name="Core / Delete event returns 200 with deleted ID" id="a1e3b6d0-e6b6-404d-a3f6-2ce649b253b4" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.787">
+    <testcase name="Response time is below 5000ms" time="0.787" classname="CoreDeleteEventReturns200WithDeletedId"/>
+    <testcase name="Status is 200" time="0.787" classname="CoreDeleteEventReturns200WithDeletedId"/>
+    <testcase name="Response returns deleted ID" time="0.787" classname="CoreDeleteEventReturns200WithDeletedId"/>
+  </testsuite>
+  <testsuite name="Core / Create reminder with missing required fields returns 400" id="8c0111b3-b8a5-4f60-9f43-f53df63d61d3" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.269">
+    <testcase name="Response time is below 5000ms" time="0.269" classname="CoreCreateReminderWithMissingRequiredFieldsReturns400"/>
+    <testcase name="Status is 400 or 422 for missing required fields" time="0.269" classname="CoreCreateReminderWithMissingRequiredFieldsReturns400"/>
+    <testcase name="Response body contains error message" time="0.269" classname="CoreCreateReminderWithMissingRequiredFieldsReturns400"/>
+  </testsuite>
+  <testsuite name="Core / Create event with missing required fields returns 400" id="7ef42d7c-e99e-405a-89e8-580622d9084e" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.787">
+    <testcase name="Response time is below 5000ms" time="0.787" classname="CoreCreateEventWithMissingRequiredFieldsReturns400"/>
+    <testcase name="Status is 400 or 422 for missing required fields" time="0.787" classname="CoreCreateEventWithMissingRequiredFieldsReturns400"/>
+  </testsuite>
+  <testsuite name="Attendance / Get attendance summary for self returns 200" id="37b9e221-457e-4df5-85e8-ac2a9e6ffd1d" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.990">
+    <testcase name="Response time is below 5000ms" time="0.990" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
+    <testcase name="Status is 200" time="0.990" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
+    <testcase name="Content-Type is application/json" time="0.990" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
+    <testcase name="Response matches schema" time="0.990" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
+    <testcase name="data has leave, worklog, missing" time="0.990" classname="AttendanceGetAttendanceSummaryForSelfReturns200"/>
+  </testsuite>
+  <testsuite name="Attendance / Get attendance summary for team returns 200" id="ec96ff0e-6002-4437-8bbd-5bd663a2ca69" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="2.413">
+    <testcase name="Response time is below 5000ms" time="2.413" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
+    <testcase name="Status is 200" time="2.413" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
+    <testcase name="Content-Type is application/json" time="2.413" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
+    <testcase name="Response matches schema" time="2.413" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
+    <testcase name="missing count is a non-negative integer" time="2.413" classname="AttendanceGetAttendanceSummaryForTeamReturns200"/>
+  </testsuite>
+  <testsuite name="Attendance / Get attendance summary with invalid fetchType returns 200 or 400 (quirk)" id="a0772402-647a-4cb1-82af-8baf059e8a2f" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.860">
+    <testcase name="Response time is below 5000ms" time="0.860" classname="AttendanceGetAttendanceSummaryWithInvalidFetchTypeReturns200Or400Quirk"/>
+    <testcase name="Status is 200 or 400" time="0.860" classname="AttendanceGetAttendanceSummaryWithInvalidFetchTypeReturns200Or400Quirk"/>
+  </testsuite>
+  <testsuite name="Team / Get project status types returns 200 with list" id="a8d6332d-7b68-4c09-9d47-bc7b986550e4" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.306">
+    <testcase name="Response time is below 5000ms" time="0.306" classname="TeamGetProjectStatusTypesReturns200WithList"/>
+    <testcase name="Status is 200" time="0.306" classname="TeamGetProjectStatusTypesReturns200WithList"/>
+    <testcase name="Content-Type is application/json" time="0.306" classname="TeamGetProjectStatusTypesReturns200WithList"/>
+    <testcase name="Response matches schema" time="0.306" classname="TeamGetProjectStatusTypesReturns200WithList"/>
+    <testcase name="data array is not empty" time="0.306" classname="TeamGetProjectStatusTypesReturns200WithList"/>
+  </testsuite>
+  <testsuite name="Team / Get projects summary returns 200 with status breakdown" id="c94dcb78-7916-4a37-b11d-1aa809812326" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.388">
+    <testcase name="Response time is below 5000ms" time="0.388" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
+    <testcase name="Status is 200" time="0.388" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
+    <testcase name="Content-Type is application/json" time="0.388" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
+    <testcase name="Response matches schema" time="0.388" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
+    <testcase name="status array is not empty" time="0.388" classname="TeamGetProjectsSummaryReturns200WithStatusBreakdown"/>
+  </testsuite>
+  <testsuite name="Team / Get projects summary filtered by statusId returns matching results" id="b9c82f51-f6a2-4661-9b80-310f24a52fb4" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.837">
+    <testcase name="Response time is below 5000ms" time="0.837" classname="TeamGetProjectsSummaryFilteredByStatusIdReturnsMatchingResults"/>
+    <testcase name="Status is 200" time="0.837" classname="TeamGetProjectsSummaryFilteredByStatusIdReturnsMatchingResults"/>
+    <testcase name="Response has status, category, industry, recentProjects" time="0.837" classname="TeamGetProjectsSummaryFilteredByStatusIdReturnsMatchingResults"/>
+  </testsuite>
+  <testsuite name="Team / Get projects missing data returns 200" id="d2766af2-2047-480b-8491-514a357acb16" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="1.146">
+    <testcase name="Response time is below 5000ms" time="1.146" classname="TeamGetProjectsMissingDataReturns200"/>
+    <testcase name="Status is 200" time="1.146" classname="TeamGetProjectsMissingDataReturns200"/>
+    <testcase name="Content-Type is application/json" time="1.146" classname="TeamGetProjectsMissingDataReturns200"/>
+    <testcase name="Response has data object with missing categories" time="1.146" classname="TeamGetProjectsMissingDataReturns200"/>
+  </testsuite>
+  <testsuite name="Team / Get projects activity feed returns 200 with paginated items" id="e81498a3-f99a-496d-b59f-0373f6a66e85" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.793">
+    <testcase name="Response time is below 5000ms" time="0.793" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
+    <testcase name="Status is 200" time="0.793" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
+    <testcase name="Content-Type is application/json" time="0.793" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
+    <testcase name="Response matches schema" time="0.793" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
+    <testcase name="Returned page size matches requested size" time="0.793" classname="TeamGetProjectsActivityFeedReturns200WithPaginatedItems"/>
+  </testsuite>
+  <testsuite name="Team / Get projects health trend returns 200 with weekly breakdown" id="d3fb8e34-9555-4d14-8271-76935385bbac" timestamp="2026-10-10T11:47:15.449Z" tests="6" failures="0" errors="0" time="0.368">
+    <testcase name="Response time is below 5000ms" time="0.368" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
+    <testcase name="Status is 200" time="0.368" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
+    <testcase name="Content-Type is application/json" time="0.368" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
+    <testcase name="Response matches schema" time="0.368" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
+    <testcase name="meta page equals requested page" time="0.368" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
+    <testcase name="Returned week count does not exceed size=10" time="0.368" classname="TeamGetProjectsHealthTrendReturns200WithWeeklyBreakdown"/>
+  </testsuite>
+  <testsuite name="Teams Write Operations / Create role returns 201 with role data" id="31990446-61f6-4845-8f0c-f798e60ebfcd" timestamp="2026-10-10T11:47:15.449Z" tests="6" failures="0" errors="0" time="0.833">
+    <testcase name="Response time is below 5000ms" time="0.833" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
+    <testcase name="Status is 201" time="0.833" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
+    <testcase name="Content-Type is application/json" time="0.833" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
+    <testcase name="Response matches schema" time="0.833" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
+    <testcase name="Response echoes submitted name" time="0.833" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
+    <testcase name="Role ID stored for subsequent requests" time="0.833" classname="TeamsWriteOperationsCreateRoleReturns201WithRoleData"/>
+  </testsuite>
+  <testsuite name="Teams Write Operations / Update role returns 200 with updated name" id="6f730011-8a53-4585-b760-a7ef2fc7ce48" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.381">
+    <testcase name="Response time is below 5000ms" time="0.381" classname="TeamsWriteOperationsUpdateRoleReturns200WithUpdatedName"/>
+    <testcase name="Status is 200" time="0.381" classname="TeamsWriteOperationsUpdateRoleReturns200WithUpdatedName"/>
+    <testcase name="Response echoes updated name" time="0.381" classname="TeamsWriteOperationsUpdateRoleReturns200WithUpdatedName"/>
+  </testsuite>
+  <testsuite name="Teams Write Operations / Delete role returns 200" id="7c0d5b45-2f49-43d1-80c7-9b139fe5bd40" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.852">
+    <testcase name="Response time is below 5000ms" time="0.852" classname="TeamsWriteOperationsDeleteRoleReturns200"/>
+    <testcase name="Status is 200" time="0.852" classname="TeamsWriteOperationsDeleteRoleReturns200"/>
+  </testsuite>
+  <testsuite name="Teams Write Operations / Create role with missing name returns 400" id="a19087b1-b5a8-46eb-b62c-04bfd27fb1f0" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.811">
+    <testcase name="Response time is below 5000ms" time="0.811" classname="TeamsWriteOperationsCreateRoleWithMissingNameReturns400"/>
+    <testcase name="Status is 400 or 422 for missing required fields" time="0.811" classname="TeamsWriteOperationsCreateRoleWithMissingNameReturns400"/>
+  </testsuite>
+  <testsuite name="People / Get all users returns 200 with paginated list" id="32925c01-5ec2-4f9a-9e79-a1c06af8805f" timestamp="2026-10-10T11:47:15.449Z" tests="7" failures="0" errors="0" time="0.283">
+    <testcase name="Response time is below 5000ms" time="0.283" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
+    <testcase name="Status is 200" time="0.283" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
+    <testcase name="Content-Type is application/json" time="0.283" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
+    <testcase name="Response matches schema" time="0.283" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
+    <testcase name="data array is not empty" time="0.283" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
+    <testcase name="meta contains total, size, page" time="0.283" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
+    <testcase name="Users are sorted by firstName ascending" time="0.283" classname="PeopleGetAllUsersReturns200WithPaginatedList"/>
+  </testsuite>
+  <testsuite name="People / Get user by ID returns 200 with correct user" id="295787f7-81ec-42cf-9cf1-47f904de1c5c" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.538">
+    <testcase name="Response time is below 5000ms" time="0.538" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
+    <testcase name="Status is 200" time="0.538" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
+    <testcase name="Content-Type is application/json" time="0.538" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
+    <testcase name="Response matches schema" time="0.538" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
+    <testcase name="Returned user ID matches requested ID" time="0.538" classname="PeopleGetUserByIdReturns200WithCorrectUser"/>
+  </testsuite>
+  <testsuite name="People / Get non-existent user returns 404" id="49feace3-0b9e-482a-9258-bcf79047b9fa" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.759">
+    <testcase name="Response time is below 5000ms" time="0.759" classname="PeopleGetNonExistentUserReturns404"/>
+    <testcase name="Status is 404" time="0.759" classname="PeopleGetNonExistentUserReturns404"/>
+  </testsuite>
+  <testsuite name="People / Get user roles by ID returns 200" id="21623d84-f504-44c0-b507-41c13e13433b" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.266">
+    <testcase name="Response time is below 5000ms" time="0.266" classname="PeopleGetUserRolesByIdReturns200"/>
+    <testcase name="Status is 200" time="0.266" classname="PeopleGetUserRolesByIdReturns200"/>
+    <testcase name="Content-Type is application/json" time="0.266" classname="PeopleGetUserRolesByIdReturns200"/>
+  </testsuite>
+  <testsuite name="JUMP / Get KPI filters returns 200 with area/designation list" id="13629680-b456-4316-aecf-c242305c5b47" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.908">
+    <testcase name="Response time is below 5000ms" time="0.908" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
+    <testcase name="Status is 200" time="0.908" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
+    <testcase name="Content-Type is application/json" time="0.908" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
+    <testcase name="Response matches schema" time="0.908" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
+    <testcase name="data array is not empty" time="0.908" classname="JumpGetKpiFiltersReturns200WithAreaDesignationList"/>
+  </testsuite>
+  <testsuite name="JUMP / Get KPIs filtered by designation and area returns matching items" id="fd6014cd-6f2a-4ce5-b954-b1c06d91b1b6" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.321">
+    <testcase name="Response time is below 5000ms" time="0.321" classname="JumpGetKpIsFilteredByDesignationAndAreaReturnsMatchingItems"/>
+    <testcase name="Status is 200 (500 if token user has no designation profile — backend bug)" time="0.321" classname="JumpGetKpIsFilteredByDesignationAndAreaReturnsMatchingItems"/>
+  </testsuite>
+  <testsuite name="Honor / Get honor menus returns 200 with menu list" id="63f9ed95-8e71-4b4d-81d5-a247a706c149" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.668">
+    <testcase name="Response time is below 5000ms" time="0.668" classname="HonorGetHonorMenusReturns200WithMenuList"/>
+    <testcase name="Status is 200" time="0.668" classname="HonorGetHonorMenusReturns200WithMenuList"/>
+    <testcase name="Content-Type is application/json" time="0.668" classname="HonorGetHonorMenusReturns200WithMenuList"/>
+    <testcase name="data is a non-empty array of strings" time="0.668" classname="HonorGetHonorMenusReturns200WithMenuList"/>
+  </testsuite>
+  <testsuite name="Honor / Get active campaign returns 200 with campaign details" id="43bc44f6-5dc2-4c05-ba8d-7662c93b74fe" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.579">
+    <testcase name="Response time is below 5000ms" time="0.579" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
+    <testcase name="Status is 200" time="0.579" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
+    <testcase name="Content-Type is application/json" time="0.579" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
+    <testcase name="Response matches schema" time="0.579" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
+    <testcase name="Campaign stores active campaignId for later use" time="0.579" classname="HonorGetActiveCampaignReturns200WithCampaignDetails"/>
+  </testsuite>
+  <testsuite name="Honor / Get appreciation types returns 200 with type list" id="6bae1215-467c-4a90-875c-291b73b83295" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.514">
+    <testcase name="Response time is below 5000ms" time="0.514" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
+    <testcase name="Status is 200" time="0.514" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
+    <testcase name="Content-Type is application/json" time="0.514" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
+    <testcase name="Response matches schema" time="0.514" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
+    <testcase name="data array is not empty" time="0.514" classname="HonorGetAppreciationTypesReturns200WithTypeList"/>
+  </testsuite>
+  <testsuite name="Honor / Get user appreciations for active campaign returns 200" id="2a5d133b-bb66-4e96-a23d-16de23faba18" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="1.010">
+    <testcase name="Response time is below 5000ms" time="1.010" classname="HonorGetUserAppreciationsForActiveCampaignReturns200"/>
+    <testcase name="Status is 200 or 403 (Honor access depends on user role)" time="1.010" classname="HonorGetUserAppreciationsForActiveCampaignReturns200"/>
+  </testsuite>
+  <testsuite name="Honor / Get active honor images returns 200 with image list" id="215db27a-eacf-4d95-aca1-9e922a2679ac" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.538">
+    <testcase name="Response time is below 5000ms" time="0.538" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
+    <testcase name="Status is 200" time="0.538" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
+    <testcase name="Content-Type is application/json" time="0.538" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
+    <testcase name="Response matches schema" time="0.538" classname="HonorGetActiveHonorImagesReturns200WithImageList"/>
+  </testsuite>
+  <testsuite name="OKR / Get strategic pillars summary returns 200 with pillar list" id="1c64c5df-c072-46af-a3e2-ef11a1871964" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.308">
+    <testcase name="Response time is below 5000ms" time="0.308" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
+    <testcase name="Status is 200" time="0.308" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
+    <testcase name="Content-Type is application/json" time="0.308" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
+    <testcase name="Response matches schema" time="0.308" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
+    <testcase name="data array is not empty" time="0.308" classname="OkrGetStrategicPillarsSummaryReturns200WithPillarList"/>
+  </testsuite>
+  <testsuite name="OKR / Get HLOs for single quarter returns 200" id="8c63f1e9-360e-4788-9ba1-2913ae1a4a9b" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.852">
+    <testcase name="Response time is below 5000ms" time="0.852" classname="OkrGetHlOsForSingleQuarterReturns200"/>
+    <testcase name="Status is 200" time="0.852" classname="OkrGetHlOsForSingleQuarterReturns200"/>
+    <testcase name="Content-Type is application/json" time="0.852" classname="OkrGetHlOsForSingleQuarterReturns200"/>
+    <testcase name="Response matches schema" time="0.852" classname="OkrGetHlOsForSingleQuarterReturns200"/>
+  </testsuite>
+  <testsuite name="OKR / Get HLOs for all quarters returns 200" id="540141a5-b890-4327-8ea6-dd427cbfa798" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="1.207">
+    <testcase name="Response time is below 5000ms" time="1.207" classname="OkrGetHlOsForAllQuartersReturns200"/>
+    <testcase name="Status is 200" time="1.207" classname="OkrGetHlOsForAllQuartersReturns200"/>
+    <testcase name="Content-Type is application/json" time="1.207" classname="OkrGetHlOsForAllQuartersReturns200"/>
+    <testcase name="All quarters represented in results" time="1.207" classname="OkrGetHlOsForAllQuartersReturns200"/>
+  </testsuite>
+  <testsuite name="OKR / Get OKR areas with leaderships returns 200" id="f0088c14-67cb-4200-aa66-40eb90099608" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.852">
+    <testcase name="Response time is below 5000ms" time="0.852" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
+    <testcase name="Status is 200" time="0.852" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
+    <testcase name="Content-Type is application/json" time="0.852" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
+    <testcase name="Response matches schema" time="0.852" classname="OkrGetOkrAreasWithLeadershipsReturns200"/>
+  </testsuite>
+  <testsuite name="OKR / Get OKR highlights returns 200" id="eb7e98d8-ee03-433c-acef-1ccff094501b" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="0.635">
+    <testcase name="Response time is below 5000ms" time="0.635" classname="OkrGetOkrHighlightsReturns200"/>
+    <testcase name="Status is 200" time="0.635" classname="OkrGetOkrHighlightsReturns200"/>
+    <testcase name="Content-Type is application/json" time="0.635" classname="OkrGetOkrHighlightsReturns200"/>
+    <testcase name="Response matches schema" time="0.635" classname="OkrGetOkrHighlightsReturns200"/>
+    <testcase name="Older highlights page does not exceed size=10" time="0.635" classname="OkrGetOkrHighlightsReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse / Get pulse dashboard returns 200" id="6d33768c-99a4-4af6-ab90-2d421fab0e58" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="1.479">
+    <testcase name="Response time is below 5000ms" time="1.479" classname="PulseGetPulseDashboardReturns200"/>
+    <testcase name="Status is 200" time="1.479" classname="PulseGetPulseDashboardReturns200"/>
+    <testcase name="Content-Type is application/json" time="1.479" classname="PulseGetPulseDashboardReturns200"/>
+    <testcase name="Response matches schema" time="1.479" classname="PulseGetPulseDashboardReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse / Get promotion status as appraiser returns 200" id="bf4edf4a-1627-4b4b-b41c-a339fac969b9" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.817">
+    <testcase name="Response time is below 5000ms" time="0.817" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
+    <testcase name="Status is 200" time="0.817" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
+    <testcase name="Content-Type is application/json" time="0.817" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
+    <testcase name="Response matches schema" time="0.817" classname="PulseGetPromotionStatusAsAppraiserReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse / Get evaluation groups returns 200" id="1c67e9d1-765a-45d7-8662-fca7c9453fac" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.814">
+    <testcase name="Response time is below 5000ms" time="0.814" classname="PulseGetEvaluationGroupsReturns200"/>
+    <testcase name="Status is 200" time="0.814" classname="PulseGetEvaluationGroupsReturns200"/>
+    <testcase name="Content-Type is application/json" time="0.814" classname="PulseGetEvaluationGroupsReturns200"/>
+    <testcase name="Response matches schema" time="0.814" classname="PulseGetEvaluationGroupsReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse / Get user pulse info returns 200" id="6ad35301-fa84-417a-b3c3-cb0c0041a6fa" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="1.382">
+    <testcase name="Response time is below 5000ms" time="1.382" classname="PulseGetUserPulseInfoReturns200"/>
+    <testcase name="Status is 200" time="1.382" classname="PulseGetUserPulseInfoReturns200"/>
+    <testcase name="Content-Type is application/json" time="1.382" classname="PulseGetUserPulseInfoReturns200"/>
+    <testcase name="Response matches schema" time="1.382" classname="PulseGetUserPulseInfoReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse / Get expectation notes for user returns 200" id="5ff54d8e-643a-40d1-a788-a581627e915d" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="1.204">
+    <testcase name="Response time is below 5000ms" time="1.204" classname="PulseGetExpectationNotesForUserReturns200"/>
+    <testcase name="Status is 200" time="1.204" classname="PulseGetExpectationNotesForUserReturns200"/>
+    <testcase name="Content-Type is application/json" time="1.204" classname="PulseGetExpectationNotesForUserReturns200"/>
+    <testcase name="Response matches schema" time="1.204" classname="PulseGetExpectationNotesForUserReturns200"/>
+    <testcase name="All returned notes are EXPECTATION type" time="1.204" classname="PulseGetExpectationNotesForUserReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse / Get all notes for user returns 200" id="d8ac3596-20db-4bb6-9491-bb564a2f6172" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="1.756">
+    <testcase name="Response time is below 5000ms" time="1.756" classname="PulseGetAllNotesForUserReturns200"/>
+    <testcase name="Status is 200" time="1.756" classname="PulseGetAllNotesForUserReturns200"/>
+    <testcase name="Content-Type is application/json" time="1.756" classname="PulseGetAllNotesForUserReturns200"/>
+    <testcase name="Response matches schema" time="1.756" classname="PulseGetAllNotesForUserReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse Write Operations / Create feedback note returns 200 with note ID" id="f237601e-bc56-4b21-95df-e878dc16dc6b" timestamp="2026-10-10T11:47:15.449Z" tests="5" failures="0" errors="0" time="3.115">
+    <testcase name="Response time is below 5000ms" time="3.115" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
+    <testcase name="Status is 200" time="3.115" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
+    <testcase name="Content-Type is application/json" time="3.115" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
+    <testcase name="Response matches schema" time="3.115" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
+    <testcase name="Note ID stored for subsequent requests" time="3.115" classname="PulseWriteOperationsCreateFeedbackNoteReturns200WithNoteId"/>
+  </testsuite>
+  <testsuite name="Pulse Write Operations / Update feedback note returns 200 with updated note" id="e84d5dc4-bba3-4d36-9854-a9fb47f41197" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.698">
+    <testcase name="Response time is below 5000ms" time="0.698" classname="PulseWriteOperationsUpdateFeedbackNoteReturns200WithUpdatedNote"/>
+    <testcase name="Status is 200" time="0.698" classname="PulseWriteOperationsUpdateFeedbackNoteReturns200WithUpdatedNote"/>
+    <testcase name="Response echoes updated note text" time="0.698" classname="PulseWriteOperationsUpdateFeedbackNoteReturns200WithUpdatedNote"/>
+  </testsuite>
+  <testsuite name="Pulse Write Operations / Delete feedback note returns 200" id="25654342-c3f4-4e5c-a84e-1ef002facc58" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="1.614">
+    <testcase name="Response time is below 5000ms" time="1.614" classname="PulseWriteOperationsDeleteFeedbackNoteReturns200"/>
+    <testcase name="Status is 200" time="1.614" classname="PulseWriteOperationsDeleteFeedbackNoteReturns200"/>
+  </testsuite>
+  <testsuite name="Pulse Write Operations / Create feedback note with missing required fields returns 400" id="77eb281a-1b93-4b07-897a-3fea1e169cd7" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.302">
+    <testcase name="Response time is below 5000ms" time="0.302" classname="PulseWriteOperationsCreateFeedbackNoteWithMissingRequiredFieldsReturns400"/>
+    <testcase name="Status is 400 or 422 for missing required fields" time="0.302" classname="PulseWriteOperationsCreateFeedbackNoteWithMissingRequiredFieldsReturns400"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Missing token returns 401" id="941e3f01-b1dc-44ce-9b73-e1246a54e02d" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.767">
+    <testcase name="Response time is below 5000ms" time="0.767" classname="BehaviorAmpEdgeCasesMissingTokenReturns401"/>
+    <testcase name="Status is 401" time="0.767" classname="BehaviorAmpEdgeCasesMissingTokenReturns401"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Invalid token returns 401" id="32f0c259-5211-4058-93f5-44402f8cd0fe" timestamp="2026-10-10T11:47:15.449Z" tests="2" failures="0" errors="0" time="0.755">
+    <testcase name="Response time is below 5000ms" time="0.755" classname="BehaviorAmpEdgeCasesInvalidTokenReturns401"/>
+    <testcase name="Status is 401" time="0.755" classname="BehaviorAmpEdgeCasesInvalidTokenReturns401"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Non-existent user pulse returns 404" id="2529ced0-f7c9-4aa5-844d-ff7fe79fcc57" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.425">
+    <testcase name="Response time is below 5000ms" time="0.425" classname="BehaviorAmpEdgeCasesNonExistentUserPulseReturns404"/>
+    <testcase name="Status is 400 (API returns 400 for non-existent user pulse, not 404)" time="0.425" classname="BehaviorAmpEdgeCasesNonExistentUserPulseReturns404"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Non-existent honor campaign appreciations returns 404" id="2bcab6ad-dfb7-4d29-8e33-35e07f20df1a" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.536">
+    <testcase name="Response time is below 5000ms" time="0.536" classname="BehaviorAmpEdgeCasesNonExistentHonorCampaignAppreciationsReturns404"/>
+    <testcase name="Status is 400, 403, or 404 (Honor access or campaign not found)" time="0.536" classname="BehaviorAmpEdgeCasesNonExistentHonorCampaignAppreciationsReturns404"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Non-existent OKR year returns empty data" id="f66a7801-6e04-4ff4-a923-b2abe61dfe08" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.820">
+    <testcase name="Response time is below 5000ms" time="0.820" classname="BehaviorAmpEdgeCasesNonExistentOkrYearReturnsEmptyData"/>
+    <testcase name="Status is 200" time="0.820" classname="BehaviorAmpEdgeCasesNonExistentOkrYearReturnsEmptyData"/>
+    <testcase name="Data is empty for non-existent year" time="0.820" classname="BehaviorAmpEdgeCasesNonExistentOkrYearReturnsEmptyData"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Non-existent user roles returns 200 empty (quirk — API does not validate user existence)" id="6987a5ec-6757-4a36-a5f7-5fa2a58aabd2" timestamp="2026-10-10T11:47:15.449Z" tests="4" failures="0" errors="0" time="0.787">
+    <testcase name="Response time is below 5000ms" time="0.787" classname="BehaviorAmpEdgeCasesNonExistentUserRolesReturns200EmptyQuirkApiDoesNotValidateUserExistence"/>
+    <testcase name="Status is 200 (quirk: API does not 404 for non-existent user roles)" time="0.787" classname="BehaviorAmpEdgeCasesNonExistentUserRolesReturns200EmptyQuirkApiDoesNotValidateUserExistence"/>
+    <testcase name="Response body is empty (no roles for non-existent user)" time="0.787" classname="BehaviorAmpEdgeCasesNonExistentUserRolesReturns200EmptyQuirkApiDoesNotValidateUserExistence"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create reminder returns 403" id="68cb95ff-a426-4ea4-9312-a6181655c838" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.263">
+    <testcase name="Response time is below 5000ms" time="0.263" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateReminderReturns403"/>
+    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.263" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateReminderReturns403"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create event returns 403" id="0bd8b3e2-c244-45b1-b87e-c8bd5e14b35a" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.272">
+    <testcase name="Response time is below 5000ms" time="0.272" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateEventReturns403"/>
+    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.272" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateEventReturns403"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create designation returns 403" id="cfa287d0-d63c-4afd-9a35-99659b635c91" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.785">
+    <testcase name="Response time is below 5000ms" time="0.785" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateDesignationReturns403"/>
+    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.785" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateDesignationReturns403"/>
+  </testsuite>
+  <testsuite name="Behavior &amp; Edge Cases / Restricted user cannot create notice returns 403" id="e0bc4c21-ddfc-4ce3-aa13-5dc004fadefc" timestamp="2026-10-10T11:47:15.449Z" tests="3" failures="0" errors="0" time="0.776">
+    <testcase name="Response time is below 5000ms" time="0.776" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateNoticeReturns403"/>
+    <testcase name="Status is 403 — restricted role cannot perform this action" time="0.776" classname="BehaviorAmpEdgeCasesRestrictedUserCannotCreateNoticeReturns403"/>
   </testsuite>
 </testsuites>
