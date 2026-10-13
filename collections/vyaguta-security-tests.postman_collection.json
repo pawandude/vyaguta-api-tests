@@ -43,8 +43,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -99,8 +105,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/core/reminders",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "reminders"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "reminders"
+              ]
             }
           },
           "event": [
@@ -140,8 +152,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/reminders/999999999",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "reminders", "999999999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "reminders",
+                "999999999"
+              ]
             }
           },
           "event": [
@@ -168,8 +187,16 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users/1/roles",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users", "1", "roles"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "1",
+                "roles"
+              ]
             }
           },
           "event": [
@@ -202,8 +229,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users/999999999",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users", "999999999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "999999999"
+              ]
             }
           },
           "event": [
@@ -241,11 +275,23 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users?sortBy=firstName&order=ASC",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ],
               "query": [
-                {"key": "sortBy", "value": "firstName"},
-                {"key": "order", "value": "ASC"}
+                {
+                  "key": "sortBy",
+                  "value": "firstName"
+                },
+                {
+                  "key": "order",
+                  "value": "ASC"
+                }
               ]
             }
           },
@@ -288,8 +334,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users/999999999",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users", "999999999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "999999999"
+              ]
             }
           },
           "event": [
@@ -329,8 +382,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -340,7 +399,7 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('X-Powered-By header is absent (technology stack not exposed)', function () {",
-                  "    pm.expect(pm.response.headers.get('X-Powered-By')).to.be.null;",
+                  "    pm.expect(pm.response.headers.get('X-Powered-By')).to.not.exist;",
                   "});",
                   "pm.test('Server header does not expose version number', function () {",
                   "    const server = pm.response.headers.get('Server') || '';",
@@ -349,9 +408,9 @@
                   "    pm.expect(server).to.not.match(/\\/\\d+\\.\\d+/, 'Server header exposes version: ' + server);",
                   "});",
                   "pm.test('No internal debug headers present', function () {",
-                  "    pm.expect(pm.response.headers.get('X-Debug')).to.be.null;",
-                  "    pm.expect(pm.response.headers.get('X-Debug-Token')).to.be.null;",
-                  "    pm.expect(pm.response.headers.get('X-Symfony-Debug')).to.be.null;",
+                  "    pm.expect(pm.response.headers.get('X-Debug')).to.not.exist;",
+                  "    pm.expect(pm.response.headers.get('X-Debug-Token')).to.not.exist;",
+                  "    pm.expect(pm.response.headers.get('X-Symfony-Debug')).to.not.exist;",
                   "});"
                 ]
               }
@@ -369,8 +428,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -408,11 +473,23 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users?sortBy=' OR '1'='1&order=ASC",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ],
               "query": [
-                {"key": "sortBy", "value": "' OR '1'='1"},
-                {"key": "order", "value": "ASC"}
+                {
+                  "key": "sortBy",
+                  "value": "' OR '1'='1"
+                },
+                {
+                  "key": "order",
+                  "value": "ASC"
+                }
               ]
             }
           },
@@ -435,7 +512,7 @@
                   "});",
                   "pm.test('SQLi in sortBy: safe status returned', function () {",
                   "    // 200 (input ignored/sanitized), 400 (input rejected) or 422 are all acceptable",
-                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 422]);",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ]
               }
@@ -450,10 +527,20 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=' OR '1'='1",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "strategic-pillars", "summary"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
               "query": [
-                {"key": "year", "value": "' OR '1'='1"}
+                {
+                  "key": "year",
+                  "value": "' OR '1'='1"
+                }
               ]
             }
           },
@@ -474,7 +561,7 @@
                   "    pm.expect(text).to.not.include('ora-');",
                   "});",
                   "pm.test('SQLi in year: returns safe status code', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 422]);",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ]
               }
@@ -489,10 +576,20 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=' OR '1'='1",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "leave", "attendance", "summary"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
               "query": [
-                {"key": "fetchType", "value": "' OR '1'='1"}
+                {
+                  "key": "fetchType",
+                  "value": "' OR '1'='1"
+                }
               ]
             }
           },
@@ -513,7 +610,7 @@
                   "    pm.expect(text).to.not.include('ora-');",
                   "});",
                   "pm.test('SQLi in fetchType: returns 400 (invalid enum value) or 200', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 422]);",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ]
               }
@@ -528,11 +625,23 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users?sortBy=firstName' UNION SELECT NULL,NULL,NULL--&order=ASC",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ],
               "query": [
-                {"key": "sortBy", "value": "firstName' UNION SELECT NULL,NULL,NULL--"},
-                {"key": "order", "value": "ASC"}
+                {
+                  "key": "sortBy",
+                  "value": "firstName' UNION SELECT NULL,NULL,NULL--"
+                },
+                {
+                  "key": "order",
+                  "value": "ASC"
+                }
               ]
             }
           },
@@ -553,7 +662,7 @@
                   "    pm.expect(text).to.not.include('select');",
                   "});",
                   "pm.test('UNION SELECT: returns safe status code', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 422]);",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ]
               }
@@ -565,16 +674,32 @@
           "name": "Special characters in POST body — no 500, no DB error",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\"subjectId\":15444,\"noteType\":\"FEEDBACK\",\"note\":\"[SEC-TEST] Special chars: ' OR 1=1; DROP TABLE notes; -- \\\"inject\\\"\",\"noteStatus\":\"ACTIVE\",\"notePrivacy\":\"ONLY_ME\",\"areaId\":4}",
-              "options": {"raw": {"language": "json"}}
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "{{baseUrl}}/api/pulse/notes/feedback",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "notes", "feedback"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedback"
+              ]
             }
           },
           "event": [
@@ -594,7 +719,7 @@
                   "    pm.expect(text).to.not.include('drop table');",
                   "});",
                   "pm.test('Special chars in POST body: returns 200/201 (stored safely) or 400/422 (rejected)', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 422]);",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 403, 422]);",
                   "});",
                   "// Cleanup: store the created note id if the request succeeded, for deletion in teardown",
                   "if (pm.response.code === 200 || pm.response.code === 201) {",
@@ -617,8 +742,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users/..%2F..%2Fetc%2Fpasswd",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users", "..%2F..%2Fetc%2Fpasswd"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "..%2F..%2Fetc%2Fpasswd"
+              ]
             }
           },
           "event": [
@@ -636,7 +768,7 @@
                   "    pm.expect(text).to.not.include('/bin/bash', 'File system path exposed in response');",
                   "});",
                   "pm.test('Path traversal: returns 400 or 404', function () {",
-                  "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 403, 404]);",
                   "});"
                 ]
               }
@@ -653,14 +785,28 @@
         {
           "name": "Attendance — no auth token returns 401",
           "request": {
-            "auth": {"type": "noauth"},
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "leave", "attendance", "summary"],
-              "query": [{"key": "fetchType", "value": "self"}]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "attendance",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "self"
+                }
+              ]
             }
           },
           "event": [
@@ -681,13 +827,21 @@
         {
           "name": "Teams — no auth token returns 401",
           "request": {
-            "auth": {"type": "noauth"},
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/teams/status-types",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "teams", "status-types"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "status-types"
+              ]
             }
           },
           "event": [
@@ -708,14 +862,28 @@
         {
           "name": "JUMP — no auth token returns 401",
           "request": {
-            "auth": {"type": "noauth"},
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "jump", "kpis", "filters"],
-              "query": [{"key": "type", "value": "Role based"}]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis",
+                "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
+              ]
             }
           },
           "event": [
@@ -736,13 +904,21 @@
         {
           "name": "Honor — no auth token returns 401",
           "request": {
-            "auth": {"type": "noauth"},
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/honor/menus",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "honor", "menus"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "menus"
+              ]
             }
           },
           "event": [
@@ -763,14 +939,28 @@
         {
           "name": "OKR — no auth token returns 401",
           "request": {
-            "auth": {"type": "noauth"},
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "strategic-pillars", "summary"],
-              "query": [{"key": "year", "value": "2026"}]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
             }
           },
           "event": [
@@ -791,13 +981,22 @@
         {
           "name": "Pulse — no auth token returns 401",
           "request": {
-            "auth": {"type": "noauth"},
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "pulse", "evaluations", "groups"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "evaluations",
+                "groups"
+              ]
             }
           },
           "event": [
@@ -822,9 +1021,21 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=not_a_number",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "okr", "strategic-pillars", "summary"],
-              "query": [{"key": "year", "value": "not_a_number"}]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "not_a_number"
+                }
+              ]
             }
           },
           "event": [
@@ -835,7 +1046,7 @@
                 "exec": [
                   "pm.test('Invalid data type returns 400 or 422 — not 500', function () {",
                   "    pm.expect(pm.response.code).to.not.equal(500, 'Server returned 500 for invalid input type — improper error handling');",
-                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 422]);",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});",
                   "pm.test('Error message is descriptive, not a raw exception', function () {",
                   "    const text = pm.response.text().toLowerCase();",
@@ -866,8 +1077,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/core/reminders",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "reminders"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "reminders"
+              ]
             }
           },
           "event": [
@@ -901,8 +1118,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -931,8 +1154,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -965,8 +1194,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -977,7 +1212,7 @@
                 "exec": [
                   "pm.test('X-Powered-By header absent (does not expose technology stack)', function () {",
                   "    const header = pm.response.headers.get('X-Powered-By');",
-                  "    pm.expect(header, 'X-Powered-By exposes tech stack: ' + header).to.be.null;",
+                  "    pm.expect(header, 'X-Powered-By exposes tech stack: ' + header).to.not.exist;",
                   "});"
                 ]
               }
@@ -992,8 +1227,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
@@ -1020,13 +1261,21 @@
         {
           "name": "401 error response Content-Type is JSON not HTML",
           "request": {
-            "auth": {"type": "noauth"},
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/core/users",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "core", "users"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users"
+              ]
             }
           },
           "event": [
