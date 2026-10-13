@@ -78,6 +78,12 @@ jobs:
           const duration   = Math.round((apiDur + secDur) / 1000);
           const allFailures = [...(rApi.run.failures || []), ...(rSec.run.failures || [])];
 
+          // Build execution lookup (id → execution) from both collections
+          const execMap = {};
+          for (const ex of [...(rApi.run.executions || []), ...(rSec.run.executions || [])]) {
+            if (ex.item && ex.item.id) execMap[ex.item.id] = ex;
+          }
+
           const status  = failed === 0 ? 'PASSED' : 'FAILED';
           const emoji   = failed === 0 ? '✅' : '❌';
           const dash    = '—';
@@ -121,24 +127,131 @@ jobs:
               '</tr>';
           }).join('');
 
+          // Helpers
+          function escHtml(s) {
+            return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');
+          }
+          function methodColor(m) {
+            return {GET:'#0ea5e9',POST:'#16a34a',PUT:'#d97706',PATCH:'#7c3aed',DELETE:'#dc2626'}[m] || '#6b7280';
+          }
+          function prettyJson(str) {
+            try { return JSON.stringify(JSON.parse(str), null, 2); } catch(e) { return str; }
+          }
+          function truncate(str, n) {
+            return str.length > n ? str.slice(0, n) + '\n… (truncated)' : str;
+          }
+
           // Build failed-tests detail block (only when there are failures)
           let failureBlock = '';
           if (failed > 0 && allFailures.length > 0) {
+            const seen = new Set();
             const failureItems = allFailures.map(function(f) {
               const folder   = (f.parent && f.parent.name) ? f.parent.name : '';
               const reqName  = (f.source && f.source.name) ? f.source.name : 'Unknown request';
               const errMsg   = (f.error && f.error.message) ? f.error.message : 'Assertion failed';
               const testName = (f.error && f.error.test) ? f.error.test : '';
               const location = folder ? folder + ' &rsaquo; ' + reqName : reqName;
-              return '<div style=\"margin-bottom:12px;padding:12px 14px;background:#fff;border-left:3px solid #dc2626;border-radius:0 4px 4px 0\">' +
-                '<div style=\"font-size:12px;font-weight:700;color:#374151;margin-bottom:4px\">' + location + '</div>' +
-                (testName ? '<div style=\"font-size:11px;color:#6b7280;margin-bottom:4px\">Test: ' + testName + '</div>' : '') +
-                '<div style=\"font-size:12px;color:#dc2626;font-family:monospace\">' + errMsg + '</div>' +
+
+              // Look up execution for this request
+              const srcId = f.source && f.source.id;
+              const ex    = srcId ? execMap[srcId] : null;
+              const req   = ex && ex.item && ex.item.request;
+              const res   = ex && ex.response;
+
+              // Endpoint
+              const method  = req && req.method ? req.method.toUpperCase() : '';
+              const rawUrl  = req && req.url ? (typeof req.url === 'string' ? req.url : (req.url.raw || '')) : '';
+
+              // Request headers (filter auth)
+              const reqHdrs = (req && Array.isArray(req.header) ? req.header : [])
+                .filter(function(h) { return h && h.key && !/^authorization$/i.test(h.key); })
+                .map(function(h) { return escHtml(h.key) + ': ' + escHtml(h.value || ''); })
+                .join('\n');
+
+              // Request body
+              const reqBodyRaw = req && req.body && req.body.raw ? req.body.raw : '';
+              const reqBody    = reqBodyRaw ? truncate(prettyJson(reqBodyRaw), 600) : '';
+
+              // Response
+              const statusCode = res && res.code != null ? res.code : '';
+              const statusText = res && res.status ? res.status : '';
+              const resHdrs    = (res && Array.isArray(res.header) ? res.header
+                : (res && res.headers && Array.isArray(res.headers.members) ? res.headers.members : []))
+                .filter(function(h) { return h && h.key; })
+                .map(function(h) { return escHtml(h.key) + ': ' + escHtml(h.value || ''); })
+                .join('\n');
+              let resBody = '';
+              if (res && res.stream) {
+                try {
+                  const bytes = res.stream.data ? Buffer.from(res.stream.data) : Buffer.from(res.stream);
+                  resBody = truncate(prettyJson(bytes.toString('utf8')), 800);
+                } catch(e) {}
+              }
+
+              // Dedup: show endpoint block only once per unique request
+              const dedupKey = srcId || location;
+              const isFirstForRequest = !seen.has(dedupKey);
+              seen.add(dedupKey);
+
+              const endpointBlock = isFirstForRequest && method ? (
+                '<div style=\"margin-bottom:8px;display:flex;align-items:center;gap:8px\">' +
+                '<span style=\"background:' + methodColor(method) + ';color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;font-family:monospace\">' + escHtml(method) + '</span>' +
+                '<span style=\"font-size:11px;color:#374151;font-family:monospace;word-break:break-all\">' + escHtml(rawUrl) + '</span>' +
+                '</div>'
+              ) : '';
+
+              const reqHdrBlock = isFirstForRequest && reqHdrs ? (
+                '<div style=\"margin-bottom:6px\">' +
+                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">REQUEST HEADERS</div>' +
+                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + reqHdrs + '</pre>' +
+                '</div>'
+              ) : '';
+
+              const reqBodyBlock = isFirstForRequest && reqBody ? (
+                '<div style=\"margin-bottom:6px\">' +
+                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">REQUEST BODY</div>' +
+                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + escHtml(reqBody) + '</pre>' +
+                '</div>'
+              ) : '';
+
+              const resStatusBlock = isFirstForRequest && statusCode ? (
+                '<div style=\"margin-bottom:6px\">' +
+                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">RESPONSE STATUS</div>' +
+                '<span style=\"font-size:11px;font-family:monospace;color:' + (statusCode >= 400 ? '#dc2626' : '#16a34a') + ';font-weight:700\">' + escHtml(String(statusCode)) + ' ' + escHtml(statusText) + '</span>' +
+                '</div>'
+              ) : '';
+
+              const resHdrBlock = isFirstForRequest && resHdrs ? (
+                '<div style=\"margin-bottom:6px\">' +
+                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">RESPONSE HEADERS</div>' +
+                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + resHdrs + '</pre>' +
+                '</div>'
+              ) : '';
+
+              const resBodyBlock = isFirstForRequest && resBody ? (
+                '<div style=\"margin-bottom:6px\">' +
+                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">RESPONSE BODY</div>' +
+                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + escHtml(resBody) + '</pre>' +
+                '</div>'
+              ) : '';
+
+              return '<div style=\"margin-bottom:16px;padding:14px 16px;background:#fff;border-left:3px solid #dc2626;border-radius:0 4px 4px 0;border:1px solid #fecaca;border-left-width:3px\">' +
+                '<div style=\"font-size:12px;font-weight:700;color:#374151;margin-bottom:6px\">' + escHtml(location) + '</div>' +
+                endpointBlock +
+                reqHdrBlock +
+                reqBodyBlock +
+                resStatusBlock +
+                resHdrBlock +
+                resBodyBlock +
+                '<div style=\"margin-top:8px;padding-top:8px;border-top:1px solid #fee2e2\">' +
+                (testName ? '<div style=\"font-size:10px;color:#6b7280;margin-bottom:3px\">Test: ' + escHtml(testName) + '</div>' : '') +
+                '<div style=\"font-size:11px;color:#dc2626;font-family:monospace;font-weight:600\">' + escHtml(errMsg) + '</div>' +
+                '</div>' +
                 '</div>';
             }).join('');
             failureBlock =
               '<div style=\"padding:20px 24px;background:#fef2f2;border-top:1px solid #fecaca\">' +
-              '<div style=\"font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b91c1c;margin-bottom:12px\">Failed Tests (' + allFailures.length + ')</div>' +
+              '<div style=\"font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b91c1c;margin-bottom:14px\">Failed Tests (' + allFailures.length + ')</div>' +
               failureItems +
               '</div>';
           }
