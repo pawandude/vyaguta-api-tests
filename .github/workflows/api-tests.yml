@@ -6,7 +6,8 @@ on:
   workflow_dispatch: {} # allows manual "Run workflow" from the Actions tab
 
 permissions:
-  contents: write # needed to push to gh-pages branch
+  contents: write # required by peaceiris/actions-gh-pages to push the gh-pages branch
+  # TODO (security): split into two jobs — test job (contents:read) + deploy job (contents:write)
 
 jobs:
   newman:
@@ -82,29 +83,67 @@ jobs:
           // Generate a self-contained HTML email body
           const color   = failed === 0 ? '#16a34a' : '#dc2626';
           const bgColor = failed === 0 ? '#f0fdf4' : '#fef2f2';
+          const statRowColor = failed === 0 ? '#15803d' : '#b91c1c';
           const reportUrl = process.env.PAGES_URL || '';
           const runUrl    = process.env.RUN_URL || '';
-          const rows = [
+
+          const statsData = [
             ['Requests',   requests],
             ['Assertions', assertions],
             ['Passed',     passed],
             ['Failed',     failed],
             ['Duration',   duration + 's'],
-          ].map(([k,v]) => '<tr><td style=\"padding:8px 16px;color:#6b7280;font-size:14px\">' + k + '</td><td style=\"padding:8px 16px;font-weight:600;font-size:14px\">' + v + '</td></tr>').join('');
+          ];
+          const rows = statsData.map(([k, v]) => {
+            const isFailed = k === 'Failed' && v > 0;
+            const valColor = isFailed ? '#dc2626' : '#111827';
+            return '<tr>' +
+              '<td style=\"padding:10px 20px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6\">' + k + '</td>' +
+              '<td style=\"padding:10px 20px;font-weight:700;font-size:14px;color:' + valColor + ';border-bottom:1px solid #f3f4f6\">' + v + '</td>' +
+              '</tr>';
+          }).join('');
+
+          // Build failed-tests detail block (only when there are failures)
+          let failureBlock = '';
+          if (failed > 0 && r.run.failures && r.run.failures.length > 0) {
+            const failureItems = r.run.failures.map(function(f) {
+              const folder   = (f.parent && f.parent.name) ? f.parent.name : '';
+              const reqName  = (f.source && f.source.name) ? f.source.name : 'Unknown request';
+              const errMsg   = (f.error && f.error.message) ? f.error.message : 'Assertion failed';
+              const testName = (f.error && f.error.test) ? f.error.test : '';
+              const location = folder ? folder + ' &rsaquo; ' + reqName : reqName;
+              return '<div style=\"margin-bottom:12px;padding:12px 14px;background:#fff;border-left:3px solid #dc2626;border-radius:0 4px 4px 0\">' +
+                '<div style=\"font-size:12px;font-weight:700;color:#374151;margin-bottom:4px\">' + location + '</div>' +
+                (testName ? '<div style=\"font-size:11px;color:#6b7280;margin-bottom:4px\">Test: ' + testName + '</div>' : '') +
+                '<div style=\"font-size:12px;color:#dc2626;font-family:monospace\">' + errMsg + '</div>' +
+                '</div>';
+            }).join('');
+            failureBlock =
+              '<div style=\"padding:20px 24px;background:#fef2f2;border-top:1px solid #fecaca\">' +
+              '<div style=\"font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b91c1c;margin-bottom:12px\">Failed Tests (' + r.run.failures.length + ')</div>' +
+              failureItems +
+              '</div>';
+          }
 
           const html = '<!DOCTYPE html><html><body style=\"margin:0;font-family:Arial,sans-serif;background:#f3f4f6\">' +
-            '<div style=\"max-width:560px;margin:32px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)\">' +
-            '<div style=\"background:' + color + ';padding:24px 32px\">' +
-            '<div style=\"font-size:28px;font-weight:700;color:#fff\">' + emoji + ' API Tests ' + status + '</div>' +
-            '<div style=\"color:rgba(255,255,255,.85);font-size:14px;margin-top:4px\">Vyaguta DEV &nbsp;·&nbsp; Run #' + r.run.stats.requests.total + '</div>' +
+            '<div style=\"max-width:580px;margin:32px auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)\">' +
+            // Header
+            '<div style=\"background:' + color + ';padding:26px 32px\">' +
+            '<div style=\"font-size:26px;font-weight:700;color:#fff\">' + emoji + ' API Tests ' + status + '</div>' +
+            '<div style=\"color:rgba(255,255,255,.8);font-size:13px;margin-top:6px\">Vyaguta DEV &nbsp;·&nbsp; ' + requests + ' requests &nbsp;·&nbsp; ' + duration + 's</div>' +
             '</div>' +
+            // Stats table
             '<div style=\"background:' + bgColor + ';padding:0\">' +
             '<table style=\"width:100%;border-collapse:collapse\">' + rows + '</table>' +
             '</div>' +
+            // Failure detail (only for failed runs)
+            failureBlock +
+            // Footer buttons
             '<div style=\"padding:24px 32px\">' +
-            '<a href=\"' + reportUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:14px;font-weight:600\">View Full Report</a>' +
-            '<p style=\"color:#9ca3af;font-size:12px;margin-top:16px\">GitHub Actions run: <a href=\"' + runUrl + '\" style=\"color:#6b7280\">' + runUrl + '</a></p>' +
-            '</div></div></body></html>';
+            '<a href=\"' + reportUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View Full Report</a>' +
+            '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600\">GitHub Actions Run</a>' +
+            '</div>' +
+            '</div></body></html>';
 
           fs.writeFileSync('reports/email.html', html);
           "

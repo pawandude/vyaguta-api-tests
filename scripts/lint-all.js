@@ -9,6 +9,7 @@ const ROOT = path.join(__dirname, '..');
 
 const files = [
   path.join(ROOT, 'collections', 'vyaguta-api.postman_collection.json'),
+  path.join(ROOT, 'collections', 'vyaguta-security-tests.postman_collection.json'),
   ...fs.readdirSync(path.join(ROOT, 'collections', 'modules'))
       .map(f => path.join(ROOT, 'collections', 'modules', f)),
   ...fs.readdirSync(path.join(ROOT, 'environments'))
