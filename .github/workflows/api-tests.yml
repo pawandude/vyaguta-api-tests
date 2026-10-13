@@ -27,8 +27,8 @@ jobs:
       - name: Lint collection and environment JSON
         run: npm run lint
 
-      - name: Run Newman tests
-        id: newman
+      - name: Run Newman tests (API collection)
+        id: newman-api
         continue-on-error: true
         run: |
           npx newman run collections/vyaguta-api.postman_collection.json \
@@ -39,7 +39,23 @@ jobs:
             --reporter-junit-export reports/junit-report.xml \
             --reporter-htmlextra-export reports/report.html \
             --reporter-htmlextra-title "Vyaguta API Test Report" \
-            --reporter-json-export reports/results.json
+            --reporter-json-export reports/results-api.json
+        env:
+          VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
+          VYAGUTA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_RESTRICTED_TOKEN }}
+
+      - name: Run Newman tests (Security collection)
+        id: newman-security
+        continue-on-error: true
+        run: |
+          npx newman run collections/vyaguta-security-tests.postman_collection.json \
+            -e environments/vyaguta.postman_environment.json \
+            --env-var "authToken=$VYAGUTA_TOKEN" \
+            --env-var "restrictedToken=$VYAGUTA_RESTRICTED_TOKEN" \
+            --reporters cli,htmlextra,json \
+            --reporter-htmlextra-export reports/report-security.html \
+            --reporter-htmlextra-title "Vyaguta Security Test Report" \
+            --reporter-json-export reports/results-security.json
         env:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
           VYAGUTA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_RESTRICTED_TOKEN }}
@@ -50,15 +66,17 @@ jobs:
         run: |
           node -e "
           const fs = require('fs');
-          const r = require('./reports/results.json');
-          const stats = r.run.stats;
-          const timings = r.run.timings;
+          const rApi = require('./reports/results-api.json');
+          const rSec = require('./reports/results-security.json');
 
-          const requests   = stats.requests.total;
-          const assertions = stats.assertions.total;
-          const failed     = stats.assertions.failed;
+          const requests   = rApi.run.stats.requests.total  + rSec.run.stats.requests.total;
+          const assertions = rApi.run.stats.assertions.total + rSec.run.stats.assertions.total;
+          const failed     = rApi.run.stats.assertions.failed + rSec.run.stats.assertions.failed;
           const passed     = assertions - failed;
-          const duration   = Math.round((timings.completed - timings.started) / 1000);
+          const apiDur     = rApi.run.timings.completed - rApi.run.timings.started;
+          const secDur     = rSec.run.timings.completed - rSec.run.timings.started;
+          const duration   = Math.round((apiDur + secDur) / 1000);
+          const allFailures = [...(rApi.run.failures || []), ...(rSec.run.failures || [])];
 
           const status  = failed === 0 ? 'PASSED' : 'FAILED';
           const emoji   = failed === 0 ? '✅' : '❌';
@@ -83,9 +101,9 @@ jobs:
           // Generate a self-contained HTML email body
           const color   = failed === 0 ? '#16a34a' : '#dc2626';
           const bgColor = failed === 0 ? '#f0fdf4' : '#fef2f2';
-          const statRowColor = failed === 0 ? '#15803d' : '#b91c1c';
-          const reportUrl = process.env.PAGES_URL || '';
-          const runUrl    = process.env.RUN_URL || '';
+          const reportUrl    = process.env.PAGES_URL || '';
+          const secReportUrl = process.env.SECURITY_PAGES_URL || '';
+          const runUrl       = process.env.RUN_URL || '';
 
           const statsData = [
             ['Requests',   requests],
@@ -105,8 +123,8 @@ jobs:
 
           // Build failed-tests detail block (only when there are failures)
           let failureBlock = '';
-          if (failed > 0 && r.run.failures && r.run.failures.length > 0) {
-            const failureItems = r.run.failures.map(function(f) {
+          if (failed > 0 && allFailures.length > 0) {
+            const failureItems = allFailures.map(function(f) {
               const folder   = (f.parent && f.parent.name) ? f.parent.name : '';
               const reqName  = (f.source && f.source.name) ? f.source.name : 'Unknown request';
               const errMsg   = (f.error && f.error.message) ? f.error.message : 'Assertion failed';
@@ -120,7 +138,7 @@ jobs:
             }).join('');
             failureBlock =
               '<div style=\"padding:20px 24px;background:#fef2f2;border-top:1px solid #fecaca\">' +
-              '<div style=\"font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b91c1c;margin-bottom:12px\">Failed Tests (' + r.run.failures.length + ')</div>' +
+              '<div style=\"font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b91c1c;margin-bottom:12px\">Failed Tests (' + allFailures.length + ')</div>' +
               failureItems +
               '</div>';
           }
@@ -140,7 +158,8 @@ jobs:
             failureBlock +
             // Footer buttons
             '<div style=\"padding:24px 32px\">' +
-            '<a href=\"' + reportUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View Full Report</a>' +
+            '<a href=\"' + reportUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View API Report</a>' +
+            '<a href=\"' + secReportUrl + '\" style=\"display:inline-block;background:#7c3aed;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View Security Report</a>' +
             '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600\">GitHub Actions Run</a>' +
             '</div>' +
             '</div></body></html>';
@@ -150,6 +169,7 @@ jobs:
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           PAGES_URL: https://pawandude.github.io/vyaguta-api-tests/report.html
+          SECURITY_PAGES_URL: https://pawandude.github.io/vyaguta-api-tests/report-security.html
 
       - name: Upload test report
         if: always()
@@ -182,5 +202,5 @@ jobs:
           html_body: file://reports/email.html
 
       - name: Fail the job if Newman had failures
-        if: steps.newman.outcome == 'failure'
+        if: steps.newman-api.outcome == 'failure' || steps.newman-security.outcome == 'failure'
         run: exit 1
