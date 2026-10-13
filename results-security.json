@@ -2,7 +2,7 @@
   "collection": {
     "item": [
       {
-        "id": "87def123-9d8f-4286-a787-dbfc52df128d",
+        "id": "38281b3d-ec0d-4a6f-8a34-00b0375cedf4",
         "name": "Tier 1-A — Authentication & Authorization",
         "description": {
           "content": "Verify that all protected endpoints enforce authentication and role boundaries hold under direct API manipulation.",
@@ -10,7 +10,7 @@
         },
         "item": [
           {
-            "id": "6709b65d-1945-406f-9cba-de537aa15367",
+            "id": "36538dc9-d16e-4a39-b907-635b517148ee",
             "name": "Expired JWT is rejected — 401",
             "request": {
               "url": {
@@ -42,7 +42,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "183996e8-2da2-4cd9-b3b2-2cc6f87f5144",
+                  "id": "287c5f1e-9091-46be-ade3-2ddd1eb4e58a",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Expired JWT returns 401 Unauthorized', function () {",
@@ -55,13 +55,13 @@
                     "    pm.expect(text).to.not.include('traceback');",
                     "});"
                   ],
-                  "_lastExecutionId": "68013257-587a-4f54-b19d-92587b66cdf9"
+                  "_lastExecutionId": "32b32132-a2d9-48c8-a39e-7dc09a820e64"
                 }
               }
             ]
           },
           {
-            "id": "31132d2e-c768-46ad-a3ad-9f920f6dcfbc",
+            "id": "03338a1e-2a05-4aa6-bbd3-62ca3c9f5e27",
             "name": "Restricted token cannot create resource — 403",
             "request": {
               "url": {
@@ -108,7 +108,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "73dcdbc6-8555-4631-a131-e46a5853d7ff",
+                  "id": "29f73586-d383-4348-9296-a02948cbb35d",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Restricted token cannot write — 403 or 401', function () {",
@@ -120,13 +120,13 @@
                     "    }",
                     "});"
                   ],
-                  "_lastExecutionId": "ec33d3d4-5bbb-46e2-b93f-41f0f3e83ba5"
+                  "_lastExecutionId": "245dcdf4-a783-4118-8d72-d24513c1187d"
                 }
               }
             ]
           },
           {
-            "id": "e6ffcab6-892d-4367-bb37-b8f1623d4d17",
+            "id": "2ad61c6c-24bf-45f5-a6e3-7e1229d5e006",
             "name": "Restricted token cannot delete resource — 403",
             "request": {
               "url": {
@@ -159,7 +159,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "609edd18-87ca-40a4-8a76-1da46f3dbb22",
+                  "id": "27b163f4-bf96-49b1-b66c-1cca836179de",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Restricted token cannot delete — 401 or 403 (not 404 which would mean auth passed)', function () {",
@@ -168,13 +168,13 @@
                     "    pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
                     "});"
                   ],
-                  "_lastExecutionId": "8916e5fb-0a99-4ad2-85ca-6f1c07887c75"
+                  "_lastExecutionId": "fdaaaa83-f023-42a0-a833-42e2d45535b9"
                 }
               }
             ]
           },
           {
-            "id": "5cdc1b52-261a-4720-927f-379109a7b303",
+            "id": "88657bbd-77e0-4761-bbc5-bc6a71e7782e",
             "name": "IDOR — access another user's roles returns no escalation",
             "request": {
               "url": {
@@ -198,7 +198,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "7b2e3a57-b608-4309-a678-83178ea64138",
+                  "id": "3cfaf028-d3e0-4167-b732-2f4754fc9a8e",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('IDOR check: accessing another user roles returns 403/404 or is scoped', function () {",
@@ -213,13 +213,13 @@
                     "    pm.expect(pm.response.code).to.not.equal(500);",
                     "});"
                   ],
-                  "_lastExecutionId": "6e99d2a1-d0cd-49e1-8ca3-8cd80b2ba9ba"
+                  "_lastExecutionId": "256a43af-2cdc-4286-b8cb-5a848b912df4"
                 }
               }
             ]
           },
           {
-            "id": "962277c7-b88e-42fa-8a4b-24a85b5e4fa1",
+            "id": "a4aeed48-897c-45ac-9a23-122b5f6b5372",
             "name": "Non-existent user ID returns 404 not data of another user",
             "request": {
               "url": {
@@ -242,7 +242,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "b3939197-fcf1-4e6f-b14d-d83d60f6e60d",
+                  "id": "73c0b843-4ee5-49d2-bfa7-a35321da796a",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Non-existent ID returns 404 — no data substitution', function () {",
@@ -256,7 +256,7 @@
                     "    }, 'Data should be null/undefined/empty for a non-existent resource');",
                     "});"
                   ],
-                  "_lastExecutionId": "3936d576-a7bd-4fd7-b384-f7f87636fc45"
+                  "_lastExecutionId": "93f1f7eb-6086-4499-bc7d-50eac2b59175"
                 }
               }
             ]
@@ -265,7 +265,7 @@
         "event": []
       },
       {
-        "id": "2d827220-3bc1-4009-afe0-59ca49242746",
+        "id": "5e1a666d-f0fd-40dc-bc02-dfaacf462d31",
         "name": "Tier 1-B — Sensitive Data Exposure",
         "description": {
           "content": "Ensure confidential information is never returned in API responses, headers, or error messages.",
@@ -273,7 +273,7 @@
         },
         "item": [
           {
-            "id": "c26c826a-a757-44fa-bd53-426ba8a8d958",
+            "id": "9d7cec94-0a49-4e08-955b-0c445af9d961",
             "name": "User list response contains no password fields",
             "request": {
               "url": {
@@ -304,7 +304,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "28334ced-e6d4-4af2-b34f-c0a64ccf4790",
+                  "id": "afc79132-ddb1-4dad-a20b-99c4288933d4",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Response contains no password fields', function () {",
@@ -328,13 +328,13 @@
                     "    pm.expect(text).to.not.match(/\"api_key\"\\s*:/i, 'api_key field found in response');",
                     "});"
                   ],
-                  "_lastExecutionId": "611a2c29-b076-40ba-99eb-8e3047b69e5b"
+                  "_lastExecutionId": "41595755-77c3-442c-81ac-8e1f5e66c6f5"
                 }
               }
             ]
           },
           {
-            "id": "ba4ed9ae-0f93-4065-af48-ff84553481ba",
+            "id": "72ee4fb9-a303-4604-87f4-899ab8f4ccc4",
             "name": "404 error response exposes no stack trace",
             "request": {
               "url": {
@@ -357,7 +357,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "508743ae-3699-4ec0-b359-6ed5867571a1",
+                  "id": "f1f37edf-2b03-47e4-9bc0-b51a62167aa5",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Error response does not expose stack trace', function () {",
@@ -379,13 +379,13 @@
                     "    pm.expect(text).to.not.include('from public.', 'DB schema exposed in error');",
                     "});"
                   ],
-                  "_lastExecutionId": "a36ba9ee-3956-48c5-9c0e-dae1a7dd28cc"
+                  "_lastExecutionId": "3c221ba9-b802-4bac-a049-3cb56fff8b06"
                 }
               }
             ]
           },
           {
-            "id": "a1497fcc-fb49-47a6-a0c7-573a0ff531bd",
+            "id": "a491c9da-a4dc-4643-a02a-92cdb0eec01d",
             "name": "Response headers do not expose server technology",
             "request": {
               "url": {
@@ -407,7 +407,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "a1133336-c202-44de-84e4-8387020f4fa0",
+                  "id": "012b4aa1-6202-45ca-8b5a-91f3bb432bef",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('X-Powered-By header is absent (technology stack not exposed)', function () {",
@@ -425,13 +425,13 @@
                     "    pm.expect(pm.response.headers.get('X-Symfony-Debug')).to.not.exist;",
                     "});"
                   ],
-                  "_lastExecutionId": "cd239d20-6434-4d08-983d-25b27c4ec372"
+                  "_lastExecutionId": "60d1c531-6b25-4c9d-b2f6-c4c5f7dd472b"
                 }
               }
             ]
           },
           {
-            "id": "3f896a6f-7613-4ec9-872d-9250e9ea7106",
+            "id": "ee9118c0-db67-453b-8ff6-8e398033ee85",
             "name": "401 error body does not expose sensitive info",
             "request": {
               "url": {
@@ -457,7 +457,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "5aabdbf4-523d-4b3b-8a8b-e034ffa5b245",
+                  "id": "65c3e213-7b51-4d4c-8e0c-8e1e9728eec9",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Unauthenticated request returns 401', function () {",
@@ -471,7 +471,7 @@
                     "    // Should be a simple error message only",
                     "});"
                   ],
-                  "_lastExecutionId": "4784d74f-0c5b-45bf-b393-5cde02e1cca6"
+                  "_lastExecutionId": "12de7d4f-efa5-4be7-8157-97df433e09d4"
                 }
               }
             ]
@@ -480,7 +480,7 @@
         "event": []
       },
       {
-        "id": "d509d76c-cd4f-4db1-a229-0b1e54655d77",
+        "id": "bb29ab10-286e-4ab5-b0c4-8d51545a72bb",
         "name": "Tier 1-C + Tier 2-F — Injection Attacks",
         "description": {
           "content": "Send SQL injection payloads to query parameters and special characters to POST body fields. Verify the API handles them safely — no DB errors in responses, no 500s. XSS is a browser/UI concern and is not tested here.",
@@ -488,7 +488,7 @@
         },
         "item": [
           {
-            "id": "80630a81-f4c3-4ecd-8569-0d5fcb503642",
+            "id": "7997f731-2ee7-4c45-8bc5-dcce077df265",
             "name": "SQLi in sortBy param — no DB error, not 500",
             "request": {
               "url": {
@@ -519,7 +519,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "2b507316-8e40-4435-a051-7e572f2993ef",
+                  "id": "07c0c4be-aec3-4a9f-9bec-803d268ce5d9",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('SQLi in sortBy: not a 500 server error', function () {",
@@ -538,13 +538,13 @@
                     "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                     "});"
                   ],
-                  "_lastExecutionId": "7e7b9c95-5620-43ee-98ab-5b61cf82c9c8"
+                  "_lastExecutionId": "32272e93-0296-4f9e-a733-31f6de283a4c"
                 }
               }
             ]
           },
           {
-            "id": "f37ac2ec-3659-49d0-9840-3634081e5373",
+            "id": "d7028e8b-ff1c-46df-9001-b40aa8fc46e6",
             "name": "SQLi in year param — no DB error, not 500",
             "request": {
               "url": {
@@ -572,7 +572,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "9d5c792a-9429-40c4-946f-3e7184c71224",
+                  "id": "3673f465-4d1b-44e4-b34a-252d951966b2",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('SQLi in year: not a 500 server error', function () {",
@@ -589,13 +589,13 @@
                     "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                     "});"
                   ],
-                  "_lastExecutionId": "35da8dab-f3e8-4ddd-88f4-40dd19b6b703"
+                  "_lastExecutionId": "4059ea27-537a-43e4-9e1f-8195b4acbeff"
                 }
               }
             ]
           },
           {
-            "id": "c9e8b101-6664-4963-9104-9f8747a49d9d",
+            "id": "95b8a5c6-7f46-456b-adec-50486a4b103b",
             "name": "SQLi in fetchType param — no DB error, not 500",
             "request": {
               "url": {
@@ -623,7 +623,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ecb61ae5-76bb-4b18-acff-e1b52817a320",
+                  "id": "735f0412-8f29-4d95-a639-e51be7bf81b0",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('SQLi in fetchType: not a 500 server error', function () {",
@@ -640,13 +640,13 @@
                     "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                     "});"
                   ],
-                  "_lastExecutionId": "b895c8fe-02bc-4f7f-a432-cae170995213"
+                  "_lastExecutionId": "4a5ff10b-16a6-4757-b6d0-aa2ef17aaf62"
                 }
               }
             ]
           },
           {
-            "id": "84c4bd79-5c45-49d5-a465-3821d1463161",
+            "id": "7e682f35-824e-445f-88b5-4bf8db84fc72",
             "name": "SQLi UNION SELECT attack in param — no DB error, not 500",
             "request": {
               "url": {
@@ -677,7 +677,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "05451d2f-58c0-47cb-ac5b-d4f27a683cf3",
+                  "id": "3eed07df-c972-41dd-867e-ed0460c258a7",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('UNION SELECT attack: not a 500 server error', function () {",
@@ -694,13 +694,13 @@
                     "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                     "});"
                   ],
-                  "_lastExecutionId": "c41f6b04-b0a1-497f-a7fd-12dd730d1e46"
+                  "_lastExecutionId": "48ab0bd5-b095-47f7-a59d-a1f1d8fa9367"
                 }
               }
             ]
           },
           {
-            "id": "9c38bc15-8437-47e0-aa40-da0f1f49915c",
+            "id": "ae0c80a6-9e28-47fc-8694-bbc310755f39",
             "name": "Special characters in POST body — no 500, no DB error",
             "request": {
               "url": {
@@ -738,7 +738,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "6bac62a4-088e-44bc-a2a9-e8937173385a",
+                  "id": "57bea364-c619-4db4-a760-79be9b2e1a19",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Special chars in POST body: not a 500 server error', function () {",
@@ -763,13 +763,13 @@
                     "    } catch(e) {}",
                     "}"
                   ],
-                  "_lastExecutionId": "6496101f-47ca-4c86-b3d7-a8927bd2f632"
+                  "_lastExecutionId": "8f03a659-e7bc-4d50-b975-d12a6bcf7f1e"
                 }
               }
             ]
           },
           {
-            "id": "da362fe0-8560-49ec-9f7f-d85ae432dd57",
+            "id": "99ae33c3-7757-4946-8dc5-a7c860001dd3",
             "name": "Path traversal in ID — no file system exposure",
             "request": {
               "url": {
@@ -792,7 +792,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "52073231-de95-47b5-8f2a-0b9e21d40e81",
+                  "id": "bdb78c64-aa42-4b18-8284-7de8742c2419",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Path traversal: not a 500 server error', function () {",
@@ -807,7 +807,7 @@
                     "    pm.expect(pm.response.code).to.be.oneOf([400, 403, 404]);",
                     "});"
                   ],
-                  "_lastExecutionId": "6441dda2-3ebc-4c72-b452-4b6973335dce"
+                  "_lastExecutionId": "1d2250ca-0a90-444c-8ee7-11393b22c594"
                 }
               }
             ]
@@ -816,7 +816,7 @@
         "event": []
       },
       {
-        "id": "9d04406d-204c-450c-9d80-9eb8a232c1e7",
+        "id": "a62242bb-87e4-45af-a8bb-000c2ce10eab",
         "name": "Tier 2-E — Endpoint Authorization (All Modules)",
         "description": {
           "content": "Verify every module endpoint enforces authentication at the API level — not just through the UI. Tests hit each module directly without a token.",
@@ -824,7 +824,7 @@
         },
         "item": [
           {
-            "id": "7c39f757-3c4b-4b37-977f-dd5d7d433ac4",
+            "id": "1937fd57-99dc-4a1e-96da-ec78e9fbad79",
             "name": "Attendance — no auth token returns 401",
             "request": {
               "url": {
@@ -856,20 +856,20 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "0842f932-f753-4dad-b071-3b692457d9aa",
+                  "id": "21406d26-dd6e-43b9-83f7-04230221795b",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Attendance endpoint requires auth — 401', function () {",
                     "    pm.response.to.have.status(401);",
                     "});"
                   ],
-                  "_lastExecutionId": "4d06e489-a069-4aa5-8266-d0fe950b298f"
+                  "_lastExecutionId": "5a7d01ac-cbdc-4867-aa05-56c1e207a7ad"
                 }
               }
             ]
           },
           {
-            "id": "b46f64a5-7dec-42a5-92e5-a5fb05f1114d",
+            "id": "adafd6b7-7043-4837-b257-0e46dabcac96",
             "name": "Teams — no auth token returns 401",
             "request": {
               "url": {
@@ -895,20 +895,20 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e51ea09c-7842-447c-bcb6-22b7ac7b861a",
+                  "id": "a35c6a40-81db-4c3a-b389-86876a7469ee",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Teams endpoint requires auth — 401', function () {",
                     "    pm.response.to.have.status(401);",
                     "});"
                   ],
-                  "_lastExecutionId": "1e27ae09-f445-4d94-ba6e-04a0807ab7d7"
+                  "_lastExecutionId": "aa8f9405-3faf-4fc7-b3a1-dea524eaa7b6"
                 }
               }
             ]
           },
           {
-            "id": "d5b1fc5b-895c-4d91-b489-3b26ebd7621a",
+            "id": "21be7776-2960-4100-9e40-92d2aae5b8e1",
             "name": "JUMP — no auth token returns 401",
             "request": {
               "url": {
@@ -940,20 +940,20 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "0249a743-12cd-4441-87df-fbb394a2a2ce",
+                  "id": "97d5e881-2730-45a7-ba73-7ccad4622e85",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('JUMP endpoint requires auth — 401', function () {",
                     "    pm.response.to.have.status(401);",
                     "});"
                   ],
-                  "_lastExecutionId": "f471e1d3-ebd3-4f76-90bb-a3bc0a7be26e"
+                  "_lastExecutionId": "7d165d25-46e3-4acc-97a6-c98ee4dddd79"
                 }
               }
             ]
           },
           {
-            "id": "d14f96e3-3bf9-45da-bdeb-128bc0f3ce74",
+            "id": "48ce597d-17f3-41d1-96f4-ae945faa0a4f",
             "name": "Honor — no auth token returns 401",
             "request": {
               "url": {
@@ -979,20 +979,20 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "10cd15f9-888a-44cf-931b-1f7fb703881d",
+                  "id": "99d073a8-0a79-4abd-8c24-0619b0bb4b15",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Honor endpoint requires auth — 401', function () {",
                     "    pm.response.to.have.status(401);",
                     "});"
                   ],
-                  "_lastExecutionId": "61ca12d2-ed4a-4424-aed3-cf93c264cad5"
+                  "_lastExecutionId": "94d458eb-88cf-4d1f-915f-62ef01e5c1d5"
                 }
               }
             ]
           },
           {
-            "id": "01f4a88d-b07e-4475-bdd7-8ce81a20b8bb",
+            "id": "604034e3-23ec-4d03-a3a9-db0baf906807",
             "name": "OKR — no auth token returns 401",
             "request": {
               "url": {
@@ -1024,20 +1024,20 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "d2552742-dc50-4741-a388-0524a22bfe61",
+                  "id": "b6b00703-f2ad-4022-a6aa-69a4b7a7f79f",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('OKR endpoint requires auth — 401', function () {",
                     "    pm.response.to.have.status(401);",
                     "});"
                   ],
-                  "_lastExecutionId": "d342a409-f621-4de7-8779-7040c547c392"
+                  "_lastExecutionId": "e38990db-6a96-4e4c-89ac-a299555b538b"
                 }
               }
             ]
           },
           {
-            "id": "96bd9d5e-fec4-4900-95f4-609843be52f4",
+            "id": "90e8cc13-ecb9-408a-bf0c-8639a2a92733",
             "name": "Pulse — no auth token returns 401",
             "request": {
               "url": {
@@ -1064,20 +1064,20 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "4215f9d0-033a-4787-bd84-3e95442914b7",
+                  "id": "ffcc889e-a69a-401e-b09e-997f1af7ed64",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Pulse endpoint requires auth — 401', function () {",
                     "    pm.response.to.have.status(401);",
                     "});"
                   ],
-                  "_lastExecutionId": "a83e5d46-707f-4ebd-aeb7-bc358ea7fbc2"
+                  "_lastExecutionId": "3c051bce-e678-457f-858d-6effcabccba9"
                 }
               }
             ]
           },
           {
-            "id": "17cee4d8-f36d-49f2-83e0-09a7795d4ccb",
+            "id": "dc327fae-5833-44a9-9d8b-e85b9de0aa2e",
             "name": "Unexpected data type in param — handled gracefully, not 500",
             "request": {
               "url": {
@@ -1105,7 +1105,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "6bdcecd2-d17d-420f-b554-f7556c55bdec",
+                  "id": "180a9086-8fe4-4c35-a998-b9b1df983daa",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Invalid data type returns 400 or 422 — not 500', function () {",
@@ -1120,13 +1120,13 @@
                     "    pm.expect(text).to.not.include('stack');",
                     "});"
                   ],
-                  "_lastExecutionId": "44a2f2d6-3de6-40dc-add4-7bd0ef0cebd8"
+                  "_lastExecutionId": "71ea0170-ce83-45cf-8c9e-3ea88640db5a"
                 }
               }
             ]
           },
           {
-            "id": "b98d1f5d-9352-4d37-a438-5be022973b57",
+            "id": "828f1202-96dc-4449-80f6-ac762c15ac3d",
             "name": "POST with wrong Content-Type — no 500",
             "request": {
               "url": {
@@ -1158,7 +1158,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "abbb57e2-46eb-409f-b75a-86f8fe8b1612",
+                  "id": "a14e21ce-b6e4-48a6-aa5f-aac61322f2d4",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Wrong Content-Type does not cause 500', function () {",
@@ -1168,7 +1168,7 @@
                     "    pm.expect(pm.response.code).to.be.oneOf([400, 415, 422]);",
                     "});"
                   ],
-                  "_lastExecutionId": "fb06ca97-c5c0-4df1-8035-aee73735b605"
+                  "_lastExecutionId": "ab1c6a4b-de1b-4f5a-8ba3-8750712c9b2a"
                 }
               }
             ]
@@ -1177,7 +1177,7 @@
         "event": []
       },
       {
-        "id": "fa7ebcd2-22b1-474f-8ff4-9d616d68b89d",
+        "id": "aa3c7879-8fd6-40e0-baf4-28cd0acf80ce",
         "name": "Tier 3-H — Security Headers",
         "description": {
           "content": "Verify essential HTTP security headers are configured. Failures here are findings to raise as defects against the backend/infrastructure team.",
@@ -1185,7 +1185,7 @@
         },
         "item": [
           {
-            "id": "7af1bc64-b236-458f-80ec-1eadb889b08e",
+            "id": "ae62c834-39f2-4b45-94db-6f994169db20",
             "name": "X-Content-Type-Options: nosniff is present",
             "request": {
               "url": {
@@ -1207,7 +1207,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "9256c486-e667-4789-b877-3933250fc6d0",
+                  "id": "0d7c2798-737a-47f1-993b-5b61c42a3f01",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('X-Content-Type-Options: nosniff header is present', function () {",
@@ -1218,13 +1218,13 @@
                     "    }",
                     "});"
                   ],
-                  "_lastExecutionId": "de460e57-ee75-4e83-a9b5-f5c8d6d94628"
+                  "_lastExecutionId": "dad01ac7-eacd-40c0-8109-75f0ff1aaa30"
                 }
               }
             ]
           },
           {
-            "id": "0e511ea6-3040-4277-9758-65cb3ba5c58d",
+            "id": "8ebe2bd0-5b44-403d-91c3-c1546c93bece",
             "name": "Strict-Transport-Security header is present",
             "request": {
               "url": {
@@ -1246,7 +1246,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "d5e97a70-cb44-4448-9938-6ae1a9228c1f",
+                  "id": "921d86b1-38c2-4395-a924-34e2c6f3cc25",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Strict-Transport-Security (HSTS) header is present', function () {",
@@ -1261,13 +1261,13 @@
                     "    }",
                     "});"
                   ],
-                  "_lastExecutionId": "61d15edf-8cb9-41e8-b418-916a25a1e85e"
+                  "_lastExecutionId": "86038d6f-0b5f-428f-8d27-5bc54f6769e6"
                 }
               }
             ]
           },
           {
-            "id": "3f6e8354-2ddb-4edb-abb3-52b181efd272",
+            "id": "8de23e85-18b9-4265-8ed1-40190db43566",
             "name": "X-Powered-By header is absent",
             "request": {
               "url": {
@@ -1289,7 +1289,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "14ca9289-4657-4998-8de6-480bbc3791c2",
+                  "id": "163cbc0a-88a5-488e-b3e4-0e34076b735e",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('X-Powered-By header absent (does not expose technology stack)', function () {",
@@ -1297,13 +1297,13 @@
                     "    pm.expect(header, 'X-Powered-By exposes tech stack: ' + header).to.not.exist;",
                     "});"
                   ],
-                  "_lastExecutionId": "197ad68e-68f7-4879-b47a-497233267a1d"
+                  "_lastExecutionId": "5afeaf25-ab97-4cd1-80cd-d8150125d1e9"
                 }
               }
             ]
           },
           {
-            "id": "3be5a9ea-fc25-4f73-a228-d0d22b7c52d1",
+            "id": "4cd09ee1-cfcb-429e-976a-f7d732739841",
             "name": "Content-Type is application/json for all API responses",
             "request": {
               "url": {
@@ -1325,7 +1325,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "058e08ef-107f-4a20-a449-425ca654272c",
+                  "id": "bae7feed-bb7e-43ca-b3a1-7b83929914dd",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('Content-Type is application/json', function () {",
@@ -1338,13 +1338,13 @@
                     "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                     "});"
                   ],
-                  "_lastExecutionId": "2526c74d-27f6-4ca4-8571-342007fcefd1"
+                  "_lastExecutionId": "f4d16753-7c1a-44ab-9564-5897c7aa4bd1"
                 }
               }
             ]
           },
           {
-            "id": "92191f43-0bf9-421d-9c25-71d36cea3c73",
+            "id": "c1a8ca2a-78e5-4bda-a6c0-2e5652381538",
             "name": "401 error response Content-Type is JSON not HTML",
             "request": {
               "url": {
@@ -1370,7 +1370,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "385532a7-30ae-45cc-87df-2e05cf4dbc49",
+                  "id": "63d47e08-8822-4bec-b7a9-0318ab79b031",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test('401 error response is JSON not HTML', function () {",
@@ -1379,7 +1379,7 @@
                     "    pm.expect(ct).to.not.include('text/html');",
                     "});"
                   ],
-                  "_lastExecutionId": "50bee163-c062-4651-83c6-6ff8eb5c61de"
+                  "_lastExecutionId": "9fda7725-7894-4563-a80c-9507cd551c31"
                 }
               }
             ]
@@ -1407,7 +1407,7 @@
       }
     ],
     "info": {
-      "_postman_id": "02e79027-68d3-4b85-842d-b6d98d8179c0",
+      "_postman_id": "1bd090f1-2afa-4f3f-9568-3f48cdf1d415",
       "name": "Vyaguta API Security Tests",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
       "description": {
@@ -1420,7 +1420,7 @@
     "_": {
       "postman_variable_scope": "environment"
     },
-    "id": "5f1602b0-4acb-4970-ab9d-80444e74591b",
+    "id": "0ac74f50-db1b-40d7-bf6d-c489a39ab565",
     "name": "Vyaguta (dev)",
     "values": [
       {
@@ -1526,7 +1526,7 @@
     ]
   },
   "globals": {
-    "id": "127551d6-7298-4703-a41a-461d73126732",
+    "id": "e8546c93-b01b-433f-96a5-41c6427869f5",
     "values": []
   },
   "run": {
@@ -1578,10 +1578,10 @@
       }
     },
     "timings": {
-      "responseAverage": 391.25,
-      "responseMin": 191,
-      "responseMax": 764,
-      "responseSd": 198.9785747619218,
+      "responseAverage": 535.6785714285717,
+      "responseMin": 254,
+      "responseMax": 1127,
+      "responseSd": 271.9831997925383,
       "dnsAverage": 0,
       "dnsMin": 0,
       "dnsMax": 0,
@@ -1590,8 +1590,8 @@
       "firstByteMin": 0,
       "firstByteMax": 0,
       "firstByteSd": 0,
-      "started": 1791884618320,
-      "completed": 1791884629722
+      "started": 1791897925096,
+      "completed": 1791897940453
     },
     "executions": [
       {
@@ -1604,11 +1604,11 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "6a81e876-1c5a-43a5-835d-e734d5fa691b",
-          "httpRequestId": "d639adff-1e67-4865-b412-8990a2e7e172"
+          "ref": "c7487bd8-b166-4f70-9f86-da697c2c569c",
+          "httpRequestId": "b0a31a97-3a35-499e-b1f9-88f82ed31b1a"
         },
         "item": {
-          "id": "6709b65d-1945-406f-9cba-de537aa15367",
+          "id": "36538dc9-d16e-4a39-b907-635b517148ee",
           "name": "Expired JWT is rejected — 401",
           "request": {
             "url": {
@@ -1640,7 +1640,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "183996e8-2da2-4cd9-b3b2-2cc6f87f5144",
+                "id": "287c5f1e-9091-46be-ade3-2ddd1eb4e58a",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Expired JWT returns 401 Unauthorized', function () {",
@@ -1653,7 +1653,7 @@
                   "    pm.expect(text).to.not.include('traceback');",
                   "});"
                 ],
-                "_lastExecutionId": "68013257-587a-4f54-b19d-92587b66cdf9"
+                "_lastExecutionId": "32b32132-a2d9-48c8-a39e-7dc09a820e64"
               }
             }
           ]
@@ -1699,7 +1699,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "7e10742a-c67f-4214-96e6-90d75b9eea92",
+              "value": "c6b0b869-a72f-432e-8b37-61811528eab1",
               "system": true
             },
             {
@@ -1731,7 +1731,7 @@
           }
         },
         "response": {
-          "id": "aaf885ec-83d2-4a2f-a87d-c6cddd56f02a",
+          "id": "cbad7935-ebb8-47d1-a658-95c6c13ace6f",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -1753,7 +1753,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:38 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:26 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -1813,11 +1813,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "f5a0b91c-8d4c-4b3c-a1bf-0d3e459bdd96"
+              "value": "16d4cc98-ba09-49d9-93c0-539ff37bd607"
             },
             {
               "key": "ETag",
-              "value": "W/\"73-ukiVzZBn7hJWU+kTHchwbDc/Ezw\""
+              "value": "W/\"73-fI7JV6hB3nqP8KKlMOiuBYYMyak\""
             },
             {
               "key": "X-Backend-Server",
@@ -1829,15 +1829,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "EBOjwkctcbhwMc01tMh5tQ96SrrRU9KmrNQEjzX7PPKs5lsbCU2Z5w=="
+              "value": "sUWBsNquOo_1nlXx5I334MBlQLLlSDZB3GZhh3AJhxiA0OEO0cFK-A=="
             }
           ],
           "stream": {
@@ -1943,28 +1943,28 @@
               49,
               51,
               84,
+              49,
+              51,
+              58,
+              50,
+              53,
+              58,
+              50,
+              54,
+              46,
               48,
               57,
-              58,
-              52,
-              51,
-              58,
-              51,
               56,
-              46,
-              57,
-              57,
-              55,
               90,
               34,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 764,
+          "responseTime": 1127,
           "responseSize": 115
         },
-        "id": "6709b65d-1945-406f-9cba-de537aa15367",
+        "id": "36538dc9-d16e-4a39-b907-635b517148ee",
         "assertions": [
           {
             "assertion": "Expired JWT returns 401 Unauthorized",
@@ -1978,15 +1978,15 @@
       },
       {
         "cursor": {
-          "ref": "f7b2ca8a-f713-4cfa-b1c8-568ad67a6a80",
+          "ref": "1bd9bccc-98ae-4898-b5f3-5eaebec80f72",
           "length": 28,
           "cycles": 1,
           "position": 1,
           "iteration": 0,
-          "httpRequestId": "c150c274-082d-4bd9-950f-7fa75d446237"
+          "httpRequestId": "015d15d6-2b40-4ce2-ad51-c8da66c3403c"
         },
         "item": {
-          "id": "31132d2e-c768-46ad-a3ad-9f920f6dcfbc",
+          "id": "03338a1e-2a05-4aa6-bbd3-62ca3c9f5e27",
           "name": "Restricted token cannot create resource — 403",
           "request": {
             "url": {
@@ -2033,7 +2033,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "73dcdbc6-8555-4631-a131-e46a5853d7ff",
+                "id": "29f73586-d383-4348-9296-a02948cbb35d",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Restricted token cannot write — 403 or 401', function () {",
@@ -2045,7 +2045,7 @@
                   "    }",
                   "});"
                 ],
-                "_lastExecutionId": "ec33d3d4-5bbb-46e2-b93f-41f0f3e83ba5"
+                "_lastExecutionId": "245dcdf4-a783-4118-8d72-d24513c1187d"
               }
             }
           ]
@@ -2095,7 +2095,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "c6719e95-8969-4304-a9e1-e644f805fad5",
+              "value": "f76dd77b-5461-4cff-8840-8a5f30532fd0",
               "system": true
             },
             {
@@ -2141,7 +2141,7 @@
           }
         },
         "response": {
-          "id": "d2ceb18d-3fec-4233-8f1b-46681635b6bd",
+          "id": "86a3dda6-bed2-4107-b848-7edfa5aadd16",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -2163,7 +2163,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:39 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:26 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -2223,11 +2223,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "7bf5af0f-fd3c-40a6-9c90-426dbc8066fc"
+              "value": "8f7c8a91-7d13-400d-a0a1-1e9c0763cff4"
             },
             {
               "key": "ETag",
-              "value": "W/\"85-4wbTFHcrkldS95IeM2A6jzO2XA4\""
+              "value": "W/\"85-H7faRshP31z/LAOprhHb/47EC20\""
             },
             {
               "key": "X-Backend-Server",
@@ -2239,15 +2239,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "c65FaLAL-9ZxyAZyQA4nm3lFwL2ZNpLDTkCKSSQCcvMu_mAn9mQmRA=="
+              "value": "U4Tp1alQkRHxNhggpEfInZn9irY6BtzYLoBAX6uUYFqFMdNArRtQCg=="
             }
           ],
           "stream": {
@@ -2371,28 +2371,28 @@
               49,
               51,
               84,
-              48,
-              57,
-              58,
-              52,
+              49,
               51,
               58,
-              51,
-              57,
-              46,
               50,
               53,
+              58,
+              50,
+              54,
+              46,
               56,
+              56,
+              52,
               90,
               34,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 219,
+          "responseTime": 759,
           "responseSize": 133
         },
-        "id": "31132d2e-c768-46ad-a3ad-9f920f6dcfbc",
+        "id": "03338a1e-2a05-4aa6-bbd3-62ca3c9f5e27",
         "assertions": [
           {
             "assertion": "Restricted token cannot write — 403 or 401",
@@ -2406,15 +2406,15 @@
       },
       {
         "cursor": {
-          "ref": "0b8cd2ba-958f-43b1-a090-bf69462126a8",
+          "ref": "9f9a01ca-524a-448a-aec7-8a8280b58306",
           "length": 28,
           "cycles": 1,
           "position": 2,
           "iteration": 0,
-          "httpRequestId": "902bf698-31f1-42e5-a14f-eab0357936c1"
+          "httpRequestId": "12bb9cd6-c40c-442b-9092-ef788cb8496b"
         },
         "item": {
-          "id": "e6ffcab6-892d-4367-bb37-b8f1623d4d17",
+          "id": "2ad61c6c-24bf-45f5-a6e3-7e1229d5e006",
           "name": "Restricted token cannot delete resource — 403",
           "request": {
             "url": {
@@ -2447,7 +2447,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "609edd18-87ca-40a4-8a76-1da46f3dbb22",
+                "id": "27b163f4-bf96-49b1-b66c-1cca836179de",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Restricted token cannot delete — 401 or 403 (not 404 which would mean auth passed)', function () {",
@@ -2456,7 +2456,7 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
                   "});"
                 ],
-                "_lastExecutionId": "8916e5fb-0a99-4ad2-85ca-6f1c07887c75"
+                "_lastExecutionId": "fdaaaa83-f023-42a0-a833-42e2d45535b9"
               }
             }
           ]
@@ -2503,7 +2503,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "00892040-6d20-4eba-b96e-f944db5d2199",
+              "value": "6522a10d-071e-4f6f-baf5-b32e6b1d13e5",
               "system": true
             },
             {
@@ -2535,7 +2535,7 @@
           }
         },
         "response": {
-          "id": "0278d97d-49fd-409e-b5e0-cb4a278ab7e4",
+          "id": "860b1eae-6d37-4547-b9c8-f4b48949ffe8",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -2557,7 +2557,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:39 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:27 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -2617,11 +2617,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "e234c7a6-ef88-4a89-85a2-486fbf3e2318"
+              "value": "4effdb3f-0f75-49dc-9bfd-2fc7ae69055d"
             },
             {
               "key": "ETag",
-              "value": "W/\"85-G474BSV1LocFpsb2w/oDDrvKZrg\""
+              "value": "W/\"85-zQYViURhfIs/dcKSiBxQpCm30Aw\""
             },
             {
               "key": "X-Backend-Server",
@@ -2633,15 +2633,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "p8gZnFtOlEviqhUzVuxsp3ZRqKJNyddhizD2-m3dfE6PTMz_aAM2nw=="
+              "value": "SNBk7U_wGKdS-T6ebSt7n5XLjI6IvJIuPe126HNGjO3oJ24Wud91JQ=="
             }
           ],
           "stream": {
@@ -2765,28 +2765,28 @@
               49,
               51,
               84,
-              48,
-              57,
-              58,
-              52,
+              49,
               51,
               58,
-              51,
-              57,
-              46,
-              52,
+              50,
+              53,
+              58,
+              50,
               55,
-              57,
+              46,
+              49,
+              55,
+              48,
               90,
               34,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 216,
+          "responseTime": 273,
           "responseSize": 133
         },
-        "id": "e6ffcab6-892d-4367-bb37-b8f1623d4d17",
+        "id": "2ad61c6c-24bf-45f5-a6e3-7e1229d5e006",
         "assertions": [
           {
             "assertion": "Restricted token cannot delete — 401 or 403 (not 404 which would mean auth passed)",
@@ -2796,15 +2796,15 @@
       },
       {
         "cursor": {
-          "ref": "91ebe9a9-63b8-4fcf-ba67-b006c46355b4",
+          "ref": "19729976-fa01-4670-8b30-e3ef97ae0647",
           "length": 28,
           "cycles": 1,
           "position": 3,
           "iteration": 0,
-          "httpRequestId": "1908f328-b09a-4359-a6ec-d8f9e9094253"
+          "httpRequestId": "30839075-d381-4c1f-9889-11f37e50edcb"
         },
         "item": {
-          "id": "5cdc1b52-261a-4720-927f-379109a7b303",
+          "id": "88657bbd-77e0-4761-bbc5-bc6a71e7782e",
           "name": "IDOR — access another user's roles returns no escalation",
           "request": {
             "url": {
@@ -2828,7 +2828,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "7b2e3a57-b608-4309-a678-83178ea64138",
+                "id": "3cfaf028-d3e0-4167-b732-2f4754fc9a8e",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('IDOR check: accessing another user roles returns 403/404 or is scoped', function () {",
@@ -2843,7 +2843,7 @@
                   "    pm.expect(pm.response.code).to.not.equal(500);",
                   "});"
                 ],
-                "_lastExecutionId": "6e99d2a1-d0cd-49e1-8ca3-8cd80b2ba9ba"
+                "_lastExecutionId": "256a43af-2cdc-4286-b8cb-5a848b912df4"
               }
             }
           ]
@@ -2891,7 +2891,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "469e3356-9584-4e74-ac9f-1191445f4a75",
+              "value": "24abf145-f5b9-476a-a8a9-0c681f850cbe",
               "system": true
             },
             {
@@ -2923,7 +2923,7 @@
           }
         },
         "response": {
-          "id": "7004577b-67b3-4c5c-b628-d4650b3e8a2a",
+          "id": "50f23f9a-208a-4ec2-8446-7641791af267",
           "status": "OK",
           "code": 200,
           "header": [
@@ -2945,7 +2945,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:40 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:27 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -3005,7 +3005,7 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "b76b26d5-f9d7-40dc-b26e-53e3fee9d308"
+              "value": "e2dfad0f-dc10-4a4b-a543-d9c1b9096d00"
             },
             {
               "key": "ETag",
@@ -3021,15 +3021,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "sVDkYAzyZZWxwRjV7Dq7JctZ8U7NKPFTW0aEv_kCO_x2DGnRNcgcRw=="
+              "value": "DFOXnfzCIdURezx92-vg17rTyV6KLkPNEFq9Mt42duUl-gTbnxsScw=="
             }
           ],
           "stream": {
@@ -3040,10 +3040,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 619,
+          "responseTime": 765,
           "responseSize": 2
         },
-        "id": "5cdc1b52-261a-4720-927f-379109a7b303",
+        "id": "88657bbd-77e0-4761-bbc5-bc6a71e7782e",
         "assertions": [
           {
             "assertion": "IDOR check: accessing another user roles returns 403/404 or is scoped",
@@ -3057,15 +3057,15 @@
       },
       {
         "cursor": {
-          "ref": "42d4c458-03cc-46a4-a2de-5e517c65917a",
+          "ref": "1c54f8b0-94aa-4e8f-9a34-8962a11edb2e",
           "length": 28,
           "cycles": 1,
           "position": 4,
           "iteration": 0,
-          "httpRequestId": "88223ec2-971e-4b50-9739-639ca579c6f1"
+          "httpRequestId": "f99ad2c8-5e28-40e7-8d2e-b4c7e3136469"
         },
         "item": {
-          "id": "962277c7-b88e-42fa-8a4b-24a85b5e4fa1",
+          "id": "a4aeed48-897c-45ac-9a23-122b5f6b5372",
           "name": "Non-existent user ID returns 404 not data of another user",
           "request": {
             "url": {
@@ -3088,7 +3088,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "b3939197-fcf1-4e6f-b14d-d83d60f6e60d",
+                "id": "73c0b843-4ee5-49d2-bfa7-a35321da796a",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Non-existent ID returns 404 — no data substitution', function () {",
@@ -3102,7 +3102,7 @@
                   "    }, 'Data should be null/undefined/empty for a non-existent resource');",
                   "});"
                 ],
-                "_lastExecutionId": "3936d576-a7bd-4fd7-b384-f7f87636fc45"
+                "_lastExecutionId": "93f1f7eb-6086-4499-bc7d-50eac2b59175"
               }
             }
           ]
@@ -3149,7 +3149,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "e651fb7f-6140-4fde-8da2-28f899de684b",
+              "value": "982c4328-949a-4771-9f9f-850e397af017",
               "system": true
             },
             {
@@ -3181,7 +3181,7 @@
           }
         },
         "response": {
-          "id": "b4ca6f9c-b54c-4d9f-b245-229b1e7955f0",
+          "id": "d3449ae0-f4e5-425f-820d-79e77ef93786",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -3203,7 +3203,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:40 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:28 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -3263,11 +3263,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "b5270e9c-ebda-442c-b26e-6936c29c9e87"
+              "value": "35b4db11-2719-4487-be09-ff9a595d202c"
             },
             {
               "key": "ETag",
-              "value": "W/\"66-d1SO2iB8U6PXbdcoctlQPQJnDgc\""
+              "value": "W/\"66-I/n1D+MfWDuibWkrQMearhqINHE\""
             },
             {
               "key": "X-Backend-Server",
@@ -3279,15 +3279,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "ZYjTnIHsqUBZEAsx_mso4F_eNmyVemqQ1QEOXbnZ0iHfRwN5vXtRVQ=="
+              "value": "Ip9qr_FVYl3Brj4d6xeuXah1HwbuPDbF1MUGVryvcEmISmxyhPQy9w=="
             }
           ],
           "stream": {
@@ -3380,28 +3380,28 @@
               49,
               51,
               84,
-              48,
-              57,
-              58,
-              52,
+              49,
               51,
               58,
-              52,
-              48,
+              50,
+              53,
+              58,
+              50,
+              56,
               46,
+              50,
               51,
-              54,
-              52,
+              57,
               90,
               34,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 223,
+          "responseTime": 281,
           "responseSize": 102
         },
-        "id": "962277c7-b88e-42fa-8a4b-24a85b5e4fa1",
+        "id": "a4aeed48-897c-45ac-9a23-122b5f6b5372",
         "assertions": [
           {
             "assertion": "Non-existent ID returns 404 — no data substitution",
@@ -3415,15 +3415,15 @@
       },
       {
         "cursor": {
-          "ref": "06e717f5-4c1f-4e8a-b237-43dc544ebd22",
+          "ref": "0a89b2a6-0cbb-4121-86d6-4dde8ae7ea50",
           "length": 28,
           "cycles": 1,
           "position": 5,
           "iteration": 0,
-          "httpRequestId": "57f0912a-cfc4-4e73-ab3b-76d77a4e6420"
+          "httpRequestId": "1f0990db-4fac-4cbc-80c0-f154defeb343"
         },
         "item": {
-          "id": "c26c826a-a757-44fa-bd53-426ba8a8d958",
+          "id": "9d7cec94-0a49-4e08-955b-0c445af9d961",
           "name": "User list response contains no password fields",
           "request": {
             "url": {
@@ -3454,7 +3454,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "28334ced-e6d4-4af2-b34f-c0a64ccf4790",
+                "id": "afc79132-ddb1-4dad-a20b-99c4288933d4",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Response contains no password fields', function () {",
@@ -3478,7 +3478,7 @@
                   "    pm.expect(text).to.not.match(/\"api_key\"\\s*:/i, 'api_key field found in response');",
                   "});"
                 ],
-                "_lastExecutionId": "611a2c29-b076-40ba-99eb-8e3047b69e5b"
+                "_lastExecutionId": "41595755-77c3-442c-81ac-8e1f5e66c6f5"
               }
             }
           ]
@@ -3533,7 +3533,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "0315c3a8-1cf8-40b4-b3e3-c43f211c85f5",
+              "value": "555f56bb-1d82-4213-a7bf-cd5796ad8074",
               "system": true
             },
             {
@@ -3565,7 +3565,7 @@
           }
         },
         "response": {
-          "id": "418c041a-2088-4b44-a37e-ee72c2cecc91",
+          "id": "50c1c3cd-a349-4c40-aa5e-35c9de511c93",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3587,7 +3587,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:40 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:29 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -3647,7 +3647,7 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "fb343da3-b6ff-417a-99eb-ce991918e27c"
+              "value": "750b2066-99a8-41bd-8762-286cf8d04665"
             },
             {
               "key": "ETag",
@@ -3663,15 +3663,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "lD8YGLhIjB3YsGjVBW998xpYptC-a-fPnvhAXuzJQuPFB7-9et43Sg=="
+              "value": "9HUTQo2u2_lROvrmSUO3R2L4QnbNRR7MoOSZdx-mCV5BSiqgtPzKdA=="
             }
           ],
           "stream": {
@@ -5090,10 +5090,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 599,
+          "responseTime": 800,
           "responseSize": 1410
         },
-        "id": "c26c826a-a757-44fa-bd53-426ba8a8d958",
+        "id": "9d7cec94-0a49-4e08-955b-0c445af9d961",
         "assertions": [
           {
             "assertion": "Response contains no password fields",
@@ -5111,15 +5111,15 @@
       },
       {
         "cursor": {
-          "ref": "51fd9c37-44bd-4811-92f6-822181d88133",
+          "ref": "708789cb-ea95-4c58-a915-b48aafab73dc",
           "length": 28,
           "cycles": 1,
           "position": 6,
           "iteration": 0,
-          "httpRequestId": "7668a567-58a9-46f4-9659-0d332e96d23d"
+          "httpRequestId": "cca326ab-d0f2-48aa-b6ed-421fe0ba0593"
         },
         "item": {
-          "id": "ba4ed9ae-0f93-4065-af48-ff84553481ba",
+          "id": "72ee4fb9-a303-4604-87f4-899ab8f4ccc4",
           "name": "404 error response exposes no stack trace",
           "request": {
             "url": {
@@ -5142,7 +5142,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "508743ae-3699-4ec0-b359-6ed5867571a1",
+                "id": "f1f37edf-2b03-47e4-9bc0-b51a62167aa5",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Error response does not expose stack trace', function () {",
@@ -5164,7 +5164,7 @@
                   "    pm.expect(text).to.not.include('from public.', 'DB schema exposed in error');",
                   "});"
                 ],
-                "_lastExecutionId": "a36ba9ee-3956-48c5-9c0e-dae1a7dd28cc"
+                "_lastExecutionId": "3c221ba9-b802-4bac-a049-3cb56fff8b06"
               }
             }
           ]
@@ -5211,7 +5211,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "efc474f3-1cd1-48cc-b6b9-d4bfb55eb629",
+              "value": "20fd19bb-857b-4080-b3ec-69b120187a7a",
               "system": true
             },
             {
@@ -5243,7 +5243,7 @@
           }
         },
         "response": {
-          "id": "628be812-c18c-4ad4-82b3-872d2d545536",
+          "id": "4205f5e5-d2cf-4d93-b9cb-b43660313186",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -5265,7 +5265,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:41 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:29 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -5325,11 +5325,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "9a2f3102-0ea6-40bf-8060-6915de1bee19"
+              "value": "30ffff2f-45f7-4956-9248-c84e9d326cbf"
             },
             {
               "key": "ETag",
-              "value": "W/\"66-ZhyNJDhzPOh7wcc0BgXA2JHSr0A\""
+              "value": "W/\"66-cWyeVVs0AQ2enDgYUrLhwtTzAR8\""
             },
             {
               "key": "X-Backend-Server",
@@ -5341,15 +5341,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "9E3_72muq8_HSSw1jykcvoY8CvFd5cFrlf2y3Dwi7Yrjp3BmnXtQUg=="
+              "value": "1RtBd3VOmyhWL_3IRArHW_-9phIkXznAqPpjH1GXzgsJIKCeYzT96g=="
             }
           ],
           "stream": {
@@ -5442,28 +5442,28 @@
               49,
               51,
               84,
-              48,
-              57,
-              58,
-              52,
+              49,
               51,
               58,
-              52,
-              49,
-              46,
+              50,
               53,
-              55,
+              58,
+              50,
               57,
+              46,
+              56,
+              53,
+              49,
               90,
               34,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 578,
+          "responseTime": 780,
           "responseSize": 102
         },
-        "id": "ba4ed9ae-0f93-4065-af48-ff84553481ba",
+        "id": "72ee4fb9-a303-4604-87f4-899ab8f4ccc4",
         "assertions": [
           {
             "assertion": "Error response does not expose stack trace",
@@ -5481,15 +5481,15 @@
       },
       {
         "cursor": {
-          "ref": "18a741c8-f87d-4b95-94a6-6bbef9a76f7f",
+          "ref": "a6f2e81c-f52a-4b34-8974-6fdb0cc79965",
           "length": 28,
           "cycles": 1,
           "position": 7,
           "iteration": 0,
-          "httpRequestId": "9a251175-85a1-49f1-8d32-158169eb2b61"
+          "httpRequestId": "267e00c4-8b74-4d07-b416-7a7d8978fb2c"
         },
         "item": {
-          "id": "a1497fcc-fb49-47a6-a0c7-573a0ff531bd",
+          "id": "a491c9da-a4dc-4643-a02a-92cdb0eec01d",
           "name": "Response headers do not expose server technology",
           "request": {
             "url": {
@@ -5511,7 +5511,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "a1133336-c202-44de-84e4-8387020f4fa0",
+                "id": "012b4aa1-6202-45ca-8b5a-91f3bb432bef",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('X-Powered-By header is absent (technology stack not exposed)', function () {",
@@ -5529,7 +5529,7 @@
                   "    pm.expect(pm.response.headers.get('X-Symfony-Debug')).to.not.exist;",
                   "});"
                 ],
-                "_lastExecutionId": "cd239d20-6434-4d08-983d-25b27c4ec372"
+                "_lastExecutionId": "60d1c531-6b25-4c9d-b2f6-c4c5f7dd472b"
               }
             }
           ]
@@ -5575,7 +5575,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "5311a32b-d7e2-4ff3-9a2e-d294943e28a6",
+              "value": "135d01ea-2169-4092-92c2-2765e2761e9b",
               "system": true
             },
             {
@@ -5607,7 +5607,7 @@
           }
         },
         "response": {
-          "id": "5a37d2cf-c199-4d4d-be8e-13b3730c89c8",
+          "id": "3219cef7-7dd6-4e17-ab83-c85565383f6e",
           "status": "OK",
           "code": 200,
           "header": [
@@ -5629,7 +5629,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:41 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:30 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -5689,7 +5689,7 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "c2a78361-57f9-4e0e-ad0b-f5279d4c87f8"
+              "value": "46ebb243-8e3c-4f83-a8c5-452c64cab416"
             },
             {
               "key": "ETag",
@@ -5705,15 +5705,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "hViCAujEtO3bZ9DPt90lbS1FSSJdCn52Q06Dd0_5uiAlhuR7EdLlWA=="
+              "value": "038BoX-SuKvUcIQrm19UrJeMwMsN5kYivJQT7XKiknj_K76iY0ZdUg=="
             }
           ],
           "stream": {
@@ -7132,10 +7132,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 225,
+          "responseTime": 296,
           "responseSize": 1410
         },
-        "id": "a1497fcc-fb49-47a6-a0c7-573a0ff531bd",
+        "id": "a491c9da-a4dc-4643-a02a-92cdb0eec01d",
         "assertions": [
           {
             "assertion": "X-Powered-By header is absent (technology stack not exposed)",
@@ -7153,15 +7153,15 @@
       },
       {
         "cursor": {
-          "ref": "5d3fac75-5c71-4fc8-9777-52d48ba7d7cf",
+          "ref": "428b6bba-e79e-4494-8f64-d5aef39af9ad",
           "length": 28,
           "cycles": 1,
           "position": 8,
           "iteration": 0,
-          "httpRequestId": "22b5bb10-eb29-4a85-ad0b-fbe49fe2fef5"
+          "httpRequestId": "49fb63f0-aed2-463e-b40a-2f10f07f0b30"
         },
         "item": {
-          "id": "3f896a6f-7613-4ec9-872d-9250e9ea7106",
+          "id": "ee9118c0-db67-453b-8ff6-8e398033ee85",
           "name": "401 error body does not expose sensitive info",
           "request": {
             "url": {
@@ -7187,7 +7187,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "5aabdbf4-523d-4b3b-8a8b-e034ffa5b245",
+                "id": "65c3e213-7b51-4d4c-8e0c-8e1e9728eec9",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Unauthenticated request returns 401', function () {",
@@ -7201,7 +7201,7 @@
                   "    // Should be a simple error message only",
                   "});"
                 ],
-                "_lastExecutionId": "4784d74f-0c5b-45bf-b393-5cde02e1cca6"
+                "_lastExecutionId": "12de7d4f-efa5-4be7-8157-97df433e09d4"
               }
             }
           ]
@@ -7242,7 +7242,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "7a46838f-f523-4832-94ce-303585cccc0b",
+              "value": "8ba0d948-200b-4cdf-abed-dc6eb222deae",
               "system": true
             },
             {
@@ -7268,7 +7268,7 @@
           }
         },
         "response": {
-          "id": "ac6ec3c0-28f1-4306-97c6-b9b54bf0c899",
+          "id": "26de8362-7f00-4234-a65d-46453614eb02",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -7290,7 +7290,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:42 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:30 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -7350,11 +7350,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "9459e139-e442-4907-8222-475edde37d60"
+              "value": "b04d673f-087e-4b6d-a86b-33446e4cae99"
             },
             {
               "key": "ETag",
-              "value": "W/\"71-mFEF+kWOptlF0iHZWOQuaqGBxlw\""
+              "value": "W/\"71-NbOtSj8OxIRcrpInnTy83tP6tkE\""
             },
             {
               "key": "X-Backend-Server",
@@ -7366,15 +7366,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "oX90ebAQ6w76UQKlS3TLsS7Uq3c9PfMPsLEjrTm2veW1UpVlcNBLgw=="
+              "value": "HLUB4SwMjbI8hLxd_O_m9uif8LmLzrJbh54EoobxARelCahzqmXNMA=="
             }
           ],
           "stream": {
@@ -7478,28 +7478,28 @@
               49,
               51,
               84,
-              48,
-              57,
-              58,
-              52,
+              49,
               51,
               58,
-              52,
               50,
+              53,
+              58,
+              51,
+              48,
               46,
-              48,
               52,
-              48,
+              51,
+              51,
               90,
               34,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 206,
+          "responseTime": 261,
           "responseSize": 113
         },
-        "id": "3f896a6f-7613-4ec9-872d-9250e9ea7106",
+        "id": "ee9118c0-db67-453b-8ff6-8e398033ee85",
         "assertions": [
           {
             "assertion": "Unauthenticated request returns 401",
@@ -7513,15 +7513,15 @@
       },
       {
         "cursor": {
-          "ref": "ccab117d-3e94-433b-a879-b109de7848e3",
+          "ref": "cc9b36d7-b6da-4cc1-b8d9-b57cb644bf23",
           "length": 28,
           "cycles": 1,
           "position": 9,
           "iteration": 0,
-          "httpRequestId": "e72bad38-5059-470a-a1b6-bab239ffd1cf"
+          "httpRequestId": "387d167f-2469-46c4-b7ec-ebdd14e9ed11"
         },
         "item": {
-          "id": "80630a81-f4c3-4ecd-8569-0d5fcb503642",
+          "id": "7997f731-2ee7-4c45-8bc5-dcce077df265",
           "name": "SQLi in sortBy param — no DB error, not 500",
           "request": {
             "url": {
@@ -7552,7 +7552,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "2b507316-8e40-4435-a051-7e572f2993ef",
+                "id": "07c0c4be-aec3-4a9f-9bec-803d268ce5d9",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('SQLi in sortBy: not a 500 server error', function () {",
@@ -7571,7 +7571,7 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ],
-                "_lastExecutionId": "7e7b9c95-5620-43ee-98ab-5b61cf82c9c8"
+                "_lastExecutionId": "32272e93-0296-4f9e-a733-31f6de283a4c"
               }
             }
           ]
@@ -7626,7 +7626,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "efde77b0-4661-4d5f-9130-858c0b068dbe",
+              "value": "51455180-3201-4656-aac9-8da8f71be178",
               "system": true
             },
             {
@@ -7658,7 +7658,7 @@
           }
         },
         "response": {
-          "id": "8e323437-4e69-409a-9742-0cc45ce8c40a",
+          "id": "cabe4bf8-606f-4dda-bc93-300182e7eb60",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -7680,7 +7680,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:42 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:30 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -7692,15 +7692,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "oTHS1miXRWotifOGUFsEcohE1QSn1R2e0Ytzzna0TZRPxZ6ODhogXg=="
+              "value": "Xqy7ziDZb1tmDcHxQXuyePMqmnkZihaJ1Qmv9ucowvUQD2zLjhnARA=="
             }
           ],
           "stream": {
@@ -7827,10 +7827,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 599,
+          "responseTime": 258,
           "responseSize": 118
         },
-        "id": "80630a81-f4c3-4ecd-8569-0d5fcb503642",
+        "id": "7997f731-2ee7-4c45-8bc5-dcce077df265",
         "assertions": [
           {
             "assertion": "SQLi in sortBy: not a 500 server error",
@@ -7848,15 +7848,15 @@
       },
       {
         "cursor": {
-          "ref": "207dfe7b-e741-4c57-8848-0ff842724e87",
+          "ref": "ea8137bf-2ed9-41f6-a147-ea9ba02b5de5",
           "length": 28,
           "cycles": 1,
           "position": 10,
           "iteration": 0,
-          "httpRequestId": "9fe15289-af96-4305-867c-02dd464e963f"
+          "httpRequestId": "b95a1fa7-f2b5-43f0-b1a1-465697742c6c"
         },
         "item": {
-          "id": "f37ac2ec-3659-49d0-9840-3634081e5373",
+          "id": "d7028e8b-ff1c-46df-9001-b40aa8fc46e6",
           "name": "SQLi in year param — no DB error, not 500",
           "request": {
             "url": {
@@ -7884,7 +7884,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9d5c792a-9429-40c4-946f-3e7184c71224",
+                "id": "3673f465-4d1b-44e4-b34a-252d951966b2",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('SQLi in year: not a 500 server error', function () {",
@@ -7901,7 +7901,7 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ],
-                "_lastExecutionId": "35da8dab-f3e8-4ddd-88f4-40dd19b6b703"
+                "_lastExecutionId": "4059ea27-537a-43e4-9e1f-8195b4acbeff"
               }
             }
           ]
@@ -7953,7 +7953,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "72188de3-b790-47ef-b415-a966278e0dfa",
+              "value": "14bcc339-f680-4184-9a15-ba321e33a977",
               "system": true
             },
             {
@@ -7985,7 +7985,7 @@
           }
         },
         "response": {
-          "id": "ef1834b0-79e3-4844-bd0a-fb49f374d157",
+          "id": "4f3587cd-4243-45fc-a5c4-bd914fe3aeae",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -8007,7 +8007,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:43 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:30 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -8019,15 +8019,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "0WKArJDyj8paPehrmYhUml8ttKgPL_5h7cxzYE_thydPteCOgXl2pA=="
+              "value": "jgYG_Ir8oCCxL3bTkuAnoRYhSqnl_Mua57SaHuxLXizzFF39J1Ml9w=="
             }
           ],
           "stream": {
@@ -8154,10 +8154,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 602,
+          "responseTime": 261,
           "responseSize": 118
         },
-        "id": "f37ac2ec-3659-49d0-9840-3634081e5373",
+        "id": "d7028e8b-ff1c-46df-9001-b40aa8fc46e6",
         "assertions": [
           {
             "assertion": "SQLi in year: not a 500 server error",
@@ -8175,15 +8175,15 @@
       },
       {
         "cursor": {
-          "ref": "1dfd80b2-3922-46b3-b7f3-4e882634f498",
+          "ref": "4d4d59d6-e92c-4e54-860c-b9c92611b972",
           "length": 28,
           "cycles": 1,
           "position": 11,
           "iteration": 0,
-          "httpRequestId": "59d499ea-430f-441d-a0ed-8e487f459b15"
+          "httpRequestId": "efdf0087-6281-4a87-a234-49c03d4b2936"
         },
         "item": {
-          "id": "c9e8b101-6664-4963-9104-9f8747a49d9d",
+          "id": "95b8a5c6-7f46-456b-adec-50486a4b103b",
           "name": "SQLi in fetchType param — no DB error, not 500",
           "request": {
             "url": {
@@ -8211,7 +8211,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "ecb61ae5-76bb-4b18-acff-e1b52817a320",
+                "id": "735f0412-8f29-4d95-a639-e51be7bf81b0",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('SQLi in fetchType: not a 500 server error', function () {",
@@ -8228,7 +8228,7 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ],
-                "_lastExecutionId": "b895c8fe-02bc-4f7f-a432-cae170995213"
+                "_lastExecutionId": "4a5ff10b-16a6-4757-b6d0-aa2ef17aaf62"
               }
             }
           ]
@@ -8280,7 +8280,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "759713ad-64d9-484b-a4c9-741542fbe19e",
+              "value": "da6c1bcc-b7c3-4ad4-8fb9-dafaabe5d79a",
               "system": true
             },
             {
@@ -8312,7 +8312,7 @@
           }
         },
         "response": {
-          "id": "66ea04d4-39db-4eff-80bd-27f76856bcb8",
+          "id": "143af6e7-1e19-4820-b781-02903c69ccde",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -8334,7 +8334,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:43 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:31 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -8346,15 +8346,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "sSPIl8vi8TXvaOTsoGtHHIhHlMmGxmhjGdN6AE4bbV0nwxA2lsu8WA=="
+              "value": "8vpC1OThGPH-BgT9b1aWZl_AmnirLuKuaD987sYieNNhdBkz9t-t1Q=="
             }
           ],
           "stream": {
@@ -8481,10 +8481,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 203,
+          "responseTime": 763,
           "responseSize": 118
         },
-        "id": "c9e8b101-6664-4963-9104-9f8747a49d9d",
+        "id": "95b8a5c6-7f46-456b-adec-50486a4b103b",
         "assertions": [
           {
             "assertion": "SQLi in fetchType: not a 500 server error",
@@ -8502,15 +8502,15 @@
       },
       {
         "cursor": {
-          "ref": "fda80538-6980-4e78-8300-706e15bce285",
+          "ref": "3866cd7a-93bb-4184-a0be-9d2eeea8f4a8",
           "length": 28,
           "cycles": 1,
           "position": 12,
           "iteration": 0,
-          "httpRequestId": "fe6a4106-56a3-425c-8ead-d73f8a42dd2a"
+          "httpRequestId": "324459d0-db9f-4cb3-94ea-79ddbc6da26b"
         },
         "item": {
-          "id": "84c4bd79-5c45-49d5-a465-3821d1463161",
+          "id": "7e682f35-824e-445f-88b5-4bf8db84fc72",
           "name": "SQLi UNION SELECT attack in param — no DB error, not 500",
           "request": {
             "url": {
@@ -8541,7 +8541,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "05451d2f-58c0-47cb-ac5b-d4f27a683cf3",
+                "id": "3eed07df-c972-41dd-867e-ed0460c258a7",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('UNION SELECT attack: not a 500 server error', function () {",
@@ -8558,7 +8558,7 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 403, 422]);",
                   "});"
                 ],
-                "_lastExecutionId": "c41f6b04-b0a1-497f-a7fd-12dd730d1e46"
+                "_lastExecutionId": "48ab0bd5-b095-47f7-a59d-a1f1d8fa9367"
               }
             }
           ]
@@ -8613,7 +8613,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "7f766175-a42a-41f5-8359-95d4bb9cf6c6",
+              "value": "048292c8-38d5-4c4a-a3f7-48bff75f16ba",
               "system": true
             },
             {
@@ -8645,7 +8645,7 @@
           }
         },
         "response": {
-          "id": "5be10a55-7a73-4bc0-8f3c-5289c72d0bb3",
+          "id": "e20497b8-958b-4a64-91dd-ddc9ecd56958",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -8667,7 +8667,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:43 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:32 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -8679,15 +8679,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "A1aBA53Gox16jDq71m92WD6nC3LI2E8pT7Ae6-vOp7aAskaZ7bCuCw=="
+              "value": "ZWA42dJA4jNiTgxdn4GUjVAE_MqiEvBEjWzDO7dMMXx-5RudGL7zfw=="
             }
           ],
           "stream": {
@@ -8814,10 +8814,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 191,
+          "responseTime": 745,
           "responseSize": 118
         },
-        "id": "84c4bd79-5c45-49d5-a465-3821d1463161",
+        "id": "7e682f35-824e-445f-88b5-4bf8db84fc72",
         "assertions": [
           {
             "assertion": "UNION SELECT attack: not a 500 server error",
@@ -8835,15 +8835,15 @@
       },
       {
         "cursor": {
-          "ref": "1ab50d49-c0f3-4c50-bdf3-b8a9c69e0d1b",
+          "ref": "8aa5931d-21a6-466d-86a6-ad8a0034dfbe",
           "length": 28,
           "cycles": 1,
           "position": 13,
           "iteration": 0,
-          "httpRequestId": "6cfd6f96-70d7-4496-b513-dc7ca9318e30"
+          "httpRequestId": "48af20de-467f-4ec9-b327-464c05b1782b"
         },
         "item": {
-          "id": "9c38bc15-8437-47e0-aa40-da0f1f49915c",
+          "id": "ae0c80a6-9e28-47fc-8694-bbc310755f39",
           "name": "Special characters in POST body — no 500, no DB error",
           "request": {
             "url": {
@@ -8881,7 +8881,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "6bac62a4-088e-44bc-a2a9-e8937173385a",
+                "id": "57bea364-c619-4db4-a760-79be9b2e1a19",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Special chars in POST body: not a 500 server error', function () {",
@@ -8906,7 +8906,7 @@
                   "    } catch(e) {}",
                   "}"
                 ],
-                "_lastExecutionId": "6496101f-47ca-4c86-b3d7-a8927bd2f632"
+                "_lastExecutionId": "8f03a659-e7bc-4d50-b975-d12a6bcf7f1e"
               }
             }
           ]
@@ -8957,7 +8957,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "966850e0-6469-4131-8433-1112ee9cb86d",
+              "value": "25ce0bf9-42ad-46bd-87b6-632bf4d005bc",
               "system": true
             },
             {
@@ -9003,7 +9003,7 @@
           }
         },
         "response": {
-          "id": "eccd4f97-5697-4c94-9866-8d83f09c3cbc",
+          "id": "130bd83a-3dc3-45b0-9fe6-520d6f372225",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -9025,7 +9025,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:43 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:33 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -9037,15 +9037,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "DxWf7Nsl7p1Qaqm-xrdCnRLLfUdhyGoXTbQoKOyQus79Nh_1D5lDwQ=="
+              "value": "_b24fhHwUbR-O7wOJI6za2BfmMyvBaVeEEhsFmXIOVZHAi1U-FZ-fg=="
             }
           ],
           "stream": {
@@ -9172,10 +9172,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 202,
+          "responseTime": 764,
           "responseSize": 118
         },
-        "id": "9c38bc15-8437-47e0-aa40-da0f1f49915c",
+        "id": "ae0c80a6-9e28-47fc-8694-bbc310755f39",
         "assertions": [
           {
             "assertion": "Special chars in POST body: not a 500 server error",
@@ -9193,15 +9193,15 @@
       },
       {
         "cursor": {
-          "ref": "60ef36a3-a84c-4d28-a594-9f0143c4df57",
+          "ref": "9d34d7a6-cbf3-4e6b-8900-37ad3c7feea9",
           "length": 28,
           "cycles": 1,
           "position": 14,
           "iteration": 0,
-          "httpRequestId": "d97072f7-ad3a-41dd-8d1d-80d4f0b55a80"
+          "httpRequestId": "0eb37022-57db-4bfa-b1be-33d68f7a5c0f"
         },
         "item": {
-          "id": "da362fe0-8560-49ec-9f7f-d85ae432dd57",
+          "id": "99ae33c3-7757-4946-8dc5-a7c860001dd3",
           "name": "Path traversal in ID — no file system exposure",
           "request": {
             "url": {
@@ -9224,7 +9224,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "52073231-de95-47b5-8f2a-0b9e21d40e81",
+                "id": "bdb78c64-aa42-4b18-8284-7de8742c2419",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Path traversal: not a 500 server error', function () {",
@@ -9239,7 +9239,7 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([400, 403, 404]);",
                   "});"
                 ],
-                "_lastExecutionId": "6441dda2-3ebc-4c72-b452-4b6973335dce"
+                "_lastExecutionId": "1d2250ca-0a90-444c-8ee7-11393b22c594"
               }
             }
           ]
@@ -9286,7 +9286,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "9bbfebef-845d-45bf-a60f-f9a47815a7ae",
+              "value": "f1ab42e5-5b13-42e0-9460-90c3e29f05d5",
               "system": true
             },
             {
@@ -9318,7 +9318,7 @@
           }
         },
         "response": {
-          "id": "b023f8af-4289-443c-8a71-2d1fee2c95ce",
+          "id": "73016f5a-6747-4418-ae99-bcbb03c67a80",
           "status": "Forbidden",
           "code": 403,
           "header": [
@@ -9340,7 +9340,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:44 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:33 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -9352,15 +9352,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "4YdXIME3xphx7X2F5w3nuzXZCKfQqOME5UhNBN6eACA4ca3TigDPOA=="
+              "value": "pq41KgtY_M2eZPBBjKkn1ALL3N-7j5pebJ9MI8Gv7nocVkQBv8C8Lw=="
             }
           ],
           "stream": {
@@ -9487,10 +9487,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 599,
+          "responseTime": 261,
           "responseSize": 118
         },
-        "id": "da362fe0-8560-49ec-9f7f-d85ae432dd57",
+        "id": "99ae33c3-7757-4946-8dc5-a7c860001dd3",
         "assertions": [
           {
             "assertion": "Path traversal: not a 500 server error",
@@ -9508,15 +9508,15 @@
       },
       {
         "cursor": {
-          "ref": "f80e88ca-533b-4132-a55b-ccc6fd5c6f51",
+          "ref": "9b75049e-274a-43b4-826b-54b8ce3bad04",
           "length": 28,
           "cycles": 1,
           "position": 15,
           "iteration": 0,
-          "httpRequestId": "bcf35420-1d4f-4b23-bef7-752ca26f69bc"
+          "httpRequestId": "606cf63c-2ebc-4852-9cee-de50dbc29138"
         },
         "item": {
-          "id": "7c39f757-3c4b-4b37-977f-dd5d7d433ac4",
+          "id": "1937fd57-99dc-4a1e-96da-ec78e9fbad79",
           "name": "Attendance — no auth token returns 401",
           "request": {
             "url": {
@@ -9548,14 +9548,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "0842f932-f753-4dad-b071-3b692457d9aa",
+                "id": "21406d26-dd6e-43b9-83f7-04230221795b",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Attendance endpoint requires auth — 401', function () {",
                   "    pm.response.to.have.status(401);",
                   "});"
                 ],
-                "_lastExecutionId": "4d06e489-a069-4aa5-8266-d0fe950b298f"
+                "_lastExecutionId": "5a7d01ac-cbdc-4867-aa05-56c1e207a7ad"
               }
             }
           ]
@@ -9602,7 +9602,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "20362b15-10ad-416e-8f63-839849ec6813",
+              "value": "5a1ee73e-66c0-45a0-b2bd-d3f99dc19b82",
               "system": true
             },
             {
@@ -9628,7 +9628,7 @@
           }
         },
         "response": {
-          "id": "be747f0e-f8a2-4369-b1bf-ad82dea7965d",
+          "id": "7d179c14-f6de-409e-969c-30d8e84a552b",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -9650,7 +9650,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:45 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:33 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -9714,11 +9714,11 @@
             },
             {
               "key": "X-RateLimit-Remaining",
-              "value": "2482"
+              "value": "2495"
             },
             {
               "key": "X-RateLimit-Reset",
-              "value": "1791884633"
+              "value": "1791897947"
             },
             {
               "key": "ETag",
@@ -9730,15 +9730,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "gmyeJbZVA_cfmeiPgcQC4T4pWe5WeADB6kxK4kFQwYFDgV4tiz1oHg=="
+              "value": "SSMsnGUgGaZlVFTuCOhTp-9EgnqrvjzwBBUM3jvOcGYu7CDzj7EzYA=="
             }
           ],
           "stream": {
@@ -9796,10 +9796,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 577,
+          "responseTime": 271,
           "responseSize": 49
         },
-        "id": "7c39f757-3c4b-4b37-977f-dd5d7d433ac4",
+        "id": "1937fd57-99dc-4a1e-96da-ec78e9fbad79",
         "assertions": [
           {
             "assertion": "Attendance endpoint requires auth — 401",
@@ -9809,15 +9809,15 @@
       },
       {
         "cursor": {
-          "ref": "ea222e9d-2e9f-4bbc-9786-f3170ba357b1",
+          "ref": "dd0fe526-335d-4716-ac9a-277090bad6ca",
           "length": 28,
           "cycles": 1,
           "position": 16,
           "iteration": 0,
-          "httpRequestId": "ef899f89-373d-4a86-9c03-8b7aa94901d8"
+          "httpRequestId": "d9207a65-fa87-42b6-9e6c-e17f45a34e48"
         },
         "item": {
-          "id": "b46f64a5-7dec-42a5-92e5-a5fb05f1114d",
+          "id": "adafd6b7-7043-4837-b257-0e46dabcac96",
           "name": "Teams — no auth token returns 401",
           "request": {
             "url": {
@@ -9843,14 +9843,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "e51ea09c-7842-447c-bcb6-22b7ac7b861a",
+                "id": "a35c6a40-81db-4c3a-b389-86876a7469ee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Teams endpoint requires auth — 401', function () {",
                   "    pm.response.to.have.status(401);",
                   "});"
                 ],
-                "_lastExecutionId": "1e27ae09-f445-4d94-ba6e-04a0807ab7d7"
+                "_lastExecutionId": "aa8f9405-3faf-4fc7-b3a1-dea524eaa7b6"
               }
             }
           ]
@@ -9891,7 +9891,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "453e6f4a-2770-40b1-b70a-8470ccfd3653",
+              "value": "432e8755-63f2-4dd5-af32-8566677dcb44",
               "system": true
             },
             {
@@ -9917,7 +9917,7 @@
           }
         },
         "response": {
-          "id": "96489ea2-4ee3-46f4-b751-c6cbc7863558",
+          "id": "e106b32d-b259-4fc9-a3bb-a1604acdc6ad",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -9939,7 +9939,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:45 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:34 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -10003,11 +10003,11 @@
             },
             {
               "key": "X-RateLimit-Remaining",
-              "value": "2483"
+              "value": "2499"
             },
             {
               "key": "X-RateLimit-Reset",
-              "value": "1791884632"
+              "value": "1791897995"
             },
             {
               "key": "ETag",
@@ -10019,15 +10019,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "xdIx6-KL53g4HeupqhjIMy8B8AsxkVetEnYy4K90Kb--ELJ4TfURbg=="
+              "value": "AWZYEHSPLvaRwiwJzMsCk8Wh_HnacuKoqCFWfbRZHmdS7YcEkhLd6w=="
             }
           ],
           "stream": {
@@ -10085,10 +10085,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 207,
+          "responseTime": 738,
           "responseSize": 49
         },
-        "id": "b46f64a5-7dec-42a5-92e5-a5fb05f1114d",
+        "id": "adafd6b7-7043-4837-b257-0e46dabcac96",
         "assertions": [
           {
             "assertion": "Teams endpoint requires auth — 401",
@@ -10098,15 +10098,15 @@
       },
       {
         "cursor": {
-          "ref": "1729bbff-ab86-417a-a29f-c74e33ad0966",
+          "ref": "672ee915-7af5-4b4c-9d24-1b359fb0deb9",
           "length": 28,
           "cycles": 1,
           "position": 17,
           "iteration": 0,
-          "httpRequestId": "ebbed084-19c8-4e6b-9737-224e8f71a039"
+          "httpRequestId": "dd63b74d-75bf-4b0e-81bd-3b1f4f5ef0e0"
         },
         "item": {
-          "id": "d5b1fc5b-895c-4d91-b489-3b26ebd7621a",
+          "id": "21be7776-2960-4100-9e40-92d2aae5b8e1",
           "name": "JUMP — no auth token returns 401",
           "request": {
             "url": {
@@ -10138,14 +10138,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "0249a743-12cd-4441-87df-fbb394a2a2ce",
+                "id": "97d5e881-2730-45a7-ba73-7ccad4622e85",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('JUMP endpoint requires auth — 401', function () {",
                   "    pm.response.to.have.status(401);",
                   "});"
                 ],
-                "_lastExecutionId": "f471e1d3-ebd3-4f76-90bb-a3bc0a7be26e"
+                "_lastExecutionId": "7d165d25-46e3-4acc-97a6-c98ee4dddd79"
               }
             }
           ]
@@ -10192,7 +10192,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "10d4a014-d08c-4315-8571-dea645257d3e",
+              "value": "38bf1db1-a668-42b4-bde0-c68183146f9b",
               "system": true
             },
             {
@@ -10218,7 +10218,7 @@
           }
         },
         "response": {
-          "id": "7ea09a0e-ea62-404e-9770-865b5e11a292",
+          "id": "06980d89-ce3d-4c48-b949-209935b5640f",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -10240,7 +10240,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:45 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:34 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -10252,11 +10252,11 @@
             },
             {
               "key": "X-RateLimit-Remaining",
-              "value": "2498"
+              "value": "2499"
             },
             {
               "key": "X-RateLimit-Reset",
-              "value": "1791884654"
+              "value": "1791897995"
             },
             {
               "key": "Vary",
@@ -10288,7 +10288,7 @@
             },
             {
               "key": "ETag",
-              "value": "W/\"3f-RaxkJxhcDh8o04GK7dS8eN6DeIo\""
+              "value": "W/\"3f-iRd/w/Y0tIgISVrw1/EbJS63fd0\""
             },
             {
               "key": "X-Cache",
@@ -10296,15 +10296,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "R74JmJAYIeysKlMSleWR0nRzca9wXGXUIrCtVgad5kf_ea7y-pCoLA=="
+              "value": "gsluoSt3MrayGNdQfxxhDqlvE6z2K4nT8yltxV2oNVuRc-JK-2uMAA=="
             }
           ],
           "stream": {
@@ -10326,14 +10326,14 @@
               34,
               58,
               34,
-              97,
-              101,
-              52,
-              49,
-              101,
-              57,
               99,
-              56,
+              99,
+              53,
+              98,
+              99,
+              49,
+              102,
+              49,
               34,
               44,
               34,
@@ -10376,10 +10376,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 204,
+          "responseTime": 267,
           "responseSize": 63
         },
-        "id": "d5b1fc5b-895c-4d91-b489-3b26ebd7621a",
+        "id": "21be7776-2960-4100-9e40-92d2aae5b8e1",
         "assertions": [
           {
             "assertion": "JUMP endpoint requires auth — 401",
@@ -10389,15 +10389,15 @@
       },
       {
         "cursor": {
-          "ref": "e0e33ff4-2aeb-4f0b-a179-95bfe7be7c61",
+          "ref": "09c5fa07-c9f2-46a1-b779-a0bff1cf4058",
           "length": 28,
           "cycles": 1,
           "position": 18,
           "iteration": 0,
-          "httpRequestId": "ad00e6ce-f904-422d-9926-aa3caac8acaa"
+          "httpRequestId": "c67670d2-f3be-42cc-a064-086b53cde446"
         },
         "item": {
-          "id": "d14f96e3-3bf9-45da-bdeb-128bc0f3ce74",
+          "id": "48ce597d-17f3-41d1-96f4-ae945faa0a4f",
           "name": "Honor — no auth token returns 401",
           "request": {
             "url": {
@@ -10423,14 +10423,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "10cd15f9-888a-44cf-931b-1f7fb703881d",
+                "id": "99d073a8-0a79-4abd-8c24-0619b0bb4b15",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Honor endpoint requires auth — 401', function () {",
                   "    pm.response.to.have.status(401);",
                   "});"
                 ],
-                "_lastExecutionId": "61ca12d2-ed4a-4424-aed3-cf93c264cad5"
+                "_lastExecutionId": "94d458eb-88cf-4d1f-915f-62ef01e5c1d5"
               }
             }
           ]
@@ -10471,7 +10471,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "68c88f5d-3e2c-4c41-b187-03e0500d6658",
+              "value": "7f5dba63-a482-40a7-8886-f35ef96f4d0d",
               "system": true
             },
             {
@@ -10497,7 +10497,7 @@
           }
         },
         "response": {
-          "id": "eafa522d-80f2-4207-834f-1d15bb4f5779",
+          "id": "62d96a3c-8370-43a2-9b9c-05d65459d6de",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -10519,7 +10519,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:46 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:35 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -10551,11 +10551,11 @@
             },
             {
               "key": "X-RateLimit-Remaining",
-              "value": "2494"
+              "value": "2497"
             },
             {
               "key": "X-RateLimit-Reset",
-              "value": "1791884655"
+              "value": "1791897964"
             },
             {
               "key": "Vary",
@@ -10567,7 +10567,7 @@
             },
             {
               "key": "ETag",
-              "value": "W/\"4c-wq/Q101tV8O4vnv7S3QTGuCaLJ4\""
+              "value": "W/\"4c-KdKPYcmniL/CrpwWRBHiqrFJGHA\""
             },
             {
               "key": "X-Cache",
@@ -10575,15 +10575,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "hXs3XHMsQedJIYOgv7q0qvIDqMn5GQuvd_EaFuZ7FZUKFXundCKXAA=="
+              "value": "bILLkaREnYDbe674g08NNfob_fOrzlC9TytMAfrLl8oEIdV8Iyw2gA=="
             }
           ],
           "stream": {
@@ -10605,14 +10605,14 @@
               34,
               58,
               34,
-              49,
-              54,
-              98,
-              48,
-              101,
+              100,
+              99,
+              102,
+              55,
+              51,
+              50,
               97,
-              100,
-              100,
+              50,
               34,
               44,
               34,
@@ -10668,10 +10668,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 577,
+          "responseTime": 766,
           "responseSize": 76
         },
-        "id": "d14f96e3-3bf9-45da-bdeb-128bc0f3ce74",
+        "id": "48ce597d-17f3-41d1-96f4-ae945faa0a4f",
         "assertions": [
           {
             "assertion": "Honor endpoint requires auth — 401",
@@ -10681,15 +10681,15 @@
       },
       {
         "cursor": {
-          "ref": "6aabda6e-e536-4c27-80de-bff689424ab7",
+          "ref": "30b12a95-6acd-4142-a083-7e5dc023a8cb",
           "length": 28,
           "cycles": 1,
           "position": 19,
           "iteration": 0,
-          "httpRequestId": "e3276931-5e31-42d8-9539-0e3316d3df2f"
+          "httpRequestId": "6ede60b7-dfe4-4cc9-a591-b3f1e108cb09"
         },
         "item": {
-          "id": "01f4a88d-b07e-4475-bdd7-8ce81a20b8bb",
+          "id": "604034e3-23ec-4d03-a3a9-db0baf906807",
           "name": "OKR — no auth token returns 401",
           "request": {
             "url": {
@@ -10721,14 +10721,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "d2552742-dc50-4741-a388-0524a22bfe61",
+                "id": "b6b00703-f2ad-4022-a6aa-69a4b7a7f79f",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('OKR endpoint requires auth — 401', function () {",
                   "    pm.response.to.have.status(401);",
                   "});"
                 ],
-                "_lastExecutionId": "d342a409-f621-4de7-8779-7040c547c392"
+                "_lastExecutionId": "e38990db-6a96-4e4c-89ac-a299555b538b"
               }
             }
           ]
@@ -10775,7 +10775,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "39ea710b-2f6c-4fed-bfb7-827f6de083ad",
+              "value": "9d1926db-91de-4de9-bb80-fe3c3e84238e",
               "system": true
             },
             {
@@ -10801,7 +10801,7 @@
           }
         },
         "response": {
-          "id": "f99d971d-70c9-492f-a4d1-611fec2311a2",
+          "id": "a28f34ef-d2d5-440a-a6aa-1fd724e340b3",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -10823,7 +10823,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:46 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:36 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -10883,7 +10883,7 @@
             },
             {
               "key": "X-RateLimit-Reset",
-              "value": "1791884659"
+              "value": "1791897966"
             },
             {
               "key": "Vary",
@@ -10903,15 +10903,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "_w0f4IUQ2zyQ-ToOWiGkPPz1I2ciB62Niu3bp7r5F2iQ_OzKDZnAxw=="
+              "value": "FBoziZjXIu86Batc184ldMLEpGk7F6j1WOA0zDlLZtlFRlRRmdJyWw=="
             }
           ],
           "stream": {
@@ -10977,10 +10977,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 208,
+          "responseTime": 764,
           "responseSize": 57
         },
-        "id": "01f4a88d-b07e-4475-bdd7-8ce81a20b8bb",
+        "id": "604034e3-23ec-4d03-a3a9-db0baf906807",
         "assertions": [
           {
             "assertion": "OKR endpoint requires auth — 401",
@@ -10990,15 +10990,15 @@
       },
       {
         "cursor": {
-          "ref": "351ad2b1-0817-495a-8fe7-af1a3ef4a50b",
+          "ref": "1d995123-e4aa-43ad-99cd-631565a7be5e",
           "length": 28,
           "cycles": 1,
           "position": 20,
           "iteration": 0,
-          "httpRequestId": "41ef6887-4ab5-4cd0-912f-113a7a5f6ef0"
+          "httpRequestId": "67d34e91-bcf9-487e-a99c-3351bdc70879"
         },
         "item": {
-          "id": "96bd9d5e-fec4-4900-95f4-609843be52f4",
+          "id": "90e8cc13-ecb9-408a-bf0c-8639a2a92733",
           "name": "Pulse — no auth token returns 401",
           "request": {
             "url": {
@@ -11025,14 +11025,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "4215f9d0-033a-4787-bd84-3e95442914b7",
+                "id": "ffcc889e-a69a-401e-b09e-997f1af7ed64",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Pulse endpoint requires auth — 401', function () {",
                   "    pm.response.to.have.status(401);",
                   "});"
                 ],
-                "_lastExecutionId": "a83e5d46-707f-4ebd-aeb7-bc358ea7fbc2"
+                "_lastExecutionId": "3c051bce-e678-457f-858d-6effcabccba9"
               }
             }
           ]
@@ -11074,7 +11074,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "8291de47-5ec6-4200-b114-6aaf48c1c312",
+              "value": "055ed087-34ee-4173-bd88-af99f4132c7f",
               "system": true
             },
             {
@@ -11100,7 +11100,7 @@
           }
         },
         "response": {
-          "id": "8836f1ad-cfa1-4605-80e5-74d8ae454ac7",
+          "id": "9f4acb22-03e6-492a-8615-817cba953e7d",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -11122,7 +11122,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:46 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:36 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -11190,11 +11190,11 @@
             },
             {
               "key": "X-RateLimit-Remaining",
-              "value": "2492"
+              "value": "2495"
             },
             {
               "key": "X-RateLimit-Reset",
-              "value": "1791884664"
+              "value": "1791897970"
             },
             {
               "key": "ETag",
@@ -11206,15 +11206,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "lXyhZP5QYwtckMg9kkVLQ9w_GHRdspC2lkm-_lQTJ5MgBYaJ3sfyMA=="
+              "value": "1YarsrckYdVBFOmUPXpJZwhp98LTkcHXoFun-lAZjMYygmK4bekI4Q=="
             }
           ],
           "stream": {
@@ -11280,10 +11280,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 614,
+          "responseTime": 261,
           "responseSize": 57
         },
-        "id": "96bd9d5e-fec4-4900-95f4-609843be52f4",
+        "id": "90e8cc13-ecb9-408a-bf0c-8639a2a92733",
         "assertions": [
           {
             "assertion": "Pulse endpoint requires auth — 401",
@@ -11293,15 +11293,15 @@
       },
       {
         "cursor": {
-          "ref": "60dc787c-6fcc-40e2-a85a-c553c9088726",
+          "ref": "f6cf6eb0-3dd1-4f2d-9433-e0cadf4a3e5f",
           "length": 28,
           "cycles": 1,
           "position": 21,
           "iteration": 0,
-          "httpRequestId": "e928011d-2cc5-4880-b8f6-c801997dbd76"
+          "httpRequestId": "511830ed-5f2a-48c6-81b4-02654089d551"
         },
         "item": {
-          "id": "17cee4d8-f36d-49f2-83e0-09a7795d4ccb",
+          "id": "dc327fae-5833-44a9-9d8b-e85b9de0aa2e",
           "name": "Unexpected data type in param — handled gracefully, not 500",
           "request": {
             "url": {
@@ -11329,7 +11329,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "6bdcecd2-d17d-420f-b554-f7556c55bdec",
+                "id": "180a9086-8fe4-4c35-a998-b9b1df983daa",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Invalid data type returns 400 or 422 — not 500', function () {",
@@ -11344,7 +11344,7 @@
                   "    pm.expect(text).to.not.include('stack');",
                   "});"
                 ],
-                "_lastExecutionId": "44a2f2d6-3de6-40dc-add4-7bd0ef0cebd8"
+                "_lastExecutionId": "71ea0170-ce83-45cf-8c9e-3ea88640db5a"
               }
             }
           ]
@@ -11396,7 +11396,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "9eaa2292-1996-4977-8eab-7c5674bca0f6",
+              "value": "122c04ea-478a-4628-9674-b9cc24d45c1e",
               "system": true
             },
             {
@@ -11428,7 +11428,7 @@
           }
         },
         "response": {
-          "id": "76f423f9-25ff-49e7-a683-a5c94da845db",
+          "id": "7b44f228-0fe7-4097-ad1b-571d74a8b113",
           "status": "OK",
           "code": 200,
           "header": [
@@ -11450,7 +11450,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:47 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:37 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -11510,7 +11510,7 @@
             },
             {
               "key": "X-RateLimit-Reset",
-              "value": "1791884659"
+              "value": "1791897965"
             },
             {
               "key": "Vary",
@@ -11530,15 +11530,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "BoRCg-hfmopO6MHxFy0GAU9QzQ0X1EBr-YukaCU5YukNlXjPjmgcOw=="
+              "value": "CrmRSDPNERDnBpAz-hgF7F09eTDaeHHUnFbrBvuVlLys_nFimQWFrQ=="
             }
           ],
           "stream": {
@@ -11633,10 +11633,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 326,
+          "responseTime": 845,
           "responseSize": 86
         },
-        "id": "17cee4d8-f36d-49f2-83e0-09a7795d4ccb",
+        "id": "dc327fae-5833-44a9-9d8b-e85b9de0aa2e",
         "assertions": [
           {
             "assertion": "Invalid data type returns 400 or 422 — not 500",
@@ -11650,15 +11650,15 @@
       },
       {
         "cursor": {
-          "ref": "dab71d4b-3778-4805-907b-13574c1a47eb",
+          "ref": "13b6981f-7477-4422-819b-e7ae6326ec6e",
           "length": 28,
           "cycles": 1,
           "position": 22,
           "iteration": 0,
-          "httpRequestId": "48785958-faa0-443b-8fca-77bfc83ced55"
+          "httpRequestId": "dca625bb-fcea-4100-b3e1-a5f249baae73"
         },
         "item": {
-          "id": "b98d1f5d-9352-4d37-a438-5be022973b57",
+          "id": "828f1202-96dc-4449-80f6-ac762c15ac3d",
           "name": "POST with wrong Content-Type — no 500",
           "request": {
             "url": {
@@ -11690,7 +11690,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "abbb57e2-46eb-409f-b75a-86f8fe8b1612",
+                "id": "a14e21ce-b6e4-48a6-aa5f-aac61322f2d4",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Wrong Content-Type does not cause 500', function () {",
@@ -11700,7 +11700,7 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([400, 415, 422]);",
                   "});"
                 ],
-                "_lastExecutionId": "fb06ca97-c5c0-4df1-8035-aee73735b605"
+                "_lastExecutionId": "ab1c6a4b-de1b-4f5a-8ba3-8750712c9b2a"
               }
             }
           ]
@@ -11750,7 +11750,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "e8b27509-6e7b-4d6e-93d1-277d4383fc6e",
+              "value": "3b24ae7d-2c1d-446a-8e9b-efc100c55b31",
               "system": true
             },
             {
@@ -11791,7 +11791,7 @@
           }
         },
         "response": {
-          "id": "3b4fa0e0-4098-4fda-869a-095d36f85616",
+          "id": "4d150a9a-6425-4967-8a5e-21d739325ae1",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -11813,7 +11813,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:47 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:37 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -11873,11 +11873,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "d33de61e-c6ac-4026-ad93-c2efcd43a383"
+              "value": "559854b5-732a-4ac8-af5c-bdd47152b0a1"
             },
             {
               "key": "ETag",
-              "value": "W/\"142-QdN5YtE5B/ANaQgBPN+XnmN6L5g\""
+              "value": "W/\"142-I0eHiTge/4HnOaz5zCJtx1lEqxo\""
             },
             {
               "key": "X-Backend-Server",
@@ -11889,15 +11889,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "u7FizlCXwDclhg2gp0lgoiCdos7-tesCkhVOa2HlTw-MBM7ipH6idA=="
+              "value": "XCsnu8s7hraDGmZ1QwFAsJh16c6-mU7lTiYmZRf2RIq0DeTSQIBfww=="
             }
           ],
           "stream": {
@@ -12210,28 +12210,28 @@
               49,
               51,
               84,
-              48,
-              57,
-              58,
-              52,
+              49,
               51,
               58,
-              52,
+              50,
+              53,
+              58,
+              51,
               55,
               46,
-              53,
-              55,
-              50,
+              56,
+              52,
+              48,
               90,
               34,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 222,
+          "responseTime": 275,
           "responseSize": 322
         },
-        "id": "b98d1f5d-9352-4d37-a438-5be022973b57",
+        "id": "828f1202-96dc-4449-80f6-ac762c15ac3d",
         "assertions": [
           {
             "assertion": "Wrong Content-Type does not cause 500",
@@ -12245,15 +12245,15 @@
       },
       {
         "cursor": {
-          "ref": "7bb83884-4c33-4bca-b2c3-b61eb048ad44",
+          "ref": "4fe3e334-5736-4bca-b4f0-d0a9f6a5ed6d",
           "length": 28,
           "cycles": 1,
           "position": 23,
           "iteration": 0,
-          "httpRequestId": "92d9f4cb-3975-4415-912a-a34eb3154cef"
+          "httpRequestId": "9ce71abb-61dd-43d0-a14c-8159621b7a56"
         },
         "item": {
-          "id": "7af1bc64-b236-458f-80ec-1eadb889b08e",
+          "id": "ae62c834-39f2-4b45-94db-6f994169db20",
           "name": "X-Content-Type-Options: nosniff is present",
           "request": {
             "url": {
@@ -12275,7 +12275,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9256c486-e667-4789-b877-3933250fc6d0",
+                "id": "0d7c2798-737a-47f1-993b-5b61c42a3f01",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('X-Content-Type-Options: nosniff header is present', function () {",
@@ -12286,7 +12286,7 @@
                   "    }",
                   "});"
                 ],
-                "_lastExecutionId": "de460e57-ee75-4e83-a9b5-f5c8d6d94628"
+                "_lastExecutionId": "dad01ac7-eacd-40c0-8109-75f0ff1aaa30"
               }
             }
           ]
@@ -12332,7 +12332,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "e7cae859-c0d6-4c7c-bc70-a1a2e3ef70f9",
+              "value": "137b3f4b-d7c4-4845-a79b-79248ac72bda",
               "system": true
             },
             {
@@ -12364,7 +12364,7 @@
           }
         },
         "response": {
-          "id": "f346f425-87fe-4831-9ae8-361843deead2",
+          "id": "1788cec7-70b4-4198-a75a-af2c874cb321",
           "status": "OK",
           "code": 200,
           "header": [
@@ -12386,7 +12386,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:48 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:38 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -12446,7 +12446,7 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "8852dbfc-1338-4404-a8ff-a1b770645e1c"
+              "value": "bf6a11b9-4863-44c6-b967-a1ff357623c9"
             },
             {
               "key": "ETag",
@@ -12462,15 +12462,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "iXslwlHv1S-4wi-KrG2gWJUxlkgjy8ybftDXN2Mu6mm18kI7Wx2Tog=="
+              "value": "De-3NlefZrhomxD6JihtYv_h2U6aQ0FCPQr-lBQ2F33C2QEhXjFtxg=="
             }
           ],
           "stream": {
@@ -13889,10 +13889,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 762,
+          "responseTime": 295,
           "responseSize": 1410
         },
-        "id": "7af1bc64-b236-458f-80ec-1eadb889b08e",
+        "id": "ae62c834-39f2-4b45-94db-6f994169db20",
         "assertions": [
           {
             "assertion": "X-Content-Type-Options: nosniff header is present",
@@ -13902,15 +13902,15 @@
       },
       {
         "cursor": {
-          "ref": "96ff84b1-472e-4603-a637-cf665dc95e00",
+          "ref": "1063e1c8-71d4-4d04-9ca6-7411d0dfa176",
           "length": 28,
           "cycles": 1,
           "position": 24,
           "iteration": 0,
-          "httpRequestId": "db90c26f-1405-46a3-b59c-91982cf6ae17"
+          "httpRequestId": "2346163f-1879-4db9-8148-6ba6b62c2db6"
         },
         "item": {
-          "id": "0e511ea6-3040-4277-9758-65cb3ba5c58d",
+          "id": "8ebe2bd0-5b44-403d-91c3-c1546c93bece",
           "name": "Strict-Transport-Security header is present",
           "request": {
             "url": {
@@ -13932,7 +13932,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "d5e97a70-cb44-4448-9938-6ae1a9228c1f",
+                "id": "921d86b1-38c2-4395-a924-34e2c6f3cc25",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Strict-Transport-Security (HSTS) header is present', function () {",
@@ -13947,7 +13947,7 @@
                   "    }",
                   "});"
                 ],
-                "_lastExecutionId": "61d15edf-8cb9-41e8-b418-916a25a1e85e"
+                "_lastExecutionId": "86038d6f-0b5f-428f-8d27-5bc54f6769e6"
               }
             }
           ]
@@ -13993,7 +13993,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "2055c365-5aeb-4abc-8e04-f7877a638f93",
+              "value": "8270a9e3-351e-40bf-9616-dad71480e403",
               "system": true
             },
             {
@@ -14025,7 +14025,7 @@
           }
         },
         "response": {
-          "id": "9b3646f4-936c-4c43-b713-66dae6fa802b",
+          "id": "2a6497e8-62bf-4262-936f-db3a0ae8b0a5",
           "status": "OK",
           "code": 200,
           "header": [
@@ -14047,7 +14047,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:48 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:38 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -14107,7 +14107,7 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "f9d35656-e362-45c4-9767-ce55efacc300"
+              "value": "264fb325-6fb3-4eef-aca3-0829acd43ab5"
             },
             {
               "key": "ETag",
@@ -14123,15 +14123,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "oPuxhBEZhQKCaG97tYOcgdKjYqsCP9tMwYezxjitl18wQCsVXGpnTA=="
+              "value": "xL8rbul3KA-bGvZH3uoK-bDe0w2UdFevc5U7WMpvvfXbDZQEb2IKeQ=="
             }
           ],
           "stream": {
@@ -15550,10 +15550,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 308,
+          "responseTime": 797,
           "responseSize": 1410
         },
-        "id": "0e511ea6-3040-4277-9758-65cb3ba5c58d",
+        "id": "8ebe2bd0-5b44-403d-91c3-c1546c93bece",
         "assertions": [
           {
             "assertion": "Strict-Transport-Security (HSTS) header is present",
@@ -15574,15 +15574,15 @@
       },
       {
         "cursor": {
-          "ref": "fcda5fe4-6d81-4298-8246-2bbad3470648",
+          "ref": "70b3955e-e807-461b-9981-7845bf7c09e9",
           "length": 28,
           "cycles": 1,
           "position": 25,
           "iteration": 0,
-          "httpRequestId": "c393df40-c6b7-484f-b42e-e9aff0b465f2"
+          "httpRequestId": "e65f5505-f4be-443b-823d-05e36dc961e1"
         },
         "item": {
-          "id": "3f6e8354-2ddb-4edb-abb3-52b181efd272",
+          "id": "8de23e85-18b9-4265-8ed1-40190db43566",
           "name": "X-Powered-By header is absent",
           "request": {
             "url": {
@@ -15604,7 +15604,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "14ca9289-4657-4998-8de6-480bbc3791c2",
+                "id": "163cbc0a-88a5-488e-b3e4-0e34076b735e",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('X-Powered-By header absent (does not expose technology stack)', function () {",
@@ -15612,7 +15612,7 @@
                   "    pm.expect(header, 'X-Powered-By exposes tech stack: ' + header).to.not.exist;",
                   "});"
                 ],
-                "_lastExecutionId": "197ad68e-68f7-4879-b47a-497233267a1d"
+                "_lastExecutionId": "5afeaf25-ab97-4cd1-80cd-d8150125d1e9"
               }
             }
           ]
@@ -15658,7 +15658,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "c2f7e231-d48f-4c04-b742-5924a773d69c",
+              "value": "afc027d6-7399-490d-b2a9-95ad2d5b6944",
               "system": true
             },
             {
@@ -15690,7 +15690,7 @@
           }
         },
         "response": {
-          "id": "b8bd7da8-33f5-45d5-b0ed-6494070bc15d",
+          "id": "7f70785d-7530-469a-af64-1a35aad72d73",
           "status": "OK",
           "code": 200,
           "header": [
@@ -15712,7 +15712,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:48 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:39 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -15772,7 +15772,7 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "a4bee381-2827-47e6-80d6-fc0e0175d5cf"
+              "value": "0a0cdc1c-b71e-42a8-9a92-62c46fce948c"
             },
             {
               "key": "ETag",
@@ -15788,15 +15788,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "ULToBYIh8gkb4P8Gglj01kszhETPQn7Mdtj637vJ4H7Y4zZMp1G2-A=="
+              "value": "btxk5ex44n72f6PzXzPO6G6ZmFBfYs9UfGhi78ei6ZFualRRreIWRQ=="
             }
           ],
           "stream": {
@@ -17215,10 +17215,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 300,
+          "responseTime": 297,
           "responseSize": 1410
         },
-        "id": "3f6e8354-2ddb-4edb-abb3-52b181efd272",
+        "id": "8de23e85-18b9-4265-8ed1-40190db43566",
         "assertions": [
           {
             "assertion": "X-Powered-By header absent (does not expose technology stack)",
@@ -17228,15 +17228,15 @@
       },
       {
         "cursor": {
-          "ref": "b0eadd6f-016a-4be8-83c2-a9909444358d",
+          "ref": "baeec385-d643-4604-a82e-9dc5b60b6d5c",
           "length": 28,
           "cycles": 1,
           "position": 26,
           "iteration": 0,
-          "httpRequestId": "b1a0b978-ffc8-474c-9d05-ade6a78021e7"
+          "httpRequestId": "d36e42d4-3aca-4e2c-87a5-479cbc5fc5d1"
         },
         "item": {
-          "id": "3be5a9ea-fc25-4f73-a228-d0d22b7c52d1",
+          "id": "4cd09ee1-cfcb-429e-976a-f7d732739841",
           "name": "Content-Type is application/json for all API responses",
           "request": {
             "url": {
@@ -17258,7 +17258,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "058e08ef-107f-4a20-a449-425ca654272c",
+                "id": "bae7feed-bb7e-43ca-b3a1-7b83929914dd",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Content-Type is application/json', function () {",
@@ -17271,7 +17271,7 @@
                   "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                   "});"
                 ],
-                "_lastExecutionId": "2526c74d-27f6-4ca4-8571-342007fcefd1"
+                "_lastExecutionId": "f4d16753-7c1a-44ab-9564-5897c7aa4bd1"
               }
             }
           ]
@@ -17317,7 +17317,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "14d328b7-fca2-49bd-9b18-47aa2dac8d68",
+              "value": "bfe79d56-76bf-4c83-a923-4d9078931570",
               "system": true
             },
             {
@@ -17349,7 +17349,7 @@
           }
         },
         "response": {
-          "id": "1ee7b5fb-9a68-49dc-9b48-e3765395bcec",
+          "id": "b2bb7cde-97e7-4b49-931c-8af4ffe3bd4c",
           "status": "OK",
           "code": 200,
           "header": [
@@ -17371,7 +17371,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:49 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:40 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -17431,7 +17431,7 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "6841452e-6df4-480f-9cb7-b2ba6edb56c9"
+              "value": "ba0d149b-1b65-4f0b-8bdd-5cbf6a7de780"
             },
             {
               "key": "ETag",
@@ -17447,15 +17447,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "vamXOqB4znN3WSXdvrDx4KDN98VhJ9pgyHUxfboogR1wdMZSfpOEbg=="
+              "value": "FGwbXRDuYpMCH_kPtNY1zZWhlJRk8VOBLMftvD2Q614TdDbuXXXlqQ=="
             }
           ],
           "stream": {
@@ -18874,10 +18874,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 413,
+          "responseTime": 775,
           "responseSize": 1410
         },
-        "id": "3be5a9ea-fc25-4f73-a228-d0d22b7c52d1",
+        "id": "4cd09ee1-cfcb-429e-976a-f7d732739841",
         "assertions": [
           {
             "assertion": "Content-Type is application/json",
@@ -18891,15 +18891,15 @@
       },
       {
         "cursor": {
-          "ref": "b07430ef-127d-4909-a11e-0346c3627ee9",
+          "ref": "0e14f6a8-1423-492b-af6b-5012bdac4d1e",
           "length": 28,
           "cycles": 1,
           "position": 27,
           "iteration": 0,
-          "httpRequestId": "472e0c6d-f7d9-45a7-9057-e85e5e9c3045"
+          "httpRequestId": "9a33746f-07ed-42e6-8277-367c3847c389"
         },
         "item": {
-          "id": "92191f43-0bf9-421d-9c25-71d36cea3c73",
+          "id": "c1a8ca2a-78e5-4bda-a6c0-2e5652381538",
           "name": "401 error response Content-Type is JSON not HTML",
           "request": {
             "url": {
@@ -18925,7 +18925,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "385532a7-30ae-45cc-87df-2e05cf4dbc49",
+                "id": "63d47e08-8822-4bec-b7a9-0318ab79b031",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('401 error response is JSON not HTML', function () {",
@@ -18934,7 +18934,7 @@
                   "    pm.expect(ct).to.not.include('text/html');",
                   "});"
                 ],
-                "_lastExecutionId": "50bee163-c062-4651-83c6-6ff8eb5c61de"
+                "_lastExecutionId": "9fda7725-7894-4563-a80c-9507cd551c31"
               }
             }
           ]
@@ -18975,7 +18975,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "2aaad4ab-56d9-4b01-ad2a-fbf2a175f2aa",
+              "value": "f2991076-7e4a-4021-a2b7-6df43bcbb8a2",
               "system": true
             },
             {
@@ -19001,7 +19001,7 @@
           }
         },
         "response": {
-          "id": "520392d8-b027-4194-82e9-61dfac98c923",
+          "id": "079ff263-828f-4486-a009-d3923ae61c20",
           "status": "Unauthorized",
           "code": 401,
           "header": [
@@ -19023,7 +19023,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 13 Oct 2026 09:43:49 GMT"
+              "value": "Tue, 13 Oct 2026 13:25:40 GMT"
             },
             {
               "key": "Strict-Transport-Security",
@@ -19083,11 +19083,11 @@
             },
             {
               "key": "x-correlation-id",
-              "value": "f0cccfa7-6752-431a-9e34-64654dcf1df1"
+              "value": "8ceb3525-cd49-4adc-80c5-d4be7a87c190"
             },
             {
               "key": "ETag",
-              "value": "W/\"71-CqzctYVoJpqJWSajHxG+4ZSgh2Y\""
+              "value": "W/\"71-xhSXG+ENUQ9jegpe+EHkVirS+lY\""
             },
             {
               "key": "X-Backend-Server",
@@ -19099,15 +19099,15 @@
             },
             {
               "key": "Via",
-              "value": "1.1 6be13380bf1ffb443d50fc21eba30b30.cloudfront.net (CloudFront)"
+              "value": "1.1 4580bd56b0ae00b2dbb17d9f265459a2.cloudfront.net (CloudFront)"
             },
             {
               "key": "X-Amz-Cf-Pop",
-              "value": "IAD55-P2"
+              "value": "PHX52-P3"
             },
             {
               "key": "X-Amz-Cf-Id",
-              "value": "XS3SWbiea7uJRW-0taoDuU7uBujZZs3Gt7D4CN-hfqy2hiZahY_JZg=="
+              "value": "aeDAoo6hzwHDOxjUbGvXG8cJduWENGc3w1s2hh5ehbzSiVVN3YBMAQ=="
             }
           ],
           "stream": {
@@ -19211,16 +19211,16 @@
               49,
               51,
               84,
-              48,
-              57,
-              58,
-              52,
+              49,
               51,
               58,
+              50,
+              53,
+              58,
               52,
-              57,
+              48,
               46,
-              54,
+              51,
               49,
               55,
               90,
@@ -19229,10 +19229,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 192,
+          "responseTime": 254,
           "responseSize": 113
         },
-        "id": "92191f43-0bf9-421d-9c25-71d36cea3c73",
+        "id": "c1a8ca2a-78e5-4bda-a6c0-2e5652381538",
         "assertions": [
           {
             "assertion": "401 error response is JSON not HTML",
@@ -19253,8 +19253,8 @@
           "message": "HSTS max-age too short — should be at least 6 months: expected 3153600 to be at least 15768000",
           "stack": "AssertionError: HSTS max-age too short — should be at least 6 months: expected 3153600 to be at least 15768000\n   at Object.eval sandbox-script.js:2:25)",
           "checksum": "a6f07c9e9e99da4d92a531f51316b0f9",
-          "id": "c79f5a85-13ae-44e0-b60a-5ef28656c0ea",
-          "timestamp": 1791884628774,
+          "id": "3c5321ab-f634-439f-a926-a51fe44e4dd7",
+          "timestamp": 1791897939090,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -19269,7 +19269,7 @@
         },
         "at": "assertion:1 in test-script",
         "source": {
-          "id": "0e511ea6-3040-4277-9758-65cb3ba5c58d",
+          "id": "8ebe2bd0-5b44-403d-91c3-c1546c93bece",
           "name": "Strict-Transport-Security header is present",
           "request": {
             "url": {
@@ -19291,7 +19291,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "d5e97a70-cb44-4448-9938-6ae1a9228c1f",
+                "id": "921d86b1-38c2-4395-a924-34e2c6f3cc25",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Strict-Transport-Security (HSTS) header is present', function () {",
@@ -19306,13 +19306,13 @@
                   "    }",
                   "});"
                 ],
-                "_lastExecutionId": "61d15edf-8cb9-41e8-b418-916a25a1e85e"
+                "_lastExecutionId": "86038d6f-0b5f-428f-8d27-5bc54f6769e6"
               }
             }
           ]
         },
         "parent": {
-          "id": "fa7ebcd2-22b1-474f-8ff4-9d616d68b89d",
+          "id": "aa3c7879-8fd6-40e0-baf4-28cd0acf80ce",
           "name": "Tier 3-H — Security Headers",
           "description": {
             "content": "Verify essential HTTP security headers are configured. Failures here are findings to raise as defects against the backend/infrastructure team.",
@@ -19320,7 +19320,7 @@
           },
           "item": [
             {
-              "id": "7af1bc64-b236-458f-80ec-1eadb889b08e",
+              "id": "ae62c834-39f2-4b45-94db-6f994169db20",
               "name": "X-Content-Type-Options: nosniff is present",
               "request": {
                 "url": {
@@ -19342,7 +19342,7 @@
                 {
                   "listen": "test",
                   "script": {
-                    "id": "9256c486-e667-4789-b877-3933250fc6d0",
+                    "id": "0d7c2798-737a-47f1-993b-5b61c42a3f01",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test('X-Content-Type-Options: nosniff header is present', function () {",
@@ -19353,13 +19353,13 @@
                       "    }",
                       "});"
                     ],
-                    "_lastExecutionId": "de460e57-ee75-4e83-a9b5-f5c8d6d94628"
+                    "_lastExecutionId": "dad01ac7-eacd-40c0-8109-75f0ff1aaa30"
                   }
                 }
               ]
             },
             {
-              "id": "0e511ea6-3040-4277-9758-65cb3ba5c58d",
+              "id": "8ebe2bd0-5b44-403d-91c3-c1546c93bece",
               "name": "Strict-Transport-Security header is present",
               "request": {
                 "url": {
@@ -19381,7 +19381,7 @@
                 {
                   "listen": "test",
                   "script": {
-                    "id": "d5e97a70-cb44-4448-9938-6ae1a9228c1f",
+                    "id": "921d86b1-38c2-4395-a924-34e2c6f3cc25",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test('Strict-Transport-Security (HSTS) header is present', function () {",
@@ -19396,13 +19396,13 @@
                       "    }",
                       "});"
                     ],
-                    "_lastExecutionId": "61d15edf-8cb9-41e8-b418-916a25a1e85e"
+                    "_lastExecutionId": "86038d6f-0b5f-428f-8d27-5bc54f6769e6"
                   }
                 }
               ]
             },
             {
-              "id": "3f6e8354-2ddb-4edb-abb3-52b181efd272",
+              "id": "8de23e85-18b9-4265-8ed1-40190db43566",
               "name": "X-Powered-By header is absent",
               "request": {
                 "url": {
@@ -19424,7 +19424,7 @@
                 {
                   "listen": "test",
                   "script": {
-                    "id": "14ca9289-4657-4998-8de6-480bbc3791c2",
+                    "id": "163cbc0a-88a5-488e-b3e4-0e34076b735e",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test('X-Powered-By header absent (does not expose technology stack)', function () {",
@@ -19432,13 +19432,13 @@
                       "    pm.expect(header, 'X-Powered-By exposes tech stack: ' + header).to.not.exist;",
                       "});"
                     ],
-                    "_lastExecutionId": "197ad68e-68f7-4879-b47a-497233267a1d"
+                    "_lastExecutionId": "5afeaf25-ab97-4cd1-80cd-d8150125d1e9"
                   }
                 }
               ]
             },
             {
-              "id": "3be5a9ea-fc25-4f73-a228-d0d22b7c52d1",
+              "id": "4cd09ee1-cfcb-429e-976a-f7d732739841",
               "name": "Content-Type is application/json for all API responses",
               "request": {
                 "url": {
@@ -19460,7 +19460,7 @@
                 {
                   "listen": "test",
                   "script": {
-                    "id": "058e08ef-107f-4a20-a449-425ca654272c",
+                    "id": "bae7feed-bb7e-43ca-b3a1-7b83929914dd",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test('Content-Type is application/json', function () {",
@@ -19473,13 +19473,13 @@
                       "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                       "});"
                     ],
-                    "_lastExecutionId": "2526c74d-27f6-4ca4-8571-342007fcefd1"
+                    "_lastExecutionId": "f4d16753-7c1a-44ab-9564-5897c7aa4bd1"
                   }
                 }
               ]
             },
             {
-              "id": "92191f43-0bf9-421d-9c25-71d36cea3c73",
+              "id": "c1a8ca2a-78e5-4bda-a6c0-2e5652381538",
               "name": "401 error response Content-Type is JSON not HTML",
               "request": {
                 "url": {
@@ -19505,7 +19505,7 @@
                 {
                   "listen": "test",
                   "script": {
-                    "id": "385532a7-30ae-45cc-87df-2e05cf4dbc49",
+                    "id": "63d47e08-8822-4bec-b7a9-0318ab79b031",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test('401 error response is JSON not HTML', function () {",
@@ -19514,7 +19514,7 @@
                       "    pm.expect(ct).to.not.include('text/html');",
                       "});"
                     ],
-                    "_lastExecutionId": "50bee163-c062-4651-83c6-6ff8eb5c61de"
+                    "_lastExecutionId": "9fda7725-7894-4563-a80c-9507cd551c31"
                   }
                 }
               ]
@@ -19523,14 +19523,14 @@
           "event": []
         },
         "cursor": {
-          "ref": "96ff84b1-472e-4603-a637-cf665dc95e00",
+          "ref": "1063e1c8-71d4-4d04-9ca6-7411d0dfa176",
           "length": 28,
           "cycles": 1,
           "position": 24,
           "iteration": 0,
-          "httpRequestId": "db90c26f-1405-46a3-b59c-91982cf6ae17",
-          "scriptId": "d5e97a70-cb44-4448-9938-6ae1a9228c1f",
-          "execution": "61d15edf-8cb9-41e8-b418-916a25a1e85e"
+          "httpRequestId": "2346163f-1879-4db9-8148-6ba6b62c2db6",
+          "scriptId": "921d86b1-38c2-4395-a924-34e2c6f3cc25",
+          "execution": "86038d6f-0b5f-428f-8d27-5bc54f6769e6"
         }
       }
     ],
