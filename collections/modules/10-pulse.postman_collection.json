@@ -1,0 +1,623 @@
+{
+  "info": {
+    "name": "Vyaguta — Pulse + Pulse Write Operations",
+    "description": "Module tests: Pulse + Pulse Write Operations. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Pulse",
+      "description": "Tests for the Pulse module (surveys, feedback).",
+      "item": [
+        {
+          "name": "Get pulse dashboard returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01&endDate=2026-12-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "dashboard"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'relation', 'noteStatus'],",
+                  "        properties: {",
+                  "          id:         { type: 'integer' },",
+                  "          relation:   { type: 'string' },",
+                  "          noteStatus: { type: 'string' },",
+                  "          subject:    { type: ['object', 'null'] },",
+                  "          appraiser:  { type: ['object', 'null'] }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get promotion status as appraiser returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/promotion?startDate=2026-07-01&endDate=2026-12-31&actionAs=appraiser&userIds=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "promotion"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2026-07-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
+                },
+                {
+                  "key": "actionAs",
+                  "value": "appraiser"
+                },
+                {
+                  "key": "userIds",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: { type: 'array' }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get evaluation groups returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "evaluations",
+                "groups"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data', 'message'],",
+                  "  properties: {",
+                  "    message: { type: 'string' },",
+                  "    data:    { type: 'array' }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get user pulse info returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/user/{{personId}}/pulse",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "user",
+                "{{personId}}",
+                "pulse"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data', 'message'],",
+                  "  properties: {",
+                  "    message: { type: 'string' },",
+                  "    data: {",
+                  "      type: 'object',",
+                  "      required: ['helpRequests', 'pip', 'probations'],",
+                  "      properties: {",
+                  "        helpRequests: { type: 'array' },",
+                  "        pip:          { type: 'array' },",
+                  "        probations: {",
+                  "          type: 'array',",
+                  "          items: {",
+                  "            type: 'object',",
+                  "            required: ['id', 'status'],",
+                  "            properties: {",
+                  "              id:                  { type: 'integer' },",
+                  "              eventDate:           { type: ['string', 'null'] },",
+                  "              status:              { type: 'string' },",
+                  "              probationCategory:   { type: ['string', 'null'] }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get expectation notes for user returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes?noteType=EXPECTATION&subjectId={{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes"
+              ],
+              "query": [
+                {
+                  "key": "noteType",
+                  "value": "EXPECTATION"
+                },
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const noteSchema = {",
+                  "  type: 'object',",
+                  "  required: ['id', 'noteType', 'subjectId'],",
+                  "  properties: {",
+                  "    id:                   { type: 'integer' },",
+                  "    allocationId:         { type: ['integer', 'null'] },",
+                  "    isClosingFeedback:    { type: 'integer' },",
+                  "    note:                 { type: ['string', 'null'] },",
+                  "    noteExpectations:     { type: 'array' },",
+                  "    isDeletable:          { type: 'boolean' },",
+                  "    ratings:              { type: ['number', 'null'] },",
+                  "    finalEvaluationScore: { type: ['number', 'null'] },",
+                  "    noteType:             { type: 'string' },",
+                  "    subjectId:            { type: 'integer' },",
+                  "    pulseNoteRelation:    { type: 'string' },",
+                  "    notePrivacy:          { type: 'string' },",
+                  "    createdAt:            { type: 'string' },",
+                  "    createdBy:            { type: 'integer' },",
+                  "    updatedAt:            { type: ['string', 'null'] },",
+                  "    deletedAt:            { type: ['string', 'null'] },",
+                  "    noteStatus:           { type: 'string' }",
+                  "  }",
+                  "};",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: { data: { type: 'array', items: noteSchema } }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"All returned notes are EXPECTATION type\", function () {",
+                  "    pm.response.json().data.forEach(function (note) {",
+                  "        pm.expect(note.noteType).to.equal('EXPECTATION');",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get all notes for user returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes?subjectId={{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const noteSchema = {",
+                  "  type: 'object',",
+                  "  required: ['id', 'noteType', 'subjectId'],",
+                  "  properties: {",
+                  "    id:                   { type: 'integer' },",
+                  "    allocationId:         { type: ['integer', 'null'] },",
+                  "    isClosingFeedback:    { type: 'integer' },",
+                  "    note:                 { type: ['string', 'null'] },",
+                  "    noteExpectations:     { type: 'array' },",
+                  "    isDeletable:          { type: 'boolean' },",
+                  "    noteType:             { type: 'string' },",
+                  "    subjectId:            { type: 'integer' },",
+                  "    pulseNoteRelation:    { type: 'string' },",
+                  "    notePrivacy:          { type: 'string' },",
+                  "    createdAt:            { type: 'string' },",
+                  "    noteStatus:           { type: 'string' }",
+                  "  }",
+                  "};",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: { data: { type: 'array', items: noteSchema } }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pulse Write Operations",
+      "item": [
+        {
+          "name": "Create feedback note returns 200 with note ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedback",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedback"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"subjectId\":15444,\"noteType\":\"FEEDBACK\",\"note\":\"[TEST] Automated feedback note\",\"noteStatus\":\"ACTIVE\",\"notePrivacy\":\"ONLY_ME\",\"areaId\":4}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Content-Type is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['message', 'data'],",
+                  "  properties: {",
+                  "    message: { type: 'string' },",
+                  "    data: { type: 'object', required: ['id'], properties: { id: { type: 'integer' } } }",
+                  "  }",
+                  "};",
+                  "pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "pm.test('Note ID stored for subsequent requests', function () {",
+                  "    const id = pm.response.json().data.id;",
+                  "    pm.environment.set('pulseNoteId', id);",
+                  "    pm.expect(id).to.be.a('number').and.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Update feedback note returns 200 with updated note",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedback/{{pulseNoteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedback",
+                "{{pulseNoteId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"note\":\"[TEST] Updated feedback note\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response echoes updated note text', function () {",
+                  "    const d = pm.response.json().data;",
+                  "    pm.expect(d.note).to.equal('[TEST] Updated feedback note');",
+                  "    pm.expect(d.id).to.equal(pm.environment.get('pulseNoteId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Delete feedback note returns 200",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedbacks/{{pulseNoteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedbacks",
+                "{{pulseNoteId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.environment.unset('pulseNoteId');"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create feedback note with missing required fields returns 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/notes/feedback",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "notes",
+                "feedback"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"note\":\"missing subjectId and other required fields\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400 or 422 for missing required fields', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
