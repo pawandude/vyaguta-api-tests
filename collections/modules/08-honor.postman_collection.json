@@ -1,0 +1,290 @@
+{
+  "info": {
+    "name": "Vyaguta — Honor",
+    "description": "Module tests: Honor. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Honor",
+      "description": "Tests for the Honor module — /api/honor/menus, /api/honor/campaigns/active, /api/honor/appreciation-types, /api/honor/users/:id/campaigns/:id/appreciations, /api/honor/images/active.",
+      "item": [
+        {
+          "name": "Get honor menus returns 200 with menu list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/menus",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "menus"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "pm.test(\"data is a non-empty array of strings\", function () {",
+                  "    const data = pm.response.json().data;",
+                  "    pm.expect(data).to.be.an('array').that.is.not.empty;",
+                  "    data.forEach(function (item) {",
+                  "        pm.expect(item).to.be.a('string');",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get active campaign returns 200 with campaign details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/campaigns/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "campaigns",
+                "active"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['id', 'name', 'status', 'startDate', 'endDate'],",
+                  "  properties: {",
+                  "    id:          { type: 'string' },",
+                  "    name:        { type: 'string' },",
+                  "    status:      { type: 'string' },",
+                  "    startDate:   { type: 'string' },",
+                  "    endDate:     { type: 'string' },",
+                  "    categoryId:  { type: 'array' },",
+                  "    isEvaluator: { type: 'boolean' }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"Campaign stores active campaignId for later use\", function () {",
+                  "    const campaignId = pm.response.json().id;",
+                  "    if (campaignId) pm.environment.set('honorCampaignId', campaignId);",
+                  "    pm.expect(campaignId).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get appreciation types returns 200 with type list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/appreciation-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "appreciation-types"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'name', 'abbreviation', 'value'],",
+                  "        properties: {",
+                  "          id:           { type: 'string' },",
+                  "          name:         { type: 'string' },",
+                  "          abbreviation: { type: 'string' },",
+                  "          value:        { type: 'integer' }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"data array is not empty\", function () {",
+                  "    pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get user appreciations for active campaign returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/users/{{personId}}/campaigns/11820130-e04d-463e-8d82-2272908fcaca/appreciations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "users",
+                "{{personId}}",
+                "campaigns",
+                "11820130-e04d-463e-8d82-2272908fcaca",
+                "appreciations"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const status = pm.response.code;",
+                  "pm.test('Status is 200 or 403 (Honor access depends on user role)', function () {",
+                  "    pm.expect(status).to.be.oneOf([200, 403]);",
+                  "});",
+                  "if (status === 200) {",
+                  "    pm.test('Content-Type is application/json', function () {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "    });",
+                  "    pm.test('Response has data array', function () {",
+                  "        pm.expect(pm.response.json().data).to.be.an('array');",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get active honor images returns 200 with image list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/honor/images/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "honor",
+                "images",
+                "active"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['id', 'url', 'active'],",
+                  "        properties: {",
+                  "          id:        { type: 'string' },",
+                  "          url:       { type: 'string' },",
+                  "          active:    { type: 'integer' },",
+                  "          createdAt: { type: 'string' },",
+                  "          updatedAt: { type: 'string' }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
