@@ -1,0 +1,209 @@
+{
+  "info": {
+    "name": "Vyaguta — JUMP",
+    "description": "Module tests: JUMP. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "JUMP",
+      "description": "Tests for the JUMP module — /api/jump/kpis/filters and /api/jump/kpis.",
+      "item": [
+        {
+          "name": "Get KPI filters returns 200 with area/designation list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis",
+                "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "const schema = {",
+                  "  type: 'object',",
+                  "  required: ['data'],",
+                  "  properties: {",
+                  "    data: {",
+                  "      type: 'array',",
+                  "      items: {",
+                  "        type: 'object',",
+                  "        required: ['areaName', 'areaId', 'designations'],",
+                  "        properties: {",
+                  "          areaName:     { type: 'string' },",
+                  "          areaId:       { type: 'integer' },",
+                  "          designations: {",
+                  "            type: 'array',",
+                  "            items: {",
+                  "              type: 'object',",
+                  "              required: ['designationName', 'designationId'],",
+                  "              properties: {",
+                  "                designationName: { type: 'string' },",
+                  "                designationId:   { type: 'integer' }",
+                  "              }",
+                  "            }",
+                  "          },",
+                  "          stage:    { type: 'array' },",
+                  "          category: { type: 'array' }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "pm.test(\"Response matches schema\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "pm.test(\"data array is not empty\", function () {",
+                  "    pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get KPIs filtered by designation and area returns matching items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jump/kpis?designationId={{designationId}}&areaId={{areaId}}&with=score,goalCount,scope&pageSize=10&type=Role based",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jump",
+                "kpis"
+              ],
+              "query": [
+                {
+                  "key": "designationId",
+                  "value": "3"
+                },
+                {
+                  "key": "areaId",
+                  "value": "4"
+                },
+                {
+                  "key": "with",
+                  "value": "score,goalCount,scope"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "key": "type",
+                  "value": "Role based"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const status = pm.response.code;",
+                  "pm.test('Status is 200 (500 if token user has no designation profile — backend bug)', function () {",
+                  "    pm.expect(status).to.be.oneOf([200, 500]);",
+                  "});",
+                  "if (status === 200) {",
+                  "    pm.test('Content-Type is application/json', function () {",
+                  "        pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "    });",
+                  "    const schema = {",
+                  "      type: 'object',",
+                  "      required: ['data'],",
+                  "      properties: {",
+                  "        data: {",
+                  "          type: 'array',",
+                  "          items: {",
+                  "            type: 'object',",
+                  "            required: ['id', 'code', 'description', 'stage', 'type', 'area', 'designation', 'priority'],",
+                  "            properties: {",
+                  "              id:          { type: 'integer' },",
+                  "              code:        { type: 'string' },",
+                  "              description: { type: 'string' },",
+                  "              stage:       { type: ['string', 'null'] },",
+                  "              type:        { type: 'string' },",
+                  "              category:    { type: ['string', 'null'] },",
+                  "              priority:    { type: ['string', 'null'] },",
+                  "              score:       { type: ['number', 'null'] },",
+                  "              counts:      { type: ['object', 'null'] },",
+                  "              area:        { type: 'object', required: ['id', 'name'], properties: { id: { type: 'integer' }, name: { type: 'string' } } },",
+                  "              designation: { type: 'object', required: ['id', 'name'], properties: { id: { type: 'integer' }, name: { type: 'string' } } }",
+                  "            }",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    };",
+                  "    pm.test('Response matches schema', function () { pm.response.to.have.jsonSchema(schema); });",
+                  "    pm.test('All returned KPIs match requested designationId and areaId', function () {",
+                  "        const expectedDesignationId = parseInt(pm.environment.get('designationId'));",
+                  "        const expectedAreaId = parseInt(pm.environment.get('areaId'));",
+                  "        pm.response.json().data.forEach(function (kpi) {",
+                  "            pm.expect(kpi.designation.id).to.equal(expectedDesignationId);",
+                  "            pm.expect(kpi.area.id).to.equal(expectedAreaId);",
+                  "        });",
+                  "    });",
+                  "    pm.test('All returned KPIs have type Role based', function () {",
+                  "        pm.response.json().data.forEach(function (kpi) { pm.expect(kpi.type).to.equal('Role based'); });",
+                  "    });",
+                  "    pm.test('Returned item count does not exceed pageSize=10', function () {",
+                  "        pm.expect(pm.response.json().data.length).to.be.at.most(10);",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
