@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {} # allows manual "Run workflow" from the Actions tab
 
 permissions:
-  contents: write # required by peaceiris/actions-gh-pages to push the gh-pages branch
+  contents: read
 
 jobs:
   newman:
@@ -270,8 +270,7 @@ jobs:
             failureBlock +
             // Footer buttons
             '<div style=\"padding:24px 32px\">' +
-            '<a href=\"' + reportUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View API Report</a>' +
-            '<a href=\"' + secReportUrl + '\" style=\"display:inline-block;background:#7c3aed;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View Security Report</a>' +
+            '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View Full Report (Artifacts)</a>' +
             '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600\">GitHub Actions Run</a>' +
             '</div>' +
             '</div></body></html>';
@@ -280,8 +279,6 @@ jobs:
           "
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          PAGES_URL: https://Vyaguta.github.io/vyaguta-api-tests/report.html
-          SECURITY_PAGES_URL: https://Vyaguta.github.io/vyaguta-api-tests/report-security.html
 
       - name: Upload test report
         if: always()
@@ -289,16 +286,6 @@ jobs:
         with:
           name: newman-report
           path: reports/
-
-      - name: Deploy report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: reports
-          publish_branch: gh-pages
-          destination_dir: .
-          keep_files: false
 
       - name: Send email notification
         if: always()
