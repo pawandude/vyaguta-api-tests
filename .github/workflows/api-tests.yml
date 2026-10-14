@@ -268,10 +268,19 @@ jobs:
             '</div>' +
             // Failure detail (only for failed runs)
             failureBlock +
-            // Footer buttons
+            // Footer
+            '<div style=\"padding:20px 32px;background:#fffbeb;border-top:1px solid #fde68a\">' +
+            '<div style=\"display:flex;align-items:flex-start;gap:10px\">' +
+            '<span style=\"font-size:16px;line-height:1\">ℹ️</span>' +
+            '<div>' +
+            '<div style=\"font-size:12px;font-weight:700;color:#92400e;margin-bottom:3px\">Interactive HTML Reports</div>' +
+            '<div style=\"font-size:12px;color:#78350f;line-height:1.5\">GitHub Pages is currently disabled for this organization. To view the full interactive test report, click <strong>Download HTML Reports</strong> below, open the <code style=\"background:#fef3c7;padding:1px 4px;border-radius:3px\">newman-report</code> artifact, and open <code style=\"background:#fef3c7;padding:1px 4px;border-radius:3px\">report.html</code> or <code style=\"background:#fef3c7;padding:1px 4px;border-radius:3px\">report-security.html</code> in your browser.</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
             '<div style=\"padding:24px 32px\">' +
-            '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">View Full Report (Artifacts)</a>' +
-            '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600\">GitHub Actions Run</a>' +
+            '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">Download HTML Reports</a>' +
+            '<a href=\"' + runUrl + '\" style=\"display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600\">View GitHub Actions Run</a>' +
             '</div>' +
             '</div></body></html>';
 
