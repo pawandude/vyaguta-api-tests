@@ -312,3 +312,216 @@ jobs:
       - name: Fail the job if Newman had failures
         if: steps.newman-api.outcome == 'failure' || steps.newman-security.outcome == 'failure'
         run: exit 1
+
+  newman-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint collection and environment JSON
+        run: npm run lint
+
+      - name: Refresh QA access token
+        id: qa-token
+        run: |
+          RESPONSE=$(curl -s -X POST \
+            "https://qa.vyaguta.lftechnology.com.np/api/core/auth/access-token" \
+            -H "Content-Type: application/json" \
+            -d "{\"refreshToken\": \"$VYAGUTA_QA_REFRESH_TOKEN\"}" \
+            --max-time 15 || echo "")
+          NEW_TOKEN=$(echo "$RESPONSE" | node -e "
+            const chunks = [];
+            process.stdin.on('data', d => chunks.push(d));
+            process.stdin.on('end', () => {
+              try {
+                const body = JSON.parse(chunks.join(''));
+                const t = body.data && (body.data.accessToken || body.data.token);
+                process.stdout.write(t || '');
+              } catch(e) { process.stdout.write(''); }
+            });
+          ")
+          if [ -n "$NEW_TOKEN" ]; then
+            echo "QA_ACCESS_TOKEN=$NEW_TOKEN" >> $GITHUB_ENV
+            echo "Token refreshed successfully"
+          else
+            echo "QA_ACCESS_TOKEN=$VYAGUTA_QA_TOKEN" >> $GITHUB_ENV
+            echo "Refresh failed — using stored token"
+          fi
+        env:
+          VYAGUTA_QA_REFRESH_TOKEN: ${{ secrets.VYAGUTA_QA_REFRESH_TOKEN }}
+          VYAGUTA_QA_TOKEN: ${{ secrets.VYAGUTA_QA_TOKEN }}
+
+      - name: Run Newman tests — QA API collection
+        id: newman-qa-api
+        continue-on-error: true
+        run: |
+          npx newman run collections/vyaguta-api.postman_collection.json \
+            -e environments/vyaguta-qa.postman_environment.json \
+            --env-var "authToken=$QA_ACCESS_TOKEN" \
+            --env-var "restrictedToken=$QA_ACCESS_TOKEN" \
+            --reporters cli,junit,htmlextra,json \
+            --reporter-junit-export reports-qa/junit-report.xml \
+            --reporter-htmlextra-export reports-qa/report.html \
+            --reporter-htmlextra-title "Vyaguta API Test Report — QA" \
+            --reporter-json-export reports-qa/results-api.json
+        env:
+          QA_ACCESS_TOKEN: ${{ env.QA_ACCESS_TOKEN }}
+
+      - name: Run Newman tests — QA Security collection
+        id: newman-qa-security
+        continue-on-error: true
+        run: |
+          npx newman run collections/vyaguta-security-tests.postman_collection.json \
+            -e environments/vyaguta-qa.postman_environment.json \
+            --env-var "authToken=$QA_ACCESS_TOKEN" \
+            --env-var "restrictedToken=$QA_ACCESS_TOKEN" \
+            --reporters cli,htmlextra,json \
+            --reporter-htmlextra-export reports-qa/report-security.html \
+            --reporter-htmlextra-title "Vyaguta Security Test Report — QA" \
+            --reporter-json-export reports-qa/results-security.json
+        env:
+          QA_ACCESS_TOKEN: ${{ env.QA_ACCESS_TOKEN }}
+
+      - name: Parse QA test results
+        id: qa-results
+        if: always()
+        run: |
+          node -e "
+          const fs = require('fs');
+          if (!fs.existsSync('./reports-qa/results-api.json') || !fs.existsSync('./reports-qa/results-security.json')) {
+            fs.appendFileSync(process.env.GITHUB_ENV, 'QA_STATUS=ERROR\nQA_SUBJECT<<_EOF\n❌ QA API Tests — Could not parse results\n_EOF\n');
+            fs.writeFileSync('reports-qa/email.html', '<p>Test results could not be parsed.</p>');
+            process.exit(0);
+          }
+          const rApi = require('./reports-qa/results-api.json');
+          const rSec  = require('./reports-qa/results-security.json');
+
+          const requests   = rApi.run.stats.requests.total   + rSec.run.stats.requests.total;
+          const assertions = rApi.run.stats.assertions.total  + rSec.run.stats.assertions.total;
+          const failed     = rApi.run.stats.assertions.failed + rSec.run.stats.assertions.failed;
+          const passed     = assertions - failed;
+          const apiDur     = rApi.run.timings.completed - rApi.run.timings.started;
+          const secDur     = rSec.run.timings.completed - rSec.run.timings.started;
+          const duration   = Math.round((apiDur + secDur) / 1000);
+          const allFailures = [...(rApi.run.failures || []), ...(rSec.run.failures || [])];
+          const execMap = {};
+          for (const ex of [...(rApi.run.executions || []), ...(rSec.run.executions || [])]) {
+            if (ex.item && ex.item.id) execMap[ex.item.id] = ex;
+          }
+
+          const status  = failed === 0 ? 'PASSED' : 'FAILED';
+          const emoji   = failed === 0 ? '✅' : '❌';
+          const dash    = '—';
+          const subject = failed === 0
+            ? emoji + ' QA API Tests Passed ' + dash + ' ' + assertions + ' assertions, 0 failures | Vyaguta QA'
+            : emoji + ' QA API Tests Failed ' + dash + ' ' + failed + ' failure(s) in ' + assertions + ' assertions | Vyaguta QA';
+
+          const envFile = process.env.GITHUB_ENV;
+          const plain = ['QA_STATUS=' + status, 'QA_REQUESTS=' + requests, 'QA_ASSERTIONS=' + assertions, 'QA_PASSED=' + passed, 'QA_FAILED=' + failed, 'QA_DURATION=' + duration + 's'].join('\n') + '\n';
+          const subjectBlock = 'QA_SUBJECT<<_SUBEOF\n' + subject + '\n_SUBEOF\n';
+          fs.appendFileSync(envFile, plain + subjectBlock);
+
+          const color   = failed === 0 ? '#16a34a' : '#dc2626';
+          const bgColor = failed === 0 ? '#f0fdf4' : '#fef2f2';
+          const runUrl  = process.env.RUN_URL || '';
+
+          function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;'); }
+          function methodColor(m) { return {GET:'#0ea5e9',POST:'#16a34a',PUT:'#d97706',PATCH:'#7c3aed',DELETE:'#dc2626'}[m] || '#6b7280'; }
+          function prettyJson(str) { try { return JSON.stringify(JSON.parse(str), null, 2); } catch(e) { return str; } }
+          function truncate(str, n) { return str.length > n ? str.slice(0, n) + '\n… (truncated)' : str; }
+
+          const statsData = [['Requests', requests], ['Assertions', assertions], ['Passed', passed], ['Failed', failed], ['Duration', duration + 's']];
+          const rows = statsData.map(([k, v]) => {
+            const isFailed = k === 'Failed' && v > 0;
+            return '<tr><td style=\"padding:10px 20px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6\">' + k + '</td><td style=\"padding:10px 20px;font-weight:700;font-size:14px;color:' + (isFailed ? '#dc2626' : '#111827') + ';border-bottom:1px solid #f3f4f6\">' + v + '</td></tr>';
+          }).join('');
+
+          let failureBlock = '';
+          if (failed > 0 && allFailures.length > 0) {
+            const seen = new Set();
+            const items = allFailures.map(function(f) {
+              const folder = (f.parent && f.parent.name) ? f.parent.name : '';
+              const reqName = (f.source && f.source.name) ? f.source.name : 'Unknown';
+              const errMsg  = (f.error && f.error.message) ? f.error.message : 'Assertion failed';
+              const testName = (f.error && f.error.test) ? f.error.test : '';
+              const location = folder ? folder + ' &rsaquo; ' + reqName : reqName;
+              const srcId = f.source && f.source.id;
+              const ex = srcId ? execMap[srcId] : null;
+              const req = ex && ex.item && ex.item.request;
+              const res = ex && ex.response;
+              const method = req && req.method ? req.method.toUpperCase() : '';
+              const rawUrl = req && req.url ? (typeof req.url === 'string' ? req.url : (req.url.raw || '')) : '';
+              const reqHdrs = (req && Array.isArray(req.header) ? req.header : []).filter(h => h && h.key && !/^authorization$/i.test(h.key)).map(h => escHtml(h.key) + ': ' + escHtml(h.value || '')).join('\n');
+              const reqBodyRaw = req && req.body && req.body.raw ? req.body.raw : '';
+              const reqBody = reqBodyRaw ? truncate(prettyJson(reqBodyRaw), 600) : '';
+              const statusCode = res && res.code != null ? res.code : '';
+              const statusText = res && res.status ? res.status : '';
+              let resBody = '';
+              if (res && res.stream) { try { const bytes = res.stream.data ? Buffer.from(res.stream.data) : Buffer.from(res.stream); resBody = truncate(prettyJson(bytes.toString('utf8')), 800); } catch(e) {} }
+              const dedupKey = srcId || location;
+              const isFirst = !seen.has(dedupKey);
+              seen.add(dedupKey);
+              const endpointBlock = isFirst && method ? '<div style=\"margin-bottom:8px;display:flex;align-items:center;gap:8px\"><span style=\"background:' + methodColor(method) + ';color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;font-family:monospace\">' + escHtml(method) + '</span><span style=\"font-size:11px;color:#374151;font-family:monospace;word-break:break-all\">' + escHtml(rawUrl) + '</span></div>' : '';
+              const reqHdrBlock = isFirst && reqHdrs ? '<div style=\"margin-bottom:6px\"><div style=\"font-size:10px;font-weight:700;color:#6b7280;margin-bottom:2px\">REQUEST HEADERS</div><pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap\">' + reqHdrs + '</pre></div>' : '';
+              const reqBodyBlock = isFirst && reqBody ? '<div style=\"margin-bottom:6px\"><div style=\"font-size:10px;font-weight:700;color:#6b7280;margin-bottom:2px\">REQUEST BODY</div><pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap\">' + escHtml(reqBody) + '</pre></div>' : '';
+              const resStatusBlock = isFirst && statusCode ? '<div style=\"margin-bottom:6px\"><div style=\"font-size:10px;font-weight:700;color:#6b7280;margin-bottom:2px\">RESPONSE STATUS</div><span style=\"font-size:11px;font-family:monospace;color:' + (statusCode >= 400 ? '#dc2626' : '#16a34a') + ';font-weight:700\">' + escHtml(String(statusCode)) + ' ' + escHtml(statusText) + '</span></div>' : '';
+              const resBodyBlock = isFirst && resBody ? '<div style=\"margin-bottom:6px\"><div style=\"font-size:10px;font-weight:700;color:#6b7280;margin-bottom:2px\">RESPONSE BODY</div><pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap\">' + escHtml(resBody) + '</pre></div>' : '';
+              return '<div style=\"margin-bottom:16px;padding:14px 16px;background:#fff;border-left:3px solid #dc2626;border:1px solid #fecaca;border-left-width:3px;border-radius:0 4px 4px 0\">' +
+                '<div style=\"font-size:12px;font-weight:700;color:#374151;margin-bottom:6px\">' + escHtml(location) + '</div>' +
+                endpointBlock + reqHdrBlock + reqBodyBlock + resStatusBlock + resBodyBlock +
+                '<div style=\"margin-top:8px;padding-top:8px;border-top:1px solid #fee2e2\">' + (testName ? '<div style=\"font-size:10px;color:#6b7280;margin-bottom:3px\">Test: ' + escHtml(testName) + '</div>' : '') +
+                '<div style=\"font-size:11px;color:#dc2626;font-family:monospace;font-weight:600\">' + escHtml(errMsg) + '</div></div></div>';
+            }).join('');
+            failureBlock = '<div style=\"padding:20px 24px;background:#fef2f2;border-top:1px solid #fecaca\"><div style=\"font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b91c1c;margin-bottom:14px\">Failed Tests (' + allFailures.length + ')</div>' + items + '</div>';
+          }
+
+          const html = '<!DOCTYPE html><html><body style=\"margin:0;font-family:Arial,sans-serif;background:#f3f4f6\">' +
+            '<div style=\"max-width:580px;margin:32px auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)\">' +
+            '<div style=\"background:' + color + ';padding:26px 32px\">' +
+            '<div style=\"font-size:26px;font-weight:700;color:#fff\">' + emoji + ' QA API Tests ' + status + '</div>' +
+            '<div style=\"color:rgba(255,255,255,.8);font-size:13px;margin-top:6px\">Vyaguta QA &nbsp;·&nbsp; ' + requests + ' requests &nbsp;·&nbsp; ' + duration + 's</div>' +
+            '</div>' +
+            '<div style=\"background:' + bgColor + ';padding:0\"><table style=\"width:100%;border-collapse:collapse\">' + rows + '</table></div>' +
+            failureBlock +
+            '<div style=\"padding:20px 32px;background:#fffbeb;border-top:1px solid #fde68a\"><div style=\"display:flex;align-items:flex-start;gap:10px\"><span style=\"font-size:16px;line-height:1\">ℹ️</span><div><div style=\"font-size:12px;font-weight:700;color:#92400e;margin-bottom:3px\">Interactive HTML Reports</div><div style=\"font-size:12px;color:#78350f;line-height:1.5\">GitHub Pages is currently disabled for this organization. To view the full interactive test report, click <strong>Download HTML Reports</strong> below, open the <code style=\"background:#fef3c7;padding:1px 4px;border-radius:3px\">newman-report-qa</code> artifact, and open <code style=\"background:#fef3c7;padding:1px 4px;border-radius:3px\">report.html</code> in your browser.</div></div></div></div>' +
+            '<div style=\"padding:24px 32px\"><a href=\"' + runUrl + '\" style=\"display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px\">Download HTML Reports</a><a href=\"' + runUrl + '\" style=\"display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600\">View GitHub Actions Run</a></div>' +
+            '</div></body></html>';
+
+          fs.mkdirSync('reports-qa', { recursive: true });
+          fs.writeFileSync('reports-qa/email.html', html);
+          "
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Upload QA test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-report-qa
+          path: reports-qa/
+
+      - name: Send QA email notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ env.QA_SUBJECT }}
+          to: pawanlamichhane@lftechnology.com,rikeshshrestha@lftechnology.com,nischalkhadka@lftechnology.com,swarnamaden@lftechnology.com,palisthashrestha@lftechnology.com,shrijanabudhathoki@lftechnology.com
+          from: Vyaguta API Tests <${{ secrets.MAIL_USERNAME }}>
+          html_body: file://reports-qa/email.html
+
+      - name: Fail the QA job if Newman had failures
+        if: steps.newman-qa-api.outcome == 'failure' || steps.newman-qa-security.outcome == 'failure'
+        run: exit 1
