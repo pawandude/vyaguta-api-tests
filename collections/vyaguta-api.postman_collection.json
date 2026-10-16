@@ -107,38 +107,16 @@
       "script": {
         "type": "text/javascript",
         "exec": [
-          "const accessToken = pm.environment.get('authToken');",
-          "const refreshToken = pm.environment.get('refreshToken');",
-          "",
-          "if (!accessToken || !refreshToken) return;",
-          "",
-          "// Decode JWT expiry without a library (base64url decode of the payload segment)",
-          "const payloadBase64 = accessToken.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');",
-          "const payload = JSON.parse(atob(payloadBase64));",
-          "const expiresAtMs = payload.exp * 1000;",
-          "const bufferMs = 5 * 60 * 1000;",
-          "",
-          "if (Date.now() < expiresAtMs - bufferMs) return;",
-          "",
-          "// Access token is expired or expiring within 5 minutes — refresh it",
-          "pm.sendRequest({",
-          "    url: pm.environment.get('baseUrl') + '/api/core/auth/refresh',",
-          "    method: 'GET',",
-          "    header: {",
-          "        'Authorization': 'Bearer ' + refreshToken,",
-          "        'Accept': 'application/json'",
-          "    }",
-          "}, function (err, res) {",
-          "    if (err || res.code !== 200) {",
-          "        console.warn('Token refresh failed — using existing token. Error:', err || res.status);",
-          "        return;",
-          "    }",
-          "    const body = res.json();",
-          "    const newAccessToken = (body.data && body.data.accessToken) || body.accessToken;",
-          "    const newRefreshToken = (body.data && body.data.refreshToken) || body.refreshToken;",
-          "    if (newAccessToken) pm.environment.set('authToken', newAccessToken);",
-          "    if (newRefreshToken) pm.environment.set('refreshToken', newRefreshToken);",
-          "});"
+          "var now = new Date();",
+          "var pad = function(n){return n<10?'0'+n:String(n);};",
+          "var fmt = function(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};",
+          "pm.environment.set('currentDate', fmt(now));",
+          "pm.environment.set('futureDate', fmt(new Date(now.getTime()+30*24*60*60*1000)));",
+          "pm.environment.set('futureDateLong', fmt(new Date(now.getTime()+90*24*60*60*1000)));",
+          "pm.environment.set('lastMonthStart', fmt(new Date(now.getFullYear(),now.getMonth()-1,1)));",
+          "pm.environment.set('lastMonthEnd', fmt(new Date(now.getFullYear(),now.getMonth(),0)));",
+          "pm.environment.set('currentMonthStart', fmt(new Date(now.getFullYear(),now.getMonth(),1)));",
+          "pm.environment.set('currentMonthEnd', fmt(new Date(now.getFullYear(),now.getMonth()+1,0)));"
         ]
       }
     },
@@ -1699,11 +1677,13 @@
                     },
                     {
                       "key": "startDate",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "endDate",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     }
                   ]
                 }
@@ -1752,7 +1732,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"name\":\"pawan holiday dashain\",\"description\":\"tetttext\",\"date\":\"2026-10-15\",\"type\":1,\"countries\":[\"Nepal\"]}",
+                  "raw": "{\"name\":\"Test Holiday {{currentDate}}\",\"description\":\"tetttext\",\"date\":\"{{futureDate}}\",\"type\":1,\"countries\":[\"Nepal\"]}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -2667,11 +2647,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "2026-10-05"
+                      "value": "{{currentMonthStart}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-10-25"
+                      "value": "{{currentMonthEnd}}"
                     },
                     {
                       "key": "worklog",
@@ -2695,11 +2675,13 @@
                     },
                     {
                       "key": "userIds",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "userId",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     }
                   ]
                 }
@@ -2938,11 +2920,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "2026-09-01"
+                      "value": "{{lastMonthStart}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-09-30"
+                      "value": "{{lastMonthEnd}}"
                     },
                     {
                       "key": "status",
@@ -2962,11 +2944,13 @@
                     },
                     {
                       "key": "page",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "size",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     }
                   ]
                 }
@@ -3838,7 +3822,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"location\":\"OFFICE\",\"workDate\":\"2026-10-15\"}",
+                  "raw": "{\"location\":\"OFFICE\",\"workDate\":\"{{currentDate}}\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4324,11 +4308,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "2026-10-15"
+                      "value": "{{currentDate}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2027-04-15"
+                      "value": "{{futureDateLong}}"
                     },
                     {
                       "key": "projectId",
@@ -4344,27 +4328,33 @@
                     },
                     {
                       "key": "userId",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "page",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "paginationStatus",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "date",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "format",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "roles",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     }
                   ]
                 }
@@ -4467,7 +4457,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13315,\"billingStatus\":\"Assigned\",\"coAppraiserId\":null,\"isTeamLead\":false,\"potentialEndDate\":\"2026-11-26\",\"startDate\":\"2026-10-01\",\"projectId\":437,\"userId\":13994,\"roleId\":8,\"expectation\":\"test\"}",
+                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13315,\"billingStatus\":\"Assigned\",\"coAppraiserId\":null,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDateLong}}\",\"startDate\":\"{{currentDate}}\",\"projectId\":437,\"userId\":13994,\"roleId\":8,\"expectation\":\"test\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -5256,7 +5246,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"staffingRequestId\":1131,\"candidateId\":457,\"availability\":\"2026-10-21\",\"strategy\":\"etest\",\"caveatInformation\":\"test\"}",
+                  "raw": "{\"staffingRequestId\":1131,\"candidateId\":457,\"availability\":\"{{futureDate}}\",\"strategy\":\"etest\",\"caveatInformation\":\"test\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -5435,15 +5425,18 @@
                     },
                     {
                       "key": "q",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "page",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "withPagination",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     }
                   ]
                 }
@@ -6330,7 +6323,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"event\":\"test\",\"description\":\"test\",\"areaId\":3,\"categoryId\":39,\"phaseId\":399,\"severity\":\"High\",\"responseType\":\"Avoided\",\"resolutionStatus\":\"On Hold\",\"ownerId\":13994,\"sharedWithIds\":[]}",
+                  "raw": "{\"event\":\"test\",\"description\":\"test\",\"areaId\":3,\"categoryId\":39,\"phaseId\":399,\"severity\":\"High\",\"responseType\":\"Avoided\",\"resolutionStatus\":\"On Hold\",\"ownerId\":{{candidateId}},\"sharedWithIds\":[]}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -6741,7 +6734,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "------WebKitFormBoundarypmcSI4r7xi48uWI0\r\nContent-Disposition: form-data; name=\"data\"\r\n\r\n{\"name\":\"Quality Status Report\",\"projectId\":437,\"status\":\"PUBLISHED\",\"month\":\"October\",\"year\":2026,\"prSize\":1,\"cycleTime\":1,\"codingTime\":1,\"pickupTime\":1,\"reviewTime\":1,\"deployFrequencyPerService\":1,\"leadTime\":null,\"testCoverage\":null,\"cyclomaticComplexity\":1,\"duplication\":1,\"codeSmells\":1,\"postProductionBugCount\":null,\"softwareDefectTotalBugCount\":null,\"defectRemovalEfficiency\":null,\"defectLeakageRatio\":null,\"regressionCount\":null,\"criticalCount\":null,\"majorCount\":null,\"minorCount\":null,\"bugSeverityTotalBugCount\":null,\"bsi\":null,\"engineeringNote\":\"\",\"engineeringMarkedAsDone\":true,\"codeQualityNote\":\"\",\"codeQualityMarkedAsDone\":true,\"qaNote\":\"\",\"qaMarkedAsDone\":true,\"attachments\":[]}\r\n------WebKitFormBoundarypmcSI4r7xi48uWI0--",
+                  "raw": "------WebKitFormBoundarypmcSI4r7xi48uWI0\r\nContent-Disposition: form-data; name=\"data\"\r\n\r\n{\"name\":\"Quality Status Report\",\"projectId\":{{projectId}},\"status\":\"PUBLISHED\",\"month\":\"October\",\"year\":2026,\"prSize\":1,\"cycleTime\":1,\"codingTime\":1,\"pickupTime\":1,\"reviewTime\":1,\"deployFrequencyPerService\":1,\"leadTime\":null,\"testCoverage\":null,\"cyclomaticComplexity\":1,\"duplication\":1,\"codeSmells\":1,\"postProductionBugCount\":null,\"softwareDefectTotalBugCount\":null,\"defectRemovalEfficiency\":null,\"defectLeakageRatio\":null,\"regressionCount\":null,\"criticalCount\":null,\"majorCount\":null,\"minorCount\":null,\"bugSeverityTotalBugCount\":null,\"bsi\":null,\"engineeringNote\":\"\",\"engineeringMarkedAsDone\":true,\"codeQualityNote\":\"\",\"codeQualityMarkedAsDone\":true,\"qaNote\":\"\",\"qaMarkedAsDone\":true,\"attachments\":[]}\r\n------WebKitFormBoundarypmcSI4r7xi48uWI0--",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -7091,7 +7084,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"jobDescription\":\"PHA+dGVzdDwvcD4=\",\"reason\":\"\",\"teamsRoleId\":38,\"designationId\":552,\"initialRequestedTotalStaff\":1,\"skillIds\":[679],\"allocation\":40,\"duration\":12,\"targetDate\":\"2026-10-20\",\"staffingRequestType\":\"Account Expansion\",\"durationType\":\"MONTH\",\"internalAssessment\":\"Interview and Assignment\",\"externalAssessment\":\"None\",\"internalInterviewerId\":null,\"note\":\"\",\"projectId\":369}",
+                  "raw": "{\"jobDescription\":\"PHA+dGVzdDwvcD4=\",\"reason\":\"\",\"teamsRoleId\":38,\"designationId\":552,\"initialRequestedTotalStaff\":1,\"skillIds\":[679],\"allocation\":40,\"duration\":12,\"targetDate\":\"{{futureDate}}\",\"staffingRequestType\":\"Account Expansion\",\"durationType\":\"MONTH\",\"internalAssessment\":\"Interview and Assignment\",\"externalAssessment\":\"None\",\"internalInterviewerId\":null,\"note\":\"\",\"projectId\":369}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -7906,7 +7899,7 @@
                     },
                     {
                       "key": "projectId",
-                      "value": "502"
+                      "value": "{{projectId}}"
                     },
                     {
                       "key": "includeFutureAllocation",
@@ -7914,15 +7907,18 @@
                     },
                     {
                       "key": "page",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "count",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     },
                     {
                       "key": "q",
-                      "value": ""
+                      "value": "",
+                      "disabled": true
                     }
                   ]
                 }
@@ -8066,7 +8062,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"joinDate\":\"2026-10-15\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":0,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"transitionDate\":\"2026-10-15\",\"designation\":{\"id\":5,\"level\":null,\"name\":\"Team Lead\",\"status\":true,\"description\":\"Team Lead\",\"dateCreated\":\"2015-07-06 18:07:40\",\"lastUpdated\":\"2015-07-06 18:07:40\"},\"area\":{\"id\":2,\"name\":\"DevOps\",\"description\":null,\"isActive\":true,\"createdAt\":\"2020-08-24 06:10:23\",\"updatedAt\":\"2026-09-23 09:27:14\",\"createdBy\":{\"id\":400,\"email\":\"kailashraj@lftechnology.com\",\"lastName\":\"Vokins\",\"firstName\":\"Cal\"},\"updatedBy\":{\"id\":null,\"email\":null,\"lastName\":null,\"firstName\":null}}}],\"empStatusHistory\":[{\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\",\"description\":null}}],\"appraiserId\":13314,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"fnk\",\"wardNo\":12},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"fnk\",\"wardNo\":12}}}",
+                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"joinDate\":\"{{currentDate}}\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":0,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"transitionDate\":\"2026-10-15\",\"designation\":{\"id\":5,\"level\":null,\"name\":\"Team Lead\",\"status\":true,\"description\":\"Team Lead\",\"dateCreated\":\"2015-07-06 18:07:40\",\"lastUpdated\":\"2015-07-06 18:07:40\"},\"area\":{\"id\":2,\"name\":\"DevOps\",\"description\":null,\"isActive\":true,\"createdAt\":\"2020-08-24 06:10:23\",\"updatedAt\":\"2026-09-23 09:27:14\",\"createdBy\":{\"id\":400,\"email\":\"kailashraj@lftechnology.com\",\"lastName\":\"Vokins\",\"firstName\":\"Cal\"},\"updatedBy\":{\"id\":null,\"email\":null,\"lastName\":null,\"firstName\":null}}}],\"empStatusHistory\":[{\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\",\"description\":null}}],\"appraiserId\":13314,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"fnk\",\"wardNo\":12},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"fnk\",\"wardNo\":12}}}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8277,7 +8273,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"empId\":\"50001070\",\"joinDate\":\"2026-10-15\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":72,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12 00:00:00\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"id\":2140,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2139,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":2,\"name\":\"DevOps\"},\"designation\":{\"id\":5,\"name\":\"Team Lead\"}}],\"empStatusHistory\":[{\"id\":2484,\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\"},\"endDate\":null,\"empStatusDetails\":[]}],\"appraiserId\":null,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null}},\"id\":13994}",
+                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"empId\":\"50001070\",\"joinDate\":\"{{currentDate}}\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":72,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12 00:00:00\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"id\":2140,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2139,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":2,\"name\":\"DevOps\"},\"designation\":{\"id\":5,\"name\":\"Team Lead\"}}],\"empStatusHistory\":[{\"id\":2484,\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\"},\"endDate\":null,\"empStatusDetails\":[]}],\"appraiserId\":null,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null}},\"id\":13994}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8385,7 +8381,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"engagementStatusId\":3,\"transitionDate\":\"2026-10-15\",\"empStatusDetails\":[]}",
+                  "raw": "{\"engagementStatusId\":3,\"transitionDate\":\"{{currentDate}}\",\"empStatusDetails\":[]}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -9617,7 +9613,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"objectiveId\":1124,\"collaboratorIds\":[13994],\"title\":\"etest\",\"description\":\"\",\"progressType\":\"Numerical\",\"progressStartValue\":0,\"progressEndValue\":90,\"artifactUrl\":\"\",\"priority\":\"Medium\"}",
+                  "raw": "{\"objectiveId\":{{objectiveId}},\"collaboratorIds\":[{{candidateId}}],\"title\":\"etest\",\"description\":\"\",\"progressType\":\"Numerical\",\"progressStartValue\":0,\"progressEndValue\":90,\"artifactUrl\":\"\",\"priority\":\"Medium\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -9773,7 +9769,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"areaId\":56,\"title\":\"test\",\"ownerId\":13315,\"targetedQuarter\":\"Q4\",\"hloId\":125,\"isPrivate\":false,\"priority\":\"Medium\",\"year\":2026}",
+                  "raw": "{\"areaId\":{{areaId}},\"title\":\"test\",\"ownerId\":{{userId}},\"targetedQuarter\":\"Q4\",\"hloId\":125,\"isPrivate\":false,\"priority\":\"Medium\",\"year\":2026}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -9830,7 +9826,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"title\":\"success\",\"objectiveId\":1124,\"metricType\":\"percentage\",\"isTargetHigher\":true,\"currentValue\":0,\"targetValue\":100,\"industryBenchmarkValue\":null}",
+                  "raw": "{\"title\":\"success\",\"objectiveId\":{{objectiveId}},\"metricType\":\"percentage\",\"isTargetHigher\":true,\"currentValue\":0,\"targetValue\":100,\"industryBenchmarkValue\":null}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -10282,7 +10278,7 @@
                   "query": [
                     {
                       "key": "subjectId",
-                      "value": "445"
+                      "value": "{{pulseAllocationId}}"
                     },
                     {
                       "key": "projectId",
@@ -10496,7 +10492,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"pulseProfiles\":[\"dGVzdA==\"],\"subjectId\":13315,\"areaId\":4}",
+                  "raw": "{\"pulseProfiles\":[\"dGVzdA==\"],\"subjectId\":{{userId}},\"areaId\":4}",
                   "options": {
                     "raw": {
                       "language": "json"
