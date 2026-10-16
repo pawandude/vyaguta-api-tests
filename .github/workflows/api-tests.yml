@@ -330,51 +330,22 @@ jobs:
       - name: Lint collection and environment JSON
         run: npm run lint
 
-      - name: Refresh QA access token
-        id: qa-token
-        run: |
-          RESPONSE=$(curl -s -X POST \
-            "https://qa.vyaguta.lftechnology.com.np/api/core/auth/access-token" \
-            -H "Content-Type: application/json" \
-            -d "{\"refreshToken\": \"$VYAGUTA_QA_REFRESH_TOKEN\"}" \
-            --max-time 15 || echo "")
-          NEW_TOKEN=$(echo "$RESPONSE" | node -e "
-            const chunks = [];
-            process.stdin.on('data', d => chunks.push(d));
-            process.stdin.on('end', () => {
-              try {
-                const body = JSON.parse(chunks.join(''));
-                const t = body.data && (body.data.accessToken || body.data.token);
-                process.stdout.write(t || '');
-              } catch(e) { process.stdout.write(''); }
-            });
-          ")
-          if [ -n "$NEW_TOKEN" ]; then
-            echo "QA_ACCESS_TOKEN=$NEW_TOKEN" >> $GITHUB_ENV
-            echo "Token refreshed successfully"
-          else
-            echo "QA_ACCESS_TOKEN=$VYAGUTA_QA_TOKEN" >> $GITHUB_ENV
-            echo "Refresh failed — using stored token"
-          fi
-        env:
-          VYAGUTA_QA_REFRESH_TOKEN: ${{ secrets.VYAGUTA_QA_REFRESH_TOKEN }}
-          VYAGUTA_QA_TOKEN: ${{ secrets.VYAGUTA_QA_TOKEN }}
-
       - name: Run Newman tests — QA API collection
         id: newman-qa-api
         continue-on-error: true
         run: |
           npx newman run collections/vyaguta-api.postman_collection.json \
             -e environments/vyaguta-qa.postman_environment.json \
-            --env-var "authToken=$QA_ACCESS_TOKEN" \
-            --env-var "restrictedToken=$QA_ACCESS_TOKEN" \
+            --env-var "authToken=$VYAGUTA_QA_TOKEN" \
+            --env-var "restrictedToken=$VYAGUTA_QA_RESTRICTED_TOKEN" \
             --reporters cli,junit,htmlextra,json \
             --reporter-junit-export reports-qa/junit-report.xml \
             --reporter-htmlextra-export reports-qa/report.html \
             --reporter-htmlextra-title "Vyaguta API Test Report — QA" \
             --reporter-json-export reports-qa/results-api.json
         env:
-          QA_ACCESS_TOKEN: ${{ env.QA_ACCESS_TOKEN }}
+          VYAGUTA_QA_TOKEN: ${{ secrets.VYAGUTA_QA_TOKEN }}
+          VYAGUTA_QA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_QA_RESTRICTED_TOKEN }}
 
       - name: Run Newman tests — QA Security collection
         id: newman-qa-security
@@ -382,14 +353,15 @@ jobs:
         run: |
           npx newman run collections/vyaguta-security-tests.postman_collection.json \
             -e environments/vyaguta-qa.postman_environment.json \
-            --env-var "authToken=$QA_ACCESS_TOKEN" \
-            --env-var "restrictedToken=$QA_ACCESS_TOKEN" \
+            --env-var "authToken=$VYAGUTA_QA_TOKEN" \
+            --env-var "restrictedToken=$VYAGUTA_QA_RESTRICTED_TOKEN" \
             --reporters cli,htmlextra,json \
             --reporter-htmlextra-export reports-qa/report-security.html \
             --reporter-htmlextra-title "Vyaguta Security Test Report — QA" \
             --reporter-json-export reports-qa/results-security.json
         env:
-          QA_ACCESS_TOKEN: ${{ env.QA_ACCESS_TOKEN }}
+          VYAGUTA_QA_TOKEN: ${{ secrets.VYAGUTA_QA_TOKEN }}
+          VYAGUTA_QA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_QA_RESTRICTED_TOKEN }}
 
       - name: Parse QA test results
         id: qa-results
