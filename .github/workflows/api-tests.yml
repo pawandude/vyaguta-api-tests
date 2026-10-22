@@ -152,17 +152,21 @@ jobs:
               const location = folder ? folder + ' › ' + reqName : reqName;
 
               // Look up execution for this request
-              const srcId = f.source && f.source.id;
-              const ex    = srcId ? execMap[srcId] : null;
-              const req   = ex && ex.item && ex.item.request;
-              const res   = ex && ex.response;
+              const srcId   = f.source && f.source.id;
+              const ex      = srcId ? execMap[srcId] : null;
+              // ex.request = actual sent request (variables resolved); ex.item.request = raw template
+              const sentReq = ex && ex.request;
+              const itemReq = ex && ex.item && ex.item.request;
+              const res     = ex && ex.response;
 
-              // Endpoint
-              const method  = req && req.method ? req.method.toUpperCase() : '';
-              const rawUrl  = req && req.url ? (typeof req.url === 'string' ? req.url : (req.url.raw || '')) : '';
+              // Use resolved values from sentReq, fall back to itemReq
+              const method  = (sentReq && sentReq.method ? sentReq.method : (itemReq && itemReq.method ? itemReq.method : '')).toUpperCase();
+              const urlSrc  = (sentReq && sentReq.url) || (itemReq && itemReq.url) || '';
+              const rawUrl  = typeof urlSrc === 'string' ? urlSrc : (urlSrc.raw || '');
 
-              // Request body
-              const reqBodyRaw = req && req.body && req.body.raw ? req.body.raw : '';
+              // Request body — use sentReq so variables are resolved
+              const bodyObj    = (sentReq && sentReq.body) || (itemReq && itemReq.body) || null;
+              const reqBodyRaw = bodyObj && bodyObj.raw ? bodyObj.raw : '';
               const reqBody    = reqBodyRaw ? truncate(prettyJson(reqBodyRaw), 1000) : '';
 
               // Response
@@ -401,11 +405,14 @@ jobs:
               const location = folder ? folder + ' › ' + reqName : reqName;
               const srcId = f.source && f.source.id;
               const ex = srcId ? execMap[srcId] : null;
-              const req = ex && ex.item && ex.item.request;
+              const sentReq = ex && ex.request;
+              const itemReq = ex && ex.item && ex.item.request;
               const res = ex && ex.response;
-              const method = req && req.method ? req.method.toUpperCase() : '';
-              const rawUrl = req && req.url ? (typeof req.url === 'string' ? req.url : (req.url.raw || '')) : '';
-              const reqBodyRaw = req && req.body && req.body.raw ? req.body.raw : '';
+              const method = (sentReq && sentReq.method ? sentReq.method : (itemReq && itemReq.method ? itemReq.method : '')).toUpperCase();
+              const urlSrc = (sentReq && sentReq.url) || (itemReq && itemReq.url) || '';
+              const rawUrl = typeof urlSrc === 'string' ? urlSrc : (urlSrc.raw || '');
+              const bodyObj = (sentReq && sentReq.body) || (itemReq && itemReq.body) || null;
+              const reqBodyRaw = bodyObj && bodyObj.raw ? bodyObj.raw : '';
               const reqBody = reqBodyRaw ? truncate(prettyJson(reqBodyRaw), 1000) : '';
               const statusCode = res && res.code != null ? res.code : '';
               const statusText = res && res.status ? res.status : '';
