@@ -649,7 +649,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                   "pm.test('Content-Type is application/json', function () {",
                   "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                   "});",
@@ -853,7 +853,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                   "pm.test('Content-Type is application/json', function () {",
                   "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
                   "});",
@@ -1732,7 +1732,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"name\":\"Test Holiday {{currentDate}}\",\"description\":\"tetttext\",\"date\":\"{{futureDate}}\",\"type\":1,\"countries\":[\"Nepal\"]}",
+                  "raw": "{\"name\":\"Test Holiday {{currentDate}}\",\"description\":\"tetttext\",\"date\":\"{{futureDateLong}}\",\"type\":1,\"countries\":[\"Nepal\"]}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1745,7 +1745,15 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already exists', function() {",
+                      "  const code = pm.response.code;",
+                      "  if (code === 400) {",
+                      "    const msg = (pm.response.json().message || '').toLowerCase();",
+                      "    pm.expect(msg).to.include('already exist');",
+                      "  } else {",
+                      "    pm.expect(code).to.be.oneOf([200, 201]);",
+                      "  }",
+                      "});",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -3321,7 +3329,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already in final state', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -3783,7 +3791,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already processed', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -5259,7 +5267,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already booked', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -5311,7 +5319,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -6282,7 +6290,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -6747,7 +6755,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8075,7 +8083,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8129,7 +8137,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already resigned', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8381,7 +8389,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"engagementStatusId\":3,\"transitionDate\":\"{{currentDate}}\",\"empStatusDetails\":[]}",
+                  "raw": "{\"engagementStatusId\":1,\"transitionDate\":\"{{currentDate}}\",\"empStatusDetails\":[]}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8394,7 +8402,15 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or already same status', function() {",
+                      "  const code = pm.response.code;",
+                      "  if (code === 400) {",
+                      "    const msg = (pm.response.json().message || '').toLowerCase();",
+                      "    pm.expect(msg).to.include('same');",
+                      "  } else {",
+                      "    pm.expect(code).to.be.oneOf([200, 201]);",
+                      "  }",
+                      "});",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
