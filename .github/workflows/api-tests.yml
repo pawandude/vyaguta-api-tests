@@ -149,7 +149,7 @@ jobs:
               const reqName  = (f.source && f.source.name) ? f.source.name : 'Unknown request';
               const errMsg   = (f.error && f.error.message) ? f.error.message : 'Assertion failed';
               const testName = (f.error && f.error.test) ? f.error.test : '';
-              const location = folder ? folder + ' &rsaquo; ' + reqName : reqName;
+              const location = folder ? folder + ' › ' + reqName : reqName;
 
               // Look up execution for this request
               const srcId = f.source && f.source.id;
@@ -161,29 +161,18 @@ jobs:
               const method  = req && req.method ? req.method.toUpperCase() : '';
               const rawUrl  = req && req.url ? (typeof req.url === 'string' ? req.url : (req.url.raw || '')) : '';
 
-              // Request headers (filter auth)
-              const reqHdrs = (req && Array.isArray(req.header) ? req.header : [])
-                .filter(function(h) { return h && h.key && !/^authorization$/i.test(h.key); })
-                .map(function(h) { return escHtml(h.key) + ': ' + escHtml(h.value || ''); })
-                .join('\n');
-
               // Request body
               const reqBodyRaw = req && req.body && req.body.raw ? req.body.raw : '';
-              const reqBody    = reqBodyRaw ? truncate(prettyJson(reqBodyRaw), 600) : '';
+              const reqBody    = reqBodyRaw ? truncate(prettyJson(reqBodyRaw), 1000) : '';
 
               // Response
               const statusCode = res && res.code != null ? res.code : '';
               const statusText = res && res.status ? res.status : '';
-              const resHdrs    = (res && Array.isArray(res.header) ? res.header
-                : (res && res.headers && Array.isArray(res.headers.members) ? res.headers.members : []))
-                .filter(function(h) { return h && h.key; })
-                .map(function(h) { return escHtml(h.key) + ': ' + escHtml(h.value || ''); })
-                .join('\n');
               let resBody = '';
               if (res && res.stream) {
                 try {
                   const bytes = res.stream.data ? Buffer.from(res.stream.data) : Buffer.from(res.stream);
-                  resBody = truncate(prettyJson(bytes.toString('utf8')), 800);
+                  resBody = truncate(prettyJson(bytes.toString('utf8')), 1500);
                 } catch(e) {}
               }
 
@@ -192,58 +181,42 @@ jobs:
               const isFirstForRequest = !seen.has(dedupKey);
               seen.add(dedupKey);
 
-              const endpointBlock = isFirstForRequest && method ? (
-                '<div style=\"margin-bottom:8px;display:flex;align-items:center;gap:8px\">' +
-                '<span style=\"background:' + methodColor(method) + ';color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;font-family:monospace\">' + escHtml(method) + '</span>' +
-                '<span style=\"font-size:11px;color:#374151;font-family:monospace;word-break:break-all\">' + escHtml(rawUrl) + '</span>' +
-                '</div>'
-              ) : '';
-
-              const reqHdrBlock = isFirstForRequest && reqHdrs ? (
-                '<div style=\"margin-bottom:6px\">' +
-                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">REQUEST HEADERS</div>' +
-                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + reqHdrs + '</pre>' +
+              const endpointBlock = isFirstForRequest && (method || rawUrl) ? (
+                '<div style=\"margin-bottom:10px;padding:8px 10px;background:#f8fafc;border-radius:4px;border:1px solid #e5e7eb\">' +
+                (method ? '<span style=\"background:' + methodColor(method) + ';color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;font-family:monospace;display:inline-block;margin-right:8px;vertical-align:middle\">' + escHtml(method) + '</span>' : '') +
+                (rawUrl ? '<span style=\"font-size:11px;color:#1d4ed8;font-family:monospace;word-break:break-all;vertical-align:middle\">' + escHtml(rawUrl) + '</span>' : '') +
                 '</div>'
               ) : '';
 
               const reqBodyBlock = isFirstForRequest && reqBody ? (
-                '<div style=\"margin-bottom:6px\">' +
-                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">REQUEST BODY</div>' +
-                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + escHtml(reqBody) + '</pre>' +
+                '<div style=\"margin-bottom:8px\">' +
+                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px\">Request Body</div>' +
+                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:8px 10px;border-radius:4px;border:1px solid #e5e7eb;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#374151\">' + escHtml(reqBody) + '</pre>' +
                 '</div>'
               ) : '';
 
               const resStatusBlock = isFirstForRequest && statusCode ? (
-                '<div style=\"margin-bottom:6px\">' +
-                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">RESPONSE STATUS</div>' +
-                '<span style=\"font-size:11px;font-family:monospace;color:' + (statusCode >= 400 ? '#dc2626' : '#16a34a') + ';font-weight:700\">' + escHtml(String(statusCode)) + ' ' + escHtml(statusText) + '</span>' +
-                '</div>'
-              ) : '';
-
-              const resHdrBlock = isFirstForRequest && resHdrs ? (
-                '<div style=\"margin-bottom:6px\">' +
-                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">RESPONSE HEADERS</div>' +
-                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + resHdrs + '</pre>' +
+                '<div style=\"margin-bottom:8px\">' +
+                '<span style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;text-transform:uppercase;margin-right:8px\">Response Status</span>' +
+                '<span style=\"font-size:12px;font-family:monospace;background:' + (statusCode >= 400 ? '#fef2f2' : '#f0fdf4') + ';color:' + (statusCode >= 400 ? '#dc2626' : '#16a34a') + ';font-weight:700;padding:2px 8px;border-radius:3px;border:1px solid ' + (statusCode >= 400 ? '#fecaca' : '#bbf7d0') + '\">' + escHtml(String(statusCode)) + ' ' + escHtml(statusText) + '</span>' +
                 '</div>'
               ) : '';
 
               const resBodyBlock = isFirstForRequest && resBody ? (
-                '<div style=\"margin-bottom:6px\">' +
-                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;margin-bottom:2px\">RESPONSE BODY</div>' +
-                '<pre style=\"margin:0;font-size:10px;background:#f8fafc;padding:6px 8px;border-radius:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-all\">' + escHtml(resBody) + '</pre>' +
+                '<div style=\"margin-bottom:8px\">' +
+                '<div style=\"font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px\">Response Body</div>' +
+                '<pre style=\"margin:0;font-size:10px;background:#fff8f8;padding:8px 10px;border-radius:4px;border:1px solid #fecaca;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#374151\">' + escHtml(resBody) + '</pre>' +
                 '</div>'
               ) : '';
 
-              return '<div style=\"margin-bottom:16px;padding:14px 16px;background:#fff;border-left:3px solid #dc2626;border-radius:0 4px 4px 0;border:1px solid #fecaca;border-left-width:3px\">' +
-                '<div style=\"font-size:12px;font-weight:700;color:#374151;margin-bottom:6px\">' + escHtml(location) + '</div>' +
+              return '<div style=\"margin-bottom:16px;padding:14px 16px;background:#fff;border-left:4px solid #dc2626;border-radius:0 6px 6px 0;border:1px solid #fecaca;border-left-width:4px\">' +
+                '<div style=\"font-size:13px;font-weight:700;color:#111827;margin-bottom:10px\">' + escHtml(location) + '</div>' +
                 endpointBlock +
-                reqHdrBlock +
                 reqBodyBlock +
                 resStatusBlock +
-                resHdrBlock +
                 resBodyBlock +
-                '<div style=\"margin-top:8px;padding-top:8px;border-top:1px solid #fee2e2\">' +
-                (testName ? '<div style=\"font-size:10px;color:#6b7280;margin-bottom:3px\">Test: ' + escHtml(testName) + '</div>' : '') +
+                '<div style=\"margin-top:10px;padding:8px 10px;background:#fef2f2;border-radius:4px;border:1px solid #fecaca\">' +
+                (testName ? '<div style=\"font-size:10px;color:#9ca3af;margin-bottom:4px\">Assertion: ' + escHtml(testName) + '</div>' : '') +
                 '<div style=\"font-size:11px;color:#dc2626;font-family:monospace;font-weight:600\">' + escHtml(errMsg) + '</div>' +
                 '</div>' +
                 '</div>';
