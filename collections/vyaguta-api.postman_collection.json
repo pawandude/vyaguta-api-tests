@@ -2789,7 +2789,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/leave-balance?userId=13315&fiscalYearId=146&onlyActive=true&calculationDate=2026-10-15",
+                  "raw": "{{baseUrl}}/api/leave/leave-balance?userId={{userId}}&fiscalYearId=146&onlyActive=true&calculationDate={{currentDate}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -2801,7 +2801,7 @@
                   "query": [
                     {
                       "key": "userId",
-                      "value": "13315"
+                      "value": "{{userId}}"
                     },
                     {
                       "key": "fiscalYearId",
@@ -2813,7 +2813,7 @@
                     },
                     {
                       "key": "calculationDate",
-                      "value": "2026-10-15"
+                      "value": "{{currentDate}}"
                     }
                   ]
                 }
@@ -2850,7 +2850,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/leave-credits/well-being?userId=13315&fiscalYearId=146",
+                  "raw": "{{baseUrl}}/api/leave/leave-credits/well-being?userId={{userId}}&fiscalYearId=146",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -2863,7 +2863,7 @@
                   "query": [
                     {
                       "key": "userId",
-                      "value": "13315"
+                      "value": "{{userId}}"
                     },
                     {
                       "key": "fiscalYearId",
@@ -3086,7 +3086,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/leaves/working-days?startDate=2026-10-19&endDate=2026-10-19&userId=13315",
+                  "raw": "{{baseUrl}}/api/leave/leaves/working-days?startDate=2026-10-19&endDate=2026-10-19&userId={{userId}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -3107,7 +3107,7 @@
                     },
                     {
                       "key": "userId",
-                      "value": "13315"
+                      "value": "{{userId}}"
                     }
                   ]
                 }
