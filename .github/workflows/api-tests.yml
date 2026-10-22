@@ -162,7 +162,19 @@ jobs:
               // Use resolved values from sentReq, fall back to itemReq
               const method  = (sentReq && sentReq.method ? sentReq.method : (itemReq && itemReq.method ? itemReq.method : '')).toUpperCase();
               const urlSrc  = (sentReq && sentReq.url) || (itemReq && itemReq.url) || '';
-              const rawUrl  = typeof urlSrc === 'string' ? urlSrc : (urlSrc.raw || '');
+              function buildUrl(u) {
+                if (!u) return '';
+                if (typeof u === 'string') return u;
+                var proto = (u.protocol || 'https') + '://';
+                var host = Array.isArray(u.host) ? u.host.join('.') : String(u.host || '');
+                var path = Array.isArray(u.path) ? u.path.filter(function(p){return p;}).join('/') : String(u.path || '');
+                var qs = '';
+                if (Array.isArray(u.query) && u.query.length) {
+                  qs = '?' + u.query.filter(function(q){return q && q.key;}).map(function(q){return q.key + (q.value != null && q.value !== '' ? '=' + q.value : '');}).join('&');
+                }
+                return proto + host + (path ? '/' + path : '') + qs;
+              }
+              var rawUrl = buildUrl(urlSrc);
 
               // Request body — use sentReq so variables are resolved
               const bodyObj    = (sentReq && sentReq.body) || (itemReq && itemReq.body) || null;
@@ -410,7 +422,19 @@ jobs:
               const res = ex && ex.response;
               const method = (sentReq && sentReq.method ? sentReq.method : (itemReq && itemReq.method ? itemReq.method : '')).toUpperCase();
               const urlSrc = (sentReq && sentReq.url) || (itemReq && itemReq.url) || '';
-              const rawUrl = typeof urlSrc === 'string' ? urlSrc : (urlSrc.raw || '');
+              function buildUrl(u) {
+                if (!u) return '';
+                if (typeof u === 'string') return u;
+                var proto = (u.protocol || 'https') + '://';
+                var host = Array.isArray(u.host) ? u.host.join('.') : String(u.host || '');
+                var path = Array.isArray(u.path) ? u.path.filter(function(p){return p;}).join('/') : String(u.path || '');
+                var qs = '';
+                if (Array.isArray(u.query) && u.query.length) {
+                  qs = '?' + u.query.filter(function(q){return q && q.key;}).map(function(q){return q.key + (q.value != null && q.value !== '' ? '=' + q.value : '');}).join('&');
+                }
+                return proto + host + (path ? '/' + path : '') + qs;
+              }
+              var rawUrl = buildUrl(urlSrc);
               const bodyObj = (sentReq && sentReq.body) || (itemReq && itemReq.body) || null;
               const reqBodyRaw = bodyObj && bodyObj.raw ? bodyObj.raw : '';
               const reqBody = reqBodyRaw ? truncate(prettyJson(reqBodyRaw), 1000) : '';
