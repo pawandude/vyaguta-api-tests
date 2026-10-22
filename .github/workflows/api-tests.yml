@@ -310,7 +310,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: ${{ env.SUBJECT }}
-          to: pawanlamichhane@lftechnology.com,rikeshshrestha@lftechnology.com,nischalkhadka@lftechnology.com,swarnamaden@lftechnology.com,palisthashrestha@lftechnology.com,shrijanabudhathoki@lftechnology.com
+          to: pawanlamichhane@lftechnology.com,rikeshshrestha@lftechnology.com,nischalkhadka@lftechnology.com,swarnamaden@lftechnology.com,palisthashrestha@lftechnology.com,shrijanabudhathoki@lftechnology.com,oshingansi@lftechnology.com
           from: Vyaguta API Tests <${{ secrets.MAIL_USERNAME }}>
           html_body: file://reports/email.html
 
