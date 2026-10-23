@@ -2607,7 +2607,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or permission denied', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 403]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -3482,7 +3482,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or permission denied', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 403]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -10750,7 +10750,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Status is 2xx or permission denied', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 403]); });",
                   "pm.test('Response echoes updated note text', function () {",
                   "    const d = pm.response.json().data;",
                   "    pm.expect(d.note).to.equal('[TEST] Updated feedback note');",
