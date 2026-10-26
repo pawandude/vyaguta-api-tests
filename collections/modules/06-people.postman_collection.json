@@ -14,6 +14,93 @@
       }
     ]
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "areaId",
+      "value": "56",
+      "type": "string"
+    },
+    {
+      "key": "candidateId",
+      "value": "13994",
+      "type": "string"
+    },
+    {
+      "key": "keyResultId",
+      "value": "1312",
+      "type": "string"
+    },
+    {
+      "key": "leaveId",
+      "value": "473223",
+      "type": "string"
+    },
+    {
+      "key": "objectiveId",
+      "value": "1124",
+      "type": "string"
+    },
+    {
+      "key": "offboardId",
+      "value": "13106",
+      "type": "string"
+    },
+    {
+      "key": "projectId",
+      "value": "384",
+      "type": "string"
+    },
+    {
+      "key": "psrId",
+      "value": "931",
+      "type": "string"
+    },
+    {
+      "key": "pulseAllocationId",
+      "value": "445",
+      "type": "string"
+    },
+    {
+      "key": "pulseNoteId",
+      "value": "9329",
+      "type": "string"
+    },
+    {
+      "key": "remoteApplicationId",
+      "value": "239",
+      "type": "string"
+    },
+    {
+      "key": "riskId",
+      "value": "149",
+      "type": "string"
+    },
+    {
+      "key": "signoffId",
+      "value": "250",
+      "type": "string"
+    },
+    {
+      "key": "staffingId",
+      "value": "1122",
+      "type": "string"
+    },
+    {
+      "key": "unfreezeRequestId",
+      "value": "494",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "13994",
+      "type": "string"
+    }
+  ],
   "item": [
     {
       "name": "People",
@@ -318,15 +405,955 @@
               }
             }
           ]
+        },
+        {
+          "name": "People",
+          "item": [
+            {
+              "id": "20666535-bb6d-4efd-aeac-65deddb52674",
+              "name": "Get user certifications",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/certifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "certifications"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "b10b91a9-9a45-4e52-a131-ce5f2cb5d5c4",
+              "name": "Get user leave issuer history",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/leave-issuer-history",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "leave-issuer-history"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "2866c5ff-5b81-44f2-98d7-a53b101b0bb7",
+              "name": "Get user leave issuer change request",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/leave-issuer-history/change-request",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "leave-issuer-history",
+                    "change-request"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "1f4b7964-161a-4540-a298-c179b7bfb8a8",
+              "name": "Get user resignations",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/resignations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "resignations"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "7005cbfc-a69d-4269-bd7f-3c67483b0da7",
+              "name": "Get user skills (v2)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/skills/v2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "skills",
+                    "v2"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "5478a5c9-c07e-4911-9ca4-a755760cc6a9",
+              "name": "Get user team",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/team?relations=appraiser&size=40&projectId=502&includeFutureAllocation=true&page=&count=&q=",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "team"
+                  ],
+                  "query": [
+                    {
+                      "key": "relations",
+                      "value": "appraiser"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "{{projectId}}"
+                    },
+                    {
+                      "key": "includeFutureAllocation",
+                      "value": "true"
+                    },
+                    {
+                      "key": "page",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "count",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "ecb1493f-3306-4330-b277-098bf67aa508",
+              "name": "Get user team manager history",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/team-manager-history",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "team-manager-history"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "00ce5e59-8ce7-490c-b9a5-7601cbb04a34",
+              "name": "Get users summary",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/summary?type=working-shift",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "summary"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "working-shift"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "0fea40bc-c7ad-49eb-a316-82d3b55f55cb",
+              "name": "Create user",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"joinDate\":\"{{currentDate}}\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":0,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"transitionDate\":\"2026-10-15\",\"designation\":{\"id\":5,\"level\":null,\"name\":\"Team Lead\",\"status\":true,\"description\":\"Team Lead\",\"dateCreated\":\"2015-07-06 18:07:40\",\"lastUpdated\":\"2015-07-06 18:07:40\"},\"area\":{\"id\":2,\"name\":\"DevOps\",\"description\":null,\"isActive\":true,\"createdAt\":\"2020-08-24 06:10:23\",\"updatedAt\":\"2026-09-23 09:27:14\",\"createdBy\":{\"id\":400,\"email\":\"kailashraj@lftechnology.com\",\"lastName\":\"Vokins\",\"firstName\":\"Cal\"},\"updatedBy\":{\"id\":null,\"email\":null,\"lastName\":null,\"firstName\":null}}}],\"empStatusHistory\":[{\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\",\"description\":null}}],\"appraiserId\":13314,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"fnk\",\"wardNo\":12},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"fnk\",\"wardNo\":12}}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "313bd790-7414-440c-8dee-1e94fcbbcfa1",
+              "name": "Create user resignation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/resignations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "resignations"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"reason\":\"tesetttest\",\"tentativeExitDate\":\"2026-10-29\",\"informedDate\":\"2026-10-07\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already resigned', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "259602ae-8e61-4ee2-86b5-686c85cb3112",
+              "name": "Assign roles to user",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "roles"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"roles\":[{\"id\":1,\"name\":\"Super Admin\"},{\"id\":8,\"name\":\"Account Manager\"}]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "3fd73afa-171b-4be7-b9fa-0cf01e95697a",
+              "name": "Upload user profile image",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/upload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "upload"
+                  ]
+                },
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": []
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "d1d73b12-9567-47eb-81dd-861e8df9dbd5",
+              "name": "Update user by ID",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"empId\":\"50001070\",\"joinDate\":\"{{currentDate}}\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":72,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12 00:00:00\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"id\":2140,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2139,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":2,\"name\":\"DevOps\"},\"designation\":{\"id\":5,\"name\":\"Team Lead\"}}],\"empStatusHistory\":[{\"id\":2484,\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\"},\"endDate\":null,\"empStatusDetails\":[]}],\"appraiserId\":null,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null}},\"id\":13994}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "57d0e515-dc84-479f-bf13-9b88e1ffd882",
+              "name": "Update user designation",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/designation",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "designation"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"designation\":{\"id\":4,\"level\":null,\"name\":\"Senior Software Engineer\",\"status\":true,\"description\":\"Senior Software Engineer\",\"dateCreated\":\"2015-07-06 18:07:40\",\"lastUpdated\":\"2015-07-06 18:07:40\"},\"area\":{\"id\":4,\"name\":\"QA\",\"description\":null,\"isActive\":true,\"createdAt\":\"2020-07-29 07:20:33\",\"updatedAt\":\"2026-09-30 04:33:16\",\"createdBy\":{\"id\":null,\"email\":null,\"lastName\":null,\"firstName\":null},\"updatedBy\":{\"id\":null,\"email\":null,\"lastName\":null,\"firstName\":null}},\"transitionDate\":\"2026-10-15\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "ece2ff66-59e3-4a95-bcc1-d7271d07a8c1",
+              "name": "Update user engagement status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/engagement-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "engagement-status"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"engagementStatusId\":1,\"transitionDate\":\"{{currentDate}}\",\"empStatusDetails\":[]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already same status', function() {",
+                      "  const code = pm.response.code;",
+                      "  if (code === 400) {",
+                      "    const msg = (pm.response.json().message || '').toLowerCase();",
+                      "    pm.expect(msg).to.include('same');",
+                      "  } else {",
+                      "    pm.expect(code).to.be.oneOf([200, 201]);",
+                      "  }",
+                      "});",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "11c6e3c1-d70a-4f3a-89d5-daacdc3af5b1",
+              "name": "Update user leave issuer",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/leave-issuer",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "leave-issuer"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"id\":13184,\"email\":\"palisthashrestha+astha@lftechnology.com\",\"transitionDate\":\"2026-10-22\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "acabbedb-28aa-4521-84c6-c753288d2ae3",
+              "name": "Update user skills (v2)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/skills/v2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "skills",
+                    "v2"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"skills\":[{\"id\":826,\"rating\":3},{\"id\":561,\"rating\":4},{\"id\":565,\"rating\":4}]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "8494ddcc-feeb-467b-81fb-4db428819216",
+              "name": "Update user team manager",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/users/{{userId}}/team-manager",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "users",
+                    "{{userId}}",
+                    "team-manager"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"id\":446,\"transitionDate\":\"2026-10-06\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
         }
       ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "",
-      "type": "string"
     }
   ]
 }
