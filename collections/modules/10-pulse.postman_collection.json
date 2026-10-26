@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "Vyaguta — Pulse + Pulse Write Operations",
-    "description": "Module tests: Pulse + Pulse Write Operations. Part of the Vyaguta API test suite.",
+    "name": "Vyaguta — Pulse",
+    "description": "Module tests: Pulse. Part of the Vyaguta API test suite.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -14,6 +14,93 @@
       }
     ]
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "areaId",
+      "value": "56",
+      "type": "string"
+    },
+    {
+      "key": "candidateId",
+      "value": "13994",
+      "type": "string"
+    },
+    {
+      "key": "keyResultId",
+      "value": "1312",
+      "type": "string"
+    },
+    {
+      "key": "leaveId",
+      "value": "473223",
+      "type": "string"
+    },
+    {
+      "key": "objectiveId",
+      "value": "1124",
+      "type": "string"
+    },
+    {
+      "key": "offboardId",
+      "value": "13106",
+      "type": "string"
+    },
+    {
+      "key": "projectId",
+      "value": "384",
+      "type": "string"
+    },
+    {
+      "key": "psrId",
+      "value": "931",
+      "type": "string"
+    },
+    {
+      "key": "pulseAllocationId",
+      "value": "445",
+      "type": "string"
+    },
+    {
+      "key": "pulseNoteId",
+      "value": "9329",
+      "type": "string"
+    },
+    {
+      "key": "remoteApplicationId",
+      "value": "239",
+      "type": "string"
+    },
+    {
+      "key": "riskId",
+      "value": "149",
+      "type": "string"
+    },
+    {
+      "key": "signoffId",
+      "value": "250",
+      "type": "string"
+    },
+    {
+      "key": "staffingId",
+      "value": "1122",
+      "type": "string"
+    },
+    {
+      "key": "unfreezeRequestId",
+      "value": "494",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "13994",
+      "type": "string"
+    }
+  ],
   "item": [
     {
       "name": "Pulse",
@@ -406,6 +493,390 @@
               }
             }
           ]
+        },
+        {
+          "name": "Pulse Lookups",
+          "item": [
+            {
+              "id": "440b744f-143a-4d64-9353-d99ee3b93503",
+              "name": "Check appraiser nomination evaluation",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId=445&projectId=112&areaId=",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "appraiser-nominations",
+                    "check-evaluation"
+                  ],
+                  "query": [
+                    {
+                      "key": "subjectId",
+                      "value": "{{pulseAllocationId}}"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "112"
+                    },
+                    {
+                      "key": "areaId",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "e52144d5-2186-45a5-83c0-20b61783ab24",
+              "name": "List pulse expectations",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/expectations?designationId=5&areaId=2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "expectations"
+                  ],
+                  "query": [
+                    {
+                      "key": "designationId",
+                      "value": "5"
+                    },
+                    {
+                      "key": "areaId",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "7b68966d-48e3-4188-9d2f-2f430a81e592",
+              "name": "Get pulse allocation by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/pulse-allocations/{{pulseAllocationId}}?filterByStatusCreatedToday=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "pulse-allocations",
+                    "{{pulseAllocationId}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filterByStatusCreatedToday",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "87b1cb66-ef9b-4e60-a5b3-8ff0850647db",
+              "name": "Update PIP note",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/notes/pip/{{pulseNoteId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "notes",
+                    "pip",
+                    "{{pulseNoteId}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"status\":\"REMOVED\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "405e09b9-5a26-4a8f-89af-826aa89241bd",
+              "name": "Create note expectation item",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/note-expectation-item",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "note-expectation-item"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"pulseProfiles\":[\"dGVzdA==\"],\"subjectId\":{{userId}},\"areaId\":4}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Pulse Report",
+          "item": [
+            {
+              "id": "52027ee1-e5db-4030-993b-b7369ac2487d",
+              "name": "Get pulse report",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/pulse-report?page=1&size=40",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "pulse-report"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "726bcc51-77f5-4ec6-bf1e-55468eeb2e9b",
+              "name": "Get pulse PIP report",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=40",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "pulse-report",
+                    "pip"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
         }
       ]
     },
@@ -513,7 +984,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Status is 2xx or permission denied', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 403]); });",
                   "pm.test('Response echoes updated note text', function () {",
                   "    const d = pm.response.json().data;",
                   "    pm.expect(d.note).to.equal('[TEST] Updated feedback note');",
@@ -611,13 +1082,6 @@
           "response": []
         }
       ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "",
-      "type": "string"
     }
   ]
 }

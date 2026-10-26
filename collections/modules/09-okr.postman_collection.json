@@ -14,6 +14,93 @@
       }
     ]
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "areaId",
+      "value": "56",
+      "type": "string"
+    },
+    {
+      "key": "candidateId",
+      "value": "13994",
+      "type": "string"
+    },
+    {
+      "key": "keyResultId",
+      "value": "1312",
+      "type": "string"
+    },
+    {
+      "key": "leaveId",
+      "value": "473223",
+      "type": "string"
+    },
+    {
+      "key": "objectiveId",
+      "value": "1124",
+      "type": "string"
+    },
+    {
+      "key": "offboardId",
+      "value": "13106",
+      "type": "string"
+    },
+    {
+      "key": "projectId",
+      "value": "384",
+      "type": "string"
+    },
+    {
+      "key": "psrId",
+      "value": "931",
+      "type": "string"
+    },
+    {
+      "key": "pulseAllocationId",
+      "value": "445",
+      "type": "string"
+    },
+    {
+      "key": "pulseNoteId",
+      "value": "9329",
+      "type": "string"
+    },
+    {
+      "key": "remoteApplicationId",
+      "value": "239",
+      "type": "string"
+    },
+    {
+      "key": "riskId",
+      "value": "149",
+      "type": "string"
+    },
+    {
+      "key": "signoffId",
+      "value": "250",
+      "type": "string"
+    },
+    {
+      "key": "staffingId",
+      "value": "1122",
+      "type": "string"
+    },
+    {
+      "key": "unfreezeRequestId",
+      "value": "494",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "13994",
+      "type": "string"
+    }
+  ],
   "item": [
     {
       "name": "OKR",
@@ -427,15 +514,428 @@
               }
             }
           ]
+        },
+        {
+          "name": "Areas & Pillars",
+          "item": [
+            {
+              "id": "7fd51f0b-4956-4296-a0d5-e92d282d578f",
+              "name": "Get OKR area by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/areas/{{areaId}}?year=2026",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "areas",
+                    "{{areaId}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2026"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a4318da6-edb4-4cb5-9f37-2a91d1c99d08",
+              "name": "Get all strategic pillars",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/strategic-pillars/all?year=2026",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "strategic-pillars",
+                    "all"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2026"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Key Results",
+          "item": [
+            {
+              "id": "24a174f3-b8ff-4e82-9e40-7e632d57ec9f",
+              "name": "Get key result feed",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/key-result/{{keyResultId}}/feed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "key-result",
+                    "{{keyResultId}}",
+                    "feed"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "8cfd2c22-3898-4496-9364-4adf981ff227",
+              "name": "Create key result",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/key-result",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "key-result"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"objectiveId\":{{objectiveId}},\"collaboratorIds\":[{{candidateId}}],\"title\":\"etest\",\"description\":\"\",\"progressType\":\"Numerical\",\"progressStartValue\":0,\"progressEndValue\":90,\"artifactUrl\":\"\",\"priority\":\"Medium\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "58ebd75b-4370-4872-a559-74578899921c",
+              "name": "Create key result progress",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/key-result/{{keyResultId}}/progress",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "key-result",
+                    "{{keyResultId}}",
+                    "progress"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"value\":\"50\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Objectives",
+          "item": [
+            {
+              "id": "5a3235a8-53fa-4f68-99f2-934b6443a82d",
+              "name": "Get objective feed",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/objectives/{{objectiveId}}/feed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "objectives",
+                    "{{objectiveId}}",
+                    "feed"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "aa3e4b11-0e1e-4278-bfc8-df0ffd44208f",
+              "name": "Create objective",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/objectives",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "objectives"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"areaId\":{{areaId}},\"title\":\"test\",\"ownerId\":{{userId}},\"targetedQuarter\":\"Q4\",\"hloId\":125,\"isPrivate\":false,\"priority\":\"Medium\",\"year\":2026}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "OKR Lookups",
+          "item": [
+            {
+              "id": "b0e75dd0-ea8f-4577-a21c-868c40a60a1c",
+              "name": "Create success metric",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/okr/success-metrics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "okr",
+                    "success-metrics"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"title\":\"success\",\"objectiveId\":{{objectiveId}},\"metricType\":\"percentage\",\"isTargetHigher\":true,\"currentValue\":0,\"targetValue\":100,\"industryBenchmarkValue\":null}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
         }
       ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "",
-      "type": "string"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "Vyaguta — Team + Teams Write Operations",
-    "description": "Module tests: Team + Teams Write Operations. Part of the Vyaguta API test suite.",
+    "name": "Vyaguta — Teams",
+    "description": "Module tests: Teams. Part of the Vyaguta API test suite.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -14,6 +14,93 @@
       }
     ]
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "areaId",
+      "value": "56",
+      "type": "string"
+    },
+    {
+      "key": "candidateId",
+      "value": "13994",
+      "type": "string"
+    },
+    {
+      "key": "keyResultId",
+      "value": "1312",
+      "type": "string"
+    },
+    {
+      "key": "leaveId",
+      "value": "473223",
+      "type": "string"
+    },
+    {
+      "key": "objectiveId",
+      "value": "1124",
+      "type": "string"
+    },
+    {
+      "key": "offboardId",
+      "value": "13106",
+      "type": "string"
+    },
+    {
+      "key": "projectId",
+      "value": "384",
+      "type": "string"
+    },
+    {
+      "key": "psrId",
+      "value": "931",
+      "type": "string"
+    },
+    {
+      "key": "pulseAllocationId",
+      "value": "445",
+      "type": "string"
+    },
+    {
+      "key": "pulseNoteId",
+      "value": "9329",
+      "type": "string"
+    },
+    {
+      "key": "remoteApplicationId",
+      "value": "239",
+      "type": "string"
+    },
+    {
+      "key": "riskId",
+      "value": "149",
+      "type": "string"
+    },
+    {
+      "key": "signoffId",
+      "value": "250",
+      "type": "string"
+    },
+    {
+      "key": "staffingId",
+      "value": "1122",
+      "type": "string"
+    },
+    {
+      "key": "unfreezeRequestId",
+      "value": "494",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "13994",
+      "type": "string"
+    }
+  ],
   "item": [
     {
       "name": "Team",
@@ -429,6 +516,2851 @@
               }
             }
           ]
+        },
+        {
+          "name": "Allocations",
+          "item": [
+            {
+              "id": "b30028ab-3d84-4dcb-89c7-aacfe0525975",
+              "name": "List allocations",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/allocations?sortBy=role&order=asc&size=30&startDate=2026-10-15&endDate=2027-04-15&projectId=437&fetch=latest&fields=leave,teamManager&userId=&page=&paginationStatus=&date=&format=&roles=",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "allocations"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "role"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "size",
+                      "value": "30"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "{{currentDate}}"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "{{futureDateLong}}"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "437"
+                    },
+                    {
+                      "key": "fetch",
+                      "value": "latest"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "leave,teamManager"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "paginationStatus",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "date",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "format",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "roles",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "65f61106-67e4-4806-9d55-4b52d263a549",
+              "name": "Get user stakeholders for allocation",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/allocations/user-stakeholders?userId=13994&includePOCs=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "allocations",
+                    "user-stakeholders"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "13994"
+                    },
+                    {
+                      "key": "includePOCs",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "267d619d-febc-4bbb-a56f-28f1aef98fd4",
+              "name": "Create allocation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/allocations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "allocations"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13315,\"billingStatus\":\"Assigned\",\"coAppraiserId\":null,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDateLong}}\",\"startDate\":\"{{currentDate}}\",\"projectId\":437,\"userId\":13994,\"roleId\":8,\"expectation\":\"test\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Team Lookups",
+          "item": [
+            {
+              "id": "46d5ab22-a992-49b4-a05a-ea85870402c7",
+              "name": "List areas",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/areas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "areas"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "e13cedd8-c752-44dd-beda-a4b02aa9c091",
+              "name": "List categories",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "categories"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "31a5c6af-825e-4df9-93a9-c9ea0feb9ccb",
+              "name": "Get compliance summary",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/compliance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "compliance"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "1ed03d34-474c-4390-9adb-ac983eab1ccc",
+              "name": "List industries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/industries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "industries"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "c0cf578e-8cc5-4901-a16d-0b749708be06",
+              "name": "Get project phase details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/phases/detail?onDate=2026-10-15&startDate=2023-12-01&endDate=2024-01-31&projectId=369",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "phases",
+                    "detail"
+                  ],
+                  "query": [
+                    {
+                      "key": "onDate",
+                      "value": "2026-10-15"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2023-12-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-01-31"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "369"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "c1c74300-3e49-4771-90ca-acf469fa091c",
+              "name": "List risk categories",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/risk-categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "risk-categories"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "7bc35617-7a53-4d01-87f0-5eaceed80c11",
+              "name": "List roles",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "roles"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "c9b13df0-3073-464b-8b38-7cf712ed26a5",
+              "name": "Get signoff summary",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/signoff?year=2026&month=09",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "signoff"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2026"
+                    },
+                    {
+                      "key": "month",
+                      "value": "09"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "b5cc7efa-dd99-4b2b-941d-12f84d719c26",
+              "name": "List technology stacks",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/technology-stacks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "technology-stacks"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Candidates",
+          "item": [
+            {
+              "id": "d1420349-7d3a-44fd-befc-aee56e1190c9",
+              "name": "List candidates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates?bookable=bookable,booked,unassigned&sortBy=bookable&order=asc&q=pawan&size=40",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates"
+                  ],
+                  "query": [
+                    {
+                      "key": "bookable",
+                      "value": "bookable,booked,unassigned"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "bookable"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "q",
+                      "value": "pawan"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "9b6ee811-ea72-4d37-894b-0283053f41d0",
+              "name": "List candidate areas",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/areas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "areas"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "704d9c63-746e-4d02-9ff8-88809641f9f5",
+              "name": "List bookable candidates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/bookable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "bookable"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "325ca171-e133-4c59-aed5-781551fab182",
+              "name": "List candidate projects",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "projects"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "6c0548cf-70e1-4280-b4e4-a442a7ae9a1a",
+              "name": "List candidate skills",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/skills",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "skills"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "031804d2-8df8-4901-ba44-36df6839c40e",
+              "name": "List lateral candidates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/lateral-candidates?q=&isLinked=false&page=1&size=40&sortBy=name&order=asc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "lateral-candidates"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "isLinked",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "name"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "fe77e818-56d4-429d-9997-711a372eb153",
+              "name": "Book candidate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/book",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "book"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"staffingRequestId\":1131,\"candidateId\":457,\"availability\":\"{{futureDate}}\",\"strategy\":\"etest\",\"caveatInformation\":\"test\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already booked', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a9d4a6d0-ab77-4b90-85e5-5129b161e0a7",
+              "name": "Create lateral candidate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/lateral-candidates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "lateral-candidates"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"pawan\",\"atsId\":9801224}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "e7aa6ad0-2f25-4ac2-adb5-7857d93b8f72",
+              "name": "Update candidate availability",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/{{candidateId}}/available",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "{{candidateId}}",
+                    "available"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"isAvailable\":true}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Projects",
+          "item": [
+            {
+              "id": "e9a493be-f168-4b24-8062-a349fda71a4d",
+              "name": "List projects",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects?order=asc&statusIds=4,5&sortBy=projectName&size=40&q=&page=&withPagination=",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "statusIds",
+                      "value": "4,5"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "projectName"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    },
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "withPagination",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "b5ce1d65-9b3b-40fe-892a-fe0292a6eac0",
+              "name": "Get project by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "9331e91c-8217-450a-b2c4-3943df8cb4a9",
+              "name": "Get project billing config",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/billing-config?year=2026&month=09",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "billing-config"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2026"
+                    },
+                    {
+                      "key": "month",
+                      "value": "09"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "979ddeb9-22f0-4e9a-a178-827a6d42dd7a",
+              "name": "Get project offboards",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/offboards",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "offboards"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "7433abef-5ce0-4add-a187-c08addd4312e",
+              "name": "Get project releases",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/releases?released=false&date=2026-10-15",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "releases"
+                  ],
+                  "query": [
+                    {
+                      "key": "released",
+                      "value": "false"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2026-10-15"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "e62b05c0-b461-4b9e-b43d-b54baa5e1fb4",
+              "name": "Get project risks",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks?status=To+do,In+Progress,On+Hold&areaId=3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "risks"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "To+do,In+Progress,On+Hold"
+                    },
+                    {
+                      "key": "areaId",
+                      "value": "3"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "f0358cd2-2449-4b93-8c2a-12f366005aa2",
+              "name": "Get project risk actions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks/{{riskId}}/actions?page=1&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "risks",
+                    "{{riskId}}",
+                    "actions"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "ca831ada-b9fb-4b83-91a1-1c5f0060f5ea",
+              "name": "Get project risk comments",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks/{{riskId}}/comments?page=1&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "risks",
+                    "{{riskId}}",
+                    "comments"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "eabba29f-a707-4a7c-a60a-7bbf546baafe",
+              "name": "Get project risk summary by severity",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks/summary/severity",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "risks",
+                    "summary",
+                    "severity"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "9ecc3ef7-19e8-4907-9583-0c46dc0d40c8",
+              "name": "Get project risk summary by status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks/summary/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "risks",
+                    "summary",
+                    "status"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "5812db77-3d6f-4d16-a6f1-2b2480a9c7e3",
+              "name": "Get project signoff",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/signoff?year=2026&month=09",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "signoff"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2026"
+                    },
+                    {
+                      "key": "month",
+                      "value": "09"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "31100856-7c3b-4065-8c4d-1c3395f37074",
+              "name": "Get project signoff comments summary",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/signoff/{{signoffId}}/comments/summary",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "signoff",
+                    "{{signoffId}}",
+                    "comments",
+                    "summary"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "d3408248-ba66-4c76-98a3-ae7eac3721b1",
+              "name": "Get project staffing",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/staffing?statusIds=1,2&sortBy=project&order=asc&size=40",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "staffing"
+                  ],
+                  "query": [
+                    {
+                      "key": "statusIds",
+                      "value": "1,2"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "project"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "3e2100aa-1a5d-4c8b-be4d-5c5358e89535",
+              "name": "Get project updates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/updates?page=1&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "updates"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "ef4cb9c5-7a48-4465-8246-57364cd12bee",
+              "name": "List project risk areas",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/risks/areas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "risks",
+                    "areas"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "e89bd3ca-0957-4b61-b7be-5f20b3a5e9a4",
+              "name": "Update project offboard status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/offboard/{{offboardId}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "offboard",
+                    "{{offboardId}}",
+                    "status"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"status\":\"Offboarded\",\"reason\":\"test\",\"offboardEventDate\":\"2026-10-15\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "50e98e61-205e-4cff-9821-49be36d64316",
+              "name": "Create project",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a78d54b8-bb5c-4be3-b17e-5a16bbd94aeb",
+              "name": "Create project risk",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "risks"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"event\":\"test\",\"description\":\"test\",\"areaId\":3,\"categoryId\":39,\"phaseId\":399,\"severity\":\"High\",\"responseType\":\"Avoided\",\"resolutionStatus\":\"On Hold\",\"ownerId\":{{candidateId}},\"sharedWithIds\":[]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "c8dca721-483c-4397-8aaa-a80b5cb3ffbf",
+              "name": "Create project signoff",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/signoff",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "projects",
+                    "{{projectId}}",
+                    "signoff"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"action\":\"Signed Off By PM\",\"month\":\"09\",\"year\":2026,\"billedFte\":null,\"billings\":[{\"user\":{\"id\":13371,\"email\":\"akshaykumar@lftechnology.com\",\"empId\":\"50000545\",\"fullname\":\"akshay kumar\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"EVENING_SHIFT\",\"designation\":{\"id\":5,\"name\":\"Team Lead\",\"area\":{\"id\":6,\"name\":\"People Management\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":154,\"totalBillingHours\":154,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.875,\"leaveHours\":154,\"shift\":\"EVENING_SHIFT\",\"allocations\":{\"id\":6174,\"allocationHours\":35,\"role\":\"Graphics Designer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13371,\"allocationId\":6174},{\"user\":{\"id\":13166,\"email\":\"palisthashrestha+pratha@lftechnology.com\",\"empId\":\"50000340\",\"fullname\":\"Pratha  Project Manager\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"MORNING_SHIFT\",\"designation\":{\"id\":12,\"name\":\"Associate PM\",\"area\":{\"id\":21,\"name\":\"Project Management\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":154,\"totalBillingHours\":154,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.875,\"leaveHours\":154,\"shift\":\"MORNING_SHIFT\",\"allocations\":{\"id\":6175,\"allocationHours\":35,\"role\":\"Project Manager\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-04\",\"2026-09-02\",\"2026-09-03\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-30\",\"2026-09-28\",\"2026-09-29\"],\"userId\":13166,\"allocationId\":6175},{\"user\":{\"id\":13414,\"email\":\"kat@lftechnology.com\",\"empId\":\"50000587\",\"fullname\":\"kat shrestha\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\",\"area\":{\"id\":3,\"name\":\"IT\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":88,\"totalBillingHours\":88,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.5,\"leaveHours\":88,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6178,\"allocationHours\":20,\"role\":\"Data Engineer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13414,\"allocationId\":6178},{\"user\":{\"id\":13395,\"email\":\"swarnamaden+katrinepetersen@lftechnology.com\",\"empId\":\"50000568\",\"fullname\":\"Katrine Petersen\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"MORNING_SHIFT\",\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\",\"area\":{\"id\":2,\"name\":\"DevOps\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":66,\"totalBillingHours\":66,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.375,\"leaveHours\":66,\"shift\":\"MORNING_SHIFT\",\"allocations\":{\"id\":6187,\"allocationHours\":15,\"role\":\"Graphics Designer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13395,\"allocationId\":6187},{\"user\":{\"id\":511,\"email\":\"mukeshkarna@lftechnology.com\",\"empId\":\"393\",\"fullname\":\"Mukesh Kumar  Karna\",\"country\":\"UK\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":5,\"name\":\"Team Lead\",\"area\":{\"id\":15,\"name\":\"Product Design\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":66,\"totalBillingHours\":66,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.375,\"leaveHours\":66,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6183,\"allocationHours\":15,\"role\":\"Project Operations Coordinator\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":511,\"allocationId\":6183},{\"user\":{\"id\":13495,\"email\":\"white@lftechnology.com\",\"empId\":\"50000657\",\"fullname\":\"White Black\",\"country\":\"Nepal\",\"timezone\":\"+11:00\",\"workingShift\":\"EVENING_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":3,\"name\":\"IT\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":22,\"totalBillingHours\":22,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.125,\"leaveHours\":22,\"shift\":\"EVENING_SHIFT\",\"allocations\":{\"id\":6180,\"allocationHours\":5,\"role\":\"Fullstack Developer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13495,\"allocationId\":6180},{\"user\":{\"id\":13305,\"email\":\"sushmapuri@lftechnology.com\",\"empId\":\"50000479\",\"fullname\":\"Sushma Puri\",\"country\":\"India\",\"timezone\":\"+05:30\",\"workingShift\":\"LATE_EVENING_SHIFT\",\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\",\"area\":{\"id\":2,\"name\":\"DevOps\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":4,\"totalBillingHours\":4,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.025,\"leaveHours\":4,\"shift\":\"LATE_EVENING_SHIFT\",\"allocations\":{\"id\":6182,\"allocationHours\":1,\"role\":\"DevOps\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-15\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13305,\"allocationId\":6182},{\"user\":{\"id\":697,\"email\":\"susannagurung@lftechnology.com\",\"empId\":\"50000172\",\"fullname\":\"Susanna Gurung\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":20,\"name\":\"Engineering\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-07\",\"totalWorkingHours\":10,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-07\",\"billingType\":\"Monthly\",\"fte\":0.058333333333333334,\"leaveHours\":10,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6181,\"allocationHours\":10,\"role\":\"Automation QA\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":697,\"allocationId\":6181},{\"user\":{\"id\":497,\"email\":\"bibekshrestha@lftechnology.com\",\"empId\":\"543422\",\"fullname\":\"kinjalk  HR admin\",\"country\":\"Canada\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":22,\"name\":\"Associate HR Manager\",\"area\":{\"id\":4,\"name\":\"QA\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":176,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":1,\"leaveHours\":176,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6191,\"allocationHours\":40,\"role\":\"Computer Vision Engineer\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":497,\"allocationId\":6191},{\"user\":{\"id\":13416,\"email\":\"micheal@lftechnology.com\",\"empId\":\"50000589\",\"fullname\":\"Micheal  Scofield\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"MORNING_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":3,\"name\":\"IT\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":176,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":1,\"leaveHours\":176,\"shift\":\"MORNING_SHIFT\",\"allocations\":{\"id\":6586,\"allocationHours\":40,\"role\":\"Product Designer\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13416,\"allocationId\":6586},{\"user\":{\"id\":13370,\"email\":\"palisthashrestha+ranbir@lftechnology.com\",\"empId\":\"50000544\",\"fullname\":\"Ranbir  Kapoor\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"LATE_EVENING_SHIFT\",\"designation\":{\"id\":5,\"name\":\"Team Lead\",\"area\":{\"id\":4,\"name\":\"QA\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":176,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":1,\"leaveHours\":176,\"shift\":\"LATE_EVENING_SHIFT\",\"allocations\":{\"id\":6176,\"allocationHours\":40,\"role\":\"Automation QA\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13370,\"allocationId\":6176},{\"user\":{\"id\":13413,\"email\":\"adwait+purnashrestha@lftechnology.com\",\"empId\":\"50000586\",\"fullname\":\"Adwait upadhyaya\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"LATE_EVENING_SHIFT\",\"designation\":{\"id\":8,\"name\":\"Solution Architect\",\"area\":{\"id\":25,\"name\":\"Development\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":88,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":0.5,\"leaveHours\":88,\"shift\":\"LATE_EVENING_SHIFT\",\"allocations\":{\"id\":6177,\"allocationHours\":20,\"role\":\"Fullstack Developer\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13413,\"allocationId\":6177},{\"user\":{\"id\":697,\"email\":\"susannagurung@lftechnology.com\",\"empId\":\"50000172\",\"fullname\":\"Susanna Gurung\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":20,\"name\":\"Engineering\"}}},\"allocationStartDate\":\"2026-09-08\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":34,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-08\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":0.19166666666666668,\"leaveHours\":34,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6585,\"allocationHours\":10,\"role\":\"Automation QA\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":697,\"allocationId\":6585}]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "PSR & QSR",
+          "item": [
+            {
+              "id": "10d541ef-7065-44b3-9c1f-076eb950e274",
+              "name": "List PSRs",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/psrs?projectId=369",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "psrs"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "369"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a165f249-9d49-4a72-88e4-a774d159015f",
+              "name": "Get PSR by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/psrs/{{psrId}}?projectId=369",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "psrs",
+                    "{{psrId}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "369"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "c0a2b4e7-c7b6-4911-b0d2-c4d6a15664de",
+              "name": "Get PSR indicators",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/psrs/indicators?projectId=369",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "psrs",
+                    "indicators"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "369"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "82fb96c5-b4df-49eb-a6f2-75fd70a9d80f",
+              "name": "Get PSR teams",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/psrs/teams?projectId=369",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "psrs",
+                    "teams"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "369"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "606cb69f-092a-45b7-87c8-56882b6ed2b4",
+              "name": "List QSRs",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/qsrs?projectId=437",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "qsrs"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "437"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "0b0e361c-4fe8-4b28-9fc2-0236afaadb75",
+              "name": "Create PSR",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/psrs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "psrs"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"projectId\":369,\"name\":\"Project Status Report\",\"team\":null,\"date\":\"2026-10-15\",\"status\":\"PUBLISHED\",\"epicsTitle\":\"Overview of Epics\",\"latestUpdatesTitle\":\"Latest Updates\",\"upcomingMilestonesTitle\":\"Upcoming Milestones\",\"risksTitle\":\"Risks\",\"linksTitle\":\"Links\",\"epics\":[{\"name\":\"test\",\"plannedEndDate\":\"2026-10-07\",\"completionPercentage\":30,\"status\":\"TODO\"}],\"projectHealth\":[{\"indicatorId\":1,\"status\":\"ALL_GOOD\"},{\"indicatorId\":2,\"status\":\"ALL_GOOD\"},{\"indicatorId\":3,\"status\":\"ALL_GOOD\"},{\"indicatorId\":4,\"status\":\"ALL_GOOD\"},{\"indicatorId\":5,\"status\":\"ALL_GOOD\"}],\"components\":[{\"name\":\"Latest Updates\",\"type\":\"LATEST_UPDATE\",\"content\":\"\"},{\"name\":\"Upcoming Milestones\",\"type\":\"UPCOMING_MILESTONE\",\"content\":\"\"},{\"name\":\"Risks\",\"type\":\"RISK\",\"content\":\"\"},{\"name\":\"Links\",\"type\":\"LINK\",\"content\":\"PHVsPgo8bGk+PGEgaHJlZj0id3d3LnByb2plY3RjaGFydGVyLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPnByb2plY3RDaGFydGVyPC9hPjwvbGk+CjxsaT48YSBocmVmPSJ3d3cudGVjaGNoYXJ0ZXIuY29tIiB0YXJnZXQ9Il9ibGFuayI+dGVjaG5vbG9neTwvYT48L2xpPgo8bGk+PGEgaHJlZj0id3d3LmNoYW5nZW1nbXQuY29tIiB0YXJnZXQ9Il9ibGFuayI+Y2hhbmdlTWFuYWdlbWVudDwvYT48L2xpPgo8bGk+PGEgaHJlZj0id3d3LnJvYWRtYXAuY29tIiB0YXJnZXQ9Il9ibGFuayI+cHJvamVjdFJvYWRtYXA8L2E+PC9saT4KPGxpPjxhIGhyZWY9Ind3dy5odWJzcG90LmNvbSIgdGFyZ2V0PSJfYmxhbmsiPmh1YnNwb3RVcmw8L2E+PC9saT4KPC91bD4=\"}]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "50abe998-0a8f-4aa3-b732-41be6be4b56f",
+              "name": "Create QSR",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/qsrs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "qsrs"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "------WebKitFormBoundarypmcSI4r7xi48uWI0\r\nContent-Disposition: form-data; name=\"data\"\r\n\r\n{\"name\":\"Quality Status Report\",\"projectId\":{{projectId}},\"status\":\"PUBLISHED\",\"month\":\"October\",\"year\":2026,\"prSize\":1,\"cycleTime\":1,\"codingTime\":1,\"pickupTime\":1,\"reviewTime\":1,\"deployFrequencyPerService\":1,\"leadTime\":null,\"testCoverage\":null,\"cyclomaticComplexity\":1,\"duplication\":1,\"codeSmells\":1,\"postProductionBugCount\":null,\"softwareDefectTotalBugCount\":null,\"defectRemovalEfficiency\":null,\"defectLeakageRatio\":null,\"regressionCount\":null,\"criticalCount\":null,\"majorCount\":null,\"minorCount\":null,\"bugSeverityTotalBugCount\":null,\"bsi\":null,\"engineeringNote\":\"\",\"engineeringMarkedAsDone\":true,\"codeQualityNote\":\"\",\"codeQualityMarkedAsDone\":true,\"qaNote\":\"\",\"qaMarkedAsDone\":true,\"attachments\":[]}\r\n------WebKitFormBoundarypmcSI4r7xi48uWI0--",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Staffing",
+          "item": [
+            {
+              "id": "bfe6d0ee-2adb-49f7-8367-6dfecaaa7455",
+              "name": "List staffing requests",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/staffing?statusIds=1,2&sortBy=project&order=asc&size=40",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "staffing"
+                  ],
+                  "query": [
+                    {
+                      "key": "statusIds",
+                      "value": "1,2"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "project"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "cf256621-34dd-4146-8c0b-d4a85e95c610",
+              "name": "Get staffing request by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/staffing/{{staffingId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "staffing",
+                    "{{staffingId}}"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "7fcb3bf5-603e-4ca3-aea2-4dcec6fe4a0f",
+              "name": "Get staffing request candidates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/staffing/{{staffingId}}/candidates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "staffing",
+                    "{{staffingId}}",
+                    "candidates"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "36ab54d5-be94-40b3-b017-41896b92c675",
+              "name": "Get staffing request notes",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/staffing/{{staffingId}}/notes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "staffing",
+                    "{{staffingId}}",
+                    "notes"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "ff056f6d-a2cb-486f-90ac-205c3aa80f59",
+              "name": "Get staffing job requirements",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/staffing/job-requirements?roleId=38&designationId=552",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "staffing",
+                    "job-requirements"
+                  ],
+                  "query": [
+                    {
+                      "key": "roleId",
+                      "value": "38"
+                    },
+                    {
+                      "key": "designationId",
+                      "value": "552"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "64d5987e-d32a-4f26-a820-69aadda163df",
+              "name": "List staffing statuses",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/staffing/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "staffing",
+                    "status"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "501e096f-dbf0-4dbc-86a2-853b54ca0fa0",
+              "name": "Create staffing request",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/staffing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "staffing"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"jobDescription\":\"PHA+dGVzdDwvcD4=\",\"reason\":\"\",\"teamsRoleId\":38,\"designationId\":552,\"initialRequestedTotalStaff\":1,\"skillIds\":[679],\"allocation\":40,\"duration\":12,\"targetDate\":\"{{futureDate}}\",\"staffingRequestType\":\"Account Expansion\",\"durationType\":\"MONTH\",\"internalAssessment\":\"Interview and Assignment\",\"externalAssessment\":\"None\",\"internalInterviewerId\":null,\"note\":\"\",\"projectId\":369}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            }
+          ]
         }
       ]
     },
@@ -646,13 +3578,6 @@
           "response": []
         }
       ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "",
-      "type": "string"
     }
   ]
 }
