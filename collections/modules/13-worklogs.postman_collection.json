@@ -1,0 +1,467 @@
+{
+  "info": {
+    "name": "Vyaguta — Worklogs",
+    "description": "Module tests: Worklogs. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "areaId",
+      "value": "56",
+      "type": "string"
+    },
+    {
+      "key": "candidateId",
+      "value": "13994",
+      "type": "string"
+    },
+    {
+      "key": "keyResultId",
+      "value": "1312",
+      "type": "string"
+    },
+    {
+      "key": "leaveId",
+      "value": "473223",
+      "type": "string"
+    },
+    {
+      "key": "objectiveId",
+      "value": "1124",
+      "type": "string"
+    },
+    {
+      "key": "offboardId",
+      "value": "13106",
+      "type": "string"
+    },
+    {
+      "key": "projectId",
+      "value": "384",
+      "type": "string"
+    },
+    {
+      "key": "psrId",
+      "value": "931",
+      "type": "string"
+    },
+    {
+      "key": "pulseAllocationId",
+      "value": "445",
+      "type": "string"
+    },
+    {
+      "key": "pulseNoteId",
+      "value": "9329",
+      "type": "string"
+    },
+    {
+      "key": "remoteApplicationId",
+      "value": "239",
+      "type": "string"
+    },
+    {
+      "key": "riskId",
+      "value": "149",
+      "type": "string"
+    },
+    {
+      "key": "signoffId",
+      "value": "250",
+      "type": "string"
+    },
+    {
+      "key": "staffingId",
+      "value": "1122",
+      "type": "string"
+    },
+    {
+      "key": "unfreezeRequestId",
+      "value": "494",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "13994",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Worklogs",
+      "item": [
+        {
+          "id": "261f1873-b2ab-4290-98f3-bd8cf4e21e8a",
+          "name": "Get worklog allocation details report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report?startDate=2026-10-01&endDate=2026-10-31&projectId=502&excludeUserIds=13413,13395,13416,511,13166,13370,697,13305,13495,13371,13414,497&additionalFields=tasks,allocation",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklogs",
+                "allocation-details-report"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-10-31"
+                },
+                {
+                  "key": "projectId",
+                  "value": "502"
+                },
+                {
+                  "key": "excludeUserIds",
+                  "value": "13413,13395,13416,511,13166,13370,697,13305,13495,13371,13414,497"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "tasks,allocation"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                  "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "id": "98fa251a-4348-45d7-85b1-6c853c038aca",
+          "name": "Get worklog involvements",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklogs/involvements",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklogs",
+                "involvements"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                  "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "id": "f87cb22c-5a10-43fb-8ade-312bf4a8548c",
+          "name": "List worklog unfreeze requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklog-unfreeze-requests?page=1&size=32",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklog-unfreeze-requests"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "32"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                  "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "id": "5481170b-e55b-4406-8d9e-94093072ea8f",
+          "name": "Get worklog unfreeze request by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklog-unfreeze-requests/{{unfreezeRequestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklog-unfreeze-requests",
+                "{{unfreezeRequestId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                  "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "id": "eb473741-57f7-4f72-ad78-a5ec51de79e0",
+          "name": "Get worklog unfreeze request summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklog-unfreeze-requests/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklog-unfreeze-requests",
+                "summary"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                  "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "id": "dc81fd5d-7287-4e5e-a6a4-ea614bff0bbb",
+          "name": "Update worklog unfreeze request status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklog-unfreeze-requests/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklog-unfreeze-requests",
+                "status"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"unfreezeRequestIds\":[1461],\"status\":\"APPROVED\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 2xx or already processed', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
+                  "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "id": "f4e9a3ab-497d-4cf0-a9ef-6962321a0ccb",
+          "name": "Create worklog",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklogs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklogs"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"location\":\"OFFICE\",\"workDate\":\"{{currentDate}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                  "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    }
+  ]
+}
