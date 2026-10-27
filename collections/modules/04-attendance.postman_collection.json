@@ -37,7 +37,7 @@
     },
     {
       "key": "leaveId",
-      "value": "473223",
+      "value": "",
       "type": "string"
     },
     {
@@ -817,50 +817,6 @@
               "response": []
             },
             {
-              "id": "5ab75431-b850-42a0-b79a-b0e75ef73f90",
-              "name": "Get leave by ID",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/leave/leaves/{{leaveId}}",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "leave",
-                    "leaves",
-                    "{{leaveId}}"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
               "id": "de33bbe1-089a-4953-8a80-cca032691ef7",
               "name": "Get leaves for user",
               "request": {
@@ -1072,112 +1028,6 @@
               "response": []
             },
             {
-              "id": "df4792aa-d33f-49cf-887d-06fc49061395",
-              "name": "Update leave by ID",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/leave/leaves/{{leaveId}}",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "leave",
-                    "leaves",
-                    "{{leaveId}}"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"status\":\"REJECTED\",\"remarks\":\"Code of conduct violation\",\"isConverted\":false}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "dd7e2b92-0137-44bb-8db8-e7dd33bbb426",
-              "name": "Update leave status",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/leave/leaves/status",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "leave",
-                    "leaves",
-                    "status"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"leaveIds\":[459754],\"status\":\"APPROVED\"}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx or already in final state', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
               "id": "47f1e788-2ca9-44b3-afab-820c4d8de869",
               "name": "Create leave request",
               "request": {
@@ -1207,7 +1057,132 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"userId\":13315,\"startDate\":\"2026-10-22\",\"endDate\":\"2026-10-27\",\"leaveTypeId\":9,\"reason\":\"test\"}",
+                  "raw": "{\"userId\":{{userId}},\"startDate\":\"{{leaveStart}}\",\"endDate\":\"{{leaveEnd}}\",\"leaveTypeId\":9,\"reason\":\"test\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "var d = new Date();",
+                      "d.setDate(d.getDate() + 14);",
+                      "while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);",
+                      "function fmt(x) { return x.toISOString().slice(0, 10); }",
+                      "pm.collectionVariables.set('leaveStart', fmt(d));",
+                      "var e = new Date(d); e.setDate(e.getDate() + 1);",
+                      "while (e.getDay() === 0 || e.getDay() === 6) e.setDate(e.getDate() + 1);",
+                      "pm.collectionVariables.set('leaveEnd', fmt(e));"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+                      "var json = pm.response.json();",
+                      "var id = (json && json.data && json.data.id) ? json.data.id : (json && json.id) ? json.id : null;",
+                      "if (id) pm.collectionVariables.set('leaveId', String(id));"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "dd7e2b92-0137-44bb-8db8-e7dd33bbb426",
+              "name": "Approve leave",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/leave/leaves/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "leave",
+                    "leaves",
+                    "status"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"leaveIds\":[{{leaveId}}],\"status\":\"APPROVED\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "df4792aa-d33f-49cf-887d-06fc49061395",
+              "name": "Cancel leave",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/leave/leaves/{{leaveId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "leave",
+                    "leaves",
+                    "{{leaveId}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"status\":\"CANCELLED\",\"remarks\":\"Test cancellation\"}",
                   "options": {
                     "raw": {
                       "language": "json"

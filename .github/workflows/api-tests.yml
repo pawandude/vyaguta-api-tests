@@ -1,8 +1,6 @@
 name: API Tests
 
 on:
-  schedule:
-    - cron: '0 6 * * *' # daily at 06:00 UTC
   workflow_dispatch: {} # allows manual "Run workflow" from the Actions tab
 
 permissions:
@@ -294,7 +292,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: ${{ env.SUBJECT }}
-          to: pawanlamichhane@lftechnology.com,rikeshshrestha@lftechnology.com,swarnamaden@lftechnology.com,palisthashrestha@lftechnology.com,shrijanabudhathoki@lftechnology.com,oshingansi@lftechnology.com
+          to: pawanlamichhane@lftechnology.com
           from: Vyaguta API Tests <${{ secrets.MAIL_USERNAME }}>
           html_body: file://reports/email.html
 
@@ -492,7 +490,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: ${{ env.QA_SUBJECT }}
-          to: pawanlamichhane@lftechnology.com,rikeshshrestha@lftechnology.com,swarnamaden@lftechnology.com,palisthashrestha@lftechnology.com,shrijanabudhathoki@lftechnology.com,oshingansi@lftechnology.com
+          to: pawanlamichhane@lftechnology.com
           from: Vyaguta API Tests <${{ secrets.MAIL_USERNAME }}>
           html_body: file://reports-qa/email.html
 
