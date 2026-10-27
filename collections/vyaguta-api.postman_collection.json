@@ -4214,7 +4214,7 @@
                   "                startDate: { type: 'string' },",
                   "                endDate:   { type: 'string' },",
                   "                psrId:     { type: ['integer', 'null'] },",
-                  "                metric:    { type: ['string', 'null'] }",
+                  "                metric:    {}",
                   "              }",
                   "            }",
                   "          }",
@@ -8335,7 +8335,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"id\":12884,\"transitionDate\":\"2028-10-11\"}",
+                  "raw": "{\"id\":552,\"transitionDate\":\"{{teamManagerDate}}\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8344,6 +8344,16 @@
                 }
               },
               "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const d = new Date(); d.setDate(d.getDate() + 14);",
+                      "pm.variables.set('teamManagerDate', d.toISOString().split('T')[0]);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
                 {
                   "listen": "test",
                   "script": {
