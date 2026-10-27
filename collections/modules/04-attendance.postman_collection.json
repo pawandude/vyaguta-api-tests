@@ -1210,50 +1210,6 @@
           "name": "Remote Applications",
           "item": [
             {
-              "id": "3c7517bb-122e-4d51-9292-8cd26590427f",
-              "name": "Get remote application by ID",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/leave/remote-applications/{{remoteApplicationId}}",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "leave",
-                    "remote-applications",
-                    "{{remoteApplicationId}}"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
               "id": "175cb97c-c11b-4fca-b294-38957c6f5589",
               "name": "Create remote application",
               "request": {
