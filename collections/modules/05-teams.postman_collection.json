@@ -2438,62 +2438,6 @@
               "response": []
             },
             {
-              "id": "e89bd3ca-0957-4b61-b7be-5f20b3a5e9a4",
-              "name": "Update project offboard status",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/offboard/{{offboardId}}/status",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "projects",
-                    "{{projectId}}",
-                    "offboard",
-                    "{{offboardId}}",
-                    "status"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"status\":\"Offboarded\",\"reason\":\"test\",\"offboardEventDate\":\"2026-10-15\"}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
               "id": "50e98e61-205e-4cff-9821-49be36d64316",
               "name": "Create project",
               "request": {
@@ -2537,60 +2481,6 @@
                   "script": {
                     "exec": [
                       "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "a78d54b8-bb5c-4be3-b17e-5a16bbd94aeb",
-              "name": "Create project risk",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "projects",
-                    "{{projectId}}",
-                    "risks"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"event\":\"test\",\"description\":\"test\",\"areaId\":3,\"categoryId\":39,\"phaseId\":399,\"severity\":\"High\",\"responseType\":\"Avoided\",\"resolutionStatus\":\"On Hold\",\"ownerId\":{{candidateId}},\"sharedWithIds\":[]}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
