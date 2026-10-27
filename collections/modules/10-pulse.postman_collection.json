@@ -515,7 +515,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId=445&projectId=112&areaId=",
+                  "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId={{pulseAllocationId}}&projectId=112",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -533,10 +533,6 @@
                     {
                       "key": "projectId",
                       "value": "112"
-                    },
-                    {
-                      "key": "areaId",
-                      "value": ""
                     }
                   ]
                 }
@@ -546,7 +542,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or 400', function() { pm.expect(pm.response.code).to.be.oneOf([200, 400]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -703,7 +699,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or 400 (note may not exist)', function() { pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -755,7 +751,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or 400', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"

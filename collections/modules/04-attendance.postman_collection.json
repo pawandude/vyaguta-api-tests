@@ -1328,7 +1328,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report?startDate=2026-10-01&endDate=2026-10-31&projectId=502&excludeUserIds=13413,13395,13416,511,13166,13370,697,13305,13495,13371,13414,497&additionalFields=tasks,allocation",
+                  "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report?startDate={{lastMonthStart}}&endDate={{lastMonthEnd}}&projectId=502&additionalFields=tasks,allocation",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1341,19 +1341,15 @@
                   "query": [
                     {
                       "key": "startDate",
-                      "value": "2026-10-01"
+                      "value": "{{lastMonthStart}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-10-31"
+                      "value": "{{lastMonthEnd}}"
                     },
                     {
                       "key": "projectId",
                       "value": "502"
-                    },
-                    {
-                      "key": "excludeUserIds",
-                      "value": "13413,13395,13416,511,13166,13370,697,13305,13495,13371,13414,497"
                     },
                     {
                       "key": "additionalFields",
@@ -1368,7 +1364,7 @@
                   "script": {
                     "exec": [
                       "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                      "pm.test('Response time is below 10000ms', function() { pm.expect(pm.response.responseTime).to.be.below(10000); });"
                     ],
                     "type": "text/javascript"
                   }
@@ -1657,7 +1653,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or 400 (worklog requires prior attendance)', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"

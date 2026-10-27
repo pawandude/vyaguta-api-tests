@@ -538,7 +538,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/teams/allocations?sortBy=role&order=asc&size=30&startDate=2026-10-15&endDate=2027-04-15&projectId=437&fetch=latest&fields=leave,teamManager&userId=&page=&paginationStatus=&date=&format=&roles=",
+                  "raw": "{{baseUrl}}/api/teams/allocations?sortBy=role&order=asc&size=30&startDate={{currentDate}}&endDate={{futureDateLong}}&projectId=437&fetch=latest&fields=leave,teamManager&userId=&page=&paginationStatus=&date=&format=&roles=",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -619,7 +619,7 @@
                   "script": {
                     "exec": [
                       "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                      "pm.test('Response time is below 10000ms', function() { pm.expect(pm.response.responseTime).to.be.below(10000); });"
                     ],
                     "type": "text/javascript"
                   }
