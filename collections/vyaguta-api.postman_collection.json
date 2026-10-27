@@ -10173,7 +10173,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\"subjectId\":15444,\"noteType\":\"FEEDBACK\",\"note\":\"[TEST] Automated feedback note\",\"noteStatus\":\"ACTIVE\",\"notePrivacy\":\"ONLY_ME\",\"areaId\":4}",
+              "raw": "{\"subjectId\":{{userId}},\"noteType\":\"FEEDBACK\",\"note\":\"[TEST] Automated feedback note\",\"noteStatus\":\"ACTIVE\",\"notePrivacy\":\"ONLY_ME\",\"areaId\":4}",
               "options": {
                 "raw": {
                   "language": "json"
