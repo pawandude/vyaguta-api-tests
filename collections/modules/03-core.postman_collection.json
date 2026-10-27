@@ -99,6 +99,16 @@
       "key": "userId",
       "value": "13994",
       "type": "string"
+    },
+    {
+      "key": "skillCategoryId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "skillId",
+      "value": "",
+      "type": "string"
     }
   ],
   "item": [
@@ -1646,59 +1656,6 @@
               "response": []
             },
             {
-              "id": "b11ce880-f416-43bc-9ed3-3ea095c7be93",
-              "name": "Create skill (v2)",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/core/skills/v2",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "core",
-                    "skills",
-                    "v2"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"name\":\"test1\",\"description\":\"\",\"parentId\":848}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
               "id": "df24a974-2d55-4baf-89b9-f704f315c4ad",
               "name": "Create skill category (v2)",
               "request": {
@@ -1730,12 +1687,152 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"name\":\"pawan skill test\",\"description\":\"\"}",
+                  "raw": "{\"name\":\"test skill category\",\"description\":\"\"}",
                   "options": {
                     "raw": {
                       "language": "json"
                     }
                   }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+                      "var json = pm.response.json();",
+                      "var id = json && json.data && json.data.id ? json.data.id : json && json.id ? json.id : null;",
+                      "if (id) pm.collectionVariables.set('skillCategoryId', String(id));"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "b11ce880-f416-43bc-9ed3-3ea095c7be93",
+              "name": "Create skill (v2)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/skills/v2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "skills",
+                    "v2"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"test skill\",\"description\":\"\",\"parentId\":{{skillCategoryId}}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+                      "var json = pm.response.json();",
+                      "var id = json && json.data && json.data.id ? json.data.id : json && json.id ? json.id : null;",
+                      "if (id) pm.collectionVariables.set('skillId', String(id));"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+              "name": "Delete skill (v2)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/skills/v2/{{skillId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "skills",
+                    "v2",
+                    "{{skillId}}"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567892",
+              "name": "Delete skill category (v2)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/skills/v2/categories/{{skillCategoryId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "core",
+                    "skills",
+                    "v2",
+                    "categories",
+                    "{{skillCategoryId}}"
+                  ]
                 }
               },
               "event": [
