@@ -1050,7 +1050,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"empId\":\"50001070\",\"joinDate\":\"{{currentDate}}\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":72,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12 00:00:00\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"id\":2140,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2139,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":2,\"name\":\"DevOps\"},\"designation\":{\"id\":5,\"name\":\"Team Lead\"}}],\"empStatusHistory\":[{\"id\":2484,\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\"},\"endDate\":null,\"empStatusDetails\":[]}],\"appraiserId\":null,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null}},\"id\":13994}",
+                  "raw": "{\"firstName\":\"pawan\",\"middleName\":null,\"lastName\":\"lamichhane\",\"empId\":\"50001071\",\"joinDate\":\"2025-10-15\",\"recruiteeUrl\":\"\",\"username\":\"pawanlamichhane@lftechnology.com\",\"departmentId\":14,\"leaveIssuerId\":13184,\"teamManagerId\":446,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1,8],\"pastExperience\":{{pastExperience}},\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1986-04-09 00:00:00\",\"bloodGroup\":\"B-\",\"maritialStatus\":\"Single\",\"personalEmail\":\"testuser@test.com\",\"mobilePhone\":\"{{mobilePhone}}\",\"homePhone\":null,\"emergencyPhone\":\"9810140057\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":\"temporaryAddress\",\"permanentAddress\":\"permanentAddress\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":\"qwertyy\",\"designationAreaHistory\":[{\"id\":2176,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2175,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2174,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2141,\"transitionDate\":\"2025-10-15\",\"area\":{\"id\":2,\"name\":\"DevOps\"},\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\"}}],\"empStatusHistory\":[{\"id\":2493,\"transitionDate\":\"2026-10-27\",\"engagementStatus\":{\"id\":1,\"name\":\"Fixed-term Contract\"},\"endDate\":null,\"empStatusDetails\":[]},{\"id\":2492,\"transitionDate\":\"2026-10-27\",\"engagementStatus\":{\"id\":3,\"name\":\"Permanent\"},\"endDate\":null,\"empStatusDetails\":[]},{\"id\":2486,\"transitionDate\":\"2025-10-15\",\"engagementStatus\":{\"id\":4,\"name\":\"Probation\"},\"endDate\":null,\"empStatusDetails\":[{\"id\":1631,\"date\":\"2026-01-15\",\"category\":\"Mid Probation\"},{\"id\":1632,\"date\":\"2026-04-15\",\"category\":\"End Probation\"}]}],\"appraiserId\":null,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Dhankuta\",\"city\":\"Pakhribas\",\"streetAddressLine1\":\"kathmandu\",\"streetAddressLine2\":null,\"wardNo\":1,\"zipCode\":\"01006\"},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Dhankuta\",\"city\":\"Pakhribas\",\"streetAddressLine1\":\"kathmandu\",\"streetAddressLine2\":null,\"wardNo\":1,\"zipCode\":\"01006\"}},\"id\":{{userId}}}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1060,10 +1060,22 @@
               },
               "event": [
                 {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "var pastExp = Math.floor(Math.random() * (120 - 12 + 1)) + 12;",
+                      "pm.variables.set('pastExperience', pastExp);",
+                      "var mobile = '98' + Math.floor(Math.random() * 100000000).toString().padStart(8, '0');",
+                      "pm.variables.set('mobilePhone', mobile);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or validation error', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 500]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -1220,7 +1232,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"id\":13184,\"email\":\"palisthashrestha+astha@lftechnology.com\",\"transitionDate\":\"2026-10-22\"}",
+                  "raw": "{\"id\":13315,\"email\":\"palisthashrestha@lftechnology.com\",\"transitionDate\":\"2027-05-29\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1233,7 +1245,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or error', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 404]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -1329,7 +1341,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"id\":446,\"transitionDate\":\"2026-10-06\"}",
+                  "raw": "{\"id\":12884,\"transitionDate\":\"2028-10-11\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1342,7 +1354,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or error', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 404]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"

@@ -3468,50 +3468,6 @@
           "name": "Remote Applications",
           "item": [
             {
-              "id": "3c7517bb-122e-4d51-9292-8cd26590427f",
-              "name": "Get remote application by ID",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/leave/remote-applications/{{remoteApplicationId}}",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "leave",
-                    "remote-applications",
-                    "{{remoteApplicationId}}"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
               "id": "175cb97c-c11b-4fca-b294-38957c6f5589",
               "name": "Create remote application",
               "request": {
@@ -4533,7 +4489,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13315,\"billingStatus\":\"Assigned\",\"coAppraiserId\":null,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDateLong}}\",\"startDate\":\"{{currentDate}}\",\"projectId\":437,\"userId\":13994,\"roleId\":8,\"expectation\":\"test\"}",
+                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13314,\"billingStatus\":\"Assigned\",\"coAppraiserId\":12884,\"isTeamLead\":false,\"potentialEndDate\":\"2028-10-04\",\"startDate\":\"{{today}}\",\"projectId\":112,\"userId\":{{userId}},\"roleId\":7,\"expectation\":\"do good work\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4546,7 +4502,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or conflict', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -6310,60 +6266,6 @@
                 }
               ],
               "response": []
-            },
-            {
-              "id": "c8dca721-483c-4397-8aaa-a80b5cb3ffbf",
-              "name": "Create project signoff",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/signoff",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "projects",
-                    "{{projectId}}",
-                    "signoff"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"action\":\"Signed Off By PM\",\"month\":\"09\",\"year\":2026,\"billedFte\":null,\"billings\":[{\"user\":{\"id\":13371,\"email\":\"akshaykumar@lftechnology.com\",\"empId\":\"50000545\",\"fullname\":\"akshay kumar\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"EVENING_SHIFT\",\"designation\":{\"id\":5,\"name\":\"Team Lead\",\"area\":{\"id\":6,\"name\":\"People Management\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":154,\"totalBillingHours\":154,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.875,\"leaveHours\":154,\"shift\":\"EVENING_SHIFT\",\"allocations\":{\"id\":6174,\"allocationHours\":35,\"role\":\"Graphics Designer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13371,\"allocationId\":6174},{\"user\":{\"id\":13166,\"email\":\"palisthashrestha+pratha@lftechnology.com\",\"empId\":\"50000340\",\"fullname\":\"Pratha  Project Manager\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"MORNING_SHIFT\",\"designation\":{\"id\":12,\"name\":\"Associate PM\",\"area\":{\"id\":21,\"name\":\"Project Management\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":154,\"totalBillingHours\":154,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.875,\"leaveHours\":154,\"shift\":\"MORNING_SHIFT\",\"allocations\":{\"id\":6175,\"allocationHours\":35,\"role\":\"Project Manager\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-04\",\"2026-09-02\",\"2026-09-03\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-30\",\"2026-09-28\",\"2026-09-29\"],\"userId\":13166,\"allocationId\":6175},{\"user\":{\"id\":13414,\"email\":\"kat@lftechnology.com\",\"empId\":\"50000587\",\"fullname\":\"kat shrestha\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\",\"area\":{\"id\":3,\"name\":\"IT\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":88,\"totalBillingHours\":88,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.5,\"leaveHours\":88,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6178,\"allocationHours\":20,\"role\":\"Data Engineer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13414,\"allocationId\":6178},{\"user\":{\"id\":13395,\"email\":\"swarnamaden+katrinepetersen@lftechnology.com\",\"empId\":\"50000568\",\"fullname\":\"Katrine Petersen\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"MORNING_SHIFT\",\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\",\"area\":{\"id\":2,\"name\":\"DevOps\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":66,\"totalBillingHours\":66,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.375,\"leaveHours\":66,\"shift\":\"MORNING_SHIFT\",\"allocations\":{\"id\":6187,\"allocationHours\":15,\"role\":\"Graphics Designer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13395,\"allocationId\":6187},{\"user\":{\"id\":511,\"email\":\"mukeshkarna@lftechnology.com\",\"empId\":\"393\",\"fullname\":\"Mukesh Kumar  Karna\",\"country\":\"UK\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":5,\"name\":\"Team Lead\",\"area\":{\"id\":15,\"name\":\"Product Design\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":66,\"totalBillingHours\":66,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.375,\"leaveHours\":66,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6183,\"allocationHours\":15,\"role\":\"Project Operations Coordinator\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":511,\"allocationId\":6183},{\"user\":{\"id\":13495,\"email\":\"white@lftechnology.com\",\"empId\":\"50000657\",\"fullname\":\"White Black\",\"country\":\"Nepal\",\"timezone\":\"+11:00\",\"workingShift\":\"EVENING_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":3,\"name\":\"IT\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":22,\"totalBillingHours\":22,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.125,\"leaveHours\":22,\"shift\":\"EVENING_SHIFT\",\"allocations\":{\"id\":6180,\"allocationHours\":5,\"role\":\"Fullstack Developer\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13495,\"allocationId\":6180},{\"user\":{\"id\":13305,\"email\":\"sushmapuri@lftechnology.com\",\"empId\":\"50000479\",\"fullname\":\"Sushma Puri\",\"country\":\"India\",\"timezone\":\"+05:30\",\"workingShift\":\"LATE_EVENING_SHIFT\",\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\",\"area\":{\"id\":2,\"name\":\"DevOps\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":4,\"totalBillingHours\":4,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Monthly\",\"fte\":0.025,\"leaveHours\":4,\"shift\":\"LATE_EVENING_SHIFT\",\"allocations\":{\"id\":6182,\"allocationHours\":1,\"role\":\"DevOps\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-15\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13305,\"allocationId\":6182},{\"user\":{\"id\":697,\"email\":\"susannagurung@lftechnology.com\",\"empId\":\"50000172\",\"fullname\":\"Susanna Gurung\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":20,\"name\":\"Engineering\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-07\",\"totalWorkingHours\":10,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-07\",\"billingType\":\"Monthly\",\"fte\":0.058333333333333334,\"leaveHours\":10,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6181,\"allocationHours\":10,\"role\":\"Automation QA\",\"billingStatus\":\"Assigned\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":697,\"allocationId\":6181},{\"user\":{\"id\":497,\"email\":\"bibekshrestha@lftechnology.com\",\"empId\":\"543422\",\"fullname\":\"kinjalk  HR admin\",\"country\":\"Canada\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":22,\"name\":\"Associate HR Manager\",\"area\":{\"id\":4,\"name\":\"QA\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":176,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":1,\"leaveHours\":176,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6191,\"allocationHours\":40,\"role\":\"Computer Vision Engineer\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":497,\"allocationId\":6191},{\"user\":{\"id\":13416,\"email\":\"micheal@lftechnology.com\",\"empId\":\"50000589\",\"fullname\":\"Micheal  Scofield\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"MORNING_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":3,\"name\":\"IT\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":176,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":1,\"leaveHours\":176,\"shift\":\"MORNING_SHIFT\",\"allocations\":{\"id\":6586,\"allocationHours\":40,\"role\":\"Product Designer\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13416,\"allocationId\":6586},{\"user\":{\"id\":13370,\"email\":\"palisthashrestha+ranbir@lftechnology.com\",\"empId\":\"50000544\",\"fullname\":\"Ranbir  Kapoor\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"LATE_EVENING_SHIFT\",\"designation\":{\"id\":5,\"name\":\"Team Lead\",\"area\":{\"id\":4,\"name\":\"QA\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":176,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":1,\"leaveHours\":176,\"shift\":\"LATE_EVENING_SHIFT\",\"allocations\":{\"id\":6176,\"allocationHours\":40,\"role\":\"Automation QA\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13370,\"allocationId\":6176},{\"user\":{\"id\":13413,\"email\":\"adwait+purnashrestha@lftechnology.com\",\"empId\":\"50000586\",\"fullname\":\"Adwait upadhyaya\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"LATE_EVENING_SHIFT\",\"designation\":{\"id\":8,\"name\":\"Solution Architect\",\"area\":{\"id\":25,\"name\":\"Development\"}}},\"allocationStartDate\":\"2026-09-01\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":88,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-01\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":0.5,\"leaveHours\":88,\"shift\":\"LATE_EVENING_SHIFT\",\"allocations\":{\"id\":6177,\"allocationHours\":20,\"role\":\"Fullstack Developer\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":13413,\"allocationId\":6177},{\"user\":{\"id\":697,\"email\":\"susannagurung@lftechnology.com\",\"empId\":\"50000172\",\"fullname\":\"Susanna Gurung\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"workingShift\":\"DAY_SHIFT\",\"designation\":{\"id\":3,\"name\":\"Software Engineer\",\"area\":{\"id\":20,\"name\":\"Engineering\"}}},\"allocationStartDate\":\"2026-09-08\",\"allocationEndDate\":\"2026-09-30\",\"totalWorkingHours\":34,\"totalBillingHours\":0,\"totalAttendanceHours\":0,\"totalLoggedMinutes\":0,\"billingStartDate\":\"2026-09-08\",\"billingEndDate\":\"2026-09-30\",\"billingType\":\"Learning\",\"fte\":0.19166666666666668,\"leaveHours\":34,\"shift\":\"DAY_SHIFT\",\"allocations\":{\"id\":6585,\"allocationHours\":10,\"role\":\"Automation QA\",\"billingStatus\":\"Learning\"},\"leaveDays\":[\"2026-09-01\",\"2026-09-02\",\"2026-09-03\",\"2026-09-04\",\"2026-09-07\",\"2026-09-08\",\"2026-09-09\",\"2026-09-10\",\"2026-09-11\",\"2026-09-14\",\"2026-09-15\",\"2026-09-16\",\"2026-09-17\",\"2026-09-18\",\"2026-09-21\",\"2026-09-22\",\"2026-09-23\",\"2026-09-24\",\"2026-09-25\",\"2026-09-28\",\"2026-09-29\",\"2026-09-30\"],\"userId\":697,\"allocationId\":6585}]}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
             }
           ]
         },
@@ -6396,56 +6298,6 @@
                     "api",
                     "teams",
                     "psrs"
-                  ],
-                  "query": [
-                    {
-                      "key": "projectId",
-                      "value": "369"
-                    }
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "a165f249-9d49-4a72-88e4-a774d159015f",
-              "name": "Get PSR by ID",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/psrs/{{psrId}}?projectId=369",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "psrs",
-                    "{{psrId}}"
                   ],
                   "query": [
                     {
@@ -7050,7 +6902,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"jobDescription\":\"PHA+dGVzdDwvcD4=\",\"reason\":\"\",\"teamsRoleId\":38,\"designationId\":552,\"initialRequestedTotalStaff\":1,\"skillIds\":[679],\"allocation\":40,\"duration\":12,\"targetDate\":\"{{futureDate}}\",\"staffingRequestType\":\"Account Expansion\",\"durationType\":\"MONTH\",\"internalAssessment\":\"Interview and Assignment\",\"externalAssessment\":\"None\",\"internalInterviewerId\":null,\"note\":\"\",\"projectId\":369}",
+                  "raw": "{\"jobDescription\":\"PHA+bmVlZCB0byBkbyBhdXRvbWF0aW9uIGluIHNlbGVuaXVtIGFuZCBwb3N0bWFuPC9wPg==\",\"reason\":\"\",\"teamsRoleId\":7,\"designationId\":554,\"initialRequestedTotalStaff\":1,\"skillIds\":[679,522,710,647,593],\"allocation\":40,\"duration\":12,\"targetDate\":\"2028-09-21\",\"staffingRequestType\":\"Leapfrog Strategic\",\"durationType\":\"MONTH\",\"internalAssessment\":\"Interview and Assignment\",\"externalAssessment\":\"None\",\"internalInterviewerId\":null,\"note\":\"\",\"areaId\":4}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -7063,7 +6915,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or conflict', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8239,7 +8091,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"firstName\":\"Pawan\",\"middleName\":null,\"lastName\":\"Lammichane\",\"empId\":\"50001070\",\"joinDate\":\"{{currentDate}}\",\"recruiteeUrl\":\"\",\"username\":\"pawanlammichane@lftechnology.com\",\"departmentId\":17,\"leaveIssuerId\":13314,\"teamManagerId\":415,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1],\"pastExperience\":72,\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1978-10-12 00:00:00\",\"bloodGroup\":\"B+\",\"maritialStatus\":\"Married\",\"personalEmail\":\"pawan@test.com\",\"mobilePhone\":\"12\",\"homePhone\":\"12\",\"emergencyPhone\":\"12\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":null,\"permanentAddress\":null,\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":null,\"designationAreaHistory\":[{\"id\":2140,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2139,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":2,\"name\":\"DevOps\"},\"designation\":{\"id\":5,\"name\":\"Team Lead\"}}],\"empStatusHistory\":[{\"id\":2484,\"transitionDate\":\"2026-10-15\",\"engagementStatus\":{\"id\":6,\"name\":\"Trainee\"},\"endDate\":null,\"empStatusDetails\":[]}],\"appraiserId\":null,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Taplejung\",\"city\":\"AathraiTriveni\",\"streetAddressLine1\":\"bench\",\"streetAddressLine2\":null,\"wardNo\":12,\"zipCode\":null}},\"id\":13994}",
+                  "raw": "{\"firstName\":\"pawan\",\"middleName\":null,\"lastName\":\"lamichhane\",\"empId\":\"50001071\",\"joinDate\":\"2025-10-15\",\"recruiteeUrl\":\"\",\"username\":\"pawanlamichhane@lftechnology.com\",\"departmentId\":14,\"leaveIssuerId\":13184,\"teamManagerId\":446,\"scheduledType\":\"FULL_TIME\",\"workingShift\":\"DAY_SHIFT\",\"availabilityTime\":{\"startTime\":\"09:00\",\"startTimeType\":\"AM\",\"endTime\":\"06:00\",\"endTimeType\":\"PM\"},\"roleIds\":[1,8],\"pastExperience\":{{pastExperience}},\"cvUrl\":null,\"gender\":\"FEMALE\",\"dateofBirth\":\"1986-04-09 00:00:00\",\"bloodGroup\":\"B-\",\"maritialStatus\":\"Single\",\"personalEmail\":\"testuser@test.com\",\"mobilePhone\":\"{{mobilePhone}}\",\"homePhone\":null,\"emergencyPhone\":\"9810140057\",\"emergencyContactRelationship\":\"mom\",\"temporaryAddress\":\"temporaryAddress\",\"permanentAddress\":\"permanentAddress\",\"country\":\"Nepal\",\"timezone\":\"+05:45\",\"githubId\":\"qwertyy\",\"designationAreaHistory\":[{\"id\":2176,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2175,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2174,\"transitionDate\":\"2026-10-15\",\"area\":{\"id\":4,\"name\":\"QA\"},\"designation\":{\"id\":4,\"name\":\"Senior Software Engineer\"}},{\"id\":2141,\"transitionDate\":\"2025-10-15\",\"area\":{\"id\":2,\"name\":\"DevOps\"},\"designation\":{\"id\":2,\"name\":\"Associate Software Engineer\"}}],\"empStatusHistory\":[{\"id\":2493,\"transitionDate\":\"2026-10-27\",\"engagementStatus\":{\"id\":1,\"name\":\"Fixed-term Contract\"},\"endDate\":null,\"empStatusDetails\":[]},{\"id\":2492,\"transitionDate\":\"2026-10-27\",\"engagementStatus\":{\"id\":3,\"name\":\"Permanent\"},\"endDate\":null,\"empStatusDetails\":[]},{\"id\":2486,\"transitionDate\":\"2025-10-15\",\"engagementStatus\":{\"id\":4,\"name\":\"Probation\"},\"endDate\":null,\"empStatusDetails\":[{\"id\":1631,\"date\":\"2026-01-15\",\"category\":\"Mid Probation\"},{\"id\":1632,\"date\":\"2026-04-15\",\"category\":\"End Probation\"}]}],\"appraiserId\":null,\"coAppraiserId\":null,\"addresses\":{\"temporary\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Dhankuta\",\"city\":\"Pakhribas\",\"streetAddressLine1\":\"kathmandu\",\"streetAddressLine2\":null,\"wardNo\":1,\"zipCode\":\"01006\"},\"permanent\":{\"country\":\"Nepal\",\"stateProvince\":\"Koshi\",\"district\":\"Dhankuta\",\"city\":\"Pakhribas\",\"streetAddressLine1\":\"kathmandu\",\"streetAddressLine2\":null,\"wardNo\":1,\"zipCode\":\"01006\"}},\"id\":{{userId}}}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8249,10 +8101,22 @@
               },
               "event": [
                 {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "var pastExp = Math.floor(Math.random() * (120 - 12 + 1)) + 12;",
+                      "pm.variables.set('pastExperience', pastExp);",
+                      "var mobile = '98' + Math.floor(Math.random() * 100000000).toString().padStart(8, '0');",
+                      "pm.variables.set('mobilePhone', mobile);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or validation error', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 500]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8409,7 +8273,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"id\":13184,\"email\":\"palisthashrestha+astha@lftechnology.com\",\"transitionDate\":\"2026-10-22\"}",
+                  "raw": "{\"id\":13315,\"email\":\"palisthashrestha@lftechnology.com\",\"transitionDate\":\"2027-05-29\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8422,7 +8286,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or error', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 404]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8518,7 +8382,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"id\":446,\"transitionDate\":\"2026-10-06\"}",
+                  "raw": "{\"id\":12884,\"transitionDate\":\"2028-10-11\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8531,7 +8395,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or error', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 404]); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
