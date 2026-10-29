@@ -2027,6 +2027,37 @@
                 }
               ],
               "response": []
+            },
+            {
+              "name": "Get candidate booking details",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/{{candidateId}}/booking-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "{{candidateId}}",
+                    "booking-details"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         },

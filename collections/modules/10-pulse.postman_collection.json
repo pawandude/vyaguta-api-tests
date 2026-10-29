@@ -738,7 +738,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"pulseProfiles\":[\"dGVzdA==\"],\"subjectId\":{{userId}},\"areaId\":4}",
+                  "raw": "{\"pulseProfiles\":[\"c2VsZiBleHBlY3RhdGlvbg==\"],\"subjectId\":\"{{userId}}\",\"areaId\":4}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -752,13 +752,50 @@
                   "script": {
                     "exec": [
                       "pm.test('Status is 2xx or 400', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+                      "if ([200,201].includes(pm.response.code)) { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('noteExpectationItemId', j.data.id); }"
                     ],
                     "type": "text/javascript"
                   }
                 }
               ],
               "response": []
+            },
+            {
+              "name": "Delete note expectation item",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pulse/note-expectation-item/{{noteExpectationItemId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pulse",
+                    "note-expectation-item",
+                    "{{noteExpectationItemId}}"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status is 2xx or 400', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 404]); });"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         },
@@ -1076,6 +1113,55 @@
             }
           ],
           "response": []
+        },
+        {
+          "name": "Reset feedback expectation cycle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/feedback-expectation-cycle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "feedback-expectation-cycle"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"feedbackData\":{\"subjectId\":\"{{userId}}\",\"projectId\":\"{{projectId}}\",\"note\":\"<p>reset cycle feedback</p>\",\"notePrivacy\":\"DEFAULT\"},\"expectationData\":{\"pulseProfiles\":[\"bmV3IGN5Y2xlIGV4cA==\"]}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 2xx or 400', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });"
+                ]
+              }
+            }
+          ]
         }
       ]
     }
