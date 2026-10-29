@@ -574,12 +574,6 @@
                 "leave",
                 "attendance",
                 "summary"
-              ],
-              "query": [
-                {
-                  "key": "fetchType",
-                  "value": "self"
-                }
               ]
             }
           },
@@ -601,7 +595,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
+              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role+based",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -610,12 +604,6 @@
                 "jump",
                 "kpis",
                 "filters"
-              ],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "Role based"
-                }
               ]
             }
           },
@@ -666,21 +654,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "okr",
-                "strategic-pillars",
-                "summary"
-              ],
-              "query": [
-                {
-                  "key": "year",
-                  "value": "2026"
-                }
+                "strategic-pillars"
               ]
             }
           },
@@ -725,6 +706,125 @@
               }
             }
           ]
+        },
+        {
+          "name": "Pulse — dashboard endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01&endDate=2026-12-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "dashboard"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — user pulse endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/user/{{personId}}/pulse",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "user",
+                "{{personId}}",
+                "pulse"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — pulse report endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-report?page=1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-report"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — PIP report endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-report",
+                "pip"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -733,7 +833,7 @@
       "description": "One representative request per module. Asserts status 200, Content-Type, and non-empty body only. Run on every PR/push for fast feedback.",
       "item": [
         {
-          "name": "People — users list is reachable",
+          "name": "People — users is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -756,8 +856,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
-                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
@@ -787,8 +887,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
-                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
@@ -1187,12 +1287,6 @@
                 "leave",
                 "attendance",
                 "summary"
-              ],
-              "query": [
-                {
-                  "key": "fetchType",
-                  "value": "self"
-                }
               ]
             }
           },
@@ -1203,8 +1297,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
-                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
@@ -1216,7 +1310,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role based",
+              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role+based",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1225,12 +1319,6 @@
                 "jump",
                 "kpis",
                 "filters"
-              ],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "Role based"
-                }
               ]
             }
           },
@@ -1241,8 +1329,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
-                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
@@ -1272,8 +1360,8 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
-                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
@@ -1285,21 +1373,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "okr",
-                "strategic-pillars",
-                "summary"
-              ],
-              "query": [
-                {
-                  "key": "year",
-                  "value": "2026"
-                }
+                "strategic-pillars"
               ]
             }
           },
@@ -1310,15 +1391,15 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
-                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
           ]
         },
         {
-          "name": "Pulse — evaluation groups is reachable",
+          "name": "Pulse — evaluations is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -1342,8 +1423,135 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
-                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — dashboard is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01&endDate=2026-12-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "dashboard"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — user pulse is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/user/{{personId}}/pulse",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "user",
+                "{{personId}}",
+                "pulse"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — pulse report is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-report?page=1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-report"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — PIP report is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-report",
+                "pip"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
