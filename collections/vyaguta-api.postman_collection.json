@@ -206,6 +206,151 @@
           ]
         },
         {
+          "name": "Teams — allocations endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate=2026-01-01&endDate=2026-12-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "allocations"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — candidates endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/candidates?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "candidates"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — projects endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — staffing endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/staffing?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "staffing"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — PSR endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "psrs"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
           "name": "Attendance — summary endpoint is up",
           "request": {
             "method": "GET",
@@ -435,6 +580,161 @@
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
                   "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
                   "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property('data'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — allocations is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate=2026-01-01&endDate=2026-12-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "allocations"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — candidates is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/candidates?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "candidates"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — projects is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — staffing is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/staffing?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "staffing"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — PSR is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "psrs"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });",
+                  "pm.test(\"Response body has data property\", function () { pm.expect(pm.response.json()).to.have.property(\"data\"); });"
                 ]
               }
             }
@@ -4442,7 +4742,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13314,\"billingStatus\":\"Assigned\",\"coAppraiserId\":12884,\"isTeamLead\":false,\"potentialEndDate\":\"2028-10-04\",\"startDate\":\"{{today}}\",\"projectId\":112,\"userId\":{{userId}},\"roleId\":7,\"expectation\":\"do good work\"}",
+                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13314,\"billingStatus\":\"Assigned\",\"coAppraiserId\":12884,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDate365}}\",\"startDate\":\"{{today}}\",\"projectId\":112,\"userId\":{{userId}},\"roleId\":7,\"expectation\":\"deliver quality work\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4451,6 +4751,19 @@
                 }
               },
               "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const today = new Date();",
+                      "const fmt = d => d.toISOString().split('T')[0];",
+                      "pm.variables.set('today', fmt(today));",
+                      "const future = new Date(today); future.setFullYear(future.getFullYear()+1);",
+                      "pm.variables.set('futureDate365', fmt(future));"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
                 {
                   "listen": "test",
                   "script": {
@@ -4947,7 +5260,8 @@
                   "script": {
                     "exec": [
                       "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+                      "const json = pm.response.json(); const items = (json.data && json.data.data) || json.data || []; if (items.length) { pm.collectionVariables.set('candidateId', items[0].id); }"
                     ],
                     "type": "text/javascript"
                   }
@@ -6855,7 +7169,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"jobDescription\":\"PHA+bmVlZCB0byBkbyBhdXRvbWF0aW9uIGluIHNlbGVuaXVtIGFuZCBwb3N0bWFuPC9wPg==\",\"reason\":\"\",\"teamsRoleId\":7,\"designationId\":554,\"initialRequestedTotalStaff\":1,\"skillIds\":[679,522,710,647,593],\"allocation\":40,\"duration\":12,\"targetDate\":\"2028-09-21\",\"staffingRequestType\":\"Leapfrog Strategic\",\"durationType\":\"MONTH\",\"internalAssessment\":\"Interview and Assignment\",\"externalAssessment\":\"None\",\"internalInterviewerId\":null,\"note\":\"\",\"areaId\":4}",
+                  "raw": "{\"jobDescription\":\"PHA+bmVlZCBhIG1pZCBxYSZuYnNwOzwvcD4=\",\"reason\":\"\",\"teamsRoleId\":7,\"designationId\":554,\"initialRequestedTotalStaff\":1,\"skillIds\":[679,522,710,647,593],\"allocation\":40,\"duration\":6,\"targetDate\":\"{{futureDate30}}\",\"staffingRequestType\":\"Account Expansion\",\"durationType\":\"MONTH\",\"internalAssessment\":\"Interview and Assignment\",\"externalAssessment\":\"None\",\"internalInterviewerId\":null,\"note\":\"\",\"projectId\":112}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -6864,6 +7178,16 @@
                 }
               },
               "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const today = new Date(); today.setDate(today.getDate()+30);",
+                      "pm.variables.set('futureDate30', today.toISOString().split('T')[0]);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
                 {
                   "listen": "test",
                   "script": {
