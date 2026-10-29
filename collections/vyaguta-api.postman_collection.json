@@ -5386,6 +5386,79 @@
                 }
               ],
               "response": []
+            },
+            {
+              "name": "Get allocation summary report",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year=2026",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "reports",
+                    "allocation-summary-reports"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get allocation report",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/reports/allocation-reports?startDate={{today}}&endDate={{futureDate180}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "reports",
+                    "allocation-reports"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const today = new Date();",
+                      "const fmt = d => d.toISOString().split(\"T\")[0];",
+                      "pm.variables.set(\"today\", fmt(today));",
+                      "const d180 = new Date(today); d180.setDate(d180.getDate()+180);",
+                      "pm.variables.set(\"futureDate180\", fmt(d180));"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         },
