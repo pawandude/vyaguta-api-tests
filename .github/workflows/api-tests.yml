@@ -341,6 +341,20 @@ jobs:
           VYAGUTA_QA_TOKEN: ${{ secrets.VYAGUTA_QA_TOKEN }}
           VYAGUTA_QA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_QA_RESTRICTED_TOKEN }}
 
+      - name: Run Newman tests — QA Assets collection
+        id: newman-qa-assets
+        continue-on-error: true
+        run: |
+          npx newman run collections/vyaguta-assets.postman_collection.json \
+            -e environments/vyaguta-qa.postman_environment.json \
+            --env-var "secopApiKey=$SECOPS_API_KEY" \
+            --reporters cli,htmlextra,json \
+            --reporter-htmlextra-export reports-qa/report-assets.html \
+            --reporter-htmlextra-title "Vyaguta Assets Test Report — QA" \
+            --reporter-json-export reports-qa/results-assets.json
+        env:
+          SECOPS_API_KEY: ${{ secrets.SECOPS_API_KEY }}
+
       - name: Parse QA test results
         id: qa-results
         if: always()
