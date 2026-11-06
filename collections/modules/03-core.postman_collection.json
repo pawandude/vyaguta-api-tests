@@ -781,6 +781,62 @@
               "response": []
             },
             {
+              "id": "c7a3f1e2-5b9d-4a8c-a2e0-3f4d5c6b7e8a",
+              "name": "Create designation returns 201",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"{{desigName}}\",\"description\":\"{{desigDesc}}\",\"status\":true}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/designations",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "core", "designations"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const ts = Date.now();",
+                      "pm.collectionVariables.set('desigName', 'AutoDesig_' + ts);",
+                      "pm.collectionVariables.set('desigDesc', 'Auto-created designation ' + ts);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 201', function() { pm.response.to.have.status(201); });",
+                      "pm.test('Content-Type is JSON', function() { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                      "const schema = { type: 'object', required: ['data'], properties: { data: { type: 'object', required: ['id', 'name', 'status'], properties: { id: { type: 'integer' }, name: { type: 'string' }, status: { type: 'boolean' }, description: {}, level: {}, dateCreated: { type: 'string' }, lastUpdated: { type: 'string' } } } } };",
+                      "pm.test('Response matches schema', function() { pm.response.to.have.jsonSchema(schema); });",
+                      "pm.test('Response echoes name and description', function() { const d = pm.response.json().data; pm.expect(d.name).to.include('AutoDesig_'); pm.expect(d.description).to.include('Auto-created designation'); });",
+                      "pm.collectionVariables.set('designationId', pm.response.json().data.id);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
               "id": "df4ddcaf-74ca-4a09-9205-148db0850303",
               "name": "List engagement status",
               "request": {
@@ -1083,6 +1139,56 @@
                     "exec": [
                       "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "name": "People finder with filters returns 200 with matching results",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/core/people-finder?page=1&designationId=3&country=Nepal&areaId=4",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "core", "people-finder"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "designationId", "value": "3" },
+                    { "key": "country", "value": "Nepal" },
+                    { "key": "areaId", "value": "4" }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 200', function() { pm.response.to.have.status(200); });",
+                      "pm.test('Content-Type is JSON', function() { pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+                      "pm.test('All results match country filter', function() {",
+                      "  const items = pm.response.json().data || [];",
+                      "  items.forEach(function(item) {",
+                      "    if (item.country) { pm.expect(item.country).to.equal('Nepal'); }",
+                      "  });",
+                      "});"
                     ],
                     "type": "text/javascript"
                   }

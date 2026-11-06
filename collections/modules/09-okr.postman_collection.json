@@ -1,726 +1,877 @@
 {
-  "info": {
-    "name": "Vyaguta — OKR",
-    "description": "Module tests: OKR. Part of the Vyaguta API test suite.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{authToken}}",
-        "type": "string"
-      }
-    ]
-  },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "areaId",
-      "value": "56",
-      "type": "string"
-    },
-    {
-      "key": "candidateId",
-      "value": "13994",
-      "type": "string"
-    },
-    {
-      "key": "keyResultId",
-      "value": "1312",
-      "type": "string"
-    },
-    {
-      "key": "leaveId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "objectiveId",
-      "value": "1124",
-      "type": "string"
-    },
-    {
-      "key": "offboardId",
-      "value": "13106",
-      "type": "string"
-    },
-    {
-      "key": "projectId",
-      "value": "384",
-      "type": "string"
-    },
-    {
-      "key": "psrId",
-      "value": "931",
-      "type": "string"
-    },
-    {
-      "key": "pulseAllocationId",
-      "value": "445",
-      "type": "string"
-    },
-    {
-      "key": "pulseNoteId",
-      "value": "9329",
-      "type": "string"
-    },
-    {
-      "key": "remoteApplicationId",
-      "value": "239",
-      "type": "string"
-    },
-    {
-      "key": "riskId",
-      "value": "149",
-      "type": "string"
-    },
-    {
-      "key": "signoffId",
-      "value": "250",
-      "type": "string"
-    },
-    {
-      "key": "staffingId",
-      "value": "1122",
-      "type": "string"
-    },
-    {
-      "key": "unfreezeRequestId",
-      "value": "494",
-      "type": "string"
-    },
-    {
-      "key": "userId",
-      "value": "12884",
-      "type": "string"
-    }
-  ],
-  "item": [
-    {
-      "name": "OKR",
-      "description": "Tests for the OKR module — /api/okr/strategic-pillars/summary and /api/okr/hlo.",
-      "item": [
-        {
-          "name": "Get strategic pillars summary returns 200 with pillar list",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "strategic-pillars",
-                "summary"
-              ],
-              "query": [
-                {
-                  "key": "year",
-                  "value": "2026"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "const schema = {",
-                  "  type: 'object',",
-                  "  required: ['data'],",
-                  "  properties: {",
-                  "    data: {",
-                  "      type: 'array',",
-                  "      items: {",
-                  "        type: 'object',",
-                  "        required: ['strategicPillarId', 'statement', 'hloCount', 'objectiveCount', 'progress'],",
-                  "        properties: {",
-                  "          strategicPillarId: { type: 'integer' },",
-                  "          statement:         { type: 'string' },",
-                  "          hloCount:          { type: 'integer' },",
-                  "          objectiveCount:    { type: 'integer' },",
-                  "          progress:          { type: ['number', 'null'] }",
-                  "        }",
-                  "      }",
-                  "    }",
-                  "  }",
-                  "};",
-                  "pm.test(\"Response matches schema\", function () {",
-                  "    pm.response.to.have.jsonSchema(schema);",
-                  "});",
-                  "pm.test(\"data array is not empty\", function () {",
-                  "    pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty;",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Get HLOs for single quarter returns 200",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year=2026",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "hlo"
-              ],
-              "query": [
-                {
-                  "key": "quarters",
-                  "value": "Q4"
-                },
-                {
-                  "key": "with",
-                  "value": "objectives"
-                },
-                {
-                  "key": "year",
-                  "value": "2026"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "const schema = {",
-                  "  type: 'object',",
-                  "  required: ['data'],",
-                  "  properties: {",
-                  "    data: {",
-                  "      type: 'array',",
-                  "      items: {",
-                  "        type: 'object',",
-                  "        required: ['id', 'code', 'title', 'quarter'],",
-                  "        properties: {",
-                  "          id:      { type: 'integer' },",
-                  "          code:    { type: 'string' },",
-                  "          title:   { type: 'string' },",
-                  "          quarter: { type: 'string' },",
-                  "          area: {",
-                  "            type: 'object',",
-                  "            properties: {",
-                  "              id:   { type: 'integer' },",
-                  "              name: { type: 'string' },",
-                  "              code: { type: 'string' }",
-                  "            }",
-                  "          }",
-                  "        }",
-                  "      }",
-                  "    }",
-                  "  }",
-                  "};",
-                  "pm.test(\"Response matches schema\", function () {",
-                  "    pm.response.to.have.jsonSchema(schema);",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Get HLOs for all quarters returns 200",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q1,Q2,Q3,Q4&with=objectives&year=2026",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "hlo"
-              ],
-              "query": [
-                {
-                  "key": "quarters",
-                  "value": "Q1,Q2,Q3,Q4"
-                },
-                {
-                  "key": "with",
-                  "value": "objectives"
-                },
-                {
-                  "key": "year",
-                  "value": "2026"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "pm.test(\"All quarters represented in results\", function () {",
-                  "    const quarters = pm.response.json().data.map(function (hlo) { return hlo.quarter; });",
-                  "    const unique = [...new Set(quarters)];",
-                  "    pm.expect(unique.length).to.be.at.least(1);",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Get OKR areas with leaderships returns 200",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/areas?year=2026&additionalFields=leaderships,objectiveCount",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "areas"
-              ],
-              "query": [
-                {
-                  "key": "year",
-                  "value": "2026"
-                },
-                {
-                  "key": "additionalFields",
-                  "value": "leaderships,objectiveCount"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "const schema = {",
-                  "  type: 'object',",
-                  "  required: ['data'],",
-                  "  properties: {",
-                  "    data: {",
-                  "      type: 'array',",
-                  "      items: {",
-                  "        type: 'object',",
-                  "        required: ['id', 'name', 'type'],",
-                  "        properties: {",
-                  "          id:             { type: 'integer' },",
-                  "          name:           { type: 'string' },",
-                  "          description:    { type: ['string', 'null'] },",
-                  "          type:           { type: 'string' },",
-                  "          createdBy:      { type: 'integer' },",
-                  "          createdAt:      { type: 'string' },",
-                  "          updatedAt:      { type: ['string', 'null'] },",
-                  "          updatedBy:      { type: ['integer', 'null'] },",
-                  "          objectiveCount: { type: 'integer' },",
-                  "          progress:       { type: 'number' },",
-                  "          lastUpdatedAt:  { type: ['string', 'null'] },",
-                  "          manager: {",
-                  "            type: ['array', 'null'],",
-                  "            items: {",
-                  "              type: 'object',",
-                  "              required: ['id', 'fullName'],",
-                  "              properties: {",
-                  "                id:       { type: 'integer' },",
-                  "                email:    { type: 'string' },",
-                  "                empId:    { type: 'string' },",
-                  "                fullName: { type: 'string' }",
-                  "              }",
-                  "            }",
-                  "          },",
-                  "          lead: {",
-                  "            type: ['object', 'null'],",
-                  "            properties: {",
-                  "              id:       { type: 'integer' },",
-                  "              email:    { type: 'string' },",
-                  "              empId:    { type: 'string' },",
-                  "              fullName: { type: 'string' }",
-                  "            }",
-                  "          },",
-                  "          leaders: {",
-                  "            type: ['array', 'null'],",
-                  "            items: {",
-                  "              type: 'object',",
-                  "              properties: {",
-                  "                type: { type: 'string' },",
-                  "                user: {",
-                  "                  type: 'object',",
-                  "                  properties: {",
-                  "                    id:       { type: 'integer' },",
-                  "                    email:    { type: 'string' },",
-                  "                    empId:    { type: 'string' },",
-                  "                    fullName: { type: 'string' }",
-                  "                  }",
-                  "                }",
-                  "              }",
-                  "            }",
-                  "          }",
-                  "        }",
-                  "      }",
-                  "    }",
-                  "  }",
-                  "};",
-                  "pm.test(\"Response matches schema\", function () {",
-                  "    pm.response.to.have.jsonSchema(schema);",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Get OKR highlights returns 200",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year=2026",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "highlights"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "size",
-                  "value": "10"
-                },
-                {
-                  "key": "year",
-                  "value": "2026"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
-                  "});",
-                  "const schema = {",
-                  "  type: 'object',",
-                  "  required: ['data'],",
-                  "  properties: {",
-                  "    data: {",
-                  "      type: 'object',",
-                  "      required: ['today', 'yesterday', 'older'],",
-                  "      properties: {",
-                  "        today:     { type: 'array' },",
-                  "        yesterday: { type: 'array' },",
-                  "        older: {",
-                  "          type: 'array',",
-                  "          items: {",
-                  "            type: 'object',",
-                  "            required: ['id', 'actionType', 'createdAt'],",
-                  "            properties: {",
-                  "              id:         { type: 'integer' },",
-                  "              actionType: { type: 'string' },",
-                  "              area: {",
-                  "                type: ['object', 'null'],",
-                  "                properties: {",
-                  "                  id:   { type: 'integer' },",
-                  "                  name: { type: 'string' },",
-                  "                  code: { type: 'string' },",
-                  "                  type: { type: 'string' }",
-                  "                }",
-                  "              },",
-                  "              actionTemplate:     { type: 'string' },",
-                  "              actionTemplateData: { type: 'object' },",
-                  "              parentTemplate:     { type: 'string' },",
-                  "              parentTemplateData: { type: 'object' },",
-                  "              createdBy:    { type: 'integer' },",
-                  "              ownerId:      { type: 'integer' },",
-                  "              createdAt:    { type: 'string' },",
-                  "              updatedAt:    { type: ['string', 'null'] },",
-                  "              collaborators: { type: 'array' }",
-                  "            }",
-                  "          }",
-                  "        }",
-                  "      }",
-                  "    }",
-                  "  }",
-                  "};",
-                  "pm.test(\"Response matches schema\", function () {",
-                  "    pm.response.to.have.jsonSchema(schema);",
-                  "});",
-                  "pm.test('Older highlights page does not exceed size=10', function () {",
-                  "    const older = pm.response.json().data.older;",
-                  "    pm.expect(older.length).to.be.at.most(10);",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Areas & Pillars",
-          "item": [
-            {
-              "id": "7fd51f0b-4956-4296-a0d5-e92d282d578f",
-              "name": "Get OKR area by ID",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/okr/areas/{{areaId}}?year=2026",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "okr",
-                    "areas",
-                    "{{areaId}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "year",
-                      "value": "2026"
-                    }
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "a4318da6-edb4-4cb5-9f37-2a91d1c99d08",
-              "name": "Get all strategic pillars",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/okr/strategic-pillars/all?year=2026",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "okr",
-                    "strategic-pillars",
-                    "all"
-                  ],
-                  "query": [
-                    {
-                      "key": "year",
-                      "value": "2026"
-                    }
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            }
-          ]
-        },
-        {
-          "name": "Key Results",
-          "item": [
-            {
-              "id": "24a174f3-b8ff-4e82-9e40-7e632d57ec9f",
-              "name": "Get key result feed",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/okr/key-result/{{keyResultId}}/feed",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "okr",
-                    "key-result",
-                    "{{keyResultId}}",
-                    "feed"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            }
-          ]
-        },
-        {
-          "name": "Objectives",
-          "item": [
-            {
-              "id": "5a3235a8-53fa-4f68-99f2-934b6443a82d",
-              "name": "Get objective feed",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/okr/objectives/{{objectiveId}}/feed",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "okr",
-                    "objectives",
-                    "{{objectiveId}}",
-                    "feed"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            }
-          ]
-        }
-      ]
-    }
-  ]
+    "info":  {
+                 "name":  "Vyaguta â€” OKR",
+                 "description":  "Module tests: OKR. Part of the Vyaguta API test suite.",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "auth":  {
+                 "type":  "bearer",
+                 "bearer":  [
+                                {
+                                    "key":  "token",
+                                    "value":  "{{authToken}}",
+                                    "type":  "string"
+                                }
+                            ]
+             },
+    "variable":  [
+                     {
+                         "key":  "baseUrl",
+                         "value":  "",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "areaId",
+                         "value":  "56",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "candidateId",
+                         "value":  "13994",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "keyResultId",
+                         "value":  "1312",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "leaveId",
+                         "value":  "",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "objectiveId",
+                         "value":  "1124",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "offboardId",
+                         "value":  "13106",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "projectId",
+                         "value":  "384",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "psrId",
+                         "value":  "931",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "pulseAllocationId",
+                         "value":  "445",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "pulseNoteId",
+                         "value":  "9329",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "remoteApplicationId",
+                         "value":  "239",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "riskId",
+                         "value":  "149",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "signoffId",
+                         "value":  "250",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "staffingId",
+                         "value":  "1122",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "unfreezeRequestId",
+                         "value":  "494",
+                         "type":  "string"
+                     },
+                     {
+                         "key":  "userId",
+                         "value":  "12884",
+                         "type":  "string"
+                     }
+                 ],
+    "item":  [
+                 {
+                     "name":  "OKR",
+                     "description":  "Tests for the OKR module â€” /api/okr/strategic-pillars/summary and /api/okr/hlo.",
+                     "item":  [
+                                  {
+                                      "name":  "Get strategic pillars summary returns 200 with pillar list",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "strategic-pillars",
+                                                                               "summary"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "year",
+                                                                                    "value":  "2026"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\"Content-Type is application/json\", function () {",
+                                                                                    "    pm.expect(pm.response.headers.get(\u0027Content-Type\u0027)).to.include(\u0027application/json\u0027);",
+                                                                                    "});",
+                                                                                    "const schema = {",
+                                                                                    "  type: \u0027object\u0027,",
+                                                                                    "  required: [\u0027data\u0027],",
+                                                                                    "  properties: {",
+                                                                                    "    data: {",
+                                                                                    "      type: \u0027array\u0027,",
+                                                                                    "      items: {",
+                                                                                    "        type: \u0027object\u0027,",
+                                                                                    "        required: [\u0027strategicPillarId\u0027, \u0027statement\u0027, \u0027hloCount\u0027, \u0027objectiveCount\u0027, \u0027progress\u0027],",
+                                                                                    "        properties: {",
+                                                                                    "          strategicPillarId: { type: \u0027integer\u0027 },",
+                                                                                    "          statement:         { type: \u0027string\u0027 },",
+                                                                                    "          hloCount:          { type: \u0027integer\u0027 },",
+                                                                                    "          objectiveCount:    { type: \u0027integer\u0027 },",
+                                                                                    "          progress:          { type: [\u0027number\u0027, \u0027null\u0027] }",
+                                                                                    "        }",
+                                                                                    "      }",
+                                                                                    "    }",
+                                                                                    "  }",
+                                                                                    "};",
+                                                                                    "pm.test(\"Response matches schema\", function () {",
+                                                                                    "    pm.response.to.have.jsonSchema(schema);",
+                                                                                    "});",
+                                                                                    "pm.test(\"data array is not empty\", function () {",
+                                                                                    "    pm.expect(pm.response.json().data).to.be.an(\u0027array\u0027).that.is.not.empty;",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Get HLOs for single quarter returns 200",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/hlo?quarters=Q4\u0026with=objectives\u0026year=2026",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "hlo"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "quarters",
+                                                                                    "value":  "Q4"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "with",
+                                                                                    "value":  "objectives"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "year",
+                                                                                    "value":  "2026"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\"Content-Type is application/json\", function () {",
+                                                                                    "    pm.expect(pm.response.headers.get(\u0027Content-Type\u0027)).to.include(\u0027application/json\u0027);",
+                                                                                    "});",
+                                                                                    "const schema = {",
+                                                                                    "  type: \u0027object\u0027,",
+                                                                                    "  required: [\u0027data\u0027],",
+                                                                                    "  properties: {",
+                                                                                    "    data: {",
+                                                                                    "      type: \u0027array\u0027,",
+                                                                                    "      items: {",
+                                                                                    "        type: \u0027object\u0027,",
+                                                                                    "        required: [\u0027id\u0027, \u0027code\u0027, \u0027title\u0027, \u0027quarter\u0027],",
+                                                                                    "        properties: {",
+                                                                                    "          id:      { type: \u0027integer\u0027 },",
+                                                                                    "          code:    { type: \u0027string\u0027 },",
+                                                                                    "          title:   { type: \u0027string\u0027 },",
+                                                                                    "          quarter: { type: \u0027string\u0027 },",
+                                                                                    "          area: {",
+                                                                                    "            type: \u0027object\u0027,",
+                                                                                    "            properties: {",
+                                                                                    "              id:   { type: \u0027integer\u0027 },",
+                                                                                    "              name: { type: \u0027string\u0027 },",
+                                                                                    "              code: { type: \u0027string\u0027 }",
+                                                                                    "            }",
+                                                                                    "          }",
+                                                                                    "        }",
+                                                                                    "      }",
+                                                                                    "    }",
+                                                                                    "  }",
+                                                                                    "};",
+                                                                                    "pm.test(\"Response matches schema\", function () {",
+                                                                                    "    pm.response.to.have.jsonSchema(schema);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Get HLOs for all quarters returns 200",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/hlo?quarters=Q1,Q2,Q3,Q4\u0026with=objectives\u0026year=2026",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "hlo"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "quarters",
+                                                                                    "value":  "Q1,Q2,Q3,Q4"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "with",
+                                                                                    "value":  "objectives"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "year",
+                                                                                    "value":  "2026"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\"Content-Type is application/json\", function () {",
+                                                                                    "    pm.expect(pm.response.headers.get(\u0027Content-Type\u0027)).to.include(\u0027application/json\u0027);",
+                                                                                    "});",
+                                                                                    "pm.test(\"All quarters represented in results\", function () {",
+                                                                                    "    const quarters = pm.response.json().data.map(function (hlo) { return hlo.quarter; });",
+                                                                                    "    const unique = [...new Set(quarters)];",
+                                                                                    "    pm.expect(unique.length).to.be.at.least(1);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Get OKR areas with leaderships returns 200",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/areas?year=2026\u0026additionalFields=leaderships,objectiveCount",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "areas"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "year",
+                                                                                    "value":  "2026"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "additionalFields",
+                                                                                    "value":  "leaderships,objectiveCount"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\"Content-Type is application/json\", function () {",
+                                                                                    "    pm.expect(pm.response.headers.get(\u0027Content-Type\u0027)).to.include(\u0027application/json\u0027);",
+                                                                                    "});",
+                                                                                    "const schema = {",
+                                                                                    "  type: \u0027object\u0027,",
+                                                                                    "  required: [\u0027data\u0027],",
+                                                                                    "  properties: {",
+                                                                                    "    data: {",
+                                                                                    "      type: \u0027array\u0027,",
+                                                                                    "      items: {",
+                                                                                    "        type: \u0027object\u0027,",
+                                                                                    "        required: [\u0027id\u0027, \u0027name\u0027, \u0027type\u0027],",
+                                                                                    "        properties: {",
+                                                                                    "          id:             { type: \u0027integer\u0027 },",
+                                                                                    "          name:           { type: \u0027string\u0027 },",
+                                                                                    "          description:    { type: [\u0027string\u0027, \u0027null\u0027] },",
+                                                                                    "          type:           { type: \u0027string\u0027 },",
+                                                                                    "          createdBy:      { type: \u0027integer\u0027 },",
+                                                                                    "          createdAt:      { type: \u0027string\u0027 },",
+                                                                                    "          updatedAt:      { type: [\u0027string\u0027, \u0027null\u0027] },",
+                                                                                    "          updatedBy:      { type: [\u0027integer\u0027, \u0027null\u0027] },",
+                                                                                    "          objectiveCount: { type: \u0027integer\u0027 },",
+                                                                                    "          progress:       { type: \u0027number\u0027 },",
+                                                                                    "          lastUpdatedAt:  { type: [\u0027string\u0027, \u0027null\u0027] },",
+                                                                                    "          manager: {",
+                                                                                    "            type: [\u0027array\u0027, \u0027null\u0027],",
+                                                                                    "            items: {",
+                                                                                    "              type: \u0027object\u0027,",
+                                                                                    "              required: [\u0027id\u0027, \u0027fullName\u0027],",
+                                                                                    "              properties: {",
+                                                                                    "                id:       { type: \u0027integer\u0027 },",
+                                                                                    "                email:    { type: \u0027string\u0027 },",
+                                                                                    "                empId:    { type: \u0027string\u0027 },",
+                                                                                    "                fullName: { type: \u0027string\u0027 }",
+                                                                                    "              }",
+                                                                                    "            }",
+                                                                                    "          },",
+                                                                                    "          lead: {",
+                                                                                    "            type: [\u0027object\u0027, \u0027null\u0027],",
+                                                                                    "            properties: {",
+                                                                                    "              id:       { type: \u0027integer\u0027 },",
+                                                                                    "              email:    { type: \u0027string\u0027 },",
+                                                                                    "              empId:    { type: \u0027string\u0027 },",
+                                                                                    "              fullName: { type: \u0027string\u0027 }",
+                                                                                    "            }",
+                                                                                    "          },",
+                                                                                    "          leaders: {",
+                                                                                    "            type: [\u0027array\u0027, \u0027null\u0027],",
+                                                                                    "            items: {",
+                                                                                    "              type: \u0027object\u0027,",
+                                                                                    "              properties: {",
+                                                                                    "                type: { type: \u0027string\u0027 },",
+                                                                                    "                user: {",
+                                                                                    "                  type: \u0027object\u0027,",
+                                                                                    "                  properties: {",
+                                                                                    "                    id:       { type: \u0027integer\u0027 },",
+                                                                                    "                    email:    { type: \u0027string\u0027 },",
+                                                                                    "                    empId:    { type: \u0027string\u0027 },",
+                                                                                    "                    fullName: { type: \u0027string\u0027 }",
+                                                                                    "                  }",
+                                                                                    "                }",
+                                                                                    "              }",
+                                                                                    "            }",
+                                                                                    "          }",
+                                                                                    "        }",
+                                                                                    "      }",
+                                                                                    "    }",
+                                                                                    "  }",
+                                                                                    "};",
+                                                                                    "pm.test(\"Response matches schema\", function () {",
+                                                                                    "    pm.response.to.have.jsonSchema(schema);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Get OKR highlights returns 200",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/highlights?page=1\u0026size=10\u0026year=2026",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "highlights"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "page",
+                                                                                    "value":  "1"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "size",
+                                                                                    "value":  "10"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "year",
+                                                                                    "value":  "2026"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\"Content-Type is application/json\", function () {",
+                                                                                    "    pm.expect(pm.response.headers.get(\u0027Content-Type\u0027)).to.include(\u0027application/json\u0027);",
+                                                                                    "});",
+                                                                                    "const schema = {",
+                                                                                    "  type: \u0027object\u0027,",
+                                                                                    "  required: [\u0027data\u0027],",
+                                                                                    "  properties: {",
+                                                                                    "    data: {",
+                                                                                    "      type: \u0027object\u0027,",
+                                                                                    "      required: [\u0027today\u0027, \u0027yesterday\u0027, \u0027older\u0027],",
+                                                                                    "      properties: {",
+                                                                                    "        today:     { type: \u0027array\u0027 },",
+                                                                                    "        yesterday: { type: \u0027array\u0027 },",
+                                                                                    "        older: {",
+                                                                                    "          type: \u0027array\u0027,",
+                                                                                    "          items: {",
+                                                                                    "            type: \u0027object\u0027,",
+                                                                                    "            required: [\u0027id\u0027, \u0027actionType\u0027, \u0027createdAt\u0027],",
+                                                                                    "            properties: {",
+                                                                                    "              id:         { type: \u0027integer\u0027 },",
+                                                                                    "              actionType: { type: \u0027string\u0027 },",
+                                                                                    "              area: {",
+                                                                                    "                type: [\u0027object\u0027, \u0027null\u0027],",
+                                                                                    "                properties: {",
+                                                                                    "                  id:   { type: \u0027integer\u0027 },",
+                                                                                    "                  name: { type: \u0027string\u0027 },",
+                                                                                    "                  code: { type: \u0027string\u0027 },",
+                                                                                    "                  type: { type: \u0027string\u0027 }",
+                                                                                    "                }",
+                                                                                    "              },",
+                                                                                    "              actionTemplate:     { type: \u0027string\u0027 },",
+                                                                                    "              actionTemplateData: { type: \u0027object\u0027 },",
+                                                                                    "              parentTemplate:     { type: \u0027string\u0027 },",
+                                                                                    "              parentTemplateData: { type: \u0027object\u0027 },",
+                                                                                    "              createdBy:    { type: \u0027integer\u0027 },",
+                                                                                    "              ownerId:      { type: \u0027integer\u0027 },",
+                                                                                    "              createdAt:    { type: \u0027string\u0027 },",
+                                                                                    "              updatedAt:    { type: [\u0027string\u0027, \u0027null\u0027] },",
+                                                                                    "              collaborators: { type: \u0027array\u0027 }",
+                                                                                    "            }",
+                                                                                    "          }",
+                                                                                    "        }",
+                                                                                    "      }",
+                                                                                    "    }",
+                                                                                    "  }",
+                                                                                    "};",
+                                                                                    "pm.test(\"Response matches schema\", function () {",
+                                                                                    "    pm.response.to.have.jsonSchema(schema);",
+                                                                                    "});",
+                                                                                    "pm.test(\u0027Older highlights page does not exceed size=10\u0027, function () {",
+                                                                                    "    const older = pm.response.json().data.older;",
+                                                                                    "    pm.expect(older.length).to.be.at.most(10);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Areas \u0026 Pillars",
+                                      "item":  [
+                                                   {
+                                                       "id":  "7fd51f0b-4956-4296-a0d5-e92d282d578f",
+                                                       "name":  "Get OKR area by ID",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Authorization",
+                                                                                          "value":  "Bearer {{authToken}}",
+                                                                                          "type":  "text"
+                                                                                      },
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json",
+                                                                                          "type":  "text"
+                                                                                      }
+                                                                                  ],
+                                                                       "url":  {
+                                                                                   "raw":  "{{baseUrl}}/api/okr/areas/{{areaId}}?year=2026",
+                                                                                   "host":  [
+                                                                                                "{{baseUrl}}"
+                                                                                            ],
+                                                                                   "path":  [
+                                                                                                "api",
+                                                                                                "okr",
+                                                                                                "areas",
+                                                                                                "{{areaId}}"
+                                                                                            ],
+                                                                                   "query":  [
+                                                                                                 {
+                                                                                                     "key":  "year",
+                                                                                                     "value":  "2026"
+                                                                                                 }
+                                                                                             ]
+                                                                               }
+                                                                   },
+                                                       "event":  [
+                                                                     {
+                                                                         "listen":  "test",
+                                                                         "script":  {
+                                                                                        "exec":  [
+                                                                                                     "pm.test(\u0027Status is 2xx\u0027, function() { pm.response.to.be.success; });",
+                                                                                                     "pm.test(\u0027Response time is below 5000ms\u0027, function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                                                                                                 ],
+                                                                                        "type":  "text/javascript"
+                                                                                    }
+                                                                     }
+                                                                 ],
+                                                       "response":  [
+
+                                                                    ]
+                                                   },
+                                                   {
+                                                       "id":  "a4318da6-edb4-4cb5-9f37-2a91d1c99d08",
+                                                       "name":  "Get all strategic pillars",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Authorization",
+                                                                                          "value":  "Bearer {{authToken}}",
+                                                                                          "type":  "text"
+                                                                                      },
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json",
+                                                                                          "type":  "text"
+                                                                                      }
+                                                                                  ],
+                                                                       "url":  {
+                                                                                   "raw":  "{{baseUrl}}/api/okr/strategic-pillars/all?year=2026",
+                                                                                   "host":  [
+                                                                                                "{{baseUrl}}"
+                                                                                            ],
+                                                                                   "path":  [
+                                                                                                "api",
+                                                                                                "okr",
+                                                                                                "strategic-pillars",
+                                                                                                "all"
+                                                                                            ],
+                                                                                   "query":  [
+                                                                                                 {
+                                                                                                     "key":  "year",
+                                                                                                     "value":  "2026"
+                                                                                                 }
+                                                                                             ]
+                                                                               }
+                                                                   },
+                                                       "event":  [
+                                                                     {
+                                                                         "listen":  "test",
+                                                                         "script":  {
+                                                                                        "exec":  [
+                                                                                                     "pm.test(\u0027Status is 2xx\u0027, function() { pm.response.to.be.success; });",
+                                                                                                     "pm.test(\u0027Response time is below 5000ms\u0027, function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                                                                                                 ],
+                                                                                        "type":  "text/javascript"
+                                                                                    }
+                                                                     }
+                                                                 ],
+                                                       "response":  [
+
+                                                                    ]
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "Key Results",
+                                      "item":  [
+                                                   {
+                                                       "id":  "24a174f3-b8ff-4e82-9e40-7e632d57ec9f",
+                                                       "name":  "Get key result feed",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Authorization",
+                                                                                          "value":  "Bearer {{authToken}}",
+                                                                                          "type":  "text"
+                                                                                      },
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json",
+                                                                                          "type":  "text"
+                                                                                      }
+                                                                                  ],
+                                                                       "url":  {
+                                                                                   "raw":  "{{baseUrl}}/api/okr/key-result/{{keyResultId}}/feed",
+                                                                                   "host":  [
+                                                                                                "{{baseUrl}}"
+                                                                                            ],
+                                                                                   "path":  [
+                                                                                                "api",
+                                                                                                "okr",
+                                                                                                "key-result",
+                                                                                                "{{keyResultId}}",
+                                                                                                "feed"
+                                                                                            ]
+                                                                               }
+                                                                   },
+                                                       "event":  [
+                                                                     {
+                                                                         "listen":  "test",
+                                                                         "script":  {
+                                                                                        "exec":  [
+                                                                                                     "pm.test(\u0027Status is 2xx\u0027, function() { pm.response.to.be.success; });",
+                                                                                                     "pm.test(\u0027Response time is below 5000ms\u0027, function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                                                                                                 ],
+                                                                                        "type":  "text/javascript"
+                                                                                    }
+                                                                     }
+                                                                 ],
+                                                       "response":  [
+
+                                                                    ]
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "Objectives",
+                                      "item":  [
+                                                   {
+                                                       "id":  "5a3235a8-53fa-4f68-99f2-934b6443a82d",
+                                                       "name":  "Get objective feed",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Authorization",
+                                                                                          "value":  "Bearer {{authToken}}",
+                                                                                          "type":  "text"
+                                                                                      },
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json",
+                                                                                          "type":  "text"
+                                                                                      }
+                                                                                  ],
+                                                                       "url":  {
+                                                                                   "raw":  "{{baseUrl}}/api/okr/objectives/{{objectiveId}}/feed",
+                                                                                   "host":  [
+                                                                                                "{{baseUrl}}"
+                                                                                            ],
+                                                                                   "path":  [
+                                                                                                "api",
+                                                                                                "okr",
+                                                                                                "objectives",
+                                                                                                "{{objectiveId}}",
+                                                                                                "feed"
+                                                                                            ]
+                                                                               }
+                                                                   },
+                                                       "event":  [
+                                                                     {
+                                                                         "listen":  "test",
+                                                                         "script":  {
+                                                                                        "exec":  [
+                                                                                                     "pm.test(\u0027Status is 2xx\u0027, function() { pm.response.to.be.success; });",
+                                                                                                     "pm.test(\u0027Response time is below 5000ms\u0027, function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                                                                                                 ],
+                                                                                        "type":  "text/javascript"
+                                                                                    }
+                                                                     }
+                                                                 ],
+                                                       "response":  [
+
+                                                                    ]
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "List Areas by Type — team",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/areas?type=team\u0026additionalFields=leaderships,objectiveCount",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "areas"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "type",
+                                                                                    "value":  "team"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "additionalFields",
+                                                                                    "value":  "leaderships,objectiveCount"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));",
+                                                                                    "pm.test(\"Content-Type is JSON\", () =\u003e pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+                                                                                    "const json = pm.response.json();",
+                                                                                    "pm.test(\"Response has data\", () =\u003e pm.expect(json).to.have.property(\"data\"));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "List Areas by Type — pod",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/areas?type=pod\u0026additionalFields=leaderships,objectiveCount",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "areas"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "type",
+                                                                                    "value":  "pod"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "additionalFields",
+                                                                                    "value":  "leaderships,objectiveCount"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));",
+                                                                                    "pm.test(\"Content-Type is JSON\", () =\u003e pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+                                                                                    "const json = pm.response.json();",
+                                                                                    "pm.test(\"Response has data\", () =\u003e pm.expect(json).to.have.property(\"data\"));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "OKR Report — All Areas Q4",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{baseUrl}}/api/okr/report/all?quarters=Q4\u0026year=2026",
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "api",
+                                                                               "okr",
+                                                                               "report",
+                                                                               "all"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "quarters",
+                                                                                    "value":  "Q4"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "year",
+                                                                                    "value":  "2026"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));",
+                                                                                    "pm.test(\"Content-Type is JSON\", () =\u003e pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+                                                                                    "const json = pm.response.json();",
+                                                                                    "pm.test(\"Response has data\", () =\u003e pm.expect(json).to.have.property(\"data\"));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 }
+             ]
 }
