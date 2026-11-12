@@ -24,6 +24,18 @@ jobs:
       - name: Lint collection and environment JSON
         run: npm run lint
 
+      - name: Set dynamic date variables
+        run: |
+          echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "CURRENT_YEAR=$(date +%Y)" >> $GITHUB_ENV
+          echo "CURRENT_MONTH=$(date +%m)" >> $GITHUB_ENV
+          echo "FUTURE_30=$(date -d '+30 days' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "FUTURE_180=$(date -d '+180 days' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "FUTURE_365=$(date -d '+365 days' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "LEAVE_DATE=$(date -d 'next tuesday' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "TOMORROW_ISO=$(date -d '+1 day' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
+          echo "DAY_AFTER_ISO=$(date -d '+2 days' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
+
       - name: Run Newman tests (API collection)
         id: newman-api
         continue-on-error: true
@@ -32,6 +44,16 @@ jobs:
             -e environments/vyaguta.postman_environment.json \
             --env-var "authToken=$VYAGUTA_TOKEN" \
             --env-var "restrictedToken=$VYAGUTA_RESTRICTED_TOKEN" \
+            --env-var "today=$TODAY" \
+            --env-var "currentYear=$CURRENT_YEAR" \
+            --env-var "currentMonth=$CURRENT_MONTH" \
+            --env-var "futureDate30=$FUTURE_30" \
+            --env-var "futureDate180=$FUTURE_180" \
+            --env-var "futureDate365=$FUTURE_365" \
+            --env-var "leaveStartDate=$LEAVE_DATE" \
+            --env-var "leaveEndDate=$LEAVE_DATE" \
+            --env-var "tomorrowISO=$TOMORROW_ISO" \
+            --env-var "dayAfterTomorrowISO=$DAY_AFTER_ISO" \
             --reporters cli,junit,htmlextra,json \
             --reporter-junit-export reports/junit-report.xml \
             --reporter-htmlextra-export reports/report.html \
@@ -308,6 +330,18 @@ jobs:
       - name: Lint collection and environment JSON
         run: npm run lint
 
+      - name: Set dynamic date variables
+        run: |
+          echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "CURRENT_YEAR=$(date +%Y)" >> $GITHUB_ENV
+          echo "CURRENT_MONTH=$(date +%m)" >> $GITHUB_ENV
+          echo "FUTURE_30=$(date -d '+30 days' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "FUTURE_180=$(date -d '+180 days' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "FUTURE_365=$(date -d '+365 days' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "LEAVE_DATE=$(date -d 'next tuesday' +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "TOMORROW_ISO=$(date -d '+1 day' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
+          echo "DAY_AFTER_ISO=$(date -d '+2 days' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
+
       - name: Run Newman tests — QA API collection
         id: newman-qa-api
         continue-on-error: true
@@ -316,6 +350,16 @@ jobs:
             -e environments/vyaguta-qa.postman_environment.json \
             --env-var "authToken=$VYAGUTA_QA_TOKEN" \
             --env-var "restrictedToken=$VYAGUTA_QA_RESTRICTED_TOKEN" \
+            --env-var "today=$TODAY" \
+            --env-var "currentYear=$CURRENT_YEAR" \
+            --env-var "currentMonth=$CURRENT_MONTH" \
+            --env-var "futureDate30=$FUTURE_30" \
+            --env-var "futureDate180=$FUTURE_180" \
+            --env-var "futureDate365=$FUTURE_365" \
+            --env-var "leaveStartDate=$LEAVE_DATE" \
+            --env-var "leaveEndDate=$LEAVE_DATE" \
+            --env-var "tomorrowISO=$TOMORROW_ISO" \
+            --env-var "dayAfterTomorrowISO=$DAY_AFTER_ISO" \
             --reporters cli,junit,htmlextra,json \
             --reporter-junit-export reports-qa/junit-report.xml \
             --reporter-htmlextra-export reports-qa/report.html \
