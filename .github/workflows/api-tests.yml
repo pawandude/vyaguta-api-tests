@@ -35,6 +35,7 @@ jobs:
           echo "LEAVE_DATE=$(date -d 'next tuesday' +%Y-%m-%d)" >> $GITHUB_ENV
           echo "TOMORROW_ISO=$(date -d '+1 day' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
           echo "DAY_AFTER_ISO=$(date -d '+2 days' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
+          echo "LAST_MONTH_START=$(date -d "$(date +%Y-%m-01) -1 month" +%Y-%m-%d)" >> $GITHUB_ENV
 
       - name: Run Newman tests (API collection)
         id: newman-api
@@ -54,6 +55,10 @@ jobs:
             --env-var "leaveEndDate=$LEAVE_DATE" \
             --env-var "tomorrowISO=$TOMORROW_ISO" \
             --env-var "dayAfterTomorrowISO=$DAY_AFTER_ISO" \
+            --env-var "currentDate=$TODAY" \
+            --env-var "futureDateLong=$FUTURE_365" \
+            --env-var "futureDate=$FUTURE_30" \
+            --env-var "lastMonthStart=$LAST_MONTH_START" \
             --reporters cli,junit,htmlextra,json \
             --reporter-junit-export reports/junit-report.xml \
             --reporter-htmlextra-export reports/report.html \
@@ -341,6 +346,7 @@ jobs:
           echo "LEAVE_DATE=$(date -d 'next tuesday' +%Y-%m-%d)" >> $GITHUB_ENV
           echo "TOMORROW_ISO=$(date -d '+1 day' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
           echo "DAY_AFTER_ISO=$(date -d '+2 days' +%Y-%m-%dT00:00:00.000Z)" >> $GITHUB_ENV
+          echo "LAST_MONTH_START=$(date -d "$(date +%Y-%m-01) -1 month" +%Y-%m-%d)" >> $GITHUB_ENV
 
       - name: Run Newman tests — QA API collection
         id: newman-qa-api
@@ -360,6 +366,10 @@ jobs:
             --env-var "leaveEndDate=$LEAVE_DATE" \
             --env-var "tomorrowISO=$TOMORROW_ISO" \
             --env-var "dayAfterTomorrowISO=$DAY_AFTER_ISO" \
+            --env-var "currentDate=$TODAY" \
+            --env-var "futureDateLong=$FUTURE_365" \
+            --env-var "futureDate=$FUTURE_30" \
+            --env-var "lastMonthStart=$LAST_MONTH_START" \
             --reporters cli,junit,htmlextra,json \
             --reporter-junit-export reports-qa/junit-report.xml \
             --reporter-htmlextra-export reports-qa/report.html \

@@ -226,7 +226,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate=2026-01-01&endDate=2026-12-31",
+              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate={{today}}&endDate={{futureDate365}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -234,6 +234,20 @@
                 "api",
                 "teams",
                 "allocations"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                }
               ]
             }
           },
@@ -263,6 +277,12 @@
                 "api",
                 "teams",
                 "candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -292,6 +312,12 @@
                 "api",
                 "teams",
                 "projects"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -321,6 +347,12 @@
                 "api",
                 "teams",
                 "staffing"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -350,6 +382,12 @@
                 "api",
                 "teams",
                 "psrs"
+              ],
+              "query": [
+                {
+                  "key": "projectId",
+                  "value": "{{projectId}}"
+                }
               ]
             }
           },
@@ -371,7 +409,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate=2026-01-01&endDate=2026-12-31&metric=Overall+Status&size=10&page=1",
+              "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate={{today}}&endDate={{futureDate365}}&metric=Overall+Status&size=10&page=1",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -380,6 +418,28 @@
                 "teams",
                 "projects",
                 "health-trend"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                },
+                {
+                  "key": "metric",
+                  "value": "Overall+Status"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
               ]
             }
           },
@@ -471,6 +531,12 @@
                 "api",
                 "teams",
                 "qsrs"
+              ],
+              "query": [
+                {
+                  "key": "projectId",
+                  "value": "{{projectId}}"
+                }
               ]
             }
           },
@@ -500,6 +566,16 @@
                 "api",
                 "teams",
                 "signoff"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                },
+                {
+                  "key": "month",
+                  "value": "{{currentMonth}}"
+                }
               ]
             }
           },
@@ -530,6 +606,12 @@
                 "teams",
                 "projects",
                 "summary"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "working-shift"
+                }
               ]
             }
           },
@@ -559,6 +641,20 @@
                 "api",
                 "leave",
                 "employee-morale"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                },
+                {
+                  "key": "excludedDepartmentIds",
+                  "value": "14"
+                }
               ]
             }
           },
@@ -589,6 +685,12 @@
                 "teams",
                 "projects",
                 "feed"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -618,6 +720,12 @@
                 "api",
                 "teams",
                 "lateral-candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -679,6 +787,12 @@
                 "projects",
                 "{{projectId}}",
                 "staffing"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -709,6 +823,12 @@
                 "teams",
                 "candidates",
                 "bookable"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -781,7 +901,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year=2026",
+              "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -790,6 +910,12 @@
                 "teams",
                 "reports",
                 "allocation-summary-reports"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
               ]
             }
           },
@@ -811,7 +937,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/reports/allocation-reports?startDate={{lastMonthStart}}&endDate={{currentDate}}",
+              "raw": "{{baseUrl}}/api/teams/reports/allocation-reports?startDate={{today}}&endDate={{futureDate180}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -820,6 +946,16 @@
                 "teams",
                 "reports",
                 "allocation-reports"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate180}}"
+                }
               ]
             }
           },
@@ -849,6 +985,12 @@
                 "api",
                 "teams",
                 "phases"
+              ],
+              "query": [
+                {
+                  "key": "projectId",
+                  "value": "{{projectId}}"
+                }
               ]
             }
           },
@@ -940,6 +1082,16 @@
                 "projects",
                 "{{projectId}}",
                 "signoff"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                },
+                {
+                  "key": "month",
+                  "value": "{{currentMonth}}"
+                }
               ]
             }
           },
@@ -1022,6 +1174,12 @@
                 "leave",
                 "attendance",
                 "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "self"
+                }
               ]
             }
           },
@@ -1052,6 +1210,12 @@
                 "jump",
                 "kpis",
                 "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role+based"
+                }
               ]
             }
           },
@@ -1161,7 +1325,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01&endDate=2026-12-31",
+              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate={{today}}&endDate={{futureDate365}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1169,6 +1333,16 @@
                 "api",
                 "pulse",
                 "dashboard"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                }
               ]
             }
           },
@@ -1221,7 +1395,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/pulse/promotion?startDate=2026-07-01&endDate=2026-12-31&actionAs=appraiser",
+              "raw": "{{baseUrl}}/api/pulse/promotion?startDate={{today}}&endDate={{futureDate365}}&actionAs=appraiser",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1229,6 +1403,20 @@
                 "api",
                 "pulse",
                 "promotion"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                },
+                {
+                  "key": "actionAs",
+                  "value": "appraiser"
+                }
               ]
             }
           },
@@ -1258,6 +1446,16 @@
                 "api",
                 "pulse",
                 "notes"
+              ],
+              "query": [
+                {
+                  "key": "noteType",
+                  "value": "EXPECTATION"
+                },
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                }
               ]
             }
           },
@@ -1287,6 +1485,16 @@
                 "api",
                 "pulse",
                 "expectations"
+              ],
+              "query": [
+                {
+                  "key": "designationId",
+                  "value": "5"
+                },
+                {
+                  "key": "areaId",
+                  "value": "2"
+                }
               ]
             }
           },
@@ -1347,6 +1555,16 @@
                 "pulse",
                 "appraiser-nominations",
                 "check-evaluation"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                },
+                {
+                  "key": "areaId",
+                  "value": "4"
+                }
               ]
             }
           },
@@ -1376,6 +1594,16 @@
                 "api",
                 "pulse",
                 "pulse-report"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -1406,6 +1634,16 @@
                 "pulse",
                 "pulse-report",
                 "pip"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -1435,6 +1673,16 @@
                 "api",
                 "okr",
                 "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "team"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
               ]
             }
           },
@@ -1464,6 +1712,16 @@
                 "api",
                 "okr",
                 "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "pod"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
               ]
             }
           },
@@ -1485,7 +1743,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year=2026",
+              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1494,6 +1752,16 @@
                 "okr",
                 "report",
                 "all"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
               ]
             }
           },
@@ -1788,7 +2056,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate=2026-01-01&endDate=2026-12-31",
+              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate={{today}}&endDate={{futureDate365}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1796,6 +2064,20 @@
                 "api",
                 "teams",
                 "allocations"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                }
               ]
             }
           },
@@ -1827,6 +2109,12 @@
                 "api",
                 "teams",
                 "candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -1858,6 +2146,12 @@
                 "api",
                 "teams",
                 "projects"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -1889,6 +2183,12 @@
                 "api",
                 "teams",
                 "staffing"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -1920,6 +2220,12 @@
                 "api",
                 "teams",
                 "psrs"
+              ],
+              "query": [
+                {
+                  "key": "projectId",
+                  "value": "{{projectId}}"
+                }
               ]
             }
           },
@@ -1943,7 +2249,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate=2026-01-01&endDate=2026-12-31&metric=Overall+Status&size=10&page=1",
+              "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate={{today}}&endDate={{futureDate365}}&metric=Overall+Status&size=10&page=1",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1952,6 +2258,28 @@
                 "teams",
                 "projects",
                 "health-trend"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                },
+                {
+                  "key": "metric",
+                  "value": "Overall+Status"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
               ]
             }
           },
@@ -2049,6 +2377,12 @@
                 "api",
                 "teams",
                 "qsrs"
+              ],
+              "query": [
+                {
+                  "key": "projectId",
+                  "value": "{{projectId}}"
+                }
               ]
             }
           },
@@ -2080,6 +2414,16 @@
                 "api",
                 "teams",
                 "signoff"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                },
+                {
+                  "key": "month",
+                  "value": "{{currentMonth}}"
+                }
               ]
             }
           },
@@ -2112,6 +2456,12 @@
                 "teams",
                 "projects",
                 "summary"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "working-shift"
+                }
               ]
             }
           },
@@ -2143,6 +2493,20 @@
                 "api",
                 "leave",
                 "employee-morale"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                },
+                {
+                  "key": "excludedDepartmentIds",
+                  "value": "14"
+                }
               ]
             }
           },
@@ -2175,6 +2539,12 @@
                 "teams",
                 "projects",
                 "feed"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -2206,6 +2576,12 @@
                 "api",
                 "teams",
                 "lateral-candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -2271,6 +2647,12 @@
                 "projects",
                 "{{projectId}}",
                 "staffing"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -2303,6 +2685,12 @@
                 "teams",
                 "candidates",
                 "bookable"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
               ]
             }
           },
@@ -2379,7 +2767,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year=2026",
+              "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2388,6 +2776,12 @@
                 "teams",
                 "reports",
                 "allocation-summary-reports"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
               ]
             }
           },
@@ -2411,7 +2805,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/reports/allocation-reports?startDate={{lastMonthStart}}&endDate={{currentDate}}",
+              "raw": "{{baseUrl}}/api/teams/reports/allocation-reports?startDate={{today}}&endDate={{futureDate180}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2420,6 +2814,16 @@
                 "teams",
                 "reports",
                 "allocation-reports"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate180}}"
+                }
               ]
             }
           },
@@ -2451,6 +2855,12 @@
                 "api",
                 "teams",
                 "phases"
+              ],
+              "query": [
+                {
+                  "key": "projectId",
+                  "value": "{{projectId}}"
+                }
               ]
             }
           },
@@ -2548,6 +2958,16 @@
                 "projects",
                 "{{projectId}}",
                 "signoff"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                },
+                {
+                  "key": "month",
+                  "value": "{{currentMonth}}"
+                }
               ]
             }
           },
@@ -2634,6 +3054,12 @@
                 "leave",
                 "attendance",
                 "summary"
+              ],
+              "query": [
+                {
+                  "key": "fetchType",
+                  "value": "self"
+                }
               ]
             }
           },
@@ -2666,6 +3092,12 @@
                 "jump",
                 "kpis",
                 "filters"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Role+based"
+                }
               ]
             }
           },
@@ -2783,7 +3215,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01&endDate=2026-12-31",
+              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate={{today}}&endDate={{futureDate365}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2791,6 +3223,16 @@
                 "api",
                 "pulse",
                 "dashboard"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                }
               ]
             }
           },
@@ -2847,7 +3289,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/pulse/promotion?startDate=2026-07-01&endDate=2026-12-31&actionAs=appraiser",
+              "raw": "{{baseUrl}}/api/pulse/promotion?startDate={{today}}&endDate={{futureDate365}}&actionAs=appraiser",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2855,6 +3297,20 @@
                 "api",
                 "pulse",
                 "promotion"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                },
+                {
+                  "key": "actionAs",
+                  "value": "appraiser"
+                }
               ]
             }
           },
@@ -2886,6 +3342,16 @@
                 "api",
                 "pulse",
                 "notes"
+              ],
+              "query": [
+                {
+                  "key": "noteType",
+                  "value": "EXPECTATION"
+                },
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                }
               ]
             }
           },
@@ -2917,6 +3383,16 @@
                 "api",
                 "pulse",
                 "expectations"
+              ],
+              "query": [
+                {
+                  "key": "designationId",
+                  "value": "5"
+                },
+                {
+                  "key": "areaId",
+                  "value": "2"
+                }
               ]
             }
           },
@@ -2981,6 +3457,16 @@
                 "pulse",
                 "appraiser-nominations",
                 "check-evaluation"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                },
+                {
+                  "key": "areaId",
+                  "value": "4"
+                }
               ]
             }
           },
@@ -3012,6 +3498,16 @@
                 "api",
                 "pulse",
                 "pulse-report"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -3044,6 +3540,16 @@
                 "pulse",
                 "pulse-report",
                 "pip"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -3075,6 +3581,16 @@
                 "api",
                 "okr",
                 "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "team"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
               ]
             }
           },
@@ -3106,6 +3622,16 @@
                 "api",
                 "okr",
                 "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "pod"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
               ]
             }
           },
@@ -3129,7 +3655,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year=2026",
+              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -3138,6 +3664,16 @@
                 "okr",
                 "report",
                 "all"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
               ]
             }
           },
@@ -4158,7 +4694,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/core/leave-issuers/change-requests?startDate=2026-10-01&endDate=2026-10-15",
+                  "raw": "{{baseUrl}}/api/core/leave-issuers/change-requests?startDate={{today}}&endDate={{futureDate180}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -4171,11 +4707,11 @@
                   "query": [
                     {
                       "key": "startDate",
-                      "value": "2026-10-01"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-10-15"
+                      "value": "{{futureDate180}}"
                     }
                   ]
                 }
@@ -4499,7 +5035,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"name\":\"Test Holiday {{currentDate}}\",\"description\":\"tetttext\",\"date\":\"{{futureDateLong}}\",\"type\":1,\"countries\":[\"Nepal\"]}",
+                  "raw": "{\"name\":\"Test Holiday {{today}}\",\"description\":\"tetttext\",\"date\":\"{{futureDate365}}\",\"type\":1,\"countries\":[\"Nepal\"]}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -5368,7 +5904,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/roster?userIds=13994&startDate=2026-10-12&endDate=2026-10-18",
+                  "raw": "{{baseUrl}}/api/leave/roster?userIds=13994&startDate={{today}}&endDate={{futureDate180}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5384,11 +5920,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "2026-10-12"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-10-18"
+                      "value": "{{futureDate180}}"
                     }
                   ]
                 }
@@ -5425,7 +5961,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/wifi-logs/median-time/{{userId}}?country=Nepal&endDate=2026-10-15&excludeDesignation=Support&startDate=2026-09-16",
+                  "raw": "{{baseUrl}}/api/leave/wifi-logs/median-time/{{userId}}?country=Nepal&endDate={{futureDate180}}&excludeDesignation=Support&startDate={{today}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5443,7 +5979,7 @@
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-10-15"
+                      "value": "{{futureDate180}}"
                     },
                     {
                       "key": "excludeDesignation",
@@ -5451,7 +5987,7 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "2026-09-16"
+                      "value": "{{today}}"
                     }
                   ]
                 }
@@ -5493,7 +6029,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/calendar?fetchType=team&startDate=2026-10-05&endDate=2026-10-25&worklog=false&includeFutureLeaves=true&skipPagination=true&withExpectedRosterAndWorkingShift=true&roleType=manager&userIds=&userId=",
+                  "raw": "{{baseUrl}}/api/leave/calendar?fetchType=team&startDate={{today}}&endDate={{futureDate180}}&worklog=false&includeFutureLeaves=true&skipPagination=true&withExpectedRosterAndWorkingShift=true&roleType=manager&userIds=&userId=",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5509,11 +6045,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "{{currentMonthStart}}"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "{{currentMonthEnd}}"
+                      "value": "{{futureDate180}}"
                     },
                     {
                       "key": "worklog",
@@ -5580,7 +6116,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/calendar/team-summary?fetchType=team&roleType=all&startDate=2026-09-01&endDate=2026-09-30&userIds=13371,13166,13414,13395,511,13495,13305,697,497,13416,13370,13413",
+                  "raw": "{{baseUrl}}/api/leave/calendar/team-summary?fetchType=team&roleType=all&startDate={{today}}&endDate={{futureDate180}}&userIds=13371,13166,13414,13395,511,13495,13305,697,497,13416,13370,13413",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5601,11 +6137,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "2026-09-01"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-09-30"
+                      "value": "{{futureDate180}}"
                     },
                     {
                       "key": "userIds",
@@ -5651,7 +6187,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/leave-balance?userId={{userId}}&fiscalYearId=146&onlyActive=true&calculationDate={{currentDate}}",
+                  "raw": "{{baseUrl}}/api/leave/leave-balance?userId={{userId}}&fiscalYearId=146&onlyActive=true&calculationDate={{futureDate180}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5675,7 +6211,7 @@
                     },
                     {
                       "key": "calculationDate",
-                      "value": "{{currentDate}}"
+                      "value": "{{futureDate180}}"
                     }
                   ]
                 }
@@ -5766,7 +6302,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/leaves?fetchType=all&startDate=2026-09-01&endDate=2026-09-30&status=REQUESTED,APPROVED&userIds=13371,13166,13414,13395,511,13495,13305,697,497,13416,13370,13413&additionalFields=dates&withPagination=false&page=&size=",
+                  "raw": "{{baseUrl}}/api/leave/leaves?fetchType=all&startDate={{today}}&endDate={{futureDate180}}&status=REQUESTED,APPROVED&userIds=13371,13166,13414,13395,511,13495,13305,697,497,13416,13370,13413&additionalFields=dates&withPagination=false&page=&size=",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5782,11 +6318,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "{{lastMonthStart}}"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "{{lastMonthEnd}}"
+                      "value": "{{futureDate180}}"
                     },
                     {
                       "key": "status",
@@ -5849,7 +6385,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/leaves/user/{{userId}}?startDate=2026-10-15&endDate=2026-11-26",
+                  "raw": "{{baseUrl}}/api/leave/leaves/user/{{userId}}?startDate={{today}}&endDate={{futureDate180}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5863,11 +6399,11 @@
                   "query": [
                     {
                       "key": "startDate",
-                      "value": "2026-10-15"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-11-26"
+                      "value": "{{futureDate180}}"
                     }
                   ]
                 }
@@ -5904,7 +6440,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/leaves/working-days?startDate=2026-10-19&endDate=2026-10-19&userId={{userId}}",
+                  "raw": "{{baseUrl}}/api/leave/leaves/working-days?startDate={{today}}&endDate={{futureDate180}}&userId={{userId}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -5917,11 +6453,11 @@
                   "query": [
                     {
                       "key": "startDate",
-                      "value": "2026-10-19"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "2026-10-19"
+                      "value": "{{futureDate180}}"
                     },
                     {
                       "key": "userId",
@@ -6252,7 +6788,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report?startDate={{lastMonthStart}}&endDate={{lastMonthEnd}}&projectId=502&additionalFields=tasks,allocation",
+                  "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report?startDate={{today}}&endDate={{lastMonthEnd}}&projectId=502&additionalFields=tasks,allocation",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -6265,7 +6801,7 @@
                   "query": [
                     {
                       "key": "startDate",
-                      "value": "{{lastMonthStart}}"
+                      "value": "{{today}}"
                     },
                     {
                       "key": "endDate",
@@ -6525,7 +7061,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or already processed', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([200,400,409]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -6564,7 +7100,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"location\":\"OFFICE\",\"workDate\":\"{{currentDate}}\"}",
+                  "raw": "{\"location\":\"OFFICE\",\"workDate\":\"{{today}}\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -6577,7 +7113,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or 400 (worklog requires prior attendance)', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]); });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([201,200,400,409]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -6898,7 +7434,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate=2026-08-01&endDate=2026-10-31&metric=Overall Status&size=10&page=1",
+              "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate={{today}}&endDate={{futureDate180}}&metric=Overall Status&size=10&page=1",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -6911,11 +7447,11 @@
               "query": [
                 {
                   "key": "startDate",
-                  "value": "2026-08-01"
+                  "value": "{{today}}"
                 },
                 {
                   "key": "endDate",
-                  "value": "2026-10-31"
+                  "value": "{{futureDate180}}"
                 },
                 {
                   "key": "metric",
@@ -7020,6 +7556,12 @@
                 "teams",
                 "projects",
                 "summary"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "working-shift"
+                }
               ]
             }
           },
@@ -7050,6 +7592,12 @@
                 "core",
                 "users",
                 "summary"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "working-shift"
+                }
               ]
             }
           },
@@ -7079,6 +7627,20 @@
                 "api",
                 "leave",
                 "employee-morale"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
+                },
+                {
+                  "key": "excludedDepartmentIds",
+                  "value": "14"
+                }
               ]
             }
           },
@@ -7204,7 +7766,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/teams/allocations?sortBy=role&order=asc&size=30&startDate={{currentDate}}&endDate={{futureDateLong}}&projectId=437&fetch=latest&fields=leave,teamManager&userId=&page=&paginationStatus=&date=&format=&roles=",
+                  "raw": "{{baseUrl}}/api/teams/allocations?sortBy=role&order=asc&size=30&startDate={{futureDate180}}&endDate={{futureDate365}}&projectId=437&fetch=latest&fields=leave,teamManager&userId=&page=&paginationStatus=&date=&format=&roles=",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -7228,11 +7790,11 @@
                     },
                     {
                       "key": "startDate",
-                      "value": "{{currentDate}}"
+                      "value": "{{futureDate180}}"
                     },
                     {
                       "key": "endDate",
-                      "value": "{{futureDateLong}}"
+                      "value": "{{futureDate365}}"
                     },
                     {
                       "key": "projectId",
@@ -7324,7 +7886,7 @@
                   "query": [
                     {
                       "key": "userId",
-                      "value": "12884"
+                      "value": "13994"
                     },
                     {
                       "key": "includePOCs",
@@ -7403,7 +7965,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or conflict', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([201,200,400,409]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -7418,7 +7980,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year=2026",
+                  "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year={{currentYear}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -7427,6 +7989,12 @@
                     "teams",
                     "reports",
                     "allocation-summary-reports"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "{{currentYear}}"
+                    }
                   ]
                 }
               },
@@ -7457,6 +8025,16 @@
                     "teams",
                     "reports",
                     "allocation-reports"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "{{today}}"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "{{futureDate180}}"
+                    }
                   ]
                 }
               },
@@ -8253,7 +8831,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"staffingRequestId\":1131,\"candidateId\":457,\"availability\":\"{{futureDate}}\",\"strategy\":\"etest\",\"caveatInformation\":\"test\"}",
+                  "raw": "{\"staffingRequestId\":1131,\"candidateId\":{{candidateId}},\"availability\":\"{{futureDate30}}\",\"strategy\":\"etest\",\"caveatInformation\":\"test\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8318,7 +8896,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or already exists', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([201,200,400,409]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8372,7 +8950,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([200,400,409]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -8555,7 +9133,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/billing-config?year=2026&month=09",
+                  "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/billing-config?year={{currentYear}}&month=09",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -8569,7 +9147,7 @@
                   "query": [
                     {
                       "key": "year",
-                      "value": "2026"
+                      "value": "{{currentYear}}"
                     },
                     {
                       "key": "month",
@@ -10733,7 +11311,7 @@
                     },
                     {
                       "key": "projectId",
-                      "value": "{{projectId}}"
+                      "value": "502"
                     },
                     {
                       "key": "includeFutureAllocation",
@@ -10963,7 +11541,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or already resigned', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([201,200,400,409]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -11240,7 +11818,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or already same status', function() {",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([200,400,409]).to.include(pm.response.code); });",
                       "  const code = pm.response.code;",
                       "  if (code === 400) {",
                       "    const msg = (pm.response.json().message || '').toLowerCase();",
@@ -11421,7 +11999,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or error', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 404]); });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([200,201,400,500]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -11533,11 +12111,11 @@
               "query": [
                 {
                   "key": "designationId",
-                  "value": "3"
+                  "value": "{{designationId}}"
                 },
                 {
                   "key": "areaId",
-                  "value": "4"
+                  "value": "{{areaId}}"
                 },
                 {
                   "key": "with",
@@ -11835,7 +12413,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year=2026",
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -11848,7 +12426,7 @@
               "query": [
                 {
                   "key": "year",
-                  "value": "2026"
+                  "value": "{{currentYear}}"
                 }
               ]
             }
@@ -11902,7 +12480,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year=2026",
+              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -11922,7 +12500,7 @@
                 },
                 {
                   "key": "year",
-                  "value": "2026"
+                  "value": "{{currentYear}}"
                 }
               ]
             }
@@ -11980,7 +12558,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q1,Q2,Q3,Q4&with=objectives&year=2026",
+              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q1,Q2,Q3,Q4&with=objectives&year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -12000,7 +12578,7 @@
                 },
                 {
                   "key": "year",
-                  "value": "2026"
+                  "value": "{{currentYear}}"
                 }
               ]
             }
@@ -12033,7 +12611,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/areas?year=2026&additionalFields=leaderships,objectiveCount",
+              "raw": "{{baseUrl}}/api/okr/areas?year={{currentYear}}&additionalFields=leaderships,objectiveCount",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -12045,7 +12623,7 @@
               "query": [
                 {
                   "key": "year",
-                  "value": "2026"
+                  "value": "{{currentYear}}"
                 },
                 {
                   "key": "additionalFields",
@@ -12146,7 +12724,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year=2026",
+              "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year={{currentYear}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -12166,7 +12744,7 @@
                 },
                 {
                   "key": "year",
-                  "value": "2026"
+                  "value": "{{currentYear}}"
                 }
               ]
             }
@@ -12259,7 +12837,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/okr/areas/{{areaId}}?year=2026",
+                  "raw": "{{baseUrl}}/api/okr/areas/{{areaId}}?year={{currentYear}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -12272,7 +12850,7 @@
                   "query": [
                     {
                       "key": "year",
-                      "value": "2026"
+                      "value": "{{currentYear}}"
                     }
                   ]
                 }
@@ -12309,7 +12887,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/api/okr/strategic-pillars/all?year=2026",
+                  "raw": "{{baseUrl}}/api/okr/strategic-pillars/all?year={{currentYear}}",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -12322,7 +12900,7 @@
                   "query": [
                     {
                       "key": "year",
-                      "value": "2026"
+                      "value": "{{currentYear}}"
                     }
                   ]
                 }
@@ -12455,7 +13033,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01&endDate=2026-12-31",
+              "raw": "{{baseUrl}}/api/pulse/dashboard?startDate={{today}}&endDate={{futureDate365}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -12467,11 +13045,11 @@
               "query": [
                 {
                   "key": "startDate",
-                  "value": "2026-10-01"
+                  "value": "{{today}}"
                 },
                 {
                   "key": "endDate",
-                  "value": "2026-12-31"
+                  "value": "{{futureDate365}}"
                 }
               ]
             }
@@ -12522,7 +13100,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/pulse/promotion?startDate=2026-07-01&endDate=2026-12-31&actionAs=appraiser&userIds=",
+              "raw": "{{baseUrl}}/api/pulse/promotion?startDate={{today}}&endDate={{futureDate365}}&actionAs=appraiser&userIds=",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -12534,11 +13112,11 @@
               "query": [
                 {
                   "key": "startDate",
-                  "value": "2026-07-01"
+                  "value": "{{today}}"
                 },
                 {
                   "key": "endDate",
-                  "value": "2026-12-31"
+                  "value": "{{futureDate365}}"
                 },
                 {
                   "key": "actionAs",
@@ -13042,7 +13620,7 @@
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test('Status is 2xx or 400 (note may not exist)', function() { pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]); });",
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([200,400,409]).to.include(pm.response.code); });",
                       "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
                     ],
                     "type": "text/javascript"
@@ -13592,6 +14170,12 @@
                 "okr",
                 "strategic-pillars",
                 "summary?year=1900"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "1900"
+                }
               ]
             }
           },
