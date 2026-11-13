@@ -10,10 +10,12 @@ function getArg(name) {
   return i !== -1 ? args[i + 1] : null;
 }
 
-const dir        = getArg('dir') || 'reports';
-const title      = getArg('title') || 'API Tests';
-const envPrefix  = getArg('env-prefix') || '';   // '' for DEV, 'QA' for QA
-const runUrl     = process.env.RUN_URL || '';
+const dir             = getArg('dir') || 'reports';
+const title           = getArg('title') || 'API Tests';
+const envPrefix       = getArg('env-prefix') || '';   // '' for DEV, 'QA' for QA
+const runUrl          = process.env.RUN_URL || '';
+const pagesUrl        = process.env.PAGES_URL || '';
+const securityPagesUrl = process.env.SECURITY_PAGES_URL || '';
 
 function pfx(key) { return envPrefix ? envPrefix + '_' + key : key; }
 
@@ -254,8 +256,9 @@ const html =
   allTestsSection +
   // Footer
   '<div style="padding:24px 32px;border-top:1px solid #f3f4f6">' +
-  '<a href="' + esc(runUrl) + '" style="display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px">Download HTML Reports</a>' +
-  '<a href="' + esc(runUrl) + '" style="display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600">View Run</a>' +
+  (pagesUrl ? '<a href="' + esc(pagesUrl) + '" style="display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px">📊 View Full API Report</a>' : '') +
+  (securityPagesUrl ? '<a href="' + esc(securityPagesUrl) + '" style="display:inline-block;background:#7c3aed;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px">🔒 Security Report</a>' : '') +
+  '<a href="' + esc(runUrl) + '" style="display:inline-block;background:#f3f4f6;color:#374151;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600">View GitHub Run</a>' +
   '</div></div></body></html>';
 
 fs.mkdirSync(dir, { recursive: true });
