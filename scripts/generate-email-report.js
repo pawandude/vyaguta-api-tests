@@ -234,14 +234,8 @@ if (failed > 0 && allFailures.length > 0) {
     '<div style="padding:16px 24px;background:#fef2f2">' + cards + '</div></details>';
 }
 
-// All-tests section (collapsed by default)
-const allTestsSection = '<details style="border-top:1px solid #e5e7eb">' +
-  '<summary style="cursor:pointer;padding:14px 24px;background:#f8fafc;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#374151;list-style:none;user-select:none">' +
-  '📋 All Tests — ' + passed + ' passed' + (failed > 0 ? ', ' + failed + ' failed' : '') + ' of ' + assertions + ' assertions</summary>' +
-  '<div style="padding:16px 24px">' + buildAllTestsHtml() + '</div></details>';
-
 const html =
-  '<!DOCTYPE html><html><body style="margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f4f6">' +
+  '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f4f6">' +
   '<div style="max-width:660px;margin:32px auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)">' +
   // Header
   '<div style="background:' + color + ';padding:26px 32px">' +
@@ -250,10 +244,8 @@ const html =
   '</div>' +
   // Stats
   '<div style="background:' + bgColor + ';padding:0"><table style="width:100%;border-collapse:collapse">' + statsRows + '</table></div>' +
-  // Failures (expanded)
+  // Failures (expanded when present)
   failuresSection +
-  // All tests (collapsed)
-  allTestsSection +
   // Footer
   '<div style="padding:24px 32px;border-top:1px solid #f3f4f6">' +
   (pagesUrl ? '<a href="' + esc(pagesUrl) + '" style="display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px">📊 View Full API Report</a>' : '') +
