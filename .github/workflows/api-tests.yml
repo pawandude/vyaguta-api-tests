@@ -63,6 +63,7 @@ jobs:
             --reporter-junit-export reports/junit-report.xml \
             --reporter-htmlextra-export reports/report.html \
             --reporter-htmlextra-title "Vyaguta API Test Report" \
+            --reporter-htmlextra-skipSensitiveData \
             --reporter-json-export reports/results-api.json
         env:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
@@ -79,6 +80,7 @@ jobs:
             --reporters cli,htmlextra,json \
             --reporter-htmlextra-export reports/report-security.html \
             --reporter-htmlextra-title "Vyaguta Security Test Report" \
+            --reporter-htmlextra-skipSensitiveData \
             --reporter-json-export reports/results-security.json
         env:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
@@ -171,6 +173,7 @@ jobs:
             --reporter-junit-export reports-qa/junit-report.xml \
             --reporter-htmlextra-export reports-qa/report.html \
             --reporter-htmlextra-title "Vyaguta API Test Report — QA" \
+            --reporter-htmlextra-skipSensitiveData \
             --reporter-json-export reports-qa/results-api.json
         env:
           VYAGUTA_QA_TOKEN: ${{ secrets.VYAGUTA_QA_TOKEN }}
@@ -187,6 +190,7 @@ jobs:
             --reporters cli,htmlextra,json \
             --reporter-htmlextra-export reports-qa/report-security.html \
             --reporter-htmlextra-title "Vyaguta Security Test Report — QA" \
+            --reporter-htmlextra-skipSensitiveData \
             --reporter-json-export reports-qa/results-security.json
         env:
           VYAGUTA_QA_TOKEN: ${{ secrets.VYAGUTA_QA_TOKEN }}
@@ -202,6 +206,7 @@ jobs:
             --reporters cli,htmlextra,json \
             --reporter-htmlextra-export reports-qa/report-assets.html \
             --reporter-htmlextra-title "Vyaguta Assets Test Report — QA" \
+            --reporter-htmlextra-skipSensitiveData \
             --reporter-json-export reports-qa/results-assets.json
         env:
           SECOPS_API_KEY: ${{ secrets.SECOPS_API_KEY }}
