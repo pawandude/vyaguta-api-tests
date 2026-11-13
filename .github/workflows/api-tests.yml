@@ -91,9 +91,7 @@ jobs:
         run: |
           REPO_URL="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           PAGES_DIR=$(mktemp -d)
-          RUN_PATH="${{ github.run_id }}/dev"
 
-          # Clone only the gh-pages branch (shallow), or init a new one
           git clone --depth 1 --branch gh-pages "$REPO_URL" "$PAGES_DIR" 2>/dev/null || (
             git init "$PAGES_DIR"
             cd "$PAGES_DIR"
@@ -101,17 +99,17 @@ jobs:
             git remote add origin "$REPO_URL"
           )
 
-          mkdir -p "$PAGES_DIR/$RUN_PATH"
-          cp reports/report.html          "$PAGES_DIR/$RUN_PATH/report.html"
-          cp reports/report-security.html "$PAGES_DIR/$RUN_PATH/report-security.html"
+          # Stable "latest" path — always overwritten so the email URL never goes stale
+          mkdir -p "$PAGES_DIR/latest-dev"
+          cp reports/report.html          "$PAGES_DIR/latest-dev/report.html"
+          cp reports/report-security.html "$PAGES_DIR/latest-dev/report-security.html"
 
           cd "$PAGES_DIR"
           git config user.email "github-actions@github.com"
           git config user.name  "GitHub Actions"
-          git add "$RUN_PATH"
+          git add latest-dev
           git commit -m "Report: run ${{ github.run_id }} — DEV" || true
 
-          # Retry up to 3 times in case of concurrent push conflict
           for i in 1 2 3; do
             git push origin gh-pages && break || (git pull --rebase origin gh-pages && sleep 3)
           done
@@ -122,8 +120,8 @@ jobs:
         run: node scripts/generate-email-report.js --dir reports --title "Vyaguta API Tests — DEV"
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_id }}/dev/report.html
-          SECURITY_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_id }}/dev/report-security.html
+          PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/latest-dev/report.html
+          SECURITY_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/latest-dev/report-security.html
 
       - name: Upload test report
         if: always()
@@ -248,7 +246,6 @@ jobs:
         run: |
           REPO_URL="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           PAGES_DIR=$(mktemp -d)
-          RUN_PATH="${{ github.run_id }}/qa"
 
           git clone --depth 1 --branch gh-pages "$REPO_URL" "$PAGES_DIR" 2>/dev/null || (
             git init "$PAGES_DIR"
@@ -257,14 +254,15 @@ jobs:
             git remote add origin "$REPO_URL"
           )
 
-          mkdir -p "$PAGES_DIR/$RUN_PATH"
-          cp reports-qa/report.html          "$PAGES_DIR/$RUN_PATH/report.html"
-          cp reports-qa/report-security.html "$PAGES_DIR/$RUN_PATH/report-security.html"
+          # Stable "latest" path — always overwritten so the email URL never goes stale
+          mkdir -p "$PAGES_DIR/latest-qa"
+          cp reports-qa/report.html          "$PAGES_DIR/latest-qa/report.html"
+          cp reports-qa/report-security.html "$PAGES_DIR/latest-qa/report-security.html"
 
           cd "$PAGES_DIR"
           git config user.email "github-actions@github.com"
           git config user.name  "GitHub Actions"
-          git add "$RUN_PATH"
+          git add latest-qa
           git commit -m "Report: run ${{ github.run_id }} — QA" || true
 
           for i in 1 2 3; do
@@ -277,8 +275,8 @@ jobs:
         run: node scripts/generate-email-report.js --dir reports-qa --title "Vyaguta API Tests — QA" --env-prefix QA
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_id }}/qa/report.html
-          SECURITY_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_id }}/qa/report-security.html
+          PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/latest-qa/report.html
+          SECURITY_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/latest-qa/report-security.html
 
       - name: Upload QA test report
         if: always()
