@@ -8848,6 +8848,515 @@
           ]
         },
         {
+          "name": "Candidates",
+          "item": [
+            {
+              "id": "d1420349-7d3a-44fd-befc-aee56e1190c9",
+              "name": "List candidates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates?bookable=bookable,booked,unassigned&sortBy=bookable&order=asc&q=pawan&size=40",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates"
+                  ],
+                  "query": [
+                    {
+                      "key": "bookable",
+                      "value": "bookable,booked,unassigned"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "bookable"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "q",
+                      "value": "pawan"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+                      "const json = pm.response.json(); const items = (json.data && json.data.data) || json.data || []; const avail = items.find(c => !c.isBooked); if (avail) pm.collectionVariables.set('candidateId', avail.id);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "9b6ee811-ea72-4d37-894b-0283053f41d0",
+              "name": "List candidate areas",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/areas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "areas"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "704d9c63-746e-4d02-9ff8-88809641f9f5",
+              "name": "List bookable candidates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/bookable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "bookable"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "325ca171-e133-4c59-aed5-781551fab182",
+              "name": "List candidate projects",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "projects"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "6c0548cf-70e1-4280-b4e4-a442a7ae9a1a",
+              "name": "List candidate skills",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/skills",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "skills"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "031804d2-8df8-4901-ba44-36df6839c40e",
+              "name": "List lateral candidates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/lateral-candidates?q=&isLinked=false&page=1&size=40&sortBy=name&order=asc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "lateral-candidates"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "isLinked",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "40"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "name"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "fe77e818-56d4-429d-9997-711a372eb153",
+              "name": "Book candidate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/book",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "book"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"staffingRequestId\":1131,\"candidateId\":{{candidateId}},\"availability\":\"{{futureDate30}}\",\"strategy\":\"etest\",\"caveatInformation\":\"test\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or already booked', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "a9d4a6d0-ab77-4b90-85e5-5129b161e0a7",
+              "name": "Create lateral candidate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/lateral-candidates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "lateral-candidates"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"pawan\",\"atsId\":9801224}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([201,200,400,409]).to.include(pm.response.code); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "id": "e7aa6ad0-2f25-4ac2-adb5-7857d93b8f72",
+              "name": "Update candidate availability",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/{{candidateId}}/available",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "{{candidateId}}",
+                    "available"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"isAvailable\":true}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([200,400,409]).to.include(pm.response.code); });",
+                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "response": []
+            },
+            {
+              "name": "Get candidate booking details",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/teams/candidates/{{candidateId}}/booking-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "teams",
+                    "candidates",
+                    "{{candidateId}}",
+                    "booking-details"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200 or no booking found\", function () {",
+                      "  pm.expect([200, 404]).to.include(pm.response.code);",
+                      "});",
+                      "pm.test(\"Response time is below 5000ms\", function () { pm.expect(pm.response.responseTime).to.be.below(5000); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "Allocations",
           "item": [
             {
@@ -9041,7 +9550,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13314,\"billingStatus\":\"Assigned\",\"coAppraiserId\":12884,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDate365}}\",\"startDate\":\"{{today}}\",\"projectId\":112,\"userId\":{{userId}},\"roleId\":7,\"expectation\":\"deliver quality work\"}",
+                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":{{personId}},\"billingStatus\":\"Assigned\",\"coAppraiserId\":null,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDate365}}\",\"startDate\":\"{{today}}\",\"projectId\":{{projectId}},\"userId\":{{candidateId}},\"roleId\":7,\"expectation\":\"over allocation is fine\"}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -9585,512 +10094,6 @@
                 }
               ],
               "response": []
-            }
-          ]
-        },
-        {
-          "name": "Candidates",
-          "item": [
-            {
-              "id": "d1420349-7d3a-44fd-befc-aee56e1190c9",
-              "name": "List candidates",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates?bookable=bookable,booked,unassigned&sortBy=bookable&order=asc&q=pawan&size=40",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates"
-                  ],
-                  "query": [
-                    {
-                      "key": "bookable",
-                      "value": "bookable,booked,unassigned"
-                    },
-                    {
-                      "key": "sortBy",
-                      "value": "bookable"
-                    },
-                    {
-                      "key": "order",
-                      "value": "asc"
-                    },
-                    {
-                      "key": "q",
-                      "value": "pawan"
-                    },
-                    {
-                      "key": "size",
-                      "value": "40"
-                    }
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });",
-                      "const json = pm.response.json(); const items = (json.data && json.data.data) || json.data || []; const avail = items.find(c => !c.isBooked); if (avail) pm.collectionVariables.set('candidateId', avail.id);"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "9b6ee811-ea72-4d37-894b-0283053f41d0",
-              "name": "List candidate areas",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates/areas",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates",
-                    "areas"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "704d9c63-746e-4d02-9ff8-88809641f9f5",
-              "name": "List bookable candidates",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates/bookable",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates",
-                    "bookable"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "325ca171-e133-4c59-aed5-781551fab182",
-              "name": "List candidate projects",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates/projects",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates",
-                    "projects"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "6c0548cf-70e1-4280-b4e4-a442a7ae9a1a",
-              "name": "List candidate skills",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates/skills",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates",
-                    "skills"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "031804d2-8df8-4901-ba44-36df6839c40e",
-              "name": "List lateral candidates",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/lateral-candidates?q=&isLinked=false&page=1&size=40&sortBy=name&order=asc",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "lateral-candidates"
-                  ],
-                  "query": [
-                    {
-                      "key": "q",
-                      "value": ""
-                    },
-                    {
-                      "key": "isLinked",
-                      "value": "false"
-                    },
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "size",
-                      "value": "40"
-                    },
-                    {
-                      "key": "sortBy",
-                      "value": "name"
-                    },
-                    {
-                      "key": "order",
-                      "value": "asc"
-                    }
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx', function() { pm.response.to.be.success; });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "fe77e818-56d4-429d-9997-711a372eb153",
-              "name": "Book candidate",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates/book",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates",
-                    "book"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"staffingRequestId\":1131,\"candidateId\":{{candidateId}},\"availability\":\"{{futureDate30}}\",\"strategy\":\"etest\",\"caveatInformation\":\"test\"}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx or already booked', function() { pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 409]); });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "a9d4a6d0-ab77-4b90-85e5-5129b161e0a7",
-              "name": "Create lateral candidate",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/lateral-candidates",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "lateral-candidates"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"name\":\"pawan\",\"atsId\":9801224}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([201,200,400,409]).to.include(pm.response.code); });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "id": "e7aa6ad0-2f25-4ac2-adb5-7857d93b8f72",
-              "name": "Update candidate availability",
-              "request": {
-                "method": "PUT",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{authToken}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates/{{candidateId}}/available",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates",
-                    "{{candidateId}}",
-                    "available"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\"isAvailable\":true}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test('Status is 2xx or expected conflict', function() { pm.expect([200,400,409]).to.include(pm.response.code); });",
-                      "pm.test('Response time is below 5000ms', function() { pm.expect(pm.response.responseTime).to.be.below(5000); });"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
-              "name": "Get candidate booking details",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{baseUrl}}/api/teams/candidates/{{candidateId}}/booking-details",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "teams",
-                    "candidates",
-                    "{{candidateId}}",
-                    "booking-details"
-                  ]
-                }
-              },
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                    ]
-                  }
-                }
-              ]
             }
           ]
         },
