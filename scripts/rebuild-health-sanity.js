@@ -125,7 +125,10 @@ function healthRequest(ep) {
       listen: 'test',
       script: {
         type: 'text/javascript',
-        exec: ['pm.test("Status is 200", function () { pm.response.to.have.status(200); });'],
+        exec: [
+          'pm.test("Status is 200", function () { pm.response.to.have.status(200); });',
+          'pm.test("Response time is below 5000ms", function () { pm.expect(pm.response.responseTime).to.be.below(5000); });',
+        ],
       },
     }],
   };
@@ -142,6 +145,7 @@ function sanityRequest(ep) {
         exec: [
           'pm.test("Status is 200", function () { pm.response.to.have.status(200); });',
           'pm.test("Content-Type is application/json", function () { pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json"); });',
+          'pm.test("Response time is below 5000ms", function () { pm.expect(pm.response.responseTime).to.be.below(5000); });',
         ],
       },
     }],
