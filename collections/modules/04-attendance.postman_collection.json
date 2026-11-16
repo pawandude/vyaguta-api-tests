@@ -652,7 +652,7 @@
                                                                                       }
                                                                                   ],
                                                                        "url":  {
-                                                                                   "raw":  "{{baseUrl}}/api/leave/leave-balance?userId={{userId}}\u0026fiscalYearId=146\u0026onlyActive=true\u0026calculationDate={{currentDate}}",
+                                                                                   "raw":  "{{baseUrl}}/api/leave/leave-balance?userId={{userId}}\u0026fiscalYearId={{fiscalYearId}}\u0026onlyActive=true\u0026calculationDate={{currentDate}}",
                                                                                    "host":  [
                                                                                                 "{{baseUrl}}"
                                                                                             ],
@@ -715,7 +715,7 @@
                                                                                       }
                                                                                   ],
                                                                        "url":  {
-                                                                                   "raw":  "{{baseUrl}}/api/leave/leave-credits/well-being?userId={{userId}}\u0026fiscalYearId=146",
+                                                                                   "raw":  "{{baseUrl}}/api/leave/leave-credits/well-being?userId={{userId}}\u0026fiscalYearId={{fiscalYearId}}",
                                                                                    "host":  [
                                                                                                 "{{baseUrl}}"
                                                                                             ],

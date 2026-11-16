@@ -1617,7 +1617,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/leave/leave-balance",
+          "raw": "{{baseUrl}}/api/leave/leave-balance?fiscalYearId={{fiscalYearId}}&userId={{userId}}&onlyActive=true",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1625,6 +1625,20 @@
             "api",
             "leave",
             "leave-balance"
+          ],
+          "query": [
+            {
+              "key": "fiscalYearId",
+              "value": "{{fiscalYearId}}"
+            },
+            {
+              "key": "userId",
+              "value": "{{userId}}"
+            },
+            {
+              "key": "onlyActive",
+              "value": "true"
+            }
           ]
         }
       },
@@ -1647,7 +1661,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/leave/leave-credits/well-being",
+          "raw": "{{baseUrl}}/api/leave/leave-credits/well-being?userId={{userId}}&fiscalYearId={{fiscalYearId}}",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1656,6 +1670,16 @@
             "leave",
             "leave-credits",
             "well-being"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "{{userId}}"
+            },
+            {
+              "key": "fiscalYearId",
+              "value": "{{fiscalYearId}}"
+            }
           ]
         }
       },

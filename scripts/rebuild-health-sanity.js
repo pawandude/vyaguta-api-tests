@@ -71,8 +71,8 @@ const ENDPOINTS = [
   { label: 'Attendance — worklog unfreeze requests', url: '/api/leave/worklog-unfreeze-requests' },
   { label: 'Attendance — leave transfer requests',   url: '/api/leave/leave-transfer-requests?fiscalYearId=1' },
   // ── Attendance P2 ──
-  { label: 'Attendance — leave balance',             url: '/api/leave/leave-balance' },
-  { label: 'Attendance — well-being credits',        url: '/api/leave/leave-credits/well-being' },
+  { label: 'Attendance — leave balance',             url: '/api/leave/leave-balance?fiscalYearId={{fiscalYearId}}&userId={{userId}}&onlyActive=true' },
+  { label: 'Attendance — well-being credits',        url: '/api/leave/leave-credits/well-being?userId={{userId}}&fiscalYearId={{fiscalYearId}}' },
   { label: 'Attendance — worklog allocation report', url: '/api/leave/worklogs/allocation-details-report' },
 
   // ── OKR P1 ──
