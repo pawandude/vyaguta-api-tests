@@ -746,7 +746,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":13314,\"billingStatus\":\"Assigned\",\"coAppraiserId\":12884,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDate365}}\",\"startDate\":\"{{today}}\",\"projectId\":112,\"userId\":{{userId}},\"roleId\":7,\"expectation\":\"deliver quality work\"}",
+                  "raw": "{\"allocation\":40,\"allocationType\":\"project\",\"appraiserId\":{{personId}},\"billingStatus\":\"Assigned\",\"coAppraiserId\":null,\"isTeamLead\":false,\"potentialEndDate\":\"{{futureDate365}}\",\"startDate\":\"{{today}}\",\"projectId\":{{projectId}},\"userId\":{{candidateId}},\"roleId\":7,\"expectation\":\"over allocation is fine\"}",
                   "options": {
                     "raw": {
                       "language": "json"
