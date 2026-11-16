@@ -163,7 +163,7 @@
       "description": "Lightweight GET per module. Runs every 2 hours via health-check.yml to confirm all services are reachable.",
       "item": [
         {
-          "name": "People Ã¢â‚¬â€ users endpoint is up",
+          "name": "Core — users endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -192,7 +192,414 @@
           ]
         },
         {
-          "name": "Team Ã¢â‚¬â€ status-types endpoint is up",
+          "name": "Core — user profile endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — holidays endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/holidays",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "holidays"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user dashboard (me/info) endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/me/info?types=permissions,reminders,notices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "me",
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "permissions,reminders,notices"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — engagement status endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/engagement-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "engagement-status"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — designations endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/designations?size=1000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "designations"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — designation areas endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/designation-areas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "designation-areas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — users summary endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "summary"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — people finder endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/people-finder?page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "people-finder"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — skills (v2) endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/skills/v2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "skills",
+                "v2"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user roles endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "roles"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — leave issuer change requests endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/leave-issuers/change-requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "leave-issuers",
+                "change-requests"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user skills (v2) endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/skills/v2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "skills",
+                "v2"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user resignations endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/resignations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "resignations"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — status types endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -221,85 +628,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ allocations endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate={{today}}&endDate={{futureDate365}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "allocations"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "5"
-                },
-                {
-                  "key": "startDate",
-                  "value": "{{today}}"
-                },
-                {
-                  "key": "endDate",
-                  "value": "{{futureDate365}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ candidates endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/candidates?size=5",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "candidates"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "5"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ projects endpoint is up",
+          "name": "Teams — projects endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -334,25 +663,20 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ staffing endpoint is up",
+          "name": "Teams — project detail endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/staffing?size=5",
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "staffing"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "5"
-                }
+                "projects",
+                "{{projectId}}"
               ]
             }
           },
@@ -369,42 +693,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ PSR endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "psrs"
-              ],
-              "query": [
-                {
-                  "key": "projectId",
-                  "value": "{{projectId}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project health trend endpoint is up",
+          "name": "Teams — project health trend endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -456,7 +745,43 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ project offboards endpoint is up",
+          "name": "Teams — project highlights/feed endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/feed?size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "feed"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — project offboards endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -487,12 +812,12 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ project risks endpoint is up",
+          "name": "Teams — project staffing endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/staffing?size=5",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -501,41 +826,12 @@
                 "teams",
                 "projects",
                 "{{projectId}}",
-                "risks"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ QSR endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/qsrs?projectId={{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "qsrs"
+                "staffing"
               ],
               "query": [
                 {
-                  "key": "projectId",
-                  "value": "{{projectId}}"
+                  "key": "size",
+                  "value": "5"
                 }
               ]
             }
@@ -553,28 +849,32 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ signoff endpoint is up",
+          "name": "Teams — allocations endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/signoff?year={{currentYear}}&month={{currentMonth}}",
+              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate={{today}}&endDate={{futureDate365}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "signoff"
+                "allocations"
               ],
               "query": [
                 {
-                  "key": "year",
-                  "value": "{{currentYear}}"
+                  "key": "size",
+                  "value": "5"
                 },
                 {
-                  "key": "month",
-                  "value": "{{currentMonth}}"
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
                 }
               ]
             }
@@ -592,7 +892,178 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ working shift endpoint is up",
+          "name": "Teams — staffing endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/staffing?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "staffing"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — staffing request detail endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "staffing",
+                "{{staffingRequestId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — candidates endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/candidates?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — candidates bookable endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/candidates/bookable?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "candidates",
+                "bookable"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — lateral candidates (ATS) endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/lateral-candidates?size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "lateral-candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — working shift summary endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -628,7 +1099,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ employee morale endpoint is up",
+          "name": "Teams — employee morale endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -671,25 +1142,24 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ project feed (highlights) endpoint is up",
+          "name": "Teams — phases endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/feed?size=10",
+              "raw": "{{baseUrl}}/api/teams/phases?projectId={{projectId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "projects",
-                "feed"
+                "phases"
               ],
               "query": [
                 {
-                  "key": "size",
-                  "value": "10"
+                  "key": "projectId",
+                  "value": "{{projectId}}"
                 }
               ]
             }
@@ -707,77 +1177,12 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ lateral candidates (ATS) endpoint is up",
+          "name": "Teams — project risks endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/lateral-candidates?size=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "lateral-candidates"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "10"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project detail endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "projects",
-                "{{projectId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project staffing endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/staffing?size=5",
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -786,12 +1191,72 @@
                 "teams",
                 "projects",
                 "{{projectId}}",
-                "staffing"
+                "risks"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — project opportunities endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/opportunities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "{{projectId}}",
+                "opportunities"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — PSRs endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "psrs"
               ],
               "query": [
                 {
-                  "key": "size",
-                  "value": "5"
+                  "key": "projectId",
+                  "value": "{{projectId}}"
                 }
               ]
             }
@@ -809,25 +1274,24 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ candidates bookable endpoint is up",
+          "name": "Teams — QSRs endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/candidates/bookable?size=5",
+              "raw": "{{baseUrl}}/api/teams/qsrs?projectId={{projectId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "candidates",
-                "bookable"
+                "qsrs"
               ],
               "query": [
                 {
-                  "key": "size",
-                  "value": "5"
+                  "key": "projectId",
+                  "value": "{{projectId}}"
                 }
               ]
             }
@@ -845,58 +1309,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ staffing request detail endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "staffing",
-                "{{staffingRequestId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "if (!pm.environment.get(\"staffingRequestId\")) {",
-                  "  pm.sendRequest({",
-                  "    url: pm.environment.get(\"baseUrl\") + \"/api/teams/staffing?size=1&page=1\",",
-                  "    method: \"GET\",",
-                  "    header: { \"Authorization\": \"Bearer \" + pm.environment.get(\"authToken\") }",
-                  "  }, function(err, res) {",
-                  "    if (!err && res && res.code === 200) {",
-                  "      var body = res.json();",
-                  "      var id = body && body.data && body.data[0] && body.data[0].id;",
-                  "      if (id) pm.environment.set(\"staffingRequestId\", id);",
-                  "    }",
-                  "  });",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ allocation summary report endpoint is up",
+          "name": "Teams — allocation summary report endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -932,7 +1345,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ allocation report endpoint is up",
+          "name": "Teams — allocation report endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -972,102 +1385,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ phases endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/phases?projectId={{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "phases"
-              ],
-              "query": [
-                {
-                  "key": "projectId",
-                  "value": "{{projectId}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project opportunities endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/opportunities",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "projects",
-                "{{projectId}}",
-                "opportunities"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ roles endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/roles",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "roles"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project signoff detail endpoint is up",
+          "name": "Teams — project signoff detail endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1108,7 +1426,46 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ staffing linked candidates endpoint is up",
+          "name": "Teams — signoff summary endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/signoff?year={{currentYear}}&month={{currentMonth}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "signoff"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                },
+                {
+                  "key": "month",
+                  "value": "{{currentMonth}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — staffing linked candidates endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1135,32 +1492,40 @@
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
                 ]
               }
-            },
+            }
+          ]
+        },
+        {
+          "name": "Teams — roles endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles"
+              ]
+            }
+          },
+          "event": [
             {
-              "listen": "prerequest",
+              "listen": "test",
               "script": {
+                "type": "text/javascript",
                 "exec": [
-                  "if (!pm.environment.get(\"staffingRequestId\")) {",
-                  "  pm.sendRequest({",
-                  "    url: pm.environment.get(\"baseUrl\") + \"/api/teams/staffing?size=1&page=1\",",
-                  "    method: \"GET\",",
-                  "    header: { \"Authorization\": \"Bearer \" + pm.environment.get(\"authToken\") }",
-                  "  }, function(err, res) {",
-                  "    if (!err && res && res.code === 200) {",
-                  "      var body = res.json();",
-                  "      var id = body && body.data && body.data[0] && body.data[0].id;",
-                  "      if (id) pm.environment.set(\"staffingRequestId\", id);",
-                  "    }",
-                  "  });",
-                  "}"
-                ],
-                "type": "text/javascript"
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
               }
             }
           ]
         },
         {
-          "name": "Attendance Ã¢â‚¬â€ summary endpoint is up",
+          "name": "Attendance — attendance summary endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1196,25 +1561,141 @@
           ]
         },
         {
-          "name": "JUMP Ã¢â‚¬â€ KPI filters endpoint is up",
+          "name": "Attendance — leaves endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role+based",
+              "raw": "{{baseUrl}}/api/leave/leaves",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "jump",
-                "kpis",
-                "filters"
+                "leave",
+                "leaves"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — remote applications endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/remote-applications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "remote-applications"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — worklog involvements endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklogs/involvements",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklogs",
+                "involvements"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — worklog unfreeze requests endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklog-unfreeze-requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklog-unfreeze-requests"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — leave transfer requests endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/leave-transfer-requests?fiscalYearId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "leave-transfer-requests"
               ],
               "query": [
                 {
-                  "key": "type",
-                  "value": "Role+based"
+                  "key": "fiscalYearId",
+                  "value": "1"
                 }
               ]
             }
@@ -1232,19 +1713,19 @@
           ]
         },
         {
-          "name": "Honor Ã¢â‚¬â€ menus endpoint is up",
+          "name": "Attendance — leave balance endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/honor/menus",
+              "raw": "{{baseUrl}}/api/leave/leave-balance",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "honor",
-                "menus"
+                "leave",
+                "leave-balance"
               ]
             }
           },
@@ -1261,7 +1742,110 @@
           ]
         },
         {
-          "name": "OKR Ã¢â‚¬â€ strategic pillars endpoint is up",
+          "name": "Attendance — well-being credits endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/leave-credits/well-being",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "leave-credits",
+                "well-being"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — worklog allocation report endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklogs",
+                "allocation-details-report"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — highlights endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "highlights"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — strategic pillars endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1290,7 +1874,204 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ evaluations endpoint is up",
+          "name": "OKR — strategic pillars summary endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — HLO (objectives) endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "hlo"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "with",
+                  "value": "objectives"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — areas (team) endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/areas?type=team&additionalFields=leaderships,objectiveCount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "team"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — areas (pod) endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/areas?type=pod&additionalFields=leaderships,objectiveCount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "pod"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — report/all endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "report",
+                "all"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — evaluations groups endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1320,7 +2101,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ dashboard endpoint is up",
+          "name": "Pulse — team dashboard endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1359,7 +2140,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ user pulse endpoint is up",
+          "name": "Pulse — user pulse endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1390,7 +2171,117 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ promotion endpoint is up",
+          "name": "Pulse — appraiser check endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId={{personId}}&areaId=4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "appraiser-nominations",
+                "check-evaluation"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                },
+                {
+                  "key": "areaId",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — pulse allocations endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-allocations/{{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-allocations",
+                "{{personId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — PIP report endpoint is up",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-report",
+                "pip"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — promotion endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1433,7 +2324,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ notes endpoint is up",
+          "name": "Pulse — feedback notes endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1472,7 +2363,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ expectations endpoint is up",
+          "name": "Pulse — expectations endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1511,77 +2402,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ pulse allocations endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/pulse/pulse-allocations/{{personId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "pulse",
-                "pulse-allocations",
-                "{{personId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Pulse Ã¢â‚¬â€ appraiser check endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId={{personId}}&areaId=4",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "pulse",
-                "appraiser-nominations",
-                "check-evaluation"
-              ],
-              "query": [
-                {
-                  "key": "subjectId",
-                  "value": "{{personId}}"
-                },
-                {
-                  "key": "areaId",
-                  "value": "4"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Pulse Ã¢â‚¬â€ pulse report endpoint is up",
+          "name": "Pulse — pulse report endpoint is up",
           "request": {
             "method": "GET",
             "header": [],
@@ -1614,369 +2435,6 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Pulse Ã¢â‚¬â€ PIP report endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "pulse",
-                "pulse-report",
-                "pip"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "size",
-                  "value": "10"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "OKR â€” areas (team) endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/areas?type=team&additionalFields=leaderships,objectiveCount",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "areas"
-              ],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "team"
-                },
-                {
-                  "key": "additionalFields",
-                  "value": "leaderships,objectiveCount"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "OKR â€” areas (pod) endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/areas?type=pod&additionalFields=leaderships,objectiveCount",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "areas"
-              ],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "pod"
-                },
-                {
-                  "key": "additionalFields",
-                  "value": "leaderships,objectiveCount"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "OKR â€” report/all endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year={{currentYear}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "report",
-                "all"
-              ],
-              "query": [
-                {
-                  "key": "quarters",
-                  "value": "Q4"
-                },
-                {
-                  "key": "year",
-                  "value": "{{currentYear}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — departments endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/departments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "departments"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — designations endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/designations",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "designations"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — designation-areas endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/designation-areas",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "designation-areas"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — engagement-status endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/engagement-status",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "engagement-status"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — fiscal-years endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/fiscal-years",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "fiscal-years"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — notices/list endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/notices/list",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "notices",
-                "list"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — reminders/list endpoint is up",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/reminders/list",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "reminders",
-                "list"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
                 ]
               }
             }
@@ -1989,7 +2447,7 @@
       "description": "One representative request per module. Asserts status 200, Content-Type, and non-empty body only. Run on every PR/push for fast feedback.",
       "item": [
         {
-          "name": "People Ã¢â‚¬â€ users is reachable",
+          "name": "Core — users is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2019,7 +2477,427 @@
           ]
         },
         {
-          "name": "Team Ã¢â‚¬â€ status-types is reachable",
+          "name": "Core — user profile is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — holidays is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/holidays",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "holidays"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user dashboard (me/info) is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/me/info?types=permissions,reminders,notices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "me",
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "permissions,reminders,notices"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — engagement status is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/engagement-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "engagement-status"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — designations is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/designations?size=1000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "designations"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — designation areas is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/designation-areas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "designation-areas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — users summary is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "summary"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — people finder is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/people-finder?page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "people-finder"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — skills (v2) is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/skills/v2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "skills",
+                "v2"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user roles is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "roles"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — leave issuer change requests is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/leave-issuers/change-requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "leave-issuers",
+                "change-requests"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user skills (v2) is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/skills/v2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "skills",
+                "v2"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Core — user resignations is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/core/users/{{personId}}/resignations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "core",
+                "users",
+                "{{personId}}",
+                "resignations"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — status types is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2049,87 +2927,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ allocations is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate={{today}}&endDate={{futureDate365}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "allocations"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "5"
-                },
-                {
-                  "key": "startDate",
-                  "value": "{{today}}"
-                },
-                {
-                  "key": "endDate",
-                  "value": "{{futureDate365}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ candidates is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/candidates?size=5",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "candidates"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "5"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ projects is reachable",
+          "name": "Teams — projects is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2165,25 +2963,20 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ staffing is reachable",
+          "name": "Teams — project detail is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/staffing?size=5",
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "staffing"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "5"
-                }
+                "projects",
+                "{{projectId}}"
               ]
             }
           },
@@ -2201,43 +2994,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ PSR is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "psrs"
-              ],
-              "query": [
-                {
-                  "key": "projectId",
-                  "value": "{{projectId}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project health trend is reachable",
+          "name": "Teams — project health trend is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2290,7 +3047,44 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ project offboards is reachable",
+          "name": "Teams — project highlights/feed is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/feed?size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "feed"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — project offboards is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2322,12 +3116,12 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ project risks is reachable",
+          "name": "Teams — project staffing is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/staffing?size=5",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2336,42 +3130,12 @@
                 "teams",
                 "projects",
                 "{{projectId}}",
-                "risks"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ QSR is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/qsrs?projectId={{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "qsrs"
+                "staffing"
               ],
               "query": [
                 {
-                  "key": "projectId",
-                  "value": "{{projectId}}"
+                  "key": "size",
+                  "value": "5"
                 }
               ]
             }
@@ -2390,28 +3154,32 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ signoff is reachable",
+          "name": "Teams — allocations is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/signoff?year={{currentYear}}&month={{currentMonth}}",
+              "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate={{today}}&endDate={{futureDate365}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "signoff"
+                "allocations"
               ],
               "query": [
                 {
-                  "key": "year",
-                  "value": "{{currentYear}}"
+                  "key": "size",
+                  "value": "5"
                 },
                 {
-                  "key": "month",
-                  "value": "{{currentMonth}}"
+                  "key": "startDate",
+                  "value": "{{today}}"
+                },
+                {
+                  "key": "endDate",
+                  "value": "{{futureDate365}}"
                 }
               ]
             }
@@ -2430,7 +3198,183 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ working shift is reachable",
+          "name": "Teams — staffing is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/staffing?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "staffing"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — staffing request detail is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "staffing",
+                "{{staffingRequestId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — candidates is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/candidates?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — candidates bookable is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/candidates/bookable?size=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "candidates",
+                "bookable"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — lateral candidates (ATS) is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/lateral-candidates?size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "lateral-candidates"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — working shift summary is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2467,7 +3411,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ employee morale is reachable",
+          "name": "Teams — employee morale is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2511,25 +3455,24 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ project feed (highlights) is reachable",
+          "name": "Teams — phases is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/feed?size=10",
+              "raw": "{{baseUrl}}/api/teams/phases?projectId={{projectId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "projects",
-                "feed"
+                "phases"
               ],
               "query": [
                 {
-                  "key": "size",
-                  "value": "10"
+                  "key": "projectId",
+                  "value": "{{projectId}}"
                 }
               ]
             }
@@ -2548,79 +3491,12 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ lateral candidates (ATS) is reachable",
+          "name": "Teams — project risks is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/lateral-candidates?size=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "lateral-candidates"
-              ],
-              "query": [
-                {
-                  "key": "size",
-                  "value": "10"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project detail is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "projects",
-                "{{projectId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project staffing is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/staffing?size=5",
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2629,12 +3505,74 @@
                 "teams",
                 "projects",
                 "{{projectId}}",
-                "staffing"
+                "risks"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — project opportunities is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/opportunities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "projects",
+                "{{projectId}}",
+                "opportunities"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — PSRs is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "psrs"
               ],
               "query": [
                 {
-                  "key": "size",
-                  "value": "5"
+                  "key": "projectId",
+                  "value": "{{projectId}}"
                 }
               ]
             }
@@ -2653,25 +3591,24 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ candidates bookable is reachable",
+          "name": "Teams — QSRs is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/teams/candidates/bookable?size=5",
+              "raw": "{{baseUrl}}/api/teams/qsrs?projectId={{projectId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "teams",
-                "candidates",
-                "bookable"
+                "qsrs"
               ],
               "query": [
                 {
-                  "key": "size",
-                  "value": "5"
+                  "key": "projectId",
+                  "value": "{{projectId}}"
                 }
               ]
             }
@@ -2690,59 +3627,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ staffing request detail is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "staffing",
-                "{{staffingRequestId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "if (!pm.environment.get(\"staffingRequestId\")) {",
-                  "  pm.sendRequest({",
-                  "    url: pm.environment.get(\"baseUrl\") + \"/api/teams/staffing?size=1&page=1\",",
-                  "    method: \"GET\",",
-                  "    header: { \"Authorization\": \"Bearer \" + pm.environment.get(\"authToken\") }",
-                  "  }, function(err, res) {",
-                  "    if (!err && res && res.code === 200) {",
-                  "      var body = res.json();",
-                  "      var id = body && body.data && body.data[0] && body.data[0].id;",
-                  "      if (id) pm.environment.set(\"staffingRequestId\", id);",
-                  "    }",
-                  "  });",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ allocation summary report is reachable",
+          "name": "Teams — allocation summary report is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2779,7 +3664,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ allocation report is reachable",
+          "name": "Teams — allocation report is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2820,105 +3705,7 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ phases is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/phases?projectId={{projectId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "phases"
-              ],
-              "query": [
-                {
-                  "key": "projectId",
-                  "value": "{{projectId}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project opportunities is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/opportunities",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "projects",
-                "{{projectId}}",
-                "opportunities"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ roles is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teams/roles",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teams",
-                "roles"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Teams Ã¢â‚¬â€ project signoff detail is reachable",
+          "name": "Teams — project signoff detail is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2960,7 +3747,47 @@
           ]
         },
         {
-          "name": "Teams Ã¢â‚¬â€ staffing linked candidates is reachable",
+          "name": "Teams — signoff summary is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/signoff?year={{currentYear}}&month={{currentMonth}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "signoff"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                },
+                {
+                  "key": "month",
+                  "value": "{{currentMonth}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Teams — staffing linked candidates is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -2988,32 +3815,41 @@
                   "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
                 ]
               }
-            },
+            }
+          ]
+        },
+        {
+          "name": "Teams — roles is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teams/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teams",
+                "roles"
+              ]
+            }
+          },
+          "event": [
             {
-              "listen": "prerequest",
+              "listen": "test",
               "script": {
+                "type": "text/javascript",
                 "exec": [
-                  "if (!pm.environment.get(\"staffingRequestId\")) {",
-                  "  pm.sendRequest({",
-                  "    url: pm.environment.get(\"baseUrl\") + \"/api/teams/staffing?size=1&page=1\",",
-                  "    method: \"GET\",",
-                  "    header: { \"Authorization\": \"Bearer \" + pm.environment.get(\"authToken\") }",
-                  "  }, function(err, res) {",
-                  "    if (!err && res && res.code === 200) {",
-                  "      var body = res.json();",
-                  "      var id = body && body.data && body.data[0] && body.data[0].id;",
-                  "      if (id) pm.environment.set(\"staffingRequestId\", id);",
-                  "    }",
-                  "  });",
-                  "}"
-                ],
-                "type": "text/javascript"
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
               }
             }
           ]
         },
         {
-          "name": "Attendance Ã¢â‚¬â€ summary is reachable",
+          "name": "Attendance — attendance summary is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3050,25 +3886,145 @@
           ]
         },
         {
-          "name": "JUMP Ã¢â‚¬â€ KPI filters is reachable",
+          "name": "Attendance — leaves is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/jump/kpis/filters?type=Role+based",
+              "raw": "{{baseUrl}}/api/leave/leaves",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "jump",
-                "kpis",
-                "filters"
+                "leave",
+                "leaves"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — remote applications is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/remote-applications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "remote-applications"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — worklog involvements is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklogs/involvements",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklogs",
+                "involvements"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — worklog unfreeze requests is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklog-unfreeze-requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklog-unfreeze-requests"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — leave transfer requests is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/leave-transfer-requests?fiscalYearId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "leave-transfer-requests"
               ],
               "query": [
                 {
-                  "key": "type",
-                  "value": "Role+based"
+                  "key": "fiscalYearId",
+                  "value": "1"
                 }
               ]
             }
@@ -3087,19 +4043,19 @@
           ]
         },
         {
-          "name": "Honor Ã¢â‚¬â€ menus is reachable",
+          "name": "Attendance — leave balance is reachable",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/honor/menus",
+              "raw": "{{baseUrl}}/api/leave/leave-balance",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "honor",
-                "menus"
+                "leave",
+                "leave-balance"
               ]
             }
           },
@@ -3117,7 +4073,113 @@
           ]
         },
         {
-          "name": "OKR Ã¢â‚¬â€ strategic pillars is reachable",
+          "name": "Attendance — well-being credits is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/leave-credits/well-being",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "leave-credits",
+                "well-being"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attendance — worklog allocation report is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leave",
+                "worklogs",
+                "allocation-details-report"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — highlights is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "highlights"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — strategic pillars is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3147,7 +4209,209 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ evaluations is reachable",
+          "name": "OKR — strategic pillars summary is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "strategic-pillars",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — HLO (objectives) is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "hlo"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "with",
+                  "value": "objectives"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — areas (team) is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/areas?type=team&additionalFields=leaderships,objectiveCount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "team"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — areas (pod) is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/areas?type=pod&additionalFields=leaderships,objectiveCount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "areas"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "pod"
+                },
+                {
+                  "key": "additionalFields",
+                  "value": "leaderships,objectiveCount"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "OKR — report/all is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year={{currentYear}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "okr",
+                "report",
+                "all"
+              ],
+              "query": [
+                {
+                  "key": "quarters",
+                  "value": "Q4"
+                },
+                {
+                  "key": "year",
+                  "value": "{{currentYear}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — evaluations groups is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3178,7 +4442,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ dashboard is reachable",
+          "name": "Pulse — team dashboard is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3218,7 +4482,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ user pulse is reachable",
+          "name": "Pulse — user pulse is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3250,7 +4514,120 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ promotion is reachable",
+          "name": "Pulse — appraiser check is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId={{personId}}&areaId=4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "appraiser-nominations",
+                "check-evaluation"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "{{personId}}"
+                },
+                {
+                  "key": "areaId",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — pulse allocations is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-allocations/{{personId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-allocations",
+                "{{personId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — PIP report is reachable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pulse",
+                "pulse-report",
+                "pip"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pulse — promotion is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3294,7 +4671,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ notes is reachable",
+          "name": "Pulse — feedback notes is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3334,7 +4711,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ expectations is reachable",
+          "name": "Pulse — expectations is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3374,79 +4751,7 @@
           ]
         },
         {
-          "name": "Pulse Ã¢â‚¬â€ pulse allocations is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/pulse/pulse-allocations/{{personId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "pulse",
-                "pulse-allocations",
-                "{{personId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Pulse Ã¢â‚¬â€ appraiser check is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId={{personId}}&areaId=4",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "pulse",
-                "appraiser-nominations",
-                "check-evaluation"
-              ],
-              "query": [
-                {
-                  "key": "subjectId",
-                  "value": "{{personId}}"
-                },
-                {
-                  "key": "areaId",
-                  "value": "4"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Pulse Ã¢â‚¬â€ pulse report is reachable",
+          "name": "Pulse — pulse report is reachable",
           "request": {
             "method": "GET",
             "header": [],
@@ -3480,390 +4785,6 @@
                 "exec": [
                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
                   "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Pulse Ã¢â‚¬â€ PIP report is reachable",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "pulse",
-                "pulse-report",
-                "pip"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "size",
-                  "value": "10"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });",
-                  "pm.test(\"Content-Type is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "OKR â€” areas (team) returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/areas?type=team&additionalFields=leaderships,objectiveCount",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "areas"
-              ],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "team"
-                },
-                {
-                  "key": "additionalFields",
-                  "value": "leaderships,objectiveCount"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "OKR â€” areas (pod) returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/areas?type=pod&additionalFields=leaderships,objectiveCount",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "areas"
-              ],
-              "query": [
-                {
-                  "key": "type",
-                  "value": "pod"
-                },
-                {
-                  "key": "additionalFields",
-                  "value": "leaderships,objectiveCount"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "OKR â€” report/all returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year={{currentYear}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "okr",
-                "report",
-                "all"
-              ],
-              "query": [
-                {
-                  "key": "quarters",
-                  "value": "Q4"
-                },
-                {
-                  "key": "year",
-                  "value": "{{currentYear}}"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — departments returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/departments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "departments"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — designations returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/designations",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "designations"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — designation-areas returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/designation-areas",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "designation-areas"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — engagement-status returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/engagement-status",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "engagement-status"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — fiscal-years returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/fiscal-years",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "fiscal-years"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — notices/list returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/notices/list",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "notices",
-                "list"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Core — reminders/list returns JSON data",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/core/reminders/list",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "core",
-                "reminders",
-                "list"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
-                  "pm.test(\"Content-Type is JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
-                  "pm.test(\"Has data property\", () => pm.expect(pm.response.json()).to.have.property(\"data\"));"
                 ]
               }
             }

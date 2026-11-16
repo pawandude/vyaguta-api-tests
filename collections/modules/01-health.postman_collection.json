@@ -1,1638 +1,2304 @@
 {
-    "info":  {
-                 "name":  "Vyaguta Ã¢â‚¬â€ Health",
-                 "description":  "Module tests: Health. Part of the Vyaguta API test suite.",
-                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-             },
-    "auth":  {
-                 "type":  "bearer",
-                 "bearer":  [
-                                {
-                                    "key":  "token",
-                                    "value":  "{{authToken}}",
-                                    "type":  "string"
-                                }
-                            ]
-             },
-    "item":  [
-                 {
-                     "name":  "People ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â users endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/users",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "users"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Team ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â status-types endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/status-types",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "status-types"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â allocations endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/allocations?size=5\u0026startDate=2026-01-01\u0026endDate=2026-12-31",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "allocations"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â candidates endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/candidates?size=5",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "candidates"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â projects endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects?size=5",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â staffing endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/staffing?size=5",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "staffing"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â PSR endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "psrs"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project health trend endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/health-trend?startDate=2026-01-01\u0026endDate=2026-12-31\u0026metric=Overall+Status\u0026size=10\u0026page=1",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "health-trend"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project offboards endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/{{projectId}}/offboards",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "{{projectId}}",
-                                                              "offboards"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project risks endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "{{projectId}}",
-                                                              "risks"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â QSR endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/qsrs?projectId={{projectId}}",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "qsrs"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â signoff endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/signoff?year=2026\u0026month=09",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "signoff"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â working shift endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/summary?type=working-shift",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "summary"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â employee morale endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/leave/employee-morale?startDate={{today}}\u0026endDate={{futureDate365}}\u0026excludedDepartmentIds=14",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "leave",
-                                                              "employee-morale"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project feed (highlights) endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/feed?size=10",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "feed"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â lateral candidates (ATS) endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/lateral-candidates?size=10",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "lateral-candidates"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project detail endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/{{projectId}}",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "{{projectId}}"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project staffing endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/{{projectId}}/staffing?size=5",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "{{projectId}}",
-                                                              "staffing"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â candidates bookable endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/candidates/bookable?size=5",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "candidates",
-                                                              "bookable"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â staffing request detail endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "staffing",
-                                                              "{{staffingRequestId}}"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â allocation summary report endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year=2026",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "reports",
-                                                              "allocation-summary-reports"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â allocation report endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/reports/allocation-reports?startDate=2026-01-01\u0026endDate=2026-12-31",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "reports",
-                                                              "allocation-reports"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â phases endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/phases?projectId={{projectId}}",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "phases"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project opportunities endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/{{projectId}}/opportunities",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "{{projectId}}",
-                                                              "opportunities"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â roles endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/roles",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "roles"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â project signoff detail endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/projects/{{projectId}}/signoff?year=2026\u0026month=09",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "projects",
-                                                              "{{projectId}}",
-                                                              "signoff"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Teams ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â staffing linked candidates endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}/candidates",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "teams",
-                                                              "staffing",
-                                                              "{{staffingRequestId}}",
-                                                              "candidates"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Attendance ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â summary endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "leave",
-                                                              "attendance",
-                                                              "summary"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "JUMP ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â KPI filters endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/jump/kpis/filters?type=Role+based",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "jump",
-                                                              "kpis",
-                                                              "filters"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Honor ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â menus endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/honor/menus",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "honor",
-                                                              "menus"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "OKR ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â strategic pillars endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/okr/strategic-pillars",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "okr",
-                                                              "strategic-pillars"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â evaluations endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/evaluations/groups",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "evaluations",
-                                                              "groups"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â dashboard endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/dashboard?startDate=2026-10-01\u0026endDate=2026-12-31",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "dashboard"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â user pulse endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/user/{{personId}}/pulse",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "user",
-                                                              "{{personId}}",
-                                                              "pulse"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â promotion endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/promotion?startDate=2026-07-01\u0026endDate=2026-12-31\u0026actionAs=appraiser",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "promotion"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â notes endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/notes?noteType=EXPECTATION\u0026subjectId={{personId}}",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "notes"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â expectations endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/expectations?designationId=5\u0026areaId=2",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "expectations"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pulse allocations endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/pulse-allocations/{{personId}}",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "pulse-allocations",
-                                                              "{{personId}}"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â appraiser check endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId={{personId}}\u0026areaId=4",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "appraiser-nominations",
-                                                              "check-evaluation"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pulse report endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/pulse-report?page=1\u0026size=10",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "pulse-report"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Pulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â PIP report endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/pulse/pulse-report/pip?page=1\u0026size=10",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "pulse",
-                                                              "pulse-report",
-                                                              "pip"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "OKR Ã¢â‚¬â€ areas (team) endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/okr/areas?type=team\u0026additionalFields=leaderships,objectiveCount",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "okr",
-                                                              "areas"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "OKR Ã¢â‚¬â€ areas (pod) endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/okr/areas?type=pod\u0026additionalFields=leaderships,objectiveCount",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "okr",
-                                                              "areas"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "OKR Ã¢â‚¬â€ report/all endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/okr/report/all?quarters=Q4\u0026year=2026",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "okr",
-                                                              "report",
-                                                              "all"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Core â€” departments endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/departments",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "departments"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Core â€” designations endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/designations",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "designations"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Core â€” designation-areas endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/designation-areas",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "designation-areas"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Core â€” engagement-status endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/engagement-status",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "engagement-status"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Core â€” fiscal-years endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/fiscal-years",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "fiscal-years"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Core â€” notices/list endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/notices/list",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "notices",
-                                                              "list"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 },
-                 {
-                     "name":  "Core â€” reminders/list endpoint is up",
-                     "request":  {
-                                     "method":  "GET",
-                                     "header":  [
-
-                                                ],
-                                     "url":  {
-                                                 "raw":  "{{baseUrl}}/api/core/reminders/list",
-                                                 "host":  [
-                                                              "{{baseUrl}}"
-                                                          ],
-                                                 "path":  [
-                                                              "api",
-                                                              "core",
-                                                              "reminders",
-                                                              "list"
-                                                          ]
-                                             }
-                                 },
-                     "event":  [
-                                   {
-                                       "listen":  "test",
-                                       "script":  {
-                                                      "type":  "text/javascript",
-                                                      "exec":  [
-                                                                   "pm.test(\"Status is 200\", () =\u003e pm.response.to.have.status(200));"
-                                                               ]
-                                                  }
-                                   }
-                               ]
-                 }
-             ],
-    "variable":  [
-                     {
-                         "key":  "baseUrl",
-                         "value":  "",
-                         "type":  "string"
-                     }
-                 ]
+  "info": {
+    "name": "Vyaguta Ã¢â‚¬â€ Health",
+    "description": "Module tests: Health. Part of the Vyaguta API test suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Core — users endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "users"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — user profile endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/users/{{personId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "users",
+            "{{personId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — holidays endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/holidays",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "holidays"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — user dashboard (me/info) endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/me/info?types=permissions,reminders,notices",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "me",
+            "info"
+          ],
+          "query": [
+            {
+              "key": "types",
+              "value": "permissions,reminders,notices"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — engagement status endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/engagement-status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "engagement-status"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — designations endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/designations?size=1000",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "designations"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "1000"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — designation areas endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/designation-areas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "designation-areas"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — users summary endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/users/summary",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "users",
+            "summary"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — people finder endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/people-finder?page=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "people-finder"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — skills (v2) endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/skills/v2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "skills",
+            "v2"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — user roles endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/users/{{personId}}/roles",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "users",
+            "{{personId}}",
+            "roles"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — leave issuer change requests endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/leave-issuers/change-requests",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "leave-issuers",
+            "change-requests"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — user skills (v2) endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/users/{{personId}}/skills/v2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "users",
+            "{{personId}}",
+            "skills",
+            "v2"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core — user resignations endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/core/users/{{personId}}/resignations",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "core",
+            "users",
+            "{{personId}}",
+            "resignations"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — status types endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/status-types",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "status-types"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — projects endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects?size=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project detail endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "{{projectId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project health trend endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/health-trend?startDate={{today}}&endDate={{futureDate365}}&metric=Overall+Status&size=10&page=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "health-trend"
+          ],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "endDate",
+              "value": "{{futureDate365}}"
+            },
+            {
+              "key": "metric",
+              "value": "Overall+Status"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project highlights/feed endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/feed?size=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "feed"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project offboards endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/offboards",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "{{projectId}}",
+            "offboards"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project staffing endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/staffing?size=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "{{projectId}}",
+            "staffing"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — allocations endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/allocations?size=5&startDate={{today}}&endDate={{futureDate365}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "allocations"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "5"
+            },
+            {
+              "key": "startDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "endDate",
+              "value": "{{futureDate365}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — staffing endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/staffing?size=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "staffing"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — staffing request detail endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "staffing",
+            "{{staffingRequestId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — candidates endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/candidates?size=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "candidates"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — candidates bookable endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/candidates/bookable?size=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "candidates",
+            "bookable"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — lateral candidates (ATS) endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/lateral-candidates?size=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "lateral-candidates"
+          ],
+          "query": [
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — working shift summary endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/summary?type=working-shift",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "summary"
+          ],
+          "query": [
+            {
+              "key": "type",
+              "value": "working-shift"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — employee morale endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/employee-morale?startDate={{today}}&endDate={{futureDate365}}&excludedDepartmentIds=14",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "employee-morale"
+          ],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "endDate",
+              "value": "{{futureDate365}}"
+            },
+            {
+              "key": "excludedDepartmentIds",
+              "value": "14"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — phases endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/phases?projectId={{projectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "phases"
+          ],
+          "query": [
+            {
+              "key": "projectId",
+              "value": "{{projectId}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project risks endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/risks",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "{{projectId}}",
+            "risks"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project opportunities endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/opportunities",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "{{projectId}}",
+            "opportunities"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — PSRs endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/psrs?projectId={{projectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "psrs"
+          ],
+          "query": [
+            {
+              "key": "projectId",
+              "value": "{{projectId}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — QSRs endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/qsrs?projectId={{projectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "qsrs"
+          ],
+          "query": [
+            {
+              "key": "projectId",
+              "value": "{{projectId}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — allocation summary report endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/reports/allocation-summary-reports?year={{currentYear}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "reports",
+            "allocation-summary-reports"
+          ],
+          "query": [
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — allocation report endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/reports/allocation-reports?startDate={{today}}&endDate={{futureDate180}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "reports",
+            "allocation-reports"
+          ],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "endDate",
+              "value": "{{futureDate180}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — project signoff detail endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/projects/{{projectId}}/signoff?year={{currentYear}}&month={{currentMonth}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "projects",
+            "{{projectId}}",
+            "signoff"
+          ],
+          "query": [
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            },
+            {
+              "key": "month",
+              "value": "{{currentMonth}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — signoff summary endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/signoff?year={{currentYear}}&month={{currentMonth}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "signoff"
+          ],
+          "query": [
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            },
+            {
+              "key": "month",
+              "value": "{{currentMonth}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — staffing linked candidates endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/staffing/{{staffingRequestId}}/candidates",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "staffing",
+            "{{staffingRequestId}}",
+            "candidates"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams — roles endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/roles",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "roles"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — attendance summary endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/attendance/summary?fetchType=self",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "attendance",
+            "summary"
+          ],
+          "query": [
+            {
+              "key": "fetchType",
+              "value": "self"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — leaves endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/leaves",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "leaves"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — remote applications endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/remote-applications",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "remote-applications"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — worklog involvements endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/worklogs/involvements",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "worklogs",
+            "involvements"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — worklog unfreeze requests endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/worklog-unfreeze-requests",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "worklog-unfreeze-requests"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — leave transfer requests endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/leave-transfer-requests?fiscalYearId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "leave-transfer-requests"
+          ],
+          "query": [
+            {
+              "key": "fiscalYearId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — leave balance endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/leave-balance",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "leave-balance"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — well-being credits endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/leave-credits/well-being",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "leave-credits",
+            "well-being"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance — worklog allocation report endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "leave",
+            "worklogs",
+            "allocation-details-report"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OKR — highlights endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/okr/highlights?page=1&size=10&year={{currentYear}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "okr",
+            "highlights"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            },
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OKR — strategic pillars endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/okr/strategic-pillars",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "okr",
+            "strategic-pillars"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OKR — strategic pillars summary endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/okr/strategic-pillars/summary?year={{currentYear}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "okr",
+            "strategic-pillars",
+            "summary"
+          ],
+          "query": [
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OKR — HLO (objectives) endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/okr/hlo?quarters=Q4&with=objectives&year={{currentYear}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "okr",
+            "hlo"
+          ],
+          "query": [
+            {
+              "key": "quarters",
+              "value": "Q4"
+            },
+            {
+              "key": "with",
+              "value": "objectives"
+            },
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OKR — areas (team) endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/okr/areas?type=team&additionalFields=leaderships,objectiveCount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "okr",
+            "areas"
+          ],
+          "query": [
+            {
+              "key": "type",
+              "value": "team"
+            },
+            {
+              "key": "additionalFields",
+              "value": "leaderships,objectiveCount"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OKR — areas (pod) endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/okr/areas?type=pod&additionalFields=leaderships,objectiveCount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "okr",
+            "areas"
+          ],
+          "query": [
+            {
+              "key": "type",
+              "value": "pod"
+            },
+            {
+              "key": "additionalFields",
+              "value": "leaderships,objectiveCount"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OKR — report/all endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/okr/report/all?quarters=Q4&year={{currentYear}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "okr",
+            "report",
+            "all"
+          ],
+          "query": [
+            {
+              "key": "quarters",
+              "value": "Q4"
+            },
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — evaluations groups endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/evaluations/groups",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "evaluations",
+            "groups"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — team dashboard endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/dashboard?startDate={{today}}&endDate={{futureDate365}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "dashboard"
+          ],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "endDate",
+              "value": "{{futureDate365}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — user pulse endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/user/{{personId}}/pulse",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "user",
+            "{{personId}}",
+            "pulse"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — appraiser check endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/appraiser-nominations/check-evaluation?subjectId={{personId}}&areaId=4",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "appraiser-nominations",
+            "check-evaluation"
+          ],
+          "query": [
+            {
+              "key": "subjectId",
+              "value": "{{personId}}"
+            },
+            {
+              "key": "areaId",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — pulse allocations endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/pulse-allocations/{{personId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "pulse-allocations",
+            "{{personId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — PIP report endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/pulse-report/pip?page=1&size=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "pulse-report",
+            "pip"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — promotion endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/promotion?startDate={{today}}&endDate={{futureDate365}}&actionAs=appraiser",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "promotion"
+          ],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "endDate",
+              "value": "{{futureDate365}}"
+            },
+            {
+              "key": "actionAs",
+              "value": "appraiser"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — feedback notes endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/notes?noteType=EXPECTATION&subjectId={{personId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "notes"
+          ],
+          "query": [
+            {
+              "key": "noteType",
+              "value": "EXPECTATION"
+            },
+            {
+              "key": "subjectId",
+              "value": "{{personId}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — expectations endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/expectations?designationId=5&areaId=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "expectations"
+          ],
+          "query": [
+            {
+              "key": "designationId",
+              "value": "5"
+            },
+            {
+              "key": "areaId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pulse — pulse report endpoint is up",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pulse/pulse-report?page=1&size=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pulse",
+            "pulse-report"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "",
+      "type": "string"
+    }
+  ]
 }
