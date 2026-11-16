@@ -141,7 +141,7 @@ function failureCard(f, seen) {
     ? '<div style="margin-bottom:10px;padding:8px 10px;background:#f8fafc;border-radius:4px;border:1px solid #e5e7eb">' + badge + urlTxt + '</div>' : '';
 
   const reqBodyBlock = isFirst && reqBody
-    ? '<details style="margin-bottom:8px"><summary style="cursor:pointer;font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;padding:4px 0;list-style:none">▶ Request Body</summary><pre style="margin:4px 0 0;font-size:10px;background:#f8fafc;padding:8px;border-radius:4px;border:1px solid #e5e7eb;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#374151">' + esc(reqBody) + '</pre></details>'
+    ? '<details open style="margin-bottom:8px"><summary style="cursor:pointer;font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;padding:4px 0;list-style:none">▼ Request Body</summary><pre style="margin:4px 0 0;font-size:10px;background:#f8fafc;padding:8px;border-radius:4px;border:1px solid #e5e7eb;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#374151">' + esc(reqBody) + '</pre></details>'
     : '';
 
   const sBg = statusCode >= 400 ? '#fef2f2' : '#f0fdf4';
@@ -152,7 +152,7 @@ function failureCard(f, seen) {
     : '';
 
   const resBodyBlock = isFirst && resBody
-    ? '<details style="margin-bottom:8px"><summary style="cursor:pointer;font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;padding:4px 0;list-style:none">▶ Response Body</summary><pre style="margin:4px 0 0;font-size:10px;background:#fff8f8;padding:8px;border-radius:4px;border:1px solid #fecaca;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#374151">' + esc(resBody) + '</pre></details>'
+    ? '<details open style="margin-bottom:8px"><summary style="cursor:pointer;font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;padding:4px 0;list-style:none">▼ Response Body</summary><pre style="margin:4px 0 0;font-size:10px;background:#fff8f8;padding:8px;border-radius:4px;border:1px solid #fecaca;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#374151">' + esc(resBody) + '</pre></details>'
     : '';
 
   return '<div style="margin-bottom:14px;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 6px 6px 0;background:#fff;padding:14px 16px">' +

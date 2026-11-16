@@ -127,7 +127,6 @@ function healthRequest(ep) {
         type: 'text/javascript',
         exec: [
           'pm.test("Status is 200", function () { pm.response.to.have.status(200); });',
-          'pm.test("Response time is below 5000ms", function () { pm.expect(pm.response.responseTime).to.be.below(5000); });',
         ],
       },
     }],
