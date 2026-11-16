@@ -1702,7 +1702,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report",
+          "raw": "{{baseUrl}}/api/leave/worklogs/allocation-details-report?startDate={{today}}&endDate={{today}}&projectId={{projectId}}",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1711,6 +1711,20 @@
             "leave",
             "worklogs",
             "allocation-details-report"
+          ],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "endDate",
+              "value": "{{today}}"
+            },
+            {
+              "key": "projectId",
+              "value": "{{projectId}}"
+            }
           ]
         }
       },
@@ -1777,14 +1791,21 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/okr/strategic-pillars",
+          "raw": "{{baseUrl}}/api/okr/strategic-pillars/all?year={{currentYear}}",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
             "api",
             "okr",
-            "strategic-pillars"
+            "strategic-pillars",
+            "all"
+          ],
+          "query": [
+            {
+              "key": "year",
+              "value": "{{currentYear}}"
+            }
           ]
         }
       },

@@ -73,11 +73,11 @@ const ENDPOINTS = [
   // ── Attendance P2 ──
   { label: 'Attendance — leave balance',             url: '/api/leave/leave-balance?fiscalYearId={{fiscalYearId}}&userId={{userId}}&onlyActive=true' },
   { label: 'Attendance — well-being credits',        url: '/api/leave/leave-credits/well-being?userId={{userId}}&fiscalYearId={{fiscalYearId}}' },
-  { label: 'Attendance — worklog allocation report', url: '/api/leave/worklogs/allocation-details-report' },
+  { label: 'Attendance — worklog allocation report', url: '/api/leave/worklogs/allocation-details-report?startDate={{today}}&endDate={{today}}&projectId={{projectId}}' },
 
   // ── OKR P1 ──
   { label: 'OKR — highlights',                       url: '/api/okr/highlights?page=1&size=10&year={{currentYear}}' },
-  { label: 'OKR — strategic pillars',                url: '/api/okr/strategic-pillars' },
+  { label: 'OKR — strategic pillars',                url: '/api/okr/strategic-pillars/all?year={{currentYear}}' },
   { label: 'OKR — strategic pillars summary',        url: '/api/okr/strategic-pillars/summary?year={{currentYear}}' },
   { label: 'OKR — HLO (objectives)',                 url: '/api/okr/hlo?quarters=Q4&with=objectives&year={{currentYear}}' },
   { label: 'OKR — areas (team)',                     url: '/api/okr/areas?type=team&additionalFields=leaderships,objectiveCount' },
