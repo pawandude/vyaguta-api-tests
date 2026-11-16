@@ -84,6 +84,12 @@ jobs:
           VYAGUTA_TOKEN: ${{ secrets.VYAGUTA_TOKEN }}
           VYAGUTA_RESTRICTED_TOKEN: ${{ secrets.VYAGUTA_RESTRICTED_TOKEN }}
 
+      - name: Enhance DEV reports with failure details
+        if: always()
+        run: |
+          node scripts/enhance-report.js --report reports/report.html --results reports/results-api.json
+          node scripts/enhance-report.js --report reports/report-security.html --results reports/results-security.json
+
       - name: Redact tokens from DEV reports
         if: always()
         run: |
@@ -247,6 +253,13 @@ jobs:
             --reporter-json-export reports-qa/results-assets.json
         env:
           SECOPS_API_KEY: ${{ secrets.SECOPS_API_KEY }}
+
+      - name: Enhance QA reports with failure details
+        if: always()
+        run: |
+          node scripts/enhance-report.js --report reports-qa/report.html --results reports-qa/results-api.json
+          node scripts/enhance-report.js --report reports-qa/report-security.html --results reports-qa/results-security.json
+          node scripts/enhance-report.js --report reports-qa/report-assets.html --results reports-qa/results-assets.json
 
       - name: Redact tokens from QA reports
         if: always()
