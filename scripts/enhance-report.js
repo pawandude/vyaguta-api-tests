@@ -99,10 +99,10 @@ const injectedScript = `
   /* Failure details injected by enhance-report.js */
   var DETAILS = ${JSON.stringify(detailMap)};
 
-  var MC = {
-    GET:    '#0ea5e9', POST:   '#16a34a', PUT:    '#d97706',
-    PATCH:  '#7c3aed', DELETE: '#dc2626'
-  };
+  /* htmlextra uses Bootstrap cards. Each failure card:
+     .card.border-danger > .card-header.bg-danger (has "Folder - Request" text)
+                         > div.collapse > .card-body  (inject here)
+  */
 
   function esc(s) {
     return String(s)
@@ -110,105 +110,73 @@ const injectedScript = `
       .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  /* Build HTML matching htmlextra's own Bootstrap card style exactly */
   function buildHTML(d) {
-    var isDark  = document.documentElement.dataset.theme === 'dark' ||
-                  window.matchMedia('(prefers-color-scheme:dark)').matches;
-    var bg      = isDark ? '#1e293b' : '#f8fafc';
-    var border  = isDark ? '#334155' : '#e2e8f0';
-    var codeBg  = isDark ? '#0f172a' : '#fff';
-    var codeClr = isDark ? '#94a3b8' : '#374151';
-    var codeBdr = isDark ? '#334155' : '#e2e8f0';
-    var labelClr = isDark ? '#94a3b8' : '#6b7280';
-    var wrap = isDark ? '#1e1e2e' : '#fff';
+    var sIsErr   = Number(d.statusCode) >= 400;
+    var sBadge   = sIsErr ? 'badge-danger' : 'badge-success';
 
-    var methodBadge = d.method
-      ? '<span style="background:'+(MC[d.method]||'#6b7280')+';color:#fff;'
-        +'font-size:11px;font-weight:700;padding:2px 10px;border-radius:4px;'
-        +'font-family:monospace;margin-right:8px;vertical-align:middle">'
-        +esc(d.method)+'</span>'
-      : '';
-    var urlSpan = d.url
-      ? '<span style="font-size:11px;color:#3b82f6;font-family:monospace;'
-        +'word-break:break-all;vertical-align:middle">'+esc(d.url)+'</span>'
-      : '';
-    var endpoint = (d.method || d.url)
-      ? '<div style="padding:8px 10px;background:'+bg+';border:1px solid '+border+';'
-        +'border-radius:4px;margin-bottom:10px">' + methodBadge + urlSpan + '</div>'
-      : '';
+    var reqInfo = (d.method || d.url) ? (
+      '<div class="row"><div class="col-sm-12 mb-3"><div class="card-deck">'
+      + '<div class="card border-info" style="width:50rem">'
+      + '<div class="card-body">'
+      + '<h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>'
+      + (d.method ? '<span><i class="fas fa-info-circle"></i></span>'
+        + '<strong> Request Method:</strong> '
+        + '<span class="badge-outline-success badge badge-success">' + esc(d.method) + '</span><br>' : '')
+      + (d.url ? '<span><i class="fas fa-info-circle"></i></span>'
+        + '<strong> Request URL:</strong> '
+        + '<a href="' + esc(d.url) + '" target="_blank">' + esc(d.url) + '</a><br>' : '')
+      + '</div></div></div></div></div>'
+    ) : '';
 
-    var reqB = d.reqBody
-      ? '<div style="margin-bottom:10px">'
-        +'<div style="font-size:10px;font-weight:700;color:'+labelClr+';text-transform:uppercase;'
-        +'letter-spacing:.06em;margin-bottom:4px">Request Body</div>'
-        +'<pre style="margin:0;font-size:11px;background:'+codeBg+';color:'+codeClr+';'
-        +'padding:10px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;'
-        +'word-break:break-all;border:1px solid '+codeBdr+'">'+esc(d.reqBody)+'</pre></div>'
-      : '';
+    var resInfo = d.statusCode ? (
+      '<div class="row"><div class="col-sm-12 mb-3"><div class="card-deck">'
+      + '<div class="card border-info" style="width:50rem">'
+      + '<div class="card-body">'
+      + '<h5 class="card-title text-uppercase text-white text-center bg-info">Response Information</h5>'
+      + '<span><i class="fas fa-info-circle"></i></span>'
+      + '<strong> Response Code:</strong> '
+      + '<span class="float-right badge-outline badge ' + sBadge + '">'
+      + esc(d.statusCode) + ' - ' + esc(d.statusText) + '</span><br>'
+      + '</div></div></div></div></div>'
+    ) : '';
 
-    var sIsErr = Number(d.statusCode) >= 400;
-    var sBg    = sIsErr ? (isDark?'#450a0a':'#fef2f2') : (isDark?'#052e16':'#f0fdf4');
-    var sClr   = sIsErr ? (isDark?'#fca5a5':'#dc2626') : (isDark?'#86efac':'#16a34a');
-    var resStatus = d.statusCode
-      ? '<div style="margin-bottom:10px">'
-        +'<span style="font-size:10px;font-weight:700;color:'+labelClr+';'
-        +'text-transform:uppercase;letter-spacing:.06em;margin-right:8px">Response Status</span>'
-        +'<span style="font-size:12px;font-family:monospace;background:'+sBg+';color:'+sClr+';'
-        +'font-weight:700;padding:3px 10px;border-radius:4px">'
-        +esc(d.statusCode)+' '+esc(d.statusText)+'</span></div>'
-      : '';
+    var reqBody = d.reqBody ? (
+      '<div class="row"><div class="col-sm-12 mb-3"><div class="card-deck">'
+      + '<div class="card border-info" style="width:50rem">'
+      + '<div class="card-body">'
+      + '<h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>'
+      + '<div class="dyn-height"><pre><code>' + esc(d.reqBody) + '</code></pre></div>'
+      + '</div></div></div></div></div>'
+    ) : '';
 
-    var resB = d.resBody
-      ? '<div style="margin-bottom:4px">'
-        +'<div style="font-size:10px;font-weight:700;color:'+labelClr+';text-transform:uppercase;'
-        +'letter-spacing:.06em;margin-bottom:4px">Response Body</div>'
-        +'<pre style="margin:0;font-size:11px;background:'+codeBg+';color:'+codeClr+';'
-        +'padding:10px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;'
-        +'word-break:break-all;border:1px solid '+(sIsErr?(isDark?'#7f1d1d':'#fecaca'):codeBdr)+'">'
-        +esc(d.resBody)+'</pre></div>'
-      : '';
+    var resBody = d.resBody ? (
+      '<div class="row"><div class="col-sm-12 mb-3"><div class="card-deck">'
+      + '<div class="card ' + (sIsErr ? 'border-danger' : 'border-info') + '" style="width:50rem">'
+      + '<div class="card-body">'
+      + '<h5 class="card-title text-uppercase text-white text-center ' + (sIsErr ? 'bg-danger' : 'bg-info') + '">Response Body</h5>'
+      + '<div class="dyn-height"><pre><code>' + esc(d.resBody) + '</code></pre></div>'
+      + '</div></div></div></div></div>'
+    ) : '';
 
-    return '<div class="__vfe-block" style="margin-top:12px;padding:12px;'
-      +'background:'+wrap+';border-radius:6px;border:1px solid '+border+'">'
-      + endpoint + reqB + resStatus + resB
-      +'</div>';
+    return '<div class="__vfe-block">' + reqInfo + resInfo + reqBody + resBody + '</div>';
   }
 
   var injected = {};
 
-  function findCard(folder, req) {
-    /* Strategy 1: htmlextra uses <details>/<summary> for failure items.
-       The <summary> text is: "Iteration N - ErrorType - Folder - Request ▼"
-       Target: inject into the <details> body (sibling of <summary>). */
-    var summaries = document.querySelectorAll('summary');
-    for (var i = 0; i < summaries.length; i++) {
-      var s = summaries[i];
-      var t = s.textContent || '';
+  function findCardBody(folder, req) {
+    /* The failure card header has class "card-header bg-danger" and contains
+       "Iteration N - AssertionError - FolderName - RequestName"
+       Navigate: header.parentElement = .card, then find .card-body inside it. */
+    var headers = document.querySelectorAll('.card-header.bg-danger');
+    for (var i = 0; i < headers.length; i++) {
+      var h = headers[i];
+      var t = h.textContent || '';
       if (t.indexOf(folder) !== -1 && t.indexOf(req) !== -1) {
-        /* The <details> element IS the card wrapper.
-           Return the first non-summary child (the content div), or the details itself. */
-        var details = s.parentElement;
-        for (var c = details.firstElementChild; c; c = c.nextElementSibling) {
-          if (c.tagName !== 'SUMMARY') return c; /* first content div */
-        }
-        return details;
-      }
-    }
-
-    /* Strategy 2: Bootstrap accordion — look for a div whose direct text
-       (not deep children) contains the header pattern, then use its parent. */
-    var allDivs = document.querySelectorAll('div');
-    for (var j = 0; j < allDivs.length; j++) {
-      var el = allDivs[j];
-      /* Only look at elements with limited direct-child elements (a header div) */
-      if (el.childElementCount > 4) continue;
-      var txt = el.textContent || '';
-      if (txt.indexOf('Iteration') !== -1 && txt.indexOf(folder) !== -1 && txt.indexOf(req) !== -1) {
-        /* Walk up at most 3 levels to find a container that also has "Failed Test:" */
-        var parent = el.parentElement;
-        for (var k = 0; k < 3; k++) {
-          if (!parent) break;
-          if ((parent.textContent || '').indexOf('Failed Test:') !== -1) return parent;
-          parent = parent.parentElement;
+        var card = h.parentElement; /* .card.border-danger */
+        if (card) {
+          var body = card.querySelector('.card-body');
+          if (body) return body;
         }
       }
     }
@@ -223,7 +191,7 @@ const injectedScript = `
       var folder = parts[0];
       var req    = parts.slice(1).join(' - ');
 
-      var target = findCard(folder, req);
+      var target = findCardBody(folder, req);
       if (target && !target.querySelector('.__vfe-block')) {
         var wrap = document.createElement('div');
         wrap.innerHTML = buildHTML(d);
@@ -233,16 +201,15 @@ const injectedScript = `
     }
   }
 
-  /* Run on click (tab switches reveal the failed tests section) */
+  /* Fire on tab click (Bootstrap shows the collapse when tab is selected) */
   document.addEventListener('click', function () { setTimeout(augment, 400); });
 
-  /* Run whenever Vue mutates the DOM */
-  new MutationObserver(function () { setTimeout(augment, 150); })
-    .observe(document.body, { childList: true, subtree: true });
+  /* Fire when Bootstrap collapse finishes opening */
+  document.addEventListener('shown.bs.collapse', augment);
 
-  /* Initial attempt after Vue boots */
+  /* Fallback timers */
   setTimeout(augment, 800);
-  setTimeout(augment, 2000);
+  setTimeout(augment, 2500);
 })();
 <\/script>`;
 
