@@ -175,44 +175,59 @@ const injectedScript = `
 
   var injected = {};
 
+  function findCard(folder, req) {
+    /* Strategy 1: htmlextra uses <details>/<summary> for failure items.
+       The <summary> text is: "Iteration N - ErrorType - Folder - Request ▼"
+       Target: inject into the <details> body (sibling of <summary>). */
+    var summaries = document.querySelectorAll('summary');
+    for (var i = 0; i < summaries.length; i++) {
+      var s = summaries[i];
+      var t = s.textContent || '';
+      if (t.indexOf(folder) !== -1 && t.indexOf(req) !== -1) {
+        /* The <details> element IS the card wrapper.
+           Return the first non-summary child (the content div), or the details itself. */
+        var details = s.parentElement;
+        for (var c = details.firstElementChild; c; c = c.nextElementSibling) {
+          if (c.tagName !== 'SUMMARY') return c; /* first content div */
+        }
+        return details;
+      }
+    }
+
+    /* Strategy 2: Bootstrap accordion — look for a div whose direct text
+       (not deep children) contains the header pattern, then use its parent. */
+    var allDivs = document.querySelectorAll('div');
+    for (var j = 0; j < allDivs.length; j++) {
+      var el = allDivs[j];
+      /* Only look at elements with limited direct-child elements (a header div) */
+      if (el.childElementCount > 4) continue;
+      var txt = el.textContent || '';
+      if (txt.indexOf('Iteration') !== -1 && txt.indexOf(folder) !== -1 && txt.indexOf(req) !== -1) {
+        /* Walk up at most 3 levels to find a container that also has "Failed Test:" */
+        var parent = el.parentElement;
+        for (var k = 0; k < 3; k++) {
+          if (!parent) break;
+          if ((parent.textContent || '').indexOf('Failed Test:') !== -1) return parent;
+          parent = parent.parentElement;
+        }
+      }
+    }
+    return null;
+  }
+
   function augment() {
     for (var key in DETAILS) {
       if (injected[key]) continue;
       var d = DETAILS[key];
-      /* The htmlextra card header text: "Iteration N - ErrorType - Folder - Request" */
-      /* We search for text nodes containing "Folder - Request" */
       var parts  = key.split(' - ');
       var folder = parts[0];
       var req    = parts.slice(1).join(' - ');
 
-      var walker = document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT,
-        { acceptNode: function(n) {
-            var t = n.textContent.trim();
-            return (t.indexOf(folder) !== -1 && t.indexOf(req) !== -1 && t.indexOf('Iteration') !== -1)
-              ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-          }
-        }
-      );
-
-      var node = walker.nextNode();
-      if (!node) continue;
-
-      /* Walk up from the matching text node to find the card container.
-         The card container will have "Failed Test:" text somewhere inside it. */
-      var card = node.parentElement;
-      for (var i = 0; i < 12; i++) {
-        if (!card || !card.parentElement) break;
-        if (card.textContent.indexOf('Failed Test:') !== -1 &&
-            card.textContent.indexOf('ASSERTION ERROR') !== -1) break;
-        card = card.parentElement;
-      }
-
-      if (card && !card.querySelector('.__vfe-block')) {
-        var div = document.createElement('div');
-        div.innerHTML = buildHTML(d);
-        card.appendChild(div.firstChild);
+      var target = findCard(folder, req);
+      if (target && !target.querySelector('.__vfe-block')) {
+        var wrap = document.createElement('div');
+        wrap.innerHTML = buildHTML(d);
+        target.appendChild(wrap.firstChild);
         injected[key] = true;
       }
     }
