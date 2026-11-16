@@ -2,15 +2,15 @@
 'use strict';
 
 /**
- * Post-processes a newman-reporter-htmlextra report to inject full failure
- * details (method, URL, request body, response status, response body) into
- * the page as a panel that appears above the htmlextra app.
+ * Post-processes a newman-reporter-htmlextra report by injecting a <script>
+ * block that augments the existing "Failed Tests" cards with endpoint URL,
+ * request body, response status, and response body — in-place, without adding
+ * a top banner.
  *
  * Usage: node scripts/enhance-report.js --report <html> --results <json>
  */
 
-const fs   = require('fs');
-const path = require('path');
+const fs = require('fs');
 
 const args = process.argv.slice(2);
 function getArg(n) { const i = args.indexOf('--' + n); return i !== -1 ? args[i + 1] : null; }
@@ -22,14 +22,14 @@ if (!reportPath || !resultsPath) {
   console.error('Usage: node enhance-report.js --report <html> --results <json>');
   process.exit(1);
 }
-if (!fs.existsSync(reportPath)) { console.log('Report not found, skipping'); process.exit(0); }
+if (!fs.existsSync(reportPath))  { console.log('Report not found, skipping');  process.exit(0); }
 if (!fs.existsSync(resultsPath)) { console.log('Results not found, skipping'); process.exit(0); }
 
-const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
-const html    = fs.readFileSync(reportPath, 'utf8');
-
+const results  = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
+const html     = fs.readFileSync(reportPath, 'utf8');
 const failures = results.run.failures || [];
-if (failures.length === 0) { console.log('No failures — skipping injection'); process.exit(0); }
+
+if (failures.length === 0) { console.log('No failures — nothing to inject'); process.exit(0); }
 
 // Build execution map: itemId → execution
 const execMap = {};
@@ -37,17 +37,6 @@ for (const ex of (results.run.executions || [])) {
   if (ex.item && ex.item.id) execMap[ex.item.id] = ex;
 }
 
-// Helpers
-function esc(s) {
-  return String(s)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-function pretty(s) { try { return JSON.stringify(JSON.parse(s), null, 2); } catch(e) { return String(s); } }
-function trunc(s, n) { s = String(s); return s.length > n ? s.slice(0, n) + '\n… (truncated)' : s; }
-function methodColor(m) {
-  return ({ GET:'#0ea5e9', POST:'#16a34a', PUT:'#d97706', PATCH:'#7c3aed', DELETE:'#dc2626' })[String(m).toUpperCase()] || '#6b7280';
-}
 function buildUrl(u) {
   if (!u) return '';
   if (typeof u === 'string') return u;
@@ -59,20 +48,23 @@ function buildUrl(u) {
   const proto = (u.protocol || 'https') + '://';
   return proto + host + (pth ? '/' + pth : '') + qs;
 }
+function pretty(s) { try { return JSON.stringify(JSON.parse(s), null, 2); } catch(e) { return String(s); } }
+function trunc(s, n) { s = String(s); return s.length > n ? s.slice(0, n) + '\n… (truncated)' : s; }
 
-// Collect unique failures (dedupe by item id)
-const seen = new Set();
-const cards = [];
+// Build a map keyed by "FolderName - RequestName" → detail object
+// (The htmlextra DOM shows the card header as "Iteration N - ErrorType - Folder - Request")
+const detailMap = {};
+const seenItems = new Set();
 
 for (const f of failures) {
   const folder  = (f.parent && f.parent.name) || '';
-  const reqName = (f.source && f.source.name) || 'Unknown';
-  const testNm  = (f.error && f.error.test) || '';
-  const errMsg  = (f.error && f.error.message) || '';
+  const reqName = (f.source && f.source.name) || '';
   const srcId   = f.source && f.source.id;
   const ex      = srcId ? execMap[srcId] : null;
-  const isFirst = !seen.has(srcId || (folder + reqName));
-  seen.add(srcId || (folder + reqName));
+  const mapKey  = `${folder} - ${reqName}`;
+
+  if (seenItems.has(mapKey)) continue;
+  seenItems.add(mapKey);
 
   const sentReq = ex && ex.request;
   const itemReq = ex && ex.item && ex.item.request;
@@ -92,67 +84,157 @@ for (const f of failures) {
     } catch(e) {}
   }
 
-  const loc = folder ? folder + ' &rsaquo; ' + reqName : reqName;
-
-  const methodBadge = method
-    ? `<span style="background:${methodColor(method)};color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:4px;font-family:monospace;margin-right:8px">${esc(method)}</span>`
-    : '';
-  const urlSpan = rawUrl
-    ? `<span style="font-size:12px;color:#93c5fd;font-family:monospace;word-break:break-all">${esc(rawUrl)}</span>`
-    : '';
-
-  const endpointRow = (method || rawUrl)
-    ? `<div style="padding:8px 10px;background:#1e3a5f;border-radius:4px;margin-bottom:10px">${methodBadge}${urlSpan}</div>`
-    : '';
-
-  const reqBodyBlock = reqBody
-    ? `<div style="margin-bottom:10px">
-        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Request Body</div>
-        <pre style="margin:0;font-size:11px;background:#0f172a;color:#94a3b8;padding:10px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;border:1px solid #334155">${esc(reqBody)}</pre>
-      </div>`
-    : '';
-
-  const sBg  = Number(statusCode) >= 400 ? '#450a0a' : '#052e16';
-  const sClr = Number(statusCode) >= 400 ? '#fca5a5' : '#86efac';
-  const resStatusBlock = statusCode
-    ? `<div style="margin-bottom:10px">
-        <span style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-right:8px">Response Status</span>
-        <span style="font-size:12px;font-family:monospace;background:${sBg};color:${sClr};font-weight:700;padding:3px 10px;border-radius:4px">${esc(String(statusCode))} ${esc(statusText)}</span>
-      </div>`
-    : '';
-
-  const resBodyBlock = resBody
-    ? `<div style="margin-bottom:10px">
-        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Response Body</div>
-        <pre style="margin:0;font-size:11px;background:#0f172a;color:#94a3b8;padding:10px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;border:1px solid #450a0a">${esc(resBody)}</pre>
-      </div>`
-    : '';
-
-  const assertBlock = `<div style="padding:8px 10px;background:#450a0a;border-radius:4px;border-left:3px solid #ef4444">
-      ${testNm ? `<div style="font-size:10px;color:#fca5a5;margin-bottom:4px">Test: ${esc(testNm)}</div>` : ''}
-      <div style="font-size:11px;color:#fca5a5;font-family:monospace;font-weight:600">${esc(errMsg)}</div>
-    </div>`;
-
-  cards.push(`
-    <div style="margin-bottom:16px;border:1px solid #ef4444;border-left:4px solid #ef4444;border-radius:0 6px 6px 0;background:#1e1e2e;padding:16px">
-      <div style="font-size:13px;font-weight:700;color:#f1f5f9;margin-bottom:12px">${loc}</div>
-      ${isFirst ? endpointRow + reqBodyBlock + resStatusBlock + resBodyBlock : ''}
-      ${assertBlock}
-    </div>`);
+  detailMap[mapKey] = { method, url: rawUrl, reqBody, statusCode: String(statusCode), statusText, resBody };
 }
 
-const panelHtml = `
-<div id="__vfails" style="font-family:Arial,Helvetica,sans-serif;background:#0f172a;border-bottom:3px solid #ef4444;padding:20px 24px 24px">
-  <div style="max-width:900px;margin:0 auto">
-    <div style="font-size:14px;font-weight:700;color:#ef4444;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">
-      &#10060; ${failures.length} Failure${failures.length !== 1 ? 's' : ''} — Full Details
-    </div>
-    ${cards.join('\n')}
-  </div>
-</div>`;
+// Escape for embedding in a JS string literal inside a <script> tag
+function jsStr(s) {
+  return JSON.stringify(s); // JSON.stringify produces a valid JS string literal
+}
 
-// Inject before the first <body> content (after <body> tag)
-const injected = html.replace(/<body([^>]*)>/, (m, attrs) => `${m}${panelHtml}`);
+// Produce the detail HTML builder as a client-side JS function
+const injectedScript = `
+<script>
+(function () {
+  /* Failure details injected by enhance-report.js */
+  var DETAILS = ${JSON.stringify(detailMap)};
+
+  var MC = {
+    GET:    '#0ea5e9', POST:   '#16a34a', PUT:    '#d97706',
+    PATCH:  '#7c3aed', DELETE: '#dc2626'
+  };
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function buildHTML(d) {
+    var isDark  = document.documentElement.dataset.theme === 'dark' ||
+                  window.matchMedia('(prefers-color-scheme:dark)').matches;
+    var bg      = isDark ? '#1e293b' : '#f8fafc';
+    var border  = isDark ? '#334155' : '#e2e8f0';
+    var codeBg  = isDark ? '#0f172a' : '#fff';
+    var codeClr = isDark ? '#94a3b8' : '#374151';
+    var codeBdr = isDark ? '#334155' : '#e2e8f0';
+    var labelClr = isDark ? '#94a3b8' : '#6b7280';
+    var wrap = isDark ? '#1e1e2e' : '#fff';
+
+    var methodBadge = d.method
+      ? '<span style="background:'+(MC[d.method]||'#6b7280')+';color:#fff;'
+        +'font-size:11px;font-weight:700;padding:2px 10px;border-radius:4px;'
+        +'font-family:monospace;margin-right:8px;vertical-align:middle">'
+        +esc(d.method)+'</span>'
+      : '';
+    var urlSpan = d.url
+      ? '<span style="font-size:11px;color:#3b82f6;font-family:monospace;'
+        +'word-break:break-all;vertical-align:middle">'+esc(d.url)+'</span>'
+      : '';
+    var endpoint = (d.method || d.url)
+      ? '<div style="padding:8px 10px;background:'+bg+';border:1px solid '+border+';'
+        +'border-radius:4px;margin-bottom:10px">' + methodBadge + urlSpan + '</div>'
+      : '';
+
+    var reqB = d.reqBody
+      ? '<div style="margin-bottom:10px">'
+        +'<div style="font-size:10px;font-weight:700;color:'+labelClr+';text-transform:uppercase;'
+        +'letter-spacing:.06em;margin-bottom:4px">Request Body</div>'
+        +'<pre style="margin:0;font-size:11px;background:'+codeBg+';color:'+codeClr+';'
+        +'padding:10px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;'
+        +'word-break:break-all;border:1px solid '+codeBdr+'">'+esc(d.reqBody)+'</pre></div>'
+      : '';
+
+    var sIsErr = Number(d.statusCode) >= 400;
+    var sBg    = sIsErr ? (isDark?'#450a0a':'#fef2f2') : (isDark?'#052e16':'#f0fdf4');
+    var sClr   = sIsErr ? (isDark?'#fca5a5':'#dc2626') : (isDark?'#86efac':'#16a34a');
+    var resStatus = d.statusCode
+      ? '<div style="margin-bottom:10px">'
+        +'<span style="font-size:10px;font-weight:700;color:'+labelClr+';'
+        +'text-transform:uppercase;letter-spacing:.06em;margin-right:8px">Response Status</span>'
+        +'<span style="font-size:12px;font-family:monospace;background:'+sBg+';color:'+sClr+';'
+        +'font-weight:700;padding:3px 10px;border-radius:4px">'
+        +esc(d.statusCode)+' '+esc(d.statusText)+'</span></div>'
+      : '';
+
+    var resB = d.resBody
+      ? '<div style="margin-bottom:4px">'
+        +'<div style="font-size:10px;font-weight:700;color:'+labelClr+';text-transform:uppercase;'
+        +'letter-spacing:.06em;margin-bottom:4px">Response Body</div>'
+        +'<pre style="margin:0;font-size:11px;background:'+codeBg+';color:'+codeClr+';'
+        +'padding:10px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;'
+        +'word-break:break-all;border:1px solid '+(sIsErr?(isDark?'#7f1d1d':'#fecaca'):codeBdr)+'">'
+        +esc(d.resBody)+'</pre></div>'
+      : '';
+
+    return '<div class="__vfe-block" style="margin-top:12px;padding:12px;'
+      +'background:'+wrap+';border-radius:6px;border:1px solid '+border+'">'
+      + endpoint + reqB + resStatus + resB
+      +'</div>';
+  }
+
+  var injected = {};
+
+  function augment() {
+    for (var key in DETAILS) {
+      if (injected[key]) continue;
+      var d = DETAILS[key];
+      /* The htmlextra card header text: "Iteration N - ErrorType - Folder - Request" */
+      /* We search for text nodes containing "Folder - Request" */
+      var parts  = key.split(' - ');
+      var folder = parts[0];
+      var req    = parts.slice(1).join(' - ');
+
+      var walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        { acceptNode: function(n) {
+            var t = n.textContent.trim();
+            return (t.indexOf(folder) !== -1 && t.indexOf(req) !== -1 && t.indexOf('Iteration') !== -1)
+              ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+          }
+        }
+      );
+
+      var node = walker.nextNode();
+      if (!node) continue;
+
+      /* Walk up from the matching text node to find the card container.
+         The card container will have "Failed Test:" text somewhere inside it. */
+      var card = node.parentElement;
+      for (var i = 0; i < 12; i++) {
+        if (!card || !card.parentElement) break;
+        if (card.textContent.indexOf('Failed Test:') !== -1 &&
+            card.textContent.indexOf('ASSERTION ERROR') !== -1) break;
+        card = card.parentElement;
+      }
+
+      if (card && !card.querySelector('.__vfe-block')) {
+        var div = document.createElement('div');
+        div.innerHTML = buildHTML(d);
+        card.appendChild(div.firstChild);
+        injected[key] = true;
+      }
+    }
+  }
+
+  /* Run on click (tab switches reveal the failed tests section) */
+  document.addEventListener('click', function () { setTimeout(augment, 400); });
+
+  /* Run whenever Vue mutates the DOM */
+  new MutationObserver(function () { setTimeout(augment, 150); })
+    .observe(document.body, { childList: true, subtree: true });
+
+  /* Initial attempt after Vue boots */
+  setTimeout(augment, 800);
+  setTimeout(augment, 2000);
+})();
+<\/script>`;
+
+// Inject the script just before </body>
+const injected = html.includes('</body>')
+  ? html.replace('</body>', injectedScript + '\n</body>')
+  : html + injectedScript;
 
 fs.writeFileSync(reportPath, injected, 'utf8');
-console.log(`Enhanced report with ${failures.length} failure detail(s): ${reportPath}`);
+console.log(`Injected failure-detail script (${Object.keys(detailMap).length} failures): ${reportPath}`);
